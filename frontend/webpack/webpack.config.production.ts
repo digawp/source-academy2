@@ -22,7 +22,7 @@ export default merge(baseConfig, {
       'babel-polyfill',
        path.resolve(__dirname, '../modules', 'index.tsx')
     ],
-    blueprintjs: [ './modules/blueprintjs' ]
+    vendor: [ './modules/vendor' ]
   },
 
   module: {
