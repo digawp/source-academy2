@@ -24,7 +24,7 @@ const config: webpack.Configuration = {
       'babel-polyfill',
       'react-hot-loader/patch',
       hot,
-      path.resolve(__dirname, '../modules', 'index.ts')
+      path.resolve(__dirname, '../modules', 'index.tsx')
     ],
     vendor: [
       path.resolve(__dirname, '../modules', 'vendor', 'index.ts')

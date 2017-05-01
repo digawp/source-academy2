@@ -36,6 +36,11 @@ const webpackConfig: Configuration = {
     ]
   },
 
+  output: {
+    filename: '[name].js',
+    chunkFilename: 'components-[name].js'
+  },
+
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   }

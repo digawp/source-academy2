@@ -20,7 +20,7 @@ export default merge(baseConfig, {
   entry: {
     app: [
       'babel-polyfill',
-       path.resolve(__dirname, '../modules', 'index.ts')
+       path.resolve(__dirname, '../modules', 'index.tsx')
     ],
     blueprintjs: [ './modules/blueprintjs' ]
   },
@@ -43,6 +43,7 @@ export default merge(baseConfig, {
 
   output: {
     filename: '[name].bundle.js',
+    chunkFilename: 'components-[name].bundle.js',
     path: path.join(__dirname, '../dist'),
     publicPath: '/'
   },

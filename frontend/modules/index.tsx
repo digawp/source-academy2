@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { render } from 'react-dom'
+import App from './containers/App'
 import './styles/index.scss'
 
 render(
-  React.createElement('div'),
+  <App />,
   document.getElementById('sa-root')
 )
