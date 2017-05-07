@@ -3,6 +3,7 @@
  */
 import * as path from 'path'
 import {Configuration} from 'webpack'
+import {TsConfigPathsPlugin} from 'awesome-typescript-loader'
 
 export const packageSort = (packages: string[]) => {
   const len = packages.length - 1;
@@ -26,6 +27,22 @@ export const packageSort = (packages: string[]) => {
 }
 
 const webpackConfig: Configuration = {
+  entry: {
+    vendor: [
+      'babel-polyfill',
+      'history',
+      'react',
+      'redux',
+      'react-redux',
+      'react-router',
+      'react-router-dom',
+      'react-router-redux',
+      'redux-saga',
+      'immutable',
+      '@blueprintjs/core',
+      path.resolve(__dirname, '../modules', 'vendor', 'index.ts')
+    ]
+  },
   module: {
     rules: [
       {
@@ -59,12 +76,13 @@ const webpackConfig: Configuration = {
 
   output: {
     filename: '[name].js',
-    chunkFilename: 'components-[name].js'
+    chunkFilename: '[name].js'
   },
 
   resolve: {
     alias: {
-      'sa-variables': path.join(path.resolve(__dirname, '..'), 'modules', 'vendor', '_variables.scss')
+      'sa-variables': path.resolve(__dirname, '..', 'modules', 'vendor', 'blueprint', '_variables.scss'),
+      'sa': path.resolve(__dirname, '..', 'modules', 'sa')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   }

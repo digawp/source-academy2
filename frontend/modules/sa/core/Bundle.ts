@@ -2,9 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Store } from 'redux'
+import { injectReducers } from './util'
+import { IAppDelegate } from './types'
 
 export interface IBundleProps {
-  load: (store: Store<any>, callback: Function) => void
+  load: (delegate: IAppDelegate) => void
   store: Store<any>
 }
 
@@ -15,6 +17,10 @@ export interface IBundleState {
 class Bundle extends React.Component<IBundleProps, IBundleState> {
 
   state: IBundleState = { component: null }
+
+  bundleLoaded = (component: React.ComponentClass<any>) => {
+    this.setState({ component: withRouter(component) })
+  }
 
   componentWillMount() {
     this.load(this.props)
@@ -27,10 +33,14 @@ class Bundle extends React.Component<IBundleProps, IBundleState> {
   }
 
   load(props: IBundleProps) {
+    const { store } = this.props
+
     this.setState({ component: null })
 
-    props.load(this.props.store, (component: any) => {
-      this.setState({ component: withRouter(component) })
+    props.load({
+      store,
+      injectReducers,
+      bundleLoaded: this.bundleLoaded
     })
   }
 

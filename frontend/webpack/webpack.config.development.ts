@@ -20,14 +20,10 @@ const config: webpack.Configuration = {
   devtool: 'inline-source-map',
 
   entry: {
-    app: [
-      'babel-polyfill',
+    core: [
       'react-hot-loader/patch',
       hot,
       path.resolve(__dirname, '../modules', 'index.tsx')
-    ],
-    vendor: [
-      path.resolve(__dirname, '../modules', 'vendor', 'index.ts')
     ]
   },
 
@@ -59,11 +55,12 @@ const config: webpack.Configuration = {
     new webpack.optimize.OccurrenceOrderPlugin(false),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
       template: path.resolve(__dirname, '../index.html'),
-      chunksSortMode: packageSort(['vendor', 'app'])
+      chunksSortMode: packageSort(['vendor', 'core'])
     }),
     new webpack.DefinePlugin({
       'process.env': {

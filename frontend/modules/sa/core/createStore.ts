@@ -2,8 +2,9 @@ import { History } from 'history'
 import { compose,applyMiddleware, createStore, Store, Reducer } from 'redux'
 import { routerMiddleware as createRouterMiddleware } from 'react-router-redux'
 import createSagaMiddleware, { SagaIterator } from 'redux-saga'
-import mainSaga from '../sagas'
-import { makeRootReducer } from './reducers'
+
+import mainSaga from './sagas'
+import { makeRootReducer } from './util'
 
 export interface IStore extends Store<any> {
   asyncReducers: { [name: string]: Reducer<any> }
@@ -39,9 +40,9 @@ export default (history: History, initialState = {}) => {
 
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
-      module.hot.accept('./reducers', () => {
-        const newReducers = require('./reducers').default
-        store.replaceReducer(newReducers)
+      module.hot.accept('./util', () => {
+        const makeRootReducer = require('./util').makeRootReducer
+        store.replaceReducer(makeRootReducer(store.asyncReducers))
       })
     }
   }

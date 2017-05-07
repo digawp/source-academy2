@@ -4,7 +4,7 @@ import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter } from 'react-router-redux'
 import { Store } from 'redux'
 import Bundle from './Bundle'
-import { Home, Academy } from './index' 
+import { Home, Academy } from './loaders' 
 
 export default function createRoutes(store: Store<any>) {
   return (

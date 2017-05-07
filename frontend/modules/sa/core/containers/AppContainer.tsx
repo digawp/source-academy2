@@ -3,9 +3,10 @@ import { Provider } from 'react-redux'
 import { History } from 'history'
 import { Store } from 'redux'
 import { Route } from 'react-router'
-import createRoutes from '../bundles/createRoutes'
 import { ConnectedRouter } from 'react-router-redux'
-import './styles/index.scss'
+import '../styles/index.scss'
+
+import createRoutes from '../createRoutes'
 
 export interface AppContainerProps {
   history: History

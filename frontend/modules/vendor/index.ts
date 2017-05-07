@@ -1,1 +1,1 @@
-import './blueprint.scss'
+import './blueprint/blueprint.scss'

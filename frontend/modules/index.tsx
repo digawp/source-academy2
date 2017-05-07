@@ -2,8 +2,8 @@ import * as React from 'react'
 import createBrowserHistory from 'history/createBrowserHistory'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { AppContainer as HotContainer } from 'react-hot-loader'
-import createStore from './redux/createStore'
-import AppContainer from './containers/AppContainer'
+import createStore from 'sa/core/createStore'
+import AppContainer from 'sa/core/containers/AppContainer'
 
 const history = createBrowserHistory()
 const store = createStore(history)
@@ -13,9 +13,7 @@ const container = document.getElementById('sa-root')
 const doRender = () => {
   render(
     <HotContainer>
-      <AppContainer
-        store={store}
-        history={history} />
+      <AppContainer store={store} history={history} />
     </HotContainer>,
     container
   )
@@ -23,12 +21,10 @@ const doRender = () => {
 
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
-    module.hot.accept('./containers/AppContainer', () => {
-      setImmediate(() => {
-        container && unmountComponentAtNode(container)
+    module.hot.accept('./sa/core/containers/AppContainer', () => {
+      container && unmountComponentAtNode(container)
 
-        doRender()
-      })
+      doRender()
     })
   }
 }

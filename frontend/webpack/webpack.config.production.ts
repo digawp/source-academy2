@@ -16,12 +16,8 @@ export default merge(baseConfig, {
   devtool: 'cheap-module-source-map',
 
   entry: {
-    app: [
-      'babel-polyfill',
+    core: [
       path.resolve(__dirname, '../modules', 'index.tsx')
-    ],
-    vendor: [
-      './modules/vendor'
     ]
   },
 
@@ -42,8 +38,8 @@ export default merge(baseConfig, {
   },
 
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: 'components-[name].bundle.js',
+    filename: '[name].[hash].min.js',
+    chunkFilename: '[name].[chunkhash].min.js',
     path: path.join(__dirname, '../dist'),
     publicPath: '/'
   },
@@ -54,11 +50,12 @@ export default merge(baseConfig, {
     new ParallelUglifyPlugin({
       cacheDir: path.resolve(__dirname, '../.uglifycache')
     }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
       template: path.resolve(__dirname, '../index.html'),
-      chunksSortMode: packageSort(['vendor', 'app'])
+      chunksSortMode: packageSort(['vendor', 'core'])
     }),
     new webpack.optimize.OccurrenceOrderPlugin(false),
     new ExtractTextPlugin({

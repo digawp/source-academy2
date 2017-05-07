@@ -9,7 +9,14 @@
     "removeComments": false,
     "strictNullChecks": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "*",
+        "modules/*"
+      ]
+    }
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
