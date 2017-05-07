@@ -1,6 +1,10 @@
 @import '~normalize.css/normalize.css';
 @import '~flexboxgrid/dist/flexboxgrid.css';
-@import '../vendor/variables';
+@import '~sa-variables';
+
+body {
+  margin: 0;
+}
 
 #sa-root {
   height: 100vh;

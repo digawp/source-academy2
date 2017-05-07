@@ -5,7 +5,7 @@ import * as path from 'path'
 import * as webpack from 'webpack'
 
 import { CheckerPlugin } from 'awesome-typescript-loader'
-import baseConfig from './webpack.config.base'
+import baseConfig, { packageSort } from './webpack.config.base'
 
 const merge = require('webpack-merge') // tslint:disable-line
 
@@ -62,7 +62,8 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: path.resolve(__dirname, '../index.html')
+      template: path.resolve(__dirname, '../index.html'),
+      chunksSortMode: packageSort(['vendor', 'app'])
     }),
     new webpack.DefinePlugin({
       'process.env': {

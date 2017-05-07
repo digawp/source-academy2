@@ -4,6 +4,27 @@
 import * as path from 'path'
 import {Configuration} from 'webpack'
 
+export const packageSort = (packages: string[]) => {
+  const len = packages.length - 1;
+  const first = packages[0];
+  const last = packages[len];
+
+  return (left: any, right: any) => {
+    const leftIndex = packages.indexOf(left.names[0]);
+    const rightindex = packages.indexOf(right.names[0]);
+
+    if (leftIndex < 0 || rightindex < 0) {
+      throw "unknown package";
+    }
+
+    if (leftIndex > rightindex) {
+      return 1;
+    }
+
+    return -1;
+  }
+}
+
 const webpackConfig: Configuration = {
   module: {
     rules: [
@@ -42,6 +63,9 @@ const webpackConfig: Configuration = {
   },
 
   resolve: {
+    alias: {
+      'sa-variables': path.join(path.resolve(__dirname, '..'), 'modules', 'vendor', '_variables.scss')
+    },
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   }
 }

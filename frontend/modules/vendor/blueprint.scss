@@ -1,4 +1,6 @@
 // Customize then Load Blueprint CSS
+@import '~normalize.css/normalize.css';
+@import '~flexboxgrid/dist/flexboxgrid.css';
 @import 'variables';
 @import '~@blueprintjs/core/src/blueprint';
 

@@ -8,11 +8,9 @@ import * as ParallelUglifyPlugin from 'webpack-parallel-uglify-plugin'
 
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
-import baseConfig from './webpack.config.base'
+import baseConfig, { packageSort } from './webpack.config.base'
 
 const merge = require('webpack-merge') // tslint:disable-line
-
-const entryPoint = process.env.EXAMPLE || 'demo'
 
 export default merge(baseConfig, {
   devtool: 'cheap-module-source-map',
@@ -20,9 +18,11 @@ export default merge(baseConfig, {
   entry: {
     app: [
       'babel-polyfill',
-       path.resolve(__dirname, '../modules', 'index.tsx')
+      path.resolve(__dirname, '../modules', 'index.tsx')
     ],
-    vendor: [ './modules/vendor' ]
+    vendor: [
+      './modules/vendor'
+    ]
   },
 
   module: {
@@ -38,7 +38,7 @@ export default merge(baseConfig, {
           ]
         })
       }
-     ]
+    ]
   },
 
   output: {
@@ -57,7 +57,8 @@ export default merge(baseConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
-      template: path.resolve(__dirname, '../index.html')
+      template: path.resolve(__dirname, '../index.html'),
+      chunksSortMode: packageSort(['vendor', 'app'])
     }),
     new webpack.optimize.OccurrenceOrderPlugin(false),
     new ExtractTextPlugin({
@@ -66,8 +67,10 @@ export default merge(baseConfig, {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
+        DEMO_MODE: JSON.stringify(process.env.DEMO_MODE ? true : false)
       }
     })
   ])
 })
+

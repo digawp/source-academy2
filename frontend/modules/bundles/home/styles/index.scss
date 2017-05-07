@@ -1,0 +1,24 @@
+@import '~sa-variables';
+
+.sa-home {
+  background-color: $dark-gray2;
+  padding: 50px;
+  height: 100vh;
+
+  .pt-navbar {
+    padding: 0px 50px;
+  }
+
+  .info-card {
+    padding: 50px;
+
+    .heading {
+      font-size: 2em;
+      font-weight: 700;
+    }
+
+    .content {
+      font-size: 1.5em;
+    }
+  }
+}
