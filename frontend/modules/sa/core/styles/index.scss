@@ -2,8 +2,24 @@
 
 body {
   margin: 0;
+  background: $light-gray2;
 }
 
 #sa-root {
   height: 100vh;
+}
+
+.sa-content {
+  position: relative;
+  padding: 16px;
+}
+
+.sa-http-error {
+  padding: 100px;
+  font-size: 1.2em;
+
+  span.error-code {
+    color: $red3 !important;
+    font-weight: 700;
+  }
 }

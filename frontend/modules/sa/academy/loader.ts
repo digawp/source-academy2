@@ -5,6 +5,8 @@ export default ({injectReducers, store, bundleLoaded}: IAppDelegate) => {
   require.ensure([], () => {
     const AcademyContainer = require('./containers/AcademyContainer').default
 
+    require("./styles/index.scss")
+
     if (process.env.NODE_ENV === 'development') {
       if (module.hot) {
         module.hot.accept('./containers/AcademyContainer', () => {

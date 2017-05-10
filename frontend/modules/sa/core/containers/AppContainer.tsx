@@ -3,18 +3,18 @@ import { Provider } from 'react-redux'
 import { History } from 'history'
 import { Store } from 'redux'
 import { Route } from 'react-router'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter, push } from 'react-router-redux'
 import '../styles/index.scss'
 
 import createRoutes from '../createRoutes'
 
-export interface AppContainerProps {
+export interface IAppContainerProps {
   history: History
   store: Store<any>
   routes: Route[]
 }
 
-export default class AppContainer extends React.Component<any, any> {
+export default class AppContainer extends React.Component<IAppContainerProps, void> {
 
   shouldComponentUpdate() {
     return false

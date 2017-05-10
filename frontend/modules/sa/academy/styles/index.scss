@@ -1,0 +1,14 @@
+@import "~sa-variables";
+
+@import './Navbar';
+
+.sa-academy {
+  background: white;
+
+  .pt-navbar {
+    font-weight: 700;
+  }
+  .content {
+    height: 86vh;
+  }
+}

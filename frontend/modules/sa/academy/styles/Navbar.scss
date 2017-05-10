@@ -1,0 +1,44 @@
+@import '~sa-variables';
+
+.sa-academy-navbar {
+  background: $light-gray4;
+
+  .navigation-buttons {
+    padding-top: 8px;
+    max-width: 480px;
+
+    .pt-button {
+      text-align: left;
+    }
+
+    .pt-button.pt-active {
+      background: white;
+      height: $pt-navbar-height - 8px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-top: 3px $cobalt4 solid;
+      border-left: 0.5px solid $light-gray3;
+      border-right: 0.5px solid $light-gray3;
+    }
+
+    .pt-button::before {
+      font-size: 1.2em;
+    }
+
+    .pt-button.pt-active::before {
+      color: $cobalt4 !important;
+    }
+
+    .pt-button span {
+      font-weight: 700;
+      font-size: 0.8em;
+    }
+
+    @media(max-width: 768px) {
+      .pt-button span {
+        display: none;
+      }
+    }
+  }
+
+}
