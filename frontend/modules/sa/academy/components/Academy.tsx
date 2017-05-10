@@ -11,6 +11,7 @@ import Navbar from './Navbar'
 import Materials from './materials/Materials'
 import Missions from './missions/Missions'
 import Inbox from './inbox/Inbox'
+import {InboxState} from '../ducks/inbox'
 
 export interface IAcademyProps extends RouteComponentProps<any> {
 }

@@ -1,6 +1,7 @@
 @import "~sa-variables";
 
 @import './Navbar';
+@import './Inbox';
 
 .sa-academy {
   background: white;
@@ -9,6 +10,7 @@
     font-weight: 700;
   }
   .content {
+    background: $light-gray5;
     height: 86vh;
   }
 }

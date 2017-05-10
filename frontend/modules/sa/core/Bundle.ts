@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Store } from 'redux'
-import { injectReducers } from './util'
+import { injectReducers, makeRootReducer } from './util'
 import { IAppDelegate } from './types'
 
 export interface IBundleProps {
@@ -40,6 +40,7 @@ class Bundle extends React.Component<IBundleProps, IBundleState> {
     props.load({
       store,
       injectReducers,
+      makeRootReducer,
       bundleLoaded: this.bundleLoaded
     })
   }
