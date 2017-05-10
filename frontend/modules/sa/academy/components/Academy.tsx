@@ -8,8 +8,8 @@ import { RouteComponentProps } from 'react-router'
 
 import NotFound from 'sa/core/components/NotFound'
 import Navbar from './Navbar'
-import Files from './files/Files'
-import Journal from './journal/Journal'
+import Materials from './materials/Materials'
+import Missions from './missions/Missions'
 import Inbox from './inbox/Inbox'
 
 export interface IAcademyProps extends RouteComponentProps<any> {
@@ -23,8 +23,8 @@ export default function Academy(props: IAcademyProps) {
         <Switch>
           <Redirect exact path='/academy' to='/academy/news' />
           <Route path='/academy/inbox' component={Inbox} />
-          <Route path='/academy/journal' component={Journal} />
-          <Route path='/academy/files' component={Files} />
+          <Route path='/academy/missions' component={Missions} />
+          <Route path='/academy/materials' component={Materials} />
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -1,7 +1,77 @@
 @import '~sa-variables';
 
 .sa-academy-navbar {
+  padding-right: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
   background: $light-gray4;
+
+  .resume-game {
+    .pt-button {
+      border-radius: 0px;
+    }
+
+    @media(max-width: 960px) {
+      .pt-button {
+        text-align: center;
+      }
+      .pt-button span {
+        display: none;
+      }
+    }
+  }
+
+  .profile-tab-container {
+    text-align: left;
+  }
+
+  .profile-tab {
+    margin-left: 5px;
+    cursor: pointer;
+
+    .photo {
+      width: 36px;
+      height: 36px;
+      padding: 7px 0px;
+      border: 3px solid $gray1;
+      border-radius: 5px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    .name {
+      margin: 0px 5px;
+    }
+
+    .stat-bar {
+      margin: 0px 5px;
+      border: 2px solid $light-gray1;
+      position: relative;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .stat-bar-fill {
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      width: 75%;
+      height: 100%;
+      background: $light-gray1;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      z-index: -1;
+    }
+
+    @media(max-width: 960px) {
+      .name {
+        display: none;
+      }
+    }
+  }
 
   .navigation-buttons {
     padding-top: 8px;
@@ -16,7 +86,7 @@
       height: $pt-navbar-height - 8px;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      border-top: 3px $cobalt4 solid;
+      border-top: 3px $dark-gray4 solid;
       border-left: 0.5px solid $light-gray3;
       border-right: 0.5px solid $light-gray3;
     }
@@ -26,15 +96,19 @@
     }
 
     .pt-button.pt-active::before {
-      color: $cobalt4 !important;
+      color: $dark-gray4 !important;
     }
 
     .pt-button span {
       font-weight: 700;
       font-size: 0.8em;
+      color: $dark-gray5;
     }
 
-    @media(max-width: 768px) {
+    @media(max-width: 960px) {
+      .pt-button {
+        text-align: center;
+      }
       .pt-button span {
         display: none;
       }
