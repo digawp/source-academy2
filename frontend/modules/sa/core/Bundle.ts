@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Store } from 'redux'
 import { injectReducers, makeRootReducer } from './util'
 import { IAppDelegate } from './types'
+import { AsyncStore } from './types'
 
 export interface IBundleProps {
   load: (delegate: IAppDelegate) => void
-  store: Store<any>
+  store: AsyncStore
 }
 
 export interface IBundleState {

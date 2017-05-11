@@ -22,7 +22,7 @@ export default function Academy(props: IAcademyProps) {
       <Navbar {...props}/>
       <div className="content">
         <Switch>
-          <Redirect exact path='/academy' to='/academy/news' />
+          <Redirect exact path='/academy' to='/academy/inbox' />
           <Route path='/academy/inbox' component={Inbox} />
           <Route path='/academy/missions' component={Missions} />
           <Route path='/academy/materials' component={Materials} />

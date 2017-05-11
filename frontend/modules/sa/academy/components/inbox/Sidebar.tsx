@@ -7,8 +7,7 @@ export interface ISidebarProps {
   setInboxActiveTopic: (topic: string) => void
 }
 
-export default function Sidebar({
-   activeTopic, setInboxActiveTopic }: ISidebarProps) {
+export default function Sidebar({ activeTopic, setInboxActiveTopic }: ISidebarProps) {
   
   const nodes: ITreeNode[] = [
     { id: "soon", label: "Due Soon", iconName: "time",

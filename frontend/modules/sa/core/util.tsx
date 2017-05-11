@@ -2,7 +2,7 @@ import * as React from 'react'
 import { combineReducers, Reducer, Store } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import { Link } from 'react-router-dom'
-import app from './reducers/appReducer'
+import { reducer as app } from './ducks/app'
 
 export const makeRootReducer = (asyncReducers: {[name:string]: Reducer<any>}) =>
   combineReducers({
