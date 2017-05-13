@@ -7,11 +7,11 @@
   .sidebar {
     max-width: 250px;
     background: $light-gray5;
-    height: 84vh;
+    height: 83vh;
 
     .pt-tree-node {
-      margin-top: 15px;
-      margin-bottom: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
       font-weight: 500;
       color: $dark-gray3;
     }
@@ -31,10 +31,10 @@
     .pt-tree-node.pt-tree-node-selected > .pt-tree-node-content,
     .pt-tree-node:hover {
       border-radius: 10px;
-      background: $light-gray3 !important;
-      color: black;
+      background: $light-gray4 !important;
+      color: $blue3;
       .pt-tree-node-icon {
-        color: black;
+        color: $blue3;
       }
     }
   }
@@ -47,5 +47,6 @@
 
   .inbox-content {
     background: white;
+    overflow-y: auto;
   }
  }

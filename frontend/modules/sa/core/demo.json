@@ -1,0 +1,133 @@
+{
+  "user": {
+    "0": {
+      "id": 0,
+      "role": "student",
+      "firstName": "Evan",
+      "lastName": "Sebastian",
+      "profilePicture": "http://lorempixel.com/48/48/"
+    },
+    "1": {
+      "id": 1,
+      "role": "admin",
+      "firstName": "Martin",
+      "lastName": "Henz",
+      "profilePicture": "http://lorempixel.com/48/48/"
+    },
+    "2": {
+      "id": 2,
+      "role": "staff",
+      "firstName": "Thenaesh",
+      "lastName": "Elango",
+      "profilePicture": "http://lorempixel.com/48/48/"
+    }
+  },
+
+  "announcement": {
+    "0": {
+      "id": 0,
+      "poster": 1,
+      "published": true,
+      "pinned": true,
+      "updatedAt": 1494674929,
+      "pinExpiry": 1498908494,
+      "title": "Welcome to the Academy",
+      "content": ""
+    },
+    "1": {
+      "id": 1,
+      "poster": 2,
+      "published": true,
+      "pinned": true,
+      "updatedAt": 1494674929,
+      "pinExpiry": 1498908494,
+      "title": "Mission 1 is now Available!",
+      "content": ""
+    },
+    "2": {
+      "id": 2,
+      "poster": 2,
+      "published": true,
+      "pinned": false,
+      "updatedAt": 1494674929,
+      "pinExpiry": 1498908494,
+      "title": "Reporting Registration Issues",
+      "content": ""
+    }
+  },
+
+  "student": {
+    "0": {
+      "id": 0,
+      "user": 0,
+      "level": 36,
+      "experiencePoint": 2141995
+    }
+  },
+
+  "assessment": {
+    "0": {
+      "id": 0,
+      "type": "mission",
+      "order": "1",
+      "published": true,
+      "title": "Understanding the Source",
+      "description": "Every year, the Source Academy holds a trial for worthy candidates to be trained in the Way of the Source. This will be their first step on a lifelong journey of bringing peace and justice to the galaxy. After years of anticipation, it is finally your turn. The instructors will give you some basic training before you are tested with a set of challenges. If you pass these challenges, you will be initiated into the Academy.",
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1494676017,
+      "dueAt": 1530444494
+    },
+    "1": {
+      "id": 1,
+      "type": "mission",
+      "order": "2",
+      "published": false,
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1530444494,
+      "dueAt": 1530444494
+    },
+    "2": {
+      "id": 2,
+      "type": "sidequest",
+      "order": "1",
+      "published": true,
+      "title": "An Extra Challenge",
+      "description": "Hartin Menz opens this challenge for all new cadets.",
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1494676017,
+      "dueAt": 1530444494
+    },
+    "3": {
+      "id": 3,
+      "type": "sidequest",
+      "order": "2.1",
+      "published": false,
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1530444494,
+      "dueAt": 1530444494
+    },
+    "4": {
+      "id": 4,
+      "type": "sidequest",
+      "order": "2.2",
+      "published": false,
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1530444494,
+      "dueAt": 1530444494
+    },
+    "5": {
+      "id": 5,
+      "type": "path",
+      "order": "2.2",
+      "published": false,
+      "coverPicture": "http://lorempixel.com/150/150/",
+      "openedAt": 1494676017,
+      "dueAt": 1530444494
+    }
+  },
+
+  "auth": {
+    "user": "0",
+    "token": "mytoken"
+  }
+}
