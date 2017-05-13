@@ -7,19 +7,41 @@
   .sidebar {
     max-width: 250px;
     background: $light-gray5;
-    height: 86vh;
-
-    .heading {
-      padding: 15px;
-      text-transform: uppercase;
-      font-size: 1.1em;
-      font-weight: 700;
-    }
+    height: 84vh;
 
     .pt-tree-node {
       margin-top: 15px;
       margin-bottom: 15px;
       font-weight: 500;
+      color: $dark-gray3;
+    }
+
+    @media(max-width: 768px) {
+      .pt-tree-node-label {
+        display: none
+      }
+      .pt-tree-node-caret, .pt-tree-node-caret-none {
+        min-width: 0px;
+      }
+      .pt-tree-node-icon::before {
+        margin-left: 12px !important;
+      }
+    }
+
+    .pt-tree-node.pt-tree-node-selected > .pt-tree-node-content,
+    .pt-tree-node:hover {
+      border-radius: 10px;
+      background: $light-gray3 !important;
+      color: black;
+      .pt-tree-node-icon {
+        color: black;
+      }
+    }
+  }
+
+  @media(max-width: 768px) {
+    .sidebar-container {
+      flex-basis: 12.5%
     }
   }
 
