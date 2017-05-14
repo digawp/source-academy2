@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { injectReducers, createRootReducer } from './ducks'
+import { injectReducers, createRootReducer, injectSaga } from './ducks'
 import { IAppDelegate } from './types'
 import { AsyncStore } from './types'
 
@@ -40,6 +40,7 @@ class Bundle extends React.Component<IBundleProps, IBundleState> {
     props.load({
       store,
       injectReducers,
+      injectSaga,
       createRootReducer,
       bundleLoaded: this.bundleLoaded
     })

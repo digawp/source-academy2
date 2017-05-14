@@ -16,21 +16,21 @@ const db: DB = {
       "role": "student",
       "firstName": "Evan",
       "lastName": "Sebastian",
-      "profilePicture": "http://lorempixel.com/48/48/"
+      "profilePicture": "https://randomuser.me/api/portraits/men/83.jpg"
     },
     "1": {
       "id": 1,
       "role": "admin",
       "firstName": "Martin",
       "lastName": "Henz",
-      "profilePicture": "http://lorempixel.com/48/48/"
+      "profilePicture": "https://randomuser.me/api/portraits/men/84.jpg"
     },
     "2": {
       "id": 2,
       "role": "staff",
       "firstName": "Thenaesh",
       "lastName": "Elango",
-      "profilePicture": "http://lorempixel.com/48/48/"
+      "profilePicture": "https://randomuser.me/api/portraits/men/85.jpg"
     }
   },
 
@@ -159,7 +159,7 @@ const populateStudent = async () => {
       role: "student",
       firstName: user.name.first,
       lastName: user.name.last,
-      profilePicture: user.picture.last
+      profilePicture: user.picture.large
     }
 
     db.student[(counter - 2).toString()] = {
@@ -185,22 +185,36 @@ const resourcesOfKey = <T>(key: string) => {
   return resources
 }
 
+const students: t.IStudent[] = resourcesOfKey<t.IStudent>('student')
+
 const mockAPI: t.API = {
   auth: {
-    refresh() {
-      return Promise.resolve(Object.assign({}, db.user["0"], {
+    async refresh() {
+      return Object.assign({}, db.user["0"], {
         token: "demo-token"
-      }))
+      })
     },
 
-    authenticate(username: string, password: string) {
-      return Promise.resolve(Object.assign({}, db.user["0"], {
+    async authenticate(username: string, password: string) {
+      return Object.assign({}, db.user["0"], {
         token: "demo-token"
-      }))
+      })
     },
 
     deauthenticate() {
       return
+    }
+  },
+
+  student: {
+    async fetch(limit?: number) {
+      return students
+    },
+    async get(id: number) {
+      return db.student[id + '']
+    },
+    async getByUser(id: number) {
+      return students.find(s => (s.user === id))
     }
   },
 

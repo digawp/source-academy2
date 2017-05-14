@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { Button, Text } from '@blueprintjs/core'
-import { IUser } from 'sa/core/types'
+import { IUser, IStudent } from 'sa/core/types'
 
 export interface IProfileTabProps {
   user: IUser
+  student: IStudent
 }
 
-export default function ProfileTab({ user }: IProfileTabProps) {
+export default function ProfileTab({ user, student }: IProfileTabProps) {
   const noPadding = { padding: 0 }
   return (
     <div className="profile-tab row">
@@ -17,10 +18,11 @@ export default function ProfileTab({ user }: IProfileTabProps) {
         <Text className="name" ellipsize>
           {user.firstName && (user.firstName + ' ' + user.lastName) }
         </Text>
-        <div className="stat-bar">
-          <span className="stat-bar-fill" />
-          Level <b>36</b>
-        </div>
+        { student && 
+          <div className="stat-bar">
+            <span className="stat-bar-fill" />
+            Level <b>{student.level}</b>
+          </div> }
       </div>
     </div>
   )

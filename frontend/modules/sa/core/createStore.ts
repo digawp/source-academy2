@@ -1,15 +1,10 @@
 import { History } from 'history'
 import { compose,applyMiddleware, createStore, Store, Reducer } from 'redux'
 import { routerMiddleware as createRouterMiddleware } from 'react-router-redux'
-import createSagaMiddleware, { SagaIterator } from 'redux-saga'
-
+import { AsyncStore } from './types'
 import mainSaga from './sagas'
-import { createRootReducer } from './ducks'
+import { sagaMiddleware, createRootReducer, injectSaga } from './ducks'
 import { isProtectedPath } from './util'
-
-export interface IStore extends Store<any> {
-  asyncReducers: { [name: string]: Reducer<any> }
-}
 
 export default (history: History, initialState = {}) => {
   // Setup Enhancers
@@ -23,11 +18,10 @@ export default (history: History, initialState = {}) => {
   }
 
   // Setup Middleware
-  const sagaMiddleware = createSagaMiddleware()
   const routerMiddleware = createRouterMiddleware(history)
 
   // Create Store
-  const store = <IStore> createStore(
+  const store = <AsyncStore> createStore(
     createRootReducer({}),
     composeEnchancers(
       applyMiddleware(
@@ -38,6 +32,7 @@ export default (history: History, initialState = {}) => {
   )
 
   store.asyncReducers = {}
+  store.asyncSagas = []
 
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
@@ -49,7 +44,7 @@ export default (history: History, initialState = {}) => {
   }
 
   // Run Saga
-  sagaMiddleware.run(mainSaga)
+  injectSaga(store, 'mainSaga', mainSaga)
 
   // Redirect to home if not authenticated
   history.listen(location => {

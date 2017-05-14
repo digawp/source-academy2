@@ -63,6 +63,7 @@ export interface IGrading {
 // Globals
 export interface AsyncStore extends Store<any> {
   asyncReducers: {[index: string]: Reducer<any>}
+  asyncSagas: any[]
 }
 
 export interface IAppDelegate {
@@ -72,6 +73,12 @@ export interface IAppDelegate {
     store: AsyncStore,
     reducers: {[name: string]: Reducer<any>}
   ) => void
+
+  injectSaga: (
+    store: AsyncStore,
+    key: string,
+    saga: any
+  ) => void,
 
   createRootReducer: (
     asyncReducers: {[name: string]: Reducer<any>}
@@ -93,7 +100,12 @@ export interface IAuthApi {
   deauthenticate(): void
 }
 
+export interface IStudentAPI {
+  getByUser(id: number): Promise<IStudent>
+}
+
 export interface API {
   auth: IAuthApi
   assessment: IResource<IAssessment>
+  student: IResource<IStudent> & IStudentAPI
 }

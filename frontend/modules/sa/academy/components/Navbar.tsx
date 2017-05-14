@@ -3,16 +3,16 @@ import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button, Intent } from '@blueprintjs/core'
 import { createLink } from 'sa/core/util'
-import { IUser } from 'sa/core/types'
+import { IUser, IStudent } from 'sa/core/types'
 
 import ProfileTab from './ProfileTab'
 
 export interface INavbarProps extends RouteComponentProps<any> {
   currentUser: IUser
+  currentStudent: IStudent
 }
 
-export default function Navbar({ match, currentUser }: INavbarProps) {
-
+export default function Navbar({ match, currentUser, currentStudent }: INavbarProps) {
   // Control Active Tabs
   const isInboxTabActive = match.url.endsWith('inbox')
   const isJournalTabActive = match.url.endsWith('journal')
@@ -40,7 +40,7 @@ export default function Navbar({ match, currentUser }: INavbarProps) {
       <div className="pt-navbar-group pt-align-right profile-tab-container col-xs end-xs">
         <Button className="pt-minimal" iconName="notifications" />
         <div className="pt-navbar-divider" />
-        <ProfileTab user={currentUser} />
+        <ProfileTab user={currentUser} student={currentStudent} />
       </div>
     </div>
   )
