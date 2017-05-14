@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-const config = require(`./webpack.config.${process.env.NODE_ENV}`)
+const config = require(`./webpack.config.${process.env.NODE_ENV}`).default
 
 config.entry.core.pop()
 config.entry.core.push(path.resolve(__dirname, '..', 'demo', 'index.ts'))

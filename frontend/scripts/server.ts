@@ -9,7 +9,7 @@ import * as webpackHotMiddleware from 'webpack-hot-middleware'
 import { spawn } from 'child_process'
 
 const env = (process.env.DEMO_MODE && 'demo') || process.env.NODE_ENV
-const config = require(`../webpack/webpack.config.${env}`)
+const config = require(`../webpack/webpack.config.${env}`).default
 
 const port = process.env.PORT || 8000
 const app = express()
