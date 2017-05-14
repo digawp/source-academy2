@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as moment from 'moment'
 import * as t from 'sa/core/types'
 import boot from 'sa/boot'
 
@@ -40,8 +41,8 @@ const db: DB = {
       "poster": 1,
       "published": true,
       "pinned": true,
-      "updatedAt": 1494674929,
-      "pinExpiry": 1498908494,
+      "updatedAt": 1494674929000,
+      "pinExpiry": 1498908494000,
       "title": "Welcome to the Academy",
       "content": ""
     },
@@ -50,8 +51,8 @@ const db: DB = {
       "poster": 2,
       "published": true,
       "pinned": true,
-      "updatedAt": 1494674929,
-      "pinExpiry": 1498908494,
+      "updatedAt": 1494674929000,
+      "pinExpiry": 1498908494000,
       "title": "Mission 1 is now Available!",
       "content": ""
     },
@@ -60,8 +61,8 @@ const db: DB = {
       "poster": 2,
       "published": true,
       "pinned": false,
-      "updatedAt": 1494674929,
-      "pinExpiry": 1498908494,
+      "updatedAt": 1494674929000,
+      "pinExpiry": 1498908494000,
       "title": "Reporting Registration Issues",
       "content": ""
     }
@@ -83,10 +84,10 @@ const db: DB = {
       "order": "1",
       "published": true,
       "title": "Understanding the Source",
-      "description": "Every year, the Source Academy holds a trial for worthy candidates to be trained in the Way of the Source. This will be their first step on a lifelong journey of bringing peace and justice to the galaxy. After years of anticipation, it is finally your turn. The instructors will give you some basic training before you are tested with a set of challenges. If you pass these challenges, you will be initiated into the Academy.",
+      "description": "Every year, the Source Academy holds a trial for worthy candidates to be trained in the Way of the Source. This will be their first step on a lifelong journey of bringing peace and justice to the galaxy. After years of anticipation, it is finally your turn.",
       "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1494676017,
-      "dueAt": 1530444494
+      "openedAt": moment().subtract(3, 'days').valueOf(),
+      "dueAt": moment().add(5, 'days').valueOf()
     },
     "1": {
       "id": 1,
@@ -96,8 +97,8 @@ const db: DB = {
       "description": "Continue the game to unlock this sidequest.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1530444494,
-      "dueAt": 1530444494
+      "openedAt": 1530444494000,
+      "dueAt": 1530444494000
     },
     "2": {
       "id": 2,
@@ -107,8 +108,8 @@ const db: DB = {
       "title": "An Extra Challenge",
       "description": "Hartin Menz opens this challenge for all new cadets.",
       "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1494676017,
-      "dueAt": 1530444494
+      "openedAt": moment().subtract(1, 'days').valueOf(),
+      "dueAt": moment().add(5, 'days').startOf('day').valueOf()
     },
     "3": {
       "id": 3,
@@ -118,8 +119,8 @@ const db: DB = {
       "description": "Continue the game to unlock this sidequest.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1530444494,
-      "dueAt": 1530444494
+      "openedAt": 1530444494000,
+      "dueAt": 1530444494000
     },
     "4": {
       "id": 4,
@@ -129,8 +130,8 @@ const db: DB = {
       "description": "Continue the game to unlock this one.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1530444494,
-      "dueAt": 1530444494
+      "openedAt": 15304444940000,
+      "dueAt": 1530444494000
     },
     "5": {
       "id": 5,
@@ -139,9 +140,9 @@ const db: DB = {
       "title": "Lecture 1A Review",
       "description": "These questions should help you revise the lecture material",
       "published": true,
-      "coverPicture": "http://lorempixel.com/150/150/",
-      "openedAt": 1494676017,
-      "dueAt": 1530444494
+      "coverPicture": "/assets/demo/path-cover.png",
+      "openedAt": moment().subtract(3, 'days').valueOf(),
+      "dueAt": moment().add(5, 'days').startOf('day').valueOf()
     }
   }
 }
@@ -219,12 +220,12 @@ const mockAPI: t.API = {
   },
 
   assessment: {
-    get(id: number) {
-      return Promise.resolve(db.assessment[id + ''])
+    async get(id: number) {
+      return db.assessment[id + '']
     },
 
-    fetch(limit?: number) {
-      return Promise.resolve(resourcesOfKey<t.IAssessment>('assessment'))
+    async fetch(limit?: number) {
+      return resourcesOfKey<t.IAssessment>('assessment')
     }
   }
 }

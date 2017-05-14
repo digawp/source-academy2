@@ -28,8 +28,7 @@ export default function Navbar({ match, currentUser, currentStudent }: INavbarPr
           Resume Game
         </Button>
       </div>
-
-      <div className="navigation-buttons pt-navbar-group pt-button-group pt-large pt-fill col-xs-7 col-md-5">
+      <div className="navigation-buttons pt-navbar-group pt-button-group pt-large pt-fill col-xs-8 col-md-5">
         {createLink(`/academy/inbox`, getClassNames('inbox'),
                      isInboxTabActive, <span>Inbox</span>)}
         {createLink(`/academy/journal`, getClassNames('book'),
@@ -37,6 +36,7 @@ export default function Navbar({ match, currentUser, currentStudent }: INavbarPr
         {createLink(`/academy/materials`, getClassNames('folder-open'),
                      isMaterialsTabActive, <span>Materials</span>)}
       </div>
+
       <div className="pt-navbar-group pt-align-right profile-tab-container col-xs end-xs">
         <Button className="pt-minimal" iconName="notifications" />
         <div className="pt-navbar-divider" />

@@ -1,9 +1,3 @@
-/**
- * Reducer for global application state
- * 
- * Manage global state that needs to be shared between ALL routes only!
- * E.g toggling demo mode, selecting application theme, etc. 
- */
 import { Record } from 'immutable'
 import { Action } from 'redux'
 

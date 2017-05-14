@@ -3,6 +3,7 @@ import { Tree, ITreeNodeProps } from '@blueprintjs/core'
 import { RouteComponentProps } from 'react-router'
 import { connect } from 'react-redux'
 import Sidebar from './Sidebar'
+import DueSoon from './DueSoon'
 import {InboxState, setInboxActiveTopic} from '../../ducks/inbox'
 
 export interface IInboxProps extends RouteComponentProps<any> {
@@ -14,6 +15,12 @@ const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
   const params = new URLSearchParams(location.search)
   const activeTopic = params.get('topic') || 'soon'
 
+  let element = null
+
+  if (activeTopic === 'soon') {
+    element = <DueSoon />
+  }
+
   return (
     <div className="sa-inbox row">
       <div className="sidebar-container col-xs-3">
@@ -22,6 +29,7 @@ const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
           setInboxActiveTopic={setInboxActiveTopic}/>
       </div>
       <div className="inbox-content col-xs">
+        { element } 
       </div>
     </div>
   )

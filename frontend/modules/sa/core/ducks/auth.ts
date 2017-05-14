@@ -1,5 +1,6 @@
 import { Record } from 'immutable'
 import { IUser } from '../types'
+import { User } from './user'
 
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const AUTHENTICATE_SUCCESS = 'auth/AUTHENTICATE_SUCCESS'
@@ -34,34 +35,6 @@ export const defaultParams: AuthParams = {
   isAuthenticated: false,
   currentUser: undefined,
   token: undefined
-}
-
-export interface UserParams {
-  id?: number
-  role?: "admin" | "staff" | "student"
-  firstName?: string
-  lastName?: string
-  profilePicture?: string
-}
-
-const defaultUser: UserParams = {
-  id: 0,
-  role: "student",
-  firstName: "Unknown",
-  lastName: "User",
-  profilePicture: "#"
-}
-
-export class User extends Record(defaultUser) implements IUser {
-  id: number
-  role: "admin" | "staff" | "student"
-  firstName: string
-  lastName: string
-  profilePicture: string
-
-  constructor(params?: AuthParams) {
-    params ? super(params): super()
-  }
 }
 
 export class AuthState extends Record(defaultParams) {

@@ -1,6 +1,7 @@
 import { select, takeEvery, call, put } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
+import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 import { setCurrentStudent, GET_CURRENT_STUDENT } from '../ducks/currentStudent'
 
 declare const CURRENT_API: API
@@ -12,8 +13,11 @@ function* getCurrentStudent() {
 }
 
 function* studentSaga(): any {
-  yield takeEvery(GET_CURRENT_STUDENT, getCurrentStudent)
-  yield takeEvery(LOCATION_CHANGE, getCurrentStudent)
+  yield takeEvery([
+    ACADEMY_BUNDLE_LOADED,
+    GET_CURRENT_STUDENT,
+    LOCATION_CHANGE
+  ], getCurrentStudent)
 }
 
 export default studentSaga

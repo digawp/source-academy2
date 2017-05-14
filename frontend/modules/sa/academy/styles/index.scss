@@ -13,4 +13,20 @@
     background: $light-gray5;
     height: 86vh;
   }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: $light-gray4;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    background-color: $light-gray4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $gray4;
+    border: none; 
+  }
 }

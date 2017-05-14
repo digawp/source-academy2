@@ -35,6 +35,9 @@ const wdm = webpackDevMiddleware(compiler, {
 })
 
 app.use(wdm)
+
+app.use(express.static(path.resolve(__dirname, '../../public')))
+
 app.use(webpackHotMiddleware(compiler, {
   path: '/__webpack_hmr'
 }))
@@ -56,8 +59,6 @@ const server = app.listen(port, 'localhost', (error: Error) => {
   }
   debug(`Listening at http://localhost:${port}`)
 })
-
-app.use(express.static(path.resolve(__dirname, '../dist')))
 
 process.on('SIGTERM', () => {
   debug('Stopping dev server')
