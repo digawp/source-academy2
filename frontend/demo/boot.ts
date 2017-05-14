@@ -188,11 +188,15 @@ const resourcesOfKey = <T>(key: string) => {
 const mockAPI: t.API = {
   auth: {
     refresh() {
-      return Promise.resolve(db.user["0"])
+      return Promise.resolve(Object.assign({}, db.user["0"], {
+        token: "demo-token"
+      }))
     },
 
     authenticate(username: string, password: string) {
-      return Promise.resolve(db.user["0"])
+      return Promise.resolve(Object.assign({}, db.user["0"], {
+        token: "demo-token"
+      }))
     },
 
     deauthenticate() {

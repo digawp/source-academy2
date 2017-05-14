@@ -1,12 +1,14 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { authenticate } from 'sa/core/ducks/auth'
 import Home from '../components/Home'
 
 const mapStateToProps = (state: any) => ({
+  currentUser: state.auth.currentUser
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  login: () => dispatch(push('academy'))
+  login: (username: string, password: string) =>
+    dispatch(authenticate(username, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

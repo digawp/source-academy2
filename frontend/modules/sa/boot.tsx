@@ -30,6 +30,8 @@ const boot = (api: API, container = document.getElementById('sa-root')!) => {
     }
   }
 
+  (global as any).CURRENT_API = api
+
   // Render the application
   doRender()
 

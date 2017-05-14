@@ -2,7 +2,7 @@ import { Store } from 'redux'
 import { IAppDelegate } from 'sa/core/types'
 import { reducer as inbox } from './ducks/inbox'
 
-export default ({injectReducers, store, bundleLoaded, makeRootReducer}: IAppDelegate) => {
+export default ({injectReducers, store, bundleLoaded, createRootReducer}: IAppDelegate) => {
   require.ensure([], () => {
     const AcademyContainer = require('./containers/AcademyContainer').default
 
@@ -21,7 +21,7 @@ export default ({injectReducers, store, bundleLoaded, makeRootReducer}: IAppDele
         module.hot.accept('./ducks/inbox', () => {
           const { inbox } = require('./ducks/inbox')
           store.asyncReducers.inbox = inbox
-          store.replaceReducer(makeRootReducer(store.asyncReducers))
+          store.replaceReducer(createRootReducer(store.asyncReducers))
         })
       }
     }

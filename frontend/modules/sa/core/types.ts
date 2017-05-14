@@ -73,7 +73,7 @@ export interface IAppDelegate {
     reducers: {[name: string]: Reducer<any>}
   ) => void
 
-  makeRootReducer: (
+  createRootReducer: (
     asyncReducers: {[name: string]: Reducer<any>}
   ) => Reducer<any>
 
