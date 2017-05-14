@@ -2,7 +2,8 @@
 import * as _debug from 'debug'
 import * as webpack from 'webpack'
 
-import config from '../webpack/webpack.config.production'
+const env = (process.env.DEMO_MODE && 'demo') || process.env.NODE_ENV
+const config = require(`../webpack/webpack.config.${env}`)
 
 const debug = _debug('source-academy')
 

@@ -70,11 +70,30 @@ export interface IAppDelegate {
 
   injectReducers: (
     store: AsyncStore,
-    reducers: {[name: string]: Reducer<any>}) => void
+    reducers: {[name: string]: Reducer<any>}
+  ) => void
 
   makeRootReducer: (
     asyncReducers: {[name: string]: Reducer<any>}
   ) => Reducer<any>
 
   bundleLoaded: (component: React.ComponentClass<any>) => void
+}
+
+export interface IResource<T> {
+  get(id: number): Promise<T>
+  fetch(limit?: number): Promise<T[]>
+}
+
+export interface IAuthApi {
+  refresh(): Promise<IUser & { token: string }>
+
+  authenticate(username: string, password: string): Promise<IUser & { token: string }>
+
+  deauthenticate(): void
+}
+
+export interface API {
+  auth: IAuthApi
+  assessment: IResource<IAssessment>
 }

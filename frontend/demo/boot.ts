@@ -1,4 +1,15 @@
-{
+import axios from 'axios'
+import * as t from 'sa/core/types'
+import boot from 'sa/boot'
+
+export type DB = {
+  user: { [id: string]: t.IUser }
+  announcement: { [id: string]: t.IAnnouncement }
+  student: { [id: string]: t.IStudent }
+  assessment: { [id: string]: t.IAssessment }
+}
+
+const db: DB = {
   "user": {
     "0": {
       "id": 0,
@@ -60,8 +71,8 @@
     "0": {
       "id": 0,
       "user": 0,
-      "level": 36,
-      "experiencePoint": 2141995
+      "level": 1,
+      "experiencePoint": 0
     }
   },
 
@@ -81,6 +92,8 @@
       "id": 1,
       "type": "mission",
       "order": "2",
+      "title": "???",
+      "description": "Continue the game to unlock this sidequest.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
       "openedAt": 1530444494,
@@ -101,6 +114,8 @@
       "id": 3,
       "type": "sidequest",
       "order": "2.1",
+      "title": "???",
+      "description": "Continue the game to unlock this sidequest.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
       "openedAt": 1530444494,
@@ -110,6 +125,8 @@
       "id": 4,
       "type": "sidequest",
       "order": "2.2",
+      "title": "???",
+      "description": "Continue the game to unlock this one.",
       "published": false,
       "coverPicture": "http://lorempixel.com/150/150/",
       "openedAt": 1530444494,
@@ -118,16 +135,81 @@
     "5": {
       "id": 5,
       "type": "path",
-      "order": "2.2",
-      "published": false,
+      "order": "1A",
+      "title": "Lecture 1A Review",
+      "description": "These questions should help you revise the lecture material",
+      "published": true,
       "coverPicture": "http://lorempixel.com/150/150/",
       "openedAt": 1494676017,
       "dueAt": 1530444494
     }
+  }
+}
+
+// Populate Student with Names
+const populateStudent = async () => {
+  const result = await axios.get('https://randomuser.me/api/?results=80')
+  const users = result.data.results
+
+  for (let counter = 3; counter <= 83; counter++) {
+    const user = users[counter - 3]
+    db.user[counter.toString()] = {
+      id: counter,
+      role: "student",
+      firstName: user.name.first,
+      lastName: user.name.last,
+      profilePicture: user.picture.last
+    }
+    db.student[(counter - 2).toString()] = {
+      id: counter - 2,
+      user: counter,
+      level: 1,
+      experiencePoint: 0
+    }
+  }
+}
+
+const resourcesOfKey = <T>(key: string) => {
+  const anyDB = db as any
+  const resources: T[] = []
+  const o = anyDB[key]
+
+  for (let k of Object.keys(o)) {
+    if (o.hasOwnProperty(k)) {
+      resources.push(o[k])
+    }
+  }
+
+  return resources
+}
+
+const mockAPI: t.API = {
+  auth: {
+    refresh() {
+      return Promise.resolve(db.user["0"])
+    },
+
+    authenticate(username: string, password: string) {
+      return Promise.resolve(db.user["0"])
+    },
+
+    deauthenticate() {
+      return
+    }
   },
 
-  "auth": {
-    "user": "0",
-    "token": "mytoken"
+  assessment: {
+    get(id: number) {
+      return Promise.resolve(db.assessment[id + ''])
+    },
+
+    fetch(limit?: number) {
+      return Promise.resolve(resourcesOfKey<t.IAssessment>('assessment'))
+    }
   }
+}
+
+export default async () => {
+  await populateStudent()
+  return boot(mockAPI)
 }

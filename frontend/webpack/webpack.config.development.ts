@@ -23,7 +23,7 @@ const config: webpack.Configuration = {
     core: [
       'react-hot-loader/patch',
       hot,
-      path.resolve(__dirname, '../modules', 'index.tsx')
+      path.resolve(__dirname, '..', 'index.ts')
     ]
   },
 

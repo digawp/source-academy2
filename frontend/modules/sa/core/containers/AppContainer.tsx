@@ -11,7 +11,6 @@ import createRoutes from '../createRoutes'
 export interface IAppContainerProps {
   history: History
   store: Store<any>
-  routes: Route[]
 }
 
 export default class AppContainer extends React.Component<IAppContainerProps, void> {

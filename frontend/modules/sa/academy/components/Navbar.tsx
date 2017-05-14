@@ -13,7 +13,7 @@ export default function Navbar({ match }: INavbarProps) {
 
   // Control Active Tabs
   const isInboxTabActive = match.url.endsWith('inbox')
-  const isMissionsTabActive = match.url.endsWith('missions')
+  const isJournalTabActive = match.url.endsWith('journal')
   const isMaterialsTabActive = match.url.endsWith('materials')
 
   const getClassNames = (icon: string) => `pt-button pt-minimal pt-icon-${icon}`
@@ -30,8 +30,8 @@ export default function Navbar({ match }: INavbarProps) {
       <div className="navigation-buttons pt-navbar-group pt-button-group pt-large pt-fill col-xs-7 col-md-5">
         {createLink(`/academy/inbox`, getClassNames('inbox'),
                      isInboxTabActive, <span>Inbox</span>)}
-        {createLink(`/academy/missions`, getClassNames('application'),
-                     isMissionsTabActive, <span>Missions</span>)}
+        {createLink(`/academy/journal`, getClassNames('book'),
+                     isJournalTabActive, <span>Journal</span>)}
         {createLink(`/academy/materials`, getClassNames('folder-open'),
                      isMaterialsTabActive, <span>Materials</span>)}
       </div>

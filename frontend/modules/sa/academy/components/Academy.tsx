@@ -9,7 +9,7 @@ import { RouteComponentProps } from 'react-router'
 import NotFound from 'sa/core/components/NotFound'
 import Navbar from './Navbar'
 import Materials from './materials/Materials'
-import Missions from './missions/Missions'
+import Journal from './journal/Journal'
 import Inbox from './inbox/Inbox'
 import {InboxState} from '../ducks/inbox'
 
@@ -24,7 +24,7 @@ export default function Academy(props: IAcademyProps) {
         <Switch>
           <Redirect exact path='/academy' to='/academy/inbox' />
           <Route path='/academy/inbox' component={Inbox} />
-          <Route path='/academy/missions' component={Missions} />
+          <Route path='/academy/journal' component={Journal} />
           <Route path='/academy/materials' component={Materials} />
           <Route component={NotFound} />
         </Switch>

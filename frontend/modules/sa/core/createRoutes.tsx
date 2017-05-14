@@ -14,7 +14,7 @@ export default function createRoutes(store: Store<any>) {
       <Switch>
         <Route exact path="/" component={Home(store)} />
         <Route path="/academy/inbox" component={academy} />
-        <Route path="/academy/missions" component={academy} />
+        <Route path="/academy/journal" component={academy} />
         <Route path="/academy/materials" component={academy} />
         <Route path="/academy" component={academy} />
         <Route component={NotFound} />

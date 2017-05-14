@@ -17,7 +17,7 @@ export default merge(baseConfig, {
 
   entry: {
     core: [
-      path.resolve(__dirname, '../modules', 'index.tsx')
+      path.resolve(__dirname, '..', 'index.ts')
     ]
   },
 
