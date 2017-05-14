@@ -151,8 +151,9 @@ const populateStudent = async () => {
   const result = await axios.get('https://randomuser.me/api/?results=80')
   const users = result.data.results
 
-  for (let counter = 3; counter <= 83; counter++) {
+  for (let counter = 3; counter < 83; counter++) {
     const user = users[counter - 3]
+
     db.user[counter.toString()] = {
       id: counter,
       role: "student",
@@ -160,6 +161,7 @@ const populateStudent = async () => {
       lastName: user.name.last,
       profilePicture: user.picture.last
     }
+
     db.student[(counter - 2).toString()] = {
       id: counter - 2,
       user: counter,

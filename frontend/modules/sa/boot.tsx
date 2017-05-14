@@ -22,7 +22,7 @@ const boot = (api: API, container = document.getElementById('sa-root')!) => {
 
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
-      module.hot.accept('./sa/core/containers/AppContainer', () => {
+      module.hot.accept('./core/containers/AppContainer', () => {
         container && unmountComponentAtNode(container)
 
         doRender()
