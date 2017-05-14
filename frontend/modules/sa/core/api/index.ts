@@ -3,42 +3,43 @@ import { API } from 'sa/core/types'
 
 const api = axios.create({
   baseURL: process.env.API_HOST || location.host
-}) 
+})
 
-const dummyUser = {
-  "id": 0,
-  "role": "student",
-  "firstName": "Evan",
-  "lastName": "Sebastian",
-  "profilePicture": "http://lorempixel.com/48/48/",
-  "token": "someToken"
-}
-
-const defaultAPI: API = {
-
+const defaultAPI: any = {
   auth: {
-    refresh() {
-      return Promise.resolve(dummyUser)
+    async refresh() {
+      throw "not implemented"
     },
 
-    authenticate(username: string, password: string) {
-      return Promise.resolve(dummyUser)
+    async authenticate(username: string, password: string) {
+      throw "not implemented"
     },
 
     deauthenticate() {
-      return
+      throw "not implemented"
     }
   },
 
   assessment: {
-    get(id: number) {
-      return Promise.reject("not implemented")
+    async get(id: number) {
+      throw "not implemented"
     },
-
-    fetch(limit?: number) {
-      return Promise.reject("not implemented")
+    async fetch(limit?: number) {
+      throw "not implemented"
     }
-  }
+  },
+
+  student: {
+    async fetch(limit?: number) {
+      throw "not implemented"
+    },
+    async get(id: number) {
+      throw "not implemented"
+    },
+    async getByUser(id: number) {
+      throw "not implemented"
+    }
+  },
 }
 
 export default defaultAPI
