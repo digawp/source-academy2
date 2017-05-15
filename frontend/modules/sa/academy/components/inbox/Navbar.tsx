@@ -2,35 +2,47 @@ import * as React from 'react'
 import * as classnames from 'classnames'
 import { Button, ITreeNode } from '@blueprintjs/core'
 
-export interface INavbarProps {
+export type Props = {
   activeTab: string
   onTabClick: (topic: string) => void
 }
 
-export default function Navbar({ activeTab, onTabClick }: INavbarProps) {
-  
-  const renderTab = (tab: ITreeNode) => (
-    <Button
-      key={tab.id}
-      iconName={tab.iconName}
-      onClick={() => onTabClick(tab.id.toString())}
-      className={classnames("pt-minimal", {
-      "pt-active": (activeTab === tab.id)
-    })}>{tab.label}</Button>
-  )
+export type TabProps = {
+  id: string
+  label: string
+  iconName: string
+  isActive: boolean
+  onClick: (id: string) => void
+}
 
-  const tabs: ITreeNode[] = [
+const Tab: React.StatelessComponent<TabProps> = ({ id, iconName, isActive, label, onClick }) => (
+  <Button key={id} iconName={iconName}
+    onClick={() => onClick(id.toString())}
+    className={classnames("pt-minimal", { "pt-active": isActive })}>
+    {label}
+  </Button>
+)
+
+const Navbar: React.StatelessComponent<Props> = ({ activeTab, onTabClick }) => {
+
+  const _tabs: Partial<TabProps>[] = [
     { id: "soon", label: "Due Soon", iconName: "time" },
     { id: "announcements", label: "Announcements", iconName: "feed" },
     { id: "happenings", label: "Happenings", iconName: "people" },
     { id: "comments", label: "Comments", iconName: "comment" }
   ]
 
+  const tabs: TabProps[] = _tabs.map((t) => ({
+    ...t, isActive: t.id! === activeTab, onClick: onTabClick
+  } as TabProps))
+
   return (
     <div className="navbar">
       <div className="pt-button-group">
-        { tabs.map(renderTab) }
+        { tabs.map(t => <Tab {...t} />) }
       </div>
     </div>
   )
 }
+
+export default Navbar

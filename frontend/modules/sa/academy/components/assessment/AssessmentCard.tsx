@@ -3,7 +3,7 @@ import * as moment from 'moment'
 import { IAssessment } from 'sa/core/types'
 import { Button, Text } from '@blueprintjs/core'
 
-export interface IAssessmentCardProps {
+export type Props = {
   assessment: IAssessment
 }
 
@@ -11,7 +11,7 @@ function dueAtToString(dueAt: number): string {
   return (moment(dueAt)).format("DD MMMM")
 }
 
-const AssessmentCard = ({ assessment }: IAssessmentCardProps) => (
+const AssessmentCard: React.StatelessComponent<Props> = ({ assessment }) => (
   <div className="assessment row">
     <div className="cover">
       <img src={assessment.coverPicture} />
@@ -38,4 +38,4 @@ const AssessmentCard = ({ assessment }: IAssessmentCardProps) => (
   </div>
 )
 
-export default AssessmentCard 
+export default AssessmentCard

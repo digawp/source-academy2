@@ -4,8 +4,8 @@ import { academyBundleLoaded } from 'sa/core/util'
 const loader: BundleLoader = (app, bundleLoaded) => {
   require.ensure([], () => {
     const AcademyContainer = require('./containers/AcademyContainer').default
-    const academySaga = require('./sagas')
-    const reducers = require('./reducers')
+    const academySaga = require('./sagas').default
+    const reducers = require('./reducers').default
 
     require("./styles/index.scss")
 
@@ -18,8 +18,8 @@ const loader: BundleLoader = (app, bundleLoaded) => {
           const NewContainer = require('./containers/AcademyContainer').default
           bundleLoaded(NewContainer)
         });
-        module.hot.accept(`./reducers/`, () => {
-          const reducers = require(`./reducers`).default
+        module.hot.accept('./reducers', () => {
+          const reducers = require('./reducers').default
           app.injectReducers(reducers)
         })
       }

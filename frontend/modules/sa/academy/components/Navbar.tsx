@@ -5,14 +5,12 @@ import { Button, Intent } from '@blueprintjs/core'
 import { createLink } from 'sa/core/util'
 import { IUser, IStudent } from 'sa/core/types'
 
-import ProfileTab from './ProfileTab'
-
-export interface INavbarProps extends RouteComponentProps<any> {
+export interface Props extends RouteComponentProps<any> {
   currentUser: IUser
   currentStudent: IStudent
 }
 
-export default function Navbar({ match, currentUser, currentStudent }: INavbarProps) {
+const Navbar: React.StatelessComponent<Props> = ({ match, currentUser, currentStudent }) => {
   // Control Active Tabs
   const isInboxTabActive = match.url.endsWith('inbox')
   const isJournalTabActive = match.url.endsWith('journal')
@@ -38,3 +36,5 @@ export default function Navbar({ match, currentUser, currentStudent }: INavbarPr
     </div>
   )
 }
+
+export default Navbar

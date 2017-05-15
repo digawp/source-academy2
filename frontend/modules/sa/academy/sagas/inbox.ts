@@ -2,6 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
+
 import { fetchAssessments } from '../reducers/assessment'
 import { fetchAnnouncements } from '../reducers/announcement'
 
@@ -20,7 +21,7 @@ function* fetchRequiredResource() {
     } else if (tab === 'announcements') {
       yield put(fetchAnnouncements())
     }
-  } 
+  }
 }
 
 function* inboxSaga() {
