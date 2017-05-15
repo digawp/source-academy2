@@ -2,11 +2,12 @@
 
 body {
   margin: 0;
+  padding: 0;
   background: $dark-gray3;
 }
 
-#sa-root {
-  height: 100vh;
+.sa-app {
+  padding: 0;
 }
 
 .sa-content {

@@ -9,6 +9,7 @@ import { RouteComponentProps } from 'react-router'
 import NotFound from 'sa/core/components/NotFound'
 import { IUser, IStudent } from 'sa/core/types'
 import Navbar from './Navbar'
+import BottomBar from './BottomBar'
 import Materials from './materials/Materials'
 import Journal from './journal/Journal'
 import Inbox from './inbox/Inbox'
@@ -33,6 +34,7 @@ export default function Academy(props: IAcademyProps) {
           <Route component={NotFound} />
         </Switch>
       </div>
+      <BottomBar {...props} />
     </div>
   )
 }

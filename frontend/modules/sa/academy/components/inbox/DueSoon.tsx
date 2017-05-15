@@ -27,9 +27,6 @@ const Section = ({ title, assessments }: IDueSoonSectionProps) => (
       <div className="assessment row">
         <div className="cover col-xs-12 col-md-4">
           <img src={a.coverPicture} />
-          <div className="controls">
-            <Button intent={Intent.SUCCESS} className="pt-large">Continue</Button>
-          </div>
         </div>
         <div className="description col-xs">
           <h4>{a.title}</h4>
@@ -37,8 +34,17 @@ const Section = ({ title, assessments }: IDueSoonSectionProps) => (
           <p>
             {a.description}
             <hr/>
-            <b className="due-on">Due on {dueAtToString(a.dueAt)}</b>
           </p>
+          <div className="row">
+            <div className="due-at col-xs-8">
+              <b>Due {dueAtToString(a.dueAt)}</b>
+            </div>
+            <div className="col-xs">
+              <Button intent={Intent.SUCCESS} className="pt-large">
+                Continue
+              </Button>
+            </div>
+          </div>
         </div>
         <div className="exp-gained">
           400XP

@@ -1,6 +1,7 @@
 @import "~sa-variables";
 
 @import './Navbar';
+@import './BottomBar';
 @import './Inbox';
 
 .sa-academy {
@@ -9,9 +10,10 @@
   .pt-navbar {
     font-weight: 700;
   }
-  .content {
+
+  > .content {
     background: $light-gray5;
-    height: 86vh;
+    height: 87vh;
   }
 
   ::-webkit-scrollbar-track {

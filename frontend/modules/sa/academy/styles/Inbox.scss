@@ -1,56 +1,61 @@
 @import '~sa-variables';
 
 .sa-inbox {
-  margin: 0 auto;
-  max-width: 1024px;
 
-  .sidebar {
-    max-width: 250px;
-    background: $light-gray5;
-    height: 83vh;
+  .navbar {
+    width: 100%;
+    background: $light-gray1;
+    padding: 10px;
+    text-align: center;
 
-    .pt-tree-node {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      font-weight: 500;
+    .pt-button-group {
       color: $dark-gray3;
     }
 
-    @media(max-width: 768px) {
-      .pt-tree-node-label {
-        display: none
-      }
-      .pt-tree-node-caret, .pt-tree-node-caret-none {
-        min-width: 0px;
-      }
-      .pt-tree-node-icon::before {
-        margin-left: 12px !important;
-      }
+    .pt-button {
+      margin: 0px 5px;
+      padding: 0px 20px;
+      font-weight: 500;
+      border-radius: 10px !important;
     }
 
-    .pt-tree-node.pt-tree-node-selected > .pt-tree-node-content,
-    .pt-tree-node:hover {
-      border-radius: 10px;
-      background: $light-gray4 !important;
-      color: $blue3;
-      .pt-tree-node-icon {
-        color: $blue3;
+    .pt-button.pt-active {
+      background: $light-gray4;
+    }
+
+    @media(max-width: 768px) {
+      .pt-button span {
+        display: none
       }
     }
   }
 
   .sa-duesoon {
-    padding: 10px 15px;
     overflow-y: auto;
-    height: 83vh;
+    height: 80vh;
 
     .assessment {
+      background: white;
       position: relative;
+      max-width: 800px;
+      margin: 0 auto;
       margin-bottom: 20px;
       min-height: 200px;
       padding: 0;
       border: 2px solid $light-gray4;
       border-radius: 5px;
+    }
+
+    @media(max-width: 1024px) {
+      .assessment {
+        max-width: 500px;
+      }
+    }
+
+    @media(max-width: 768px) {
+      .assessment {
+        max-width: 400px;
+      }
     }
 
     .cover {
@@ -97,27 +102,15 @@
     }
 
     .controls {
-      position: absolute;
-      width: 100%;
-      left: 0px;
-      bottom: 0px;
       padding: 5px;
       background: $dark-gray4;
-      .pt-button {
-        border-radius: 10px;
-      }
     }
 
-  }
-
-  @media(max-width: 768px) {
-    .sidebar-container {
-      flex-basis: 12.5%
-    }
   }
 
   .inbox-content {
-    background: white;
+    margin: 0 auto;
+    max-width: 1024px;
     overflow-y: auto;
   }
  }

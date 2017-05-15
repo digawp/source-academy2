@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Tree, ITreeNodeProps } from '@blueprintjs/core'
 import { RouteComponentProps } from 'react-router'
 import { connect } from 'react-redux'
-import Sidebar from './Sidebar'
+import Navbar from './Navbar'
 import DueSoon from './DueSoon'
 import {InboxState, setInboxActiveTopic} from '../../ducks/inbox'
 
@@ -22,13 +22,11 @@ const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
   }
 
   return (
-    <div className="sa-inbox row">
-      <div className="sidebar-container col-xs-3">
-        <Sidebar
-          activeTopic={activeTopic}
-          setInboxActiveTopic={setInboxActiveTopic}/>
-      </div>
-      <div className="inbox-content col-xs">
+    <div className="sa-inbox">
+      <Navbar
+        activeTopic={activeTopic}
+        setInboxActiveTopic={setInboxActiveTopic}/>
+      <div className="inbox-content">
         { element } 
       </div>
     </div>

@@ -15,9 +15,6 @@ export default function ProfileTab({ user, student }: IProfileTabProps) {
         <img src={user.profilePicture} />
       </div>
       <div className="name col-xs" style={noPadding}>
-        <Text className="name" ellipsize>
-          {user.firstName && (user.firstName + ' ' + user.lastName) }
-        </Text>
         { student && 
           <div className="stat-bar">
             <span className="stat-bar-fill" />
