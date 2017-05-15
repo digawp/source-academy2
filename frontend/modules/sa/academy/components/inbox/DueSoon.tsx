@@ -5,6 +5,8 @@ import { IAssessment } from 'sa/core/types'
 import { List, Map } from 'immutable'
 import { Button, Intent, Text } from '@blueprintjs/core'
 
+import AssessmentCard from '../assessment/AssessmentCard'
+
 export interface IDueSoonProps {
   missions: List<IAssessment>
   sidequests: List<IAssessment>
@@ -22,30 +24,9 @@ function dueAtToString(dueAt: number): string {
 
 const Section = ({ title, assessments }: IDueSoonSectionProps) => (
   <div className="section">
-    {assessments.map((a: IAssessment) => (
-      <div className="assessment row">
-        <div className="cover">
-          <img src={a.coverPicture} />
-        </div>
-        <div className="description col-xs">
-          <h4>{a.title}</h4>
-          <h6 className="order">{a.type.toUpperCase()} {a.order} | 400XP</h6>
-          <Text>{a.description}</Text>
-          <div className="row controls">
-            <div className="due-at col-xs-6 col-md-8">
-              <Button disabled className="pt-minimal" iconName="time">
-                <b>{dueAtToString(a.dueAt)}</b>
-              </Button>
-            </div>
-            <div className="col-xs">
-              <Button className="pt-minimal continue-button pt-large">
-                Continue
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    ))}
+    <div className="heading">{title}</div>
+    {assessments.map((assessment: IAssessment) =>
+      <AssessmentCard assessment={assessment} />)}
   </div>
 )
 
