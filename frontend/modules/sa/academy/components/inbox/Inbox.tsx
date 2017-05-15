@@ -4,14 +4,13 @@ import { RouteComponentProps } from 'react-router'
 import { connect } from 'react-redux'
 import Navbar from './Navbar'
 import DueSoon from './DueSoon'
-import {InboxState, setInboxActiveTopic} from '../../ducks/inbox'
+import {setInboxActiveTopic} from '../../reducers/inbox'
 
 export interface IInboxProps extends RouteComponentProps<any> {
-  inbox: InboxState
   setInboxActiveTopic: (topic: string) => void
 }
 
-const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
+const Inbox = ({ setInboxActiveTopic, location}: IInboxProps) => {
   const params = new URLSearchParams(location.search)
   const activeTopic = params.get('topic') || 'soon'
 
@@ -24,8 +23,8 @@ const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
   return (
     <div className="sa-inbox">
       <Navbar
-        activeTopic={activeTopic}
-        setInboxActiveTopic={setInboxActiveTopic}/>
+        activeTab={activeTopic}
+        onTabClick={setInboxActiveTopic}/>
       <div className="inbox-content">
         { element } 
       </div>
@@ -33,8 +32,4 @@ const Inbox = ({ inbox, setInboxActiveTopic, location}: IInboxProps) => {
   )
 }
 
-export default connect((state) => ({
-  inbox: state.inbox
-}), {
-  setInboxActiveTopic
-})(Inbox) as any
+export default connect((state) => ({}), { setInboxActiveTopic })(Inbox) as any

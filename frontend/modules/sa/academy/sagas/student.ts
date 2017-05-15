@@ -2,7 +2,7 @@ import { select, takeEvery, call, put } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
-import { setCurrentStudent, GET_CURRENT_STUDENT } from '../ducks/currentStudent'
+import { setCurrentStudent, GET_CURRENT_STUDENT } from '../reducers/currentStudent'
 
 declare const CURRENT_API: API
 

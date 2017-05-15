@@ -2,20 +2,19 @@ import * as React from 'react'
 import * as moment from 'moment'
 import { connect } from 'react-redux'
 import { IAssessment } from 'sa/core/types'
-import { List, Map } from 'immutable'
 import { Button, Intent, Text } from '@blueprintjs/core'
 
 import AssessmentCard from '../assessment/AssessmentCard'
 
 export interface IDueSoonProps {
-  missions: List<IAssessment>
-  sidequests: List<IAssessment>
-  paths: List<IAssessment>
+  missions: IAssessment[]
+  sidequests: IAssessment[]
+  paths: IAssessment[]
 }
 
 interface IDueSoonSectionProps {
   title: string
-  assessments: List<IAssessment>
+  assessments: IAssessment[]
 }
 
 function dueAtToString(dueAt: number): string {
@@ -32,17 +31,22 @@ const Section = ({ title, assessments }: IDueSoonSectionProps) => (
 
 const DueSoon = (props: IDueSoonProps) => (
   <div className="sa-duesoon">
-    { props.missions && !props.missions.isEmpty() &&
+    { props.missions && props.missions.length &&
       (<Section title="Missions" assessments={props.missions} />) }
-    { props.sidequests && !props.sidequests.isEmpty() &&
+    { props.sidequests && props.sidequests.length &&
       (<Section title="Sidequests" assessments={props.sidequests} />) }
-    { props.paths && !props.paths.isEmpty() &&
+    { props.paths && props.paths.length &&
       (<Section title="Paths" assessments={props.paths} />) }
   </div>
 )
 
-const selectDueSoon = (assessments: Map<string, IAssessment>, type: string) => {
-  return assessments.toList().filter(
+const selectDueSoon = (assessments: { [id: number]: IAssessment}, type: string) => {
+  const values: IAssessment[] = []
+  for (let key of Object.keys(assessments)) {
+    values.push(assessments[parseInt(key, 10)])
+  }
+
+  return values.filter(
     (a: IAssessment) => {
       if (a.type !== type) {
         return false

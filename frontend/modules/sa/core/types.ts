@@ -1,6 +1,7 @@
+import { History } from 'history'
 import { Store, Reducer } from 'redux'
 
-// Domain Models
+// Domain reducers
 export interface IUser {
   id: number
   role: "admin" | "staff" | "student"
@@ -63,29 +64,21 @@ export interface IGrading {
 // Globals
 export interface AsyncStore extends Store<any> {
   asyncReducers: {[index: string]: Reducer<any>}
-  asyncSagas: any[]
+  asyncSagas: string[]
 }
 
 export interface IAppDelegate {
   store: AsyncStore
+  history: History
 
-  injectReducers: (
-    store: AsyncStore,
-    reducers: {[name: string]: Reducer<any>}
-  ) => void
-
-  injectSaga: (
-    store: AsyncStore,
-    key: string,
-    saga: any
-  ) => void,
-
-  createRootReducer: (
-    asyncReducers: {[name: string]: Reducer<any>}
-  ) => Reducer<any>
-
-  bundleLoaded: (component: React.ComponentClass<any>) => void
+  injectReducers(reducers: {[name: string]: Reducer<any>}): void
+  injectSaga(key: string, saga: any): void,
+  createRootReducer(asyncReducers: {[name: string]: Reducer<any>}): Reducer<any>
 }
+
+export type BundleLoader = (
+  app: IAppDelegate,
+  bundleLoaded: (component: React.ComponentClass<any>) => void) => void
 
 export interface IResource<T> {
   get(id: number): Promise<T>
@@ -94,9 +87,7 @@ export interface IResource<T> {
 
 export interface IAuthApi {
   refresh(): Promise<IUser & { token: string }>
-
   authenticate(username: string, password: string): Promise<IUser & { token: string }>
-
   deauthenticate(): void
 }
 
@@ -107,5 +98,7 @@ export interface IStudentAPI {
 export interface API {
   auth: IAuthApi
   assessment: IResource<IAssessment>
+  announcement: IResource<IAnnouncement>
+  user: IResource<IUser>
   student: IResource<IStudent> & IStudentAPI
 }

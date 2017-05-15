@@ -12,7 +12,6 @@ export const homeBundleLoaded = () => ({
   type: HOME_BUNDLE_LOADED
 })
 
-
 export function createLink(
   to: string,
   classNames: string,

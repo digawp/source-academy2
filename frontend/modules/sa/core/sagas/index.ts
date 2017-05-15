@@ -1,6 +1,10 @@
 import { takeEvery } from 'redux-saga/effects'
 import authSaga from './auth'
+import userSaga from './user'
 
-export default function* () {
+function* mainSaga() {
   yield* authSaga()
+  yield* userSaga()
 }
+
+export default mainSaga

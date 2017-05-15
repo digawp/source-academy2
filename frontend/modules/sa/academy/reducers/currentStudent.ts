@@ -1,4 +1,3 @@
-import { Record } from 'immutable'
 import { IStudent } from 'sa/core/types'
 
 // Constants
@@ -17,11 +16,13 @@ export const getCurrentStudent = () => ({
   type: GET_CURRENT_STUDENT
 })
 
+export type State = IStudent | null
 
 export const reducer = (state = null, action: any) => {
   switch (action.type) {
     case SET_CURRENT_STUDENT:
-      return action.payload.currentStudent
+      const { currentStudent } = action.payload
+      return currentStudent
     default:
       return state
   }

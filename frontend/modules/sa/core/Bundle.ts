@@ -1,22 +1,20 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { injectReducers, createRootReducer, injectSaga } from './ducks'
-import { IAppDelegate } from './types'
-import { AsyncStore } from './types'
+import { IAppDelegate, BundleLoader } from './types'
 
-export interface IBundleProps {
-  load: (delegate: IAppDelegate) => void
-  store: AsyncStore
+export type Props = {
+  app: IAppDelegate
+  loader: BundleLoader 
 }
 
-export interface IBundleState {
+export type State = {
   component: React.ComponentClass<any> | null
 }
 
-class Bundle extends React.Component<IBundleProps, IBundleState> {
+class Bundle extends React.Component<Props, State> {
 
-  state: IBundleState = { component: null }
+  state: State = { component: null }
 
   bundleLoaded = (component: React.ComponentClass<any>) => {
     this.setState({ component: withRouter(component) })
@@ -26,24 +24,15 @@ class Bundle extends React.Component<IBundleProps, IBundleState> {
     this.load(this.props)
   }
 
-  componentWillReceiveProps(nextProps: IBundleProps) {
-    if (nextProps.load !== this.props.load) {
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.loader !== this.props.loader) {
       this.load(nextProps)
     }
   }
 
-  load(props: IBundleProps) {
-    const { store } = this.props
-
+  load(props: Props) {
     this.setState({ component: null })
-
-    props.load({
-      store,
-      injectReducers,
-      injectSaga,
-      createRootReducer,
-      bundleLoaded: this.bundleLoaded
-    })
+    props.loader(props.app, this.bundleLoaded)
   }
 
   render() {

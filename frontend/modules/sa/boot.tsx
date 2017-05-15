@@ -1,20 +1,19 @@
 import * as React from 'react'
 import { Store } from 'redux'
-import createBrowserHistory from 'history/createBrowserHistory'
 import { render, unmountComponentAtNode } from 'react-dom'
 import { AppContainer as HotContainer } from 'react-hot-loader'
-import createStore from 'sa/core/createStore'
+
+import App from 'sa/core'
 import AppContainer from 'sa/core/containers/AppContainer'
 import { API } from 'sa/core/types'
 
 const boot = (api: API, container = document.getElementById('sa-root')!) => {
-  const history = createBrowserHistory()
-  const store = createStore(history)
+  const app = new App()
 
   const doRender = () => {
     render(
       <HotContainer>
-        <AppContainer store={store} history={history} />
+        <AppContainer app={app} />
       </HotContainer>,
       container
     )
@@ -35,7 +34,7 @@ const boot = (api: API, container = document.getElementById('sa-root')!) => {
   // Render the application
   doRender()
 
-  return store
+  return app
 }
 
 export default boot

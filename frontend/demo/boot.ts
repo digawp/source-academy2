@@ -227,6 +227,26 @@ const mockAPI: t.API = {
     async fetch(limit?: number) {
       return resourcesOfKey<t.IAssessment>('assessment')
     }
+  },
+
+  announcement: {
+    async get(id: number) {
+      return db.announcement[id + '']
+    },
+
+    async fetch(limit?: number) {
+      return resourcesOfKey<t.IAnnouncement>('announcement')
+    }
+  },
+
+  user: {
+    async get(id: number) {
+      return db.user[id + '']
+    },
+
+    async fetch(limit?: number) {
+      return resourcesOfKey<t.IUser>('user')
+    }
   }
 }
 

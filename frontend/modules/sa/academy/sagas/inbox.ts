@@ -1,26 +1,29 @@
-import { select, takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
-import {
-  fetchAssessments,
-} from '../ducks/assessment'
-
-declare const CURRENT_API: API
+import { fetchAssessments } from '../reducers/assessment'
+import { fetchAnnouncements } from '../reducers/announcement'
 
 function* fetchRequiredResource() {
   const locations = location.pathname.split('/')
+  const isInsideInbox =
+    locations[1] === 'academy' && locations[2] === 'inbox'
 
-  if (locations[1] === 'academy' || locations[2] === 'inbox') {
+  if (isInsideInbox) {
     const params = new URLSearchParams(location.search)
-    const activeTab = params.get('topic') || 'soon'
-    if (activeTab === 'soon') {
+    const tab = params.get('topic') || 'soon'
+
+    if (tab === 'soon') {
       yield put(fetchAssessments())
+
+    } else if (tab === 'announcements') {
+      yield put(fetchAnnouncements())
     }
-  }
+  } 
 }
 
-function* inboxSaga(): any {
+function* inboxSaga() {
   yield takeEvery([
     ACADEMY_BUNDLE_LOADED,
     LOCATION_CHANGE

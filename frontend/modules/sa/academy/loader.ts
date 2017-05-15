@@ -1,38 +1,41 @@
 import { Store } from 'redux'
-import { IAppDelegate } from 'sa/core/types'
+import { BundleLoader } from 'sa/core/types'
 import { academyBundleLoaded } from 'sa/core/util'
-import { reducer as inbox } from './ducks/inbox'
-import { reducer as assessment } from './ducks/assessment'
-import { reducer as currentStudent, getCurrentStudent } from './ducks/currentStudent'
+import { reducer as assessment } from './reducers/assessment'
+import { reducer as currentStudent } from './reducers/currentStudent'
+import { reducer as announcement } from './reducers/announcement'
 import academySaga from './sagas'
 
-export default (app: IAppDelegate) => {
+const loader: BundleLoader = (app, bundleLoaded) => {
   require.ensure([], () => {
     const AcademyContainer = require('./containers/AcademyContainer').default
 
     require("./styles/index.scss")
 
-    const reducers = { inbox, currentStudent, assessment }
+    const reducers = { currentStudent, assessment, announcement }
 
-    app.injectReducers(app.store, reducers)
-    app.injectSaga(app.store, 'academy', academySaga)
+    app.injectReducers(reducers)
+    app.injectSaga('academy', academySaga)
 
     if (process.env.NODE_ENV === 'development') {
       if (module.hot) {
         module.hot.accept('./containers/AcademyContainer', () => {
           const NewContainer = require('./containers/AcademyContainer').default
-          app.bundleLoaded(NewContainer)
+          bundleLoaded(NewContainer)
         });
-        ['inbox', 'assessment', 'currentStudent'].forEach(key => {
-          module.hot.accept(`./ducks/${key}`, () => {
-            const { reducer } = require(`./ducks/${key}`)
-            app.store.asyncReducers[key] = reducer
-            app.store.replaceReducer(app.createRootReducer(app.store.asyncReducers))
+        ['inbox', 'assessment', 'currentStudent', 'announcement'].forEach(key => {
+          module.hot.accept(`./reducers/${key}`, () => {
+            const { reducer } = require(`./reducers/${key}`)
+            app.injectReducers({ [key]: reducer })
           })
         })
       }
     }
+
     app.store.dispatch(academyBundleLoaded())
-    app.bundleLoaded(AcademyContainer)
+
+    bundleLoaded(AcademyContainer)
   }, 'academy')
 }
+
+export default loader

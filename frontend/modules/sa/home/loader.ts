@@ -1,10 +1,10 @@
-import { IAppDelegate } from 'sa/core/types'
+import { BundleLoader } from 'sa/core/types'
 
-import './styles/index.scss'
-
-export default ({ injectReducers, store, bundleLoaded}: IAppDelegate) => {
+const loader: BundleLoader = (app, bundleLoaded) => 
   require.ensure([], () => {
     const HomeContainer = require('./containers/HomeContainer').default
+
+    require('./styles/index.scss')
 
     if (process.env.NODE_ENV === 'development') {
       if (module.hot) {
@@ -17,4 +17,5 @@ export default ({ injectReducers, store, bundleLoaded}: IAppDelegate) => {
     
     bundleLoaded(HomeContainer)
   }, 'home')
-}
+
+export default loader

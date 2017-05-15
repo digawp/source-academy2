@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { authenticate } from 'sa/core/ducks/auth'
+import { authenticate } from 'sa/core/reducers/auth'
 import Home from '../components/Home'
 
 const mapStateToProps = (state: any) => ({

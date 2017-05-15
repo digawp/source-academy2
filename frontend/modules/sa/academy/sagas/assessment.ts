@@ -5,7 +5,7 @@ import {
   fetchAssessmentsSuccess,
   FETCH_ASSESSMENTS,
   FETCH_ASSESSMENTS_SUCCESS
-} from '../ducks/assessment'
+} from '../reducers/assessment'
 
 declare const CURRENT_API: API
 

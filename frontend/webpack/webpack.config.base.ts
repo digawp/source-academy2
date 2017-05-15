@@ -29,16 +29,18 @@ export const packageSort = (packages: string[]) => {
 const webpackConfig: Configuration = {
   entry: {
     vendor: [
+      'axios',
       'babel-polyfill',
+      'classnames',
       'history',
       'react',
+      'moment',
       'redux',
       'react-redux',
       'react-router',
       'react-router-dom',
       'react-router-redux',
       'redux-saga',
-      'immutable',
       '@blueprintjs/core',
       path.resolve(__dirname, '../modules', 'vendor', 'index.ts')
     ]

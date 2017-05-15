@@ -2,10 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import { push, LOCATION_CHANGE } from 'react-router-redux'
 import { API } from '../types'
 import { isProtectedPath } from '../util'
-import {
-  authenticateSuccess,
-  AUTHENTICATE
-} from '../ducks/auth'
+import { authenticateSuccess, AUTHENTICATE } from '../reducers/auth'
 
 declare const CURRENT_API: API
 

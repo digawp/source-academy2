@@ -3,24 +3,23 @@ import * as classnames from 'classnames'
 import { Button, ITreeNode } from '@blueprintjs/core'
 
 export interface INavbarProps {
-  activeTopic: string
-  setInboxActiveTopic: (topic: string) => void
+  activeTab: string
+  onTabClick: (topic: string) => void
 }
 
-
-export default function Navbar({ activeTopic, setInboxActiveTopic }: INavbarProps) {
+export default function Navbar({ activeTab, onTabClick }: INavbarProps) {
   
-  const makeButton = (node: ITreeNode) => (
+  const renderTab = (tab: ITreeNode) => (
     <Button
-      key={node.id}
-      iconName={node.iconName}
-      onClick={() => setInboxActiveTopic(node.id.toString())}
+      key={tab.id}
+      iconName={tab.iconName}
+      onClick={() => onTabClick(tab.id.toString())}
       className={classnames("pt-minimal", {
-      "pt-active": (activeTopic === node.id)
-    })}>{node.label}</Button>
+      "pt-active": (activeTab === tab.id)
+    })}>{tab.label}</Button>
   )
 
-  const nodes: ITreeNode[] = [
+  const tabs: ITreeNode[] = [
     { id: "soon", label: "Due Soon", iconName: "time" },
     { id: "announcements", label: "Announcements", iconName: "feed" },
     { id: "happenings", label: "Happenings", iconName: "people" },
@@ -30,7 +29,7 @@ export default function Navbar({ activeTopic, setInboxActiveTopic }: INavbarProp
   return (
     <div className="navbar">
       <div className="pt-button-group">
-        { nodes.map(makeButton) }
+        { tabs.map(renderTab) }
       </div>
     </div>
   )
