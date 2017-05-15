@@ -3,7 +3,7 @@ import * as moment from 'moment'
 import { connect } from 'react-redux'
 import { IAssessment } from 'sa/core/types'
 import { List, Map } from 'immutable'
-import { Button, Intent } from '@blueprintjs/core'
+import { Button, Intent, Text } from '@blueprintjs/core'
 
 export interface IDueSoonProps {
   missions: List<IAssessment>
@@ -17,37 +17,32 @@ interface IDueSoonSectionProps {
 }
 
 function dueAtToString(dueAt: number): string {
-  const date = moment(dueAt).subtract(1, 'day')
-  return date.format("dddd DD MMMM") + " 23:59"
+  return (moment(dueAt)).format("DD MMMM")
 }
 
 const Section = ({ title, assessments }: IDueSoonSectionProps) => (
   <div className="section">
     {assessments.map((a: IAssessment) => (
       <div className="assessment row">
-        <div className="cover col-xs-12 col-md-4">
+        <div className="cover">
           <img src={a.coverPicture} />
         </div>
         <div className="description col-xs">
           <h4>{a.title}</h4>
-          <h6 className="order">{a.type.toUpperCase()} {a.order}</h6>
-          <p>
-            {a.description}
-            <hr/>
-          </p>
-          <div className="row">
-            <div className="due-at col-xs-8">
-              <b>Due {dueAtToString(a.dueAt)}</b>
+          <h6 className="order">{a.type.toUpperCase()} {a.order} | 400XP</h6>
+          <Text>{a.description}</Text>
+          <div className="row controls">
+            <div className="due-at col-xs-6 col-md-8">
+              <Button disabled className="pt-minimal" iconName="time">
+                <b>{dueAtToString(a.dueAt)}</b>
+              </Button>
             </div>
             <div className="col-xs">
-              <Button intent={Intent.SUCCESS} className="pt-large">
+              <Button className="pt-minimal continue-button pt-large">
                 Continue
               </Button>
             </div>
           </div>
-        </div>
-        <div className="exp-gained">
-          400XP
         </div>
       </div>
     ))}

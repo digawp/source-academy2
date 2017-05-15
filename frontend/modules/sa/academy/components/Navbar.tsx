@@ -23,7 +23,7 @@ export default function Navbar({ match, currentUser, currentStudent }: INavbarPr
 
   return (
     <div className="sa-academy-navbar pt-navbar pt-navbar-dark row">
-      <div className="resume-game col-xs-1">
+      <div className="resume-game col-xs-2">
       </div>
       <div className="navigation-buttons pt-navbar-group pt-button-group pt-large pt-fill col-xs-10">
         {createLink(`/academy/inbox`, getClassNames('inbox'),

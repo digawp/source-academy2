@@ -1,6 +1,7 @@
 @import '~sa-variables';
 
 .sa-inbox {
+  background: $light-gray3;
 
   .navbar {
     width: 100%;
@@ -32,39 +33,31 @@
 
   .sa-duesoon {
     overflow-y: auto;
-    height: 80vh;
+    height: 87vh;
 
     .assessment {
       background: white;
       position: relative;
       max-width: 800px;
       margin: 0 auto;
-      margin-bottom: 20px;
-      min-height: 200px;
+      margin-top: 20px;
+      height: 200px;
       padding: 0;
       border: 2px solid $light-gray4;
       border-radius: 5px;
+      padding-bottom: 1vh;
     }
 
-    @media(max-width: 1024px) {
-      .assessment {
-        max-width: 500px;
-      }
-    }
-
-    @media(max-width: 768px) {
-      .assessment {
-        max-width: 400px;
-      }
+    .assessment.row {
+      padding: 0;
     }
 
     .cover {
-      position: relative;
       display: flex;
       justify-content: center;
+      flex-basis: 25%;
       align-items: center;
       overflow: hidden;
-      min-height: 200px;
       padding: 0;
     }
 
@@ -76,7 +69,13 @@
     }
 
     .description {
-      padding: 15px;
+      position: relative;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 15px;
+      padding-bottom: 50px;
+      height: 100%;
+
       p {
         padding: 5px;
         color: $gray2;
@@ -86,24 +85,39 @@
         color: $gray2;
         font-weight: 300;
       }
+
       .due-on {
         color: $gray1;
       }
+
+      .due-at {
+        padding-top: 10px;
+
+      }
+
+      .continue-button {
+        padding: 0;
+        border-radius: 0px;
+        color: $dark-gray2;
+        font-weight: 500;
+        width: 100%;
+        height: 100%;
+      }
     }
 
-    .exp-gained {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      padding: 10px;
-      background: $dark-gray4;
-      color: white;
-      font-weight: 700;
+    @media(max-width: 768px) {
+      .cover {
+        display: none
+      }
     }
 
     .controls {
-      padding: 5px;
-      background: $dark-gray4;
+      position: absolute;
+      background: $light-gray4;
+      bottom: 0px;
+      right: 6px;
+      height: 50px;
+      left: 8px;
     }
 
   }
