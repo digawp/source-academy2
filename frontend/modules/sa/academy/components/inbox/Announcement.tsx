@@ -4,7 +4,7 @@ import { connect, MapStateToProps } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { State as UserState } from 'sa/core/reducers/user'
 import { IAnnouncement } from 'sa/core/types'
-import AnnouncementCard from '../announcement/AnnouncementCard'
+import AnnouncementCard from './AnnouncementCard'
 import { State as AnnouncementState } from '../../reducers/announcement'
 
 export type Props = {
