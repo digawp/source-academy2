@@ -1,33 +1,34 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { connect } from 'react-redux'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { push } from 'react-router-redux'
 
 import Navbar from './Navbar'
 import DueSoon from './DueSoon'
-import {setInboxActiveTopic} from '../../reducers/inbox'
+import Announcement from './Announcement'
+import NotFound from 'sa/core/components/NotFound'
 
 export interface Props extends RouteComponentProps<any> {
-  setInboxActiveTopic: (topic: string) => void
 }
 
-const Inbox: React.StatelessComponent<Props> = ({ setInboxActiveTopic, location}) => {
-  const params = new URLSearchParams(location.search)
-  const activeTopic = params.get('topic') || 'soon'
-
-  let element = null
-
-  if (activeTopic === 'soon') {
-    element = <DueSoon />
-  }
+const Inbox: React.StatelessComponent<Props> = ({ location, match }) => {
+  const paths = location.pathname.split('/')
+  const activeTab = paths[paths.length - 1]
 
   return (
     <div className="sa-inbox">
-      <Navbar activeTab={activeTopic} onTabClick={setInboxActiveTopic}/>
+      <Navbar activeTab={activeTab} />
       <div className="inbox-content">
-        { element }
+        <Switch>
+          <Redirect exact path='/academy/inbox' to='/academy/inbox/soon' />
+          <Route path={`${match.url}/soon`} component={DueSoon} />
+          <Route path={`${match.url}/announcements`} component={Announcement} />
+          <Route component={NotFound} />
+        </Switch>
       </div>
     </div>
   )
 }
 
-export default connect((state) => ({}), { setInboxActiveTopic })(Inbox)
+export default Inbox

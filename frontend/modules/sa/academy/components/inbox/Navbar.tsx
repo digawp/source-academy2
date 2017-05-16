@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
 import { Button, ITreeNode } from '@blueprintjs/core'
+import { Link } from 'react-router-dom'
 
 export type Props = {
   activeTab: string
-  onTabClick: (topic: string) => void
 }
 
 export type TabProps = {
@@ -12,18 +12,24 @@ export type TabProps = {
   label: string
   iconName: string
   isActive: boolean
-  onClick: (id: string) => void
 }
 
-const Tab: React.StatelessComponent<TabProps> = ({ id, iconName, isActive, label, onClick }) => (
-  <Button
-      className={classnames("pt-minimal", { "pt-active": isActive })}
-      iconName={iconName} onClick={() => onClick(id)}>
-    {label}
-  </Button>
+const tabClassNames = (props: TabProps) =>
+  classnames(
+    "pt-button",
+    "pt-minimal",
+    "pt-icon",
+    `pt-icon-${props.iconName}`,
+    { "pt-active": props.isActive }
+  )
+
+const Tab: React.StatelessComponent<TabProps> = (props) => (
+  <Link to={props.id} className={tabClassNames(props)}>
+    {props.label}
+  </Link>
 )
 
-const Navbar: React.StatelessComponent<Props> = ({ activeTab, onTabClick }) => {
+const Navbar: React.StatelessComponent<Props> = ({ activeTab }) => {
 
   const _tabs: Partial<TabProps>[] = [
     { id: "soon", label: "Due Soon", iconName: "time" },
@@ -33,13 +39,13 @@ const Navbar: React.StatelessComponent<Props> = ({ activeTab, onTabClick }) => {
   ]
 
   const tabs: TabProps[] = _tabs.map((t) => ({
-    ...t, isActive: t.id! === activeTab, onClick: onTabClick
+    ...t, isActive: t.id! === activeTab
   } as TabProps))
 
   return (
     <div className="navbar">
       <div className="pt-button-group">
-        { tabs.map(t => <Tab {...t} />) }
+        { tabs.map(t => <Tab key={t.id} {...t} />) }
       </div>
     </div>
   )

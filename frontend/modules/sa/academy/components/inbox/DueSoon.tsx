@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as moment from 'moment'
-import { connect } from 'react-redux'
+import { RouteComponentProps } from 'react-router'
+import { connect, MapStateToProps } from 'react-redux'
 import { IAssessment } from 'sa/core/types'
 import { Button, Intent, Text } from '@blueprintjs/core'
 
@@ -10,7 +11,7 @@ export type Props = {
   missions: IAssessment[]
   sidequests: IAssessment[]
   paths: IAssessment[]
-}
+} & RouteComponentProps<any>
 
 export type SectionProps = {
   title: string
@@ -58,10 +59,11 @@ const selectDueSoon = (assessments: { [id: number]: IAssessment}, type: string) 
     })
 }
 
-const mapStateToProps = (state: any) => ({
-  sidequests: selectDueSoon(state.assessment, 'sidequest'),
-  paths: selectDueSoon(state.assessment, 'path'),
-  missions: selectDueSoon(state.assessment, 'mission')
-})
+const mapStateToProps: MapStateToProps<any, RouteComponentProps<any>> =
+  (state: any, ownProps) => ({
+    sidequests: selectDueSoon(state.assessment, 'sidequest'),
+    paths: selectDueSoon(state.assessment, 'path'),
+    missions: selectDueSoon(state.assessment, 'mission')
+  })
 
 export default connect(mapStateToProps)(DueSoon)

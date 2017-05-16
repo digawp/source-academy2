@@ -12,8 +12,7 @@ function* fetchRequiredResource() {
     locations[1] === 'academy' && locations[2] === 'inbox'
 
   if (isInsideInbox) {
-    const params = new URLSearchParams(location.search)
-    const tab = params.get('topic') || 'soon'
+    const tab = locations[3]
 
     if (tab === 'soon') {
       yield put(fetchAssessments())
