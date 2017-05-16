@@ -24,7 +24,8 @@ function dueAtToString(dueAt: number): string {
 const Section: React.StatelessComponent<SectionProps> = ({ title, assessments }) => (
   <div className="section">
     <div className="heading">{title}</div>
-    {assessments.map((assessment) => <AssessmentCard assessment={assessment} />)}
+    {assessments.map((assessment) => <AssessmentCard key={assessment.id}
+        assessment={assessment} />)}
   </div>
 )
 

@@ -16,9 +16,9 @@ export type TabProps = {
 }
 
 const Tab: React.StatelessComponent<TabProps> = ({ id, iconName, isActive, label, onClick }) => (
-  <Button key={id} iconName={iconName}
-    onClick={() => onClick(id.toString())}
-    className={classnames("pt-minimal", { "pt-active": isActive })}>
+  <Button
+      className={classnames("pt-minimal", { "pt-active": isActive })}
+      iconName={iconName} onClick={() => onClick(id)}>
     {label}
   </Button>
 )
