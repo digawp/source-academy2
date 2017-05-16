@@ -25,7 +25,7 @@ const tabClassNames = (props: TabProps) =>
 
 const Tab: React.StatelessComponent<TabProps> = (props) => (
   <Link to={props.id} className={tabClassNames(props)}>
-    {props.label}
+    <span>{props.label}</span>
   </Link>
 )
 

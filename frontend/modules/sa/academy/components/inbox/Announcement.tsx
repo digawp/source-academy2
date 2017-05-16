@@ -21,7 +21,8 @@ const Announcement: React.StatelessComponent<Props> = ({ announcement, user }) =
 
   return (
     <div className="sa-announcements">
-      {pinned.map(a => <AnnouncementCard announcement={a} poster={user[a.poster]} />)}
+      {pinned.map(a => <AnnouncementCard pinned announcement={a} poster={user[a.poster]} />)}
+      <hr />
       {notPinned.map(a => <AnnouncementCard announcement={a} poster={user[a.poster]} />)}
     </div>
   )
