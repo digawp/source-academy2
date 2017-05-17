@@ -34,6 +34,7 @@ const webpackConfig: Configuration = {
       'classnames',
       'history',
       'react',
+      'lodash',
       'moment',
       'redux',
       'react-redux',

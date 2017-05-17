@@ -2,6 +2,9 @@
   "presets": [["es2015", { "modules": false }], "stage-0", "react"],
   "plugins": ["react-hot-loader/babel"],
   "env": {
+    "production": {
+      "plugins": ["lodash"]
+    },
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
     }

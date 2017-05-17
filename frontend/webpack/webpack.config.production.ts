@@ -2,6 +2,7 @@
 
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as LodashModuleReplacementPlugin from 'lodash-webpack-plugin'
 import * as path from 'path'
 import * as webpack from 'webpack'
 import * as ParallelUglifyPlugin from 'webpack-parallel-uglify-plugin'
@@ -50,6 +51,7 @@ export default merge(baseConfig, {
     new ParallelUglifyPlugin({
       cacheDir: path.resolve(__dirname, '../.uglifycache')
     }),
+    new LodashModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
