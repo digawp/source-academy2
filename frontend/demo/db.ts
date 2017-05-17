@@ -7,6 +7,7 @@ export type DB = {
   students: { [id: string]: types.IStudent }
   assessments: { [id: string]: types.IAssessment }
   happenings: { [id: string]: types.IHappening }
+  gradings: { [id: string]: types.IGrading }
 }
 
 const TODAY = moment().startOf('day')
@@ -163,6 +164,50 @@ const db: DB = {
       "coverPicture": "/assets/demo/path-cover.png",
       "openedAt": moment().subtract(3, 'days').valueOf(),
       "dueAt": moment().add(5, 'days').startOf('day').valueOf()
+    }
+  },
+
+  "gradings": {
+    0: {
+      id: 0,
+      status: "graded",
+      assessment: 0,
+      autoGraded: false,
+      student: 0,
+      gradedBy: 2,
+      gradedAt: moment().subtract(1, 'day').valueOf(),
+      marksObtained: 8,
+      experiencePoint: 200
+    },
+    1: {
+      id: 1,
+      status: "locked", 
+      assessment: 1,
+      student: 0
+    },
+    2: {
+      id: 2,
+      status: "locked", 
+      assessment: 2,
+      student: 0
+    },
+    3: {
+      id: 3,
+      status: "locked", 
+      assessment: 3,
+      student: 0
+    },
+    4: {
+      id: 4,
+      status: "locked", 
+      assessment: 4,
+      student: 0
+    },
+    5: {
+      id: 5,
+      status: "unlocked", 
+      assessment: 5,
+      student: 0
     }
   },
 

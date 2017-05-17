@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put, select } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
@@ -24,6 +24,7 @@ function* fetchRequiredResource() {
     }
   }
 }
+
 
 function* inboxSaga() {
   yield takeEvery([

@@ -105,6 +105,49 @@ const mockAPI: t.API = {
     async fetch(limit?: number) {
       return values(db.happenings) 
     }
+  },
+
+  gradings: {
+    async get(id: number) {
+      return db.gradings[id]
+    },
+
+    async fetch(limit?: number) {
+      return values(db.gradings) 
+    },
+
+    async getByAssessment(assessment: number, student: number) {
+      return values(db.gradings).find(g =>
+           g.assessment === assessment
+        && g.student === student
+      )
+    },
+
+    async attemptAssessment(assessment: number, student: number) {
+      const grading: t.IGrading = values(db.gradings).find(g =>
+           g.assessment === assessment
+        && g.student === student
+      )!
+      if (grading.status === "unlocked") {
+        grading.status = "attempting"
+        return true
+      } else {
+        throw new Error("Cannot attempt already attempted or locked assessment")
+      }
+    },
+
+    async unlockAssessment(assessment: number, student: number) {
+      const grading: t.IGrading = values(db.gradings).find(g =>
+           g.assessment === assessment
+        && g.student === student
+      )!
+      if (grading.status === "locked") {
+        grading.status = "unlocked"
+        return true
+      } else {
+        throw new Error("Cannot unlock already unlocked assessment")
+      }
+    }
   }
 }
 

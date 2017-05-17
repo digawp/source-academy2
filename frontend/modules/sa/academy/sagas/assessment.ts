@@ -1,17 +1,19 @@
-import { select, takeEvery, call, put } from 'redux-saga/effects'
+import { select, takeEvery, call, put, all } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
-import { API, IUser } from 'sa/core/types'
+import { API, IUser, IAssessment } from 'sa/core/types'
 import {
   fetchAssessmentsSuccess,
   getAssessmentSuccess,
   GET_ASSESSMENT,
   FETCH_ASSESSMENTS
 } from '../reducers/assessment'
+import { getGrading } from '../reducers/grading'
 
 declare const CURRENT_API: API
 
 function* doFetchAssessments() {
   const assessments = yield call(CURRENT_API.assessments.fetch)
+  yield all(assessments.map((a: IAssessment) => put(getGrading(a.id))))
   yield put(fetchAssessmentsSuccess(assessments))
 }
 

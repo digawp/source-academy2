@@ -50,14 +50,14 @@ export interface IAnswer {
 
 export interface IGrading {
   id: number
-  status: "locked" | "unlocked" | "submitted" | "graded"
+  status: "locked" | "unlocked" | "attempting" | "submitted" | "graded"
   assessment: number
-  autoGraded: boolean
+  autoGraded?: boolean
   student: number
-  gradedBy: number
-  gradedAt: number
-  marksObtained: number
-  experiencePoint: number
+  gradedBy?: number
+  gradedAt?: number
+  marksObtained?: number
+  experiencePoint?: number
 }
 
 export const FIRST_TO_FINISH = "first_to_finish"
@@ -122,6 +122,12 @@ export interface IStudentAPI {
   getByUser(id: number): Promise<IStudent>
 }
 
+export interface IGradingAPI {
+  getByAssessment(assessment: number, student: number): Promise<IGrading>
+  attemptAssessment(assessment: number, student: number): Promise<boolean>
+  unlockAssessment(assessment: number, student: number): Promise<boolean>
+}
+
 export type State = {
   auth: {[id: number]: AuthState}
   users: {[id: number]: IUser}
@@ -134,4 +140,5 @@ export interface API {
   users: IResource<IUser>
   students: IResource<IStudent> & IStudentAPI
   happenings: IResource<IHappening>
+  gradings: IResource<IGrading> & IGradingAPI
 }
