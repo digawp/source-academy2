@@ -20,6 +20,7 @@ const selectAssessments = createSelector(
 
 const mapStateToProps =
   (state: State, ownProps: RouteComponentProps<any>) => ({
+    gradings: state.gradings,
     assessments: selectAssessments(state)
   })
 

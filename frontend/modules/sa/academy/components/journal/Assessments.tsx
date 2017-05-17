@@ -1,13 +1,15 @@
 import * as React from 'react'
+import { values } from 'lodash'
 import { RouteComponentProps } from 'react-router-dom'
 import { Button } from '@blueprintjs/core'
 
-import { IAssessment } from 'sa/core/types'
+import { IAssessment, IGrading } from 'sa/core/types'
 import AssessmentCard from '../assessment/AssessmentCard'
 import SecondaryTab, {Props as SecondaryTabProps} from '../SecondaryTab'
 
 export type Props = {
   assessments: IAssessment[]
+  gradings: {[id: number]: IGrading}
 } & RouteComponentProps<any>
 
 export type NavbarProps = RouteComponentProps<any>
@@ -35,10 +37,12 @@ export const Navbar: React.StatelessComponent<NavbarProps> =
   }
 
 const Assessments: React.StatelessComponent<Props> =
-  ({ assessments }) => (
+  ({ assessments, gradings }) => (
     <div className="assessment-list">
       { assessments && assessments.map(assessment =>
           <AssessmentCard
+            grading={values(gradings).find(g =>
+              g.assessment == assessment.id)!}
             key={assessment.id}
             assessment={assessment} />) }
     </div>

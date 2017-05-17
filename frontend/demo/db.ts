@@ -99,7 +99,7 @@ const db: DB = {
   },
 
   "assessments": {
-    "0": {
+    0: {
       "id": 0,
       "type": "mission",
       "order": "1",
@@ -110,7 +110,7 @@ const db: DB = {
       "openedAt": moment().subtract(3, 'days').valueOf(),
       "dueAt": moment().add(5, 'days').valueOf()
     },
-    "1": {
+    1: {
       "id": 1,
       "type": "mission",
       "order": "2",
@@ -121,7 +121,7 @@ const db: DB = {
       "openedAt": 1530444494000,
       "dueAt": 1530444494000
     },
-    "2": {
+    2: {
       "id": 2,
       "type": "sidequest",
       "order": "1",
@@ -132,7 +132,7 @@ const db: DB = {
       "openedAt": moment().subtract(1, 'days').valueOf(),
       "dueAt": moment().add(5, 'days').startOf('day').valueOf()
     },
-    "3": {
+    3: {
       "id": 3,
       "type": "sidequest",
       "order": "2.1",
@@ -143,7 +143,7 @@ const db: DB = {
       "openedAt": 1530444494000,
       "dueAt": 1530444494000
     },
-    "4": {
+    4: {
       "id": 4,
       "type": "sidequest",
       "order": "2.2",
@@ -154,7 +154,7 @@ const db: DB = {
       "openedAt": 15304444940000,
       "dueAt": 1530444494000
     },
-    "5": {
+    5: {
       "id": 5,
       "type": "path",
       "order": "1A",

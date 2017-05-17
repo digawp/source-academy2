@@ -25,6 +25,7 @@ const selectByType = (type: string) =>
   )
 
 const mapStateToProps = (state: State, ownProps: RouteComponentProps<any>) => ({
+  gradings: state.gradings,
   sidequests: selectByType('sidequest')(state),
   paths: selectByType('path')(state),
   missions: selectByType('mission')(state)
