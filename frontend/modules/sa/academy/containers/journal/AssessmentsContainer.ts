@@ -13,7 +13,6 @@ const selectAssessments = createSelector(
     const paths = location.pathname.split('/')
     let assessmentType: string = paths[paths.length - 1] || 'missions'
     assessmentType = assessmentType.substring(0, assessmentType.length - 1)
-    console.log(assessmentType)
     return values(assessments).filter(a =>
       a.type === assessmentType
     )

@@ -3,14 +3,14 @@ import * as classnames from 'classnames'
 
 import { Link } from 'react-router-dom'
 
-export type SecondaryTabProps = {
+export type Props = {
   id: string
   label: string
   iconName: string
   isActive: boolean
 }
 
-const tabClassNames = (props: SecondaryTabProps) =>
+const tabClassNames = (props: Props) =>
   classnames(
     "pt-button",
     "pt-minimal",
@@ -19,7 +19,7 @@ const tabClassNames = (props: SecondaryTabProps) =>
     { "pt-active": props.isActive }
   )
 
-const SecondaryTab: React.StatelessComponent<SecondaryTabProps> = (props) => (
+const SecondaryTab: React.StatelessComponent<Props> = (props) => (
   <Link to={props.id} className={tabClassNames(props)}>
     <span>{props.label}</span>
   </Link>
