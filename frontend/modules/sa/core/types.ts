@@ -59,6 +59,27 @@ export interface IGrading {
   experiencePoint?: number
 }
 
+export const FIRST_TO_FINISH = "first_to_finish"
+export const SECOND_TO_FINISH = "second_to_finish"
+export const THIRD_TO_FINISH = "third_to_finish"
+export const ACHIEVEMENT_GOT = "achievement_got"
+export const LEVEL_UP = "level_up"
+
+export interface IHappening {
+  id: number
+  timestamp: number
+  type:
+     typeof FIRST_TO_FINISH
+   | typeof SECOND_TO_FINISH 
+   | typeof THIRD_TO_FINISH 
+   | typeof ACHIEVEMENT_GOT 
+   | typeof LEVEL_UP 
+  user: number
+  assessment?: number
+  achievement?: number
+  level?: number
+}
+
 // UI Types
 
 // Globals
@@ -101,4 +122,5 @@ export interface API {
   announcement: IResource<IAnnouncement>
   user: IResource<IUser>
   student: IResource<IStudent> & IStudentAPI
+  happening: IResource<IHappening>
 }

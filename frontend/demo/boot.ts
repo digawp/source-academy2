@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash'
 import axios from 'axios'
 import * as moment from 'moment'
 import * as t from 'sa/core/types'
@@ -8,25 +9,30 @@ export type DB = {
   announcement: { [id: string]: t.IAnnouncement }
   student: { [id: string]: t.IStudent }
   assessment: { [id: string]: t.IAssessment }
+  happening: { [id: string]: t.IHappening }
 }
+
+const TODAY = moment().startOf('day')
+const DAYS_AGO = (n: number) => TODAY.clone().subtract(n, 'day').clone()
+const YESTERDAY = DAYS_AGO(1).clone() 
 
 const db: DB = {
   "user": {
-    "0": {
+    0: {
       "id": 0,
       "role": "student",
       "firstName": "Evan",
       "lastName": "Sebastian",
       "profilePicture": "https://randomuser.me/api/portraits/men/83.jpg"
     },
-    "1": {
+    1: {
       "id": 1,
       "role": "admin",
       "firstName": "Martin",
       "lastName": "Henz",
       "profilePicture": "https://randomuser.me/api/portraits/men/84.jpg"
     },
-    "2": {
+    2: {
       "id": 2,
       "role": "staff",
       "firstName": "Thenaesh",
@@ -36,7 +42,7 @@ const db: DB = {
   },
 
   "announcement": {
-    "0": {
+    0: {
       "id": 0,
       "poster": 1,
       "published": true,
@@ -58,7 +64,7 @@ const db: DB = {
         <small></small>
       `
     },
-    "1": {
+    1: {
       "id": 1,
       "poster": 2,
       "published": true,
@@ -71,7 +77,7 @@ const db: DB = {
         <p>Maecenas ut ullamcorper nisi. Cras at purus ut velit tempor imperdiet id viverra justo. Nullam ipsum ante, tincidunt vel enim nec, vulputate sodales tellus. Donec eros mi, gravida at condimentum eget, congue sit amet purus. Sed efficitur, tortor eu efficitur consequat, urna nulla ultrices dolor, vitae ultricies turpis lacus sed odio. Integer lorem libero, ultricies et tristique vel, malesuada a ligula. Phasellus vulputate tincidunt lectus sed ultricies. Duis commodo viverra leo at fringilla. Ut at suscipit lacus. Cras vel dignissim est. Vestibulum tincidunt diam ac semper consectetur. Nullam scelerisque metus id tristique aliquet</p>.
       `
     },
-    "2": {
+    2: {
       "id": 2,
       "poster": 2,
       "published": true,
@@ -86,7 +92,7 @@ const db: DB = {
   },
 
   "student": {
-    "0": {
+    0: {
       "id": 0,
       "user": 0,
       "level": 1,
@@ -161,6 +167,69 @@ const db: DB = {
       "openedAt": moment().subtract(3, 'days').valueOf(),
       "dueAt": moment().add(5, 'days').startOf('day').valueOf()
     }
+  },
+
+  "happening": {
+    0: {
+      id: 0,
+      timestamp: DAYS_AGO(1).subtract(2, 'hour').valueOf(),
+      type: 'level_up',
+      user: 3,
+      level: 2
+    },
+    1: {
+      id: 1,
+      timestamp: DAYS_AGO(2).subtract(3, 'hour').valueOf(),
+      type: 'level_up',
+      user: 4,
+      level: 2
+    },
+    2: {
+      id: 2,
+      timestamp: DAYS_AGO(3).subtract(4, 'hour').valueOf(),
+      type: 'level_up',
+      user: 5,
+      level: 2
+    },
+    3: {
+      id: 3,
+      timestamp: DAYS_AGO(1).subtract(2, 'hour').valueOf(),
+      user: 3,
+      type: 'achievement_got'
+    },
+    4: {
+      id: 4,
+      timestamp: DAYS_AGO(2).subtract(3, 'hour').valueOf(),
+      user: 4,
+      type: 'achievement_got'
+    },
+    5: {
+      id: 5,
+      timestamp: DAYS_AGO(3).subtract(4, 'hour').valueOf(),
+      user: 5,
+      type: 'achievement_got'
+    },
+    6: {
+      id: 6,
+      timestamp: DAYS_AGO(1).subtract(2, 'hour').valueOf(),
+      user: 3,
+      type: 'third_to_finish',
+      assessment: 0
+    },
+    7: {
+      id: 7,
+      timestamp: DAYS_AGO(2).subtract(3, 'hour').valueOf(),
+      user: 4,
+      type: 'second_to_finish',
+      assessment: 0
+    },
+    8: {
+      id: 8,
+      timestamp: DAYS_AGO(3).subtract(4, 'hour').valueOf(),
+      user: 5,
+      type: 'first_to_finish',
+      assessment: 0
+    }
   }
 }
 
@@ -175,8 +244,8 @@ const populateStudent = async () => {
     db.user[counter.toString()] = {
       id: counter,
       role: "student",
-      firstName: user.name.first,
-      lastName: user.name.last,
+      firstName: capitalize(user.name.first),
+      lastName: capitalize(user.name.last),
       profilePicture: user.picture.large
     }
 
@@ -187,6 +256,10 @@ const populateStudent = async () => {
       experiencePoint: 0
     }
   }
+
+  db.student[3].level = 2
+  db.student[4].level = 2
+  db.student[5].level = 2
 }
 
 const resourcesOfKey = <T>(key: string) => {
@@ -208,13 +281,13 @@ const students: t.IStudent[] = resourcesOfKey<t.IStudent>('student')
 const mockAPI: t.API = {
   auth: {
     async refresh() {
-      return Object.assign({}, db.user["0"], {
+      return Object.assign({}, db.user[0], {
         token: "demo-token"
       })
     },
 
     async authenticate(username: string, password: string) {
-      return Object.assign({}, db.user["0"], {
+      return Object.assign({}, db.user[0], {
         token: "demo-token"
       })
     },
@@ -229,7 +302,7 @@ const mockAPI: t.API = {
       return students
     },
     async get(id: number) {
-      return db.student[id + '']
+      return db.student[id]
     },
     async getByUser(id: number) {
       return students.find(s => (s.user === id))
@@ -238,7 +311,7 @@ const mockAPI: t.API = {
 
   assessment: {
     async get(id: number) {
-      return db.assessment[id + '']
+      return db.assessment[id]
     },
 
     async fetch(limit?: number) {
@@ -248,7 +321,7 @@ const mockAPI: t.API = {
 
   announcement: {
     async get(id: number) {
-      return db.announcement[id + '']
+      return db.announcement[id]
     },
 
     async fetch(limit?: number) {
@@ -258,11 +331,21 @@ const mockAPI: t.API = {
 
   user: {
     async get(id: number) {
-      return db.user[id + '']
+      return db.user[id]
     },
 
     async fetch(limit?: number) {
       return resourcesOfKey<t.IUser>('user')
+    }
+  },
+
+  happening: {
+    async get(id: number) {
+      return db.happening[id]
+    },
+
+    async fetch(limit?: number) {
+      return resourcesOfKey<t.IHappening>('happening')
     }
   }
 }

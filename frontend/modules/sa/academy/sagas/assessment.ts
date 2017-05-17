@@ -3,8 +3,9 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, IUser } from 'sa/core/types'
 import {
   fetchAssessmentsSuccess,
-  FETCH_ASSESSMENTS,
-  FETCH_ASSESSMENTS_SUCCESS
+  getAssessmentSuccess,
+  GET_ASSESSMENT,
+  FETCH_ASSESSMENTS
 } from '../reducers/assessment'
 
 declare const CURRENT_API: API
@@ -14,8 +15,15 @@ function* doFetchAssessments() {
   yield put(fetchAssessmentsSuccess(assessments))
 }
 
+function* doGetAssessment(action: any) {
+  const { id } = action.payload
+  const assessment = yield call(CURRENT_API.assessment.get, id)
+  yield put(getAssessmentSuccess(assessment))
+}
+
 function* assessmentsSaga(): any {
   yield takeEvery(FETCH_ASSESSMENTS, doFetchAssessments)
+  yield takeEvery(GET_ASSESSMENT, doGetAssessment)
 }
 
 export default assessmentsSaga

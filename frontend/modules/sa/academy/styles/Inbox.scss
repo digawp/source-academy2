@@ -31,10 +31,14 @@
     }
   }
 
-  .sa-duesoon, .sa-announcements {
+  .sa-duesoon,
+  .sa-announcements,
+  .sa-happenings {
     overflow-y: auto;
     height: 87vh;
+  }
 
+  .sa-duesoon {
     .section {
       margin-top: 10px;
       margin-bottom: 10px;
@@ -53,6 +57,13 @@
   .inbox-content {
     margin: 0 auto;
     max-width: 1024px;
-    overflow-y: auto;
+  }
+
+  .sa-happenings {
+    .heading {
+      text-align: center;
+      padding: 10px;
+      font-weight: 500
+    }
   }
  }

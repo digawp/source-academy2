@@ -5,6 +5,7 @@ import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 
 import { fetchAssessments } from '../reducers/assessment'
 import { fetchAnnouncements } from '../reducers/announcement'
+import { fetchHappenings } from '../reducers/happening'
 
 function* fetchRequiredResource() {
   const locations = location.pathname.split('/')
@@ -16,9 +17,10 @@ function* fetchRequiredResource() {
 
     if (tab === 'soon') {
       yield put(fetchAssessments())
-
     } else if (tab === 'announcements') {
       yield put(fetchAnnouncements())
+    } else if (tab === 'happenings') {
+      yield put(fetchHappenings())
     }
   }
 }

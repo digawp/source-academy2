@@ -7,10 +7,10 @@ import { push } from 'react-router-redux'
 import Navbar from './Navbar'
 import DueSoon from './DueSoon'
 import Announcement from './Announcement'
+import Happening from './Happening'
 import NotFound from 'sa/core/components/NotFound'
 
-export interface Props extends RouteComponentProps<any> {
-}
+export type Props = RouteComponentProps<any>
 
 const Inbox: React.StatelessComponent<Props> = ({ location, match }) => {
   const paths = location.pathname.split('/')
@@ -24,6 +24,7 @@ const Inbox: React.StatelessComponent<Props> = ({ location, match }) => {
           <Redirect exact path='/academy/inbox' to='/academy/inbox/soon' />
           <Route path={`${match.url}/soon`} component={DueSoon} />
           <Route path={`${match.url}/announcements`} component={Announcement} />
+          <Route path={`${match.url}/happenings`} component={Happening} />
           <Route component={NotFound} />
         </Switch>
       </div>
