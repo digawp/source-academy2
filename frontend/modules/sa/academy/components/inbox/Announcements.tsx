@@ -19,10 +19,10 @@ const Announcements: React.StatelessComponent<Props> =
     )
     return (
       <div className="sa-announcements">
-        {pinned.map(a => <AnnouncementCard
+        {pinned.map(a => <AnnouncementCard key={a.id}
             pinned announcement={a} poster={users[a.poster]} />)}
         <hr />
-        {notPinned.map(a => <AnnouncementCard
+        {notPinned.map(a => <AnnouncementCard key={a.id}
             announcement={a} poster={users[a.poster]} />)}
       </div>
     )
