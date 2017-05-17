@@ -3,36 +3,9 @@
 .sa-inbox {
   background: $light-gray3;
 
-  .navbar {
-    width: 100%;
-    background: $light-gray1;
-    padding: 10px;
-    text-align: center;
-
-    .pt-button-group {
-      color: $dark-gray3;
-    }
-
-    .pt-button {
-      margin: 0px 5px;
-      padding: 0px 20px;
-      font-weight: 500;
-      border-radius: 10px !important;
-    }
-
-    .pt-button.pt-active {
-      background: $light-gray4;
-    }
-
-    @media(max-width: 768px) {
-      .pt-button span {
-        display: none
-      }
-    }
-  }
-
   .sa-duesoon,
   .sa-announcements,
+  .journal-content,
   .sa-happenings {
     overflow-y: auto;
     height: 87vh;

@@ -50,13 +50,14 @@ export interface IAnswer {
 
 export interface IGrading {
   id: number
-  status: "not_opened" | "attempting" | "submitted" | "manual"
-  assessment?: number
+  status: "locked" | "unlocked" | "submitted" | "graded"
+  assessment: number
+  autoGraded: boolean
   student: number
   gradedBy: number
   gradedAt: number
-  marksObtained?: number
-  experiencePoint?: number
+  marksObtained: number
+  experiencePoint: number
 }
 
 export const FIRST_TO_FINISH = "first_to_finish"
