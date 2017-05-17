@@ -57,6 +57,7 @@ export default merge(baseConfig, {
       template: path.resolve(__dirname, '../index.html'),
       chunksSortMode: packageSort(['vendor', 'core'])
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /sg/),
     new webpack.optimize.OccurrenceOrderPlugin(false),
     new ExtractTextPlugin({
       allChunks: true,
