@@ -123,14 +123,14 @@ export interface IStudentAPI {
 
 export type State = {
   auth: {[id: number]: AuthState}
-  user: {[id: number]: IUser}
+  users: {[id: number]: IUser}
 }
 
 export interface API {
   auth: IAuthApi
-  assessment: IResource<IAssessment>
-  announcement: IResource<IAnnouncement>
-  user: IResource<IUser>
-  student: IResource<IStudent> & IStudentAPI
-  happening: IResource<IHappening>
+  assessments: IResource<IAssessment>
+  announcements: IResource<IAnnouncement>
+  users: IResource<IUser>
+  students: IResource<IStudent> & IStudentAPI
+  happenings: IResource<IHappening>
 }

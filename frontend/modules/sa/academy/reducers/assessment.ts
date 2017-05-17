@@ -27,7 +27,7 @@ export const getAssessmentSuccess = (assessment: IAssessment) => ({
 })
 
 
-export type State = { [id: number]: IAssessment }
+type State = { [id: number]: IAssessment }
 
 export const reducer = (state: State = {}, action: any) => {
   switch (action.type) {

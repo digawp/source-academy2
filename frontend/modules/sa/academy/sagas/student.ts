@@ -8,7 +8,7 @@ declare const CURRENT_API: API
 
 function* getCurrentStudent() {
   const currentUser: IUser = yield select((state: any) => state.auth.currentUser)
-  const currentStudent = yield call(CURRENT_API.student.getByUser, currentUser.id)
+  const currentStudent = yield call(CURRENT_API.students.getByUser, currentUser.id)
   yield put(setCurrentStudent(currentStudent))
 }
 

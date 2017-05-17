@@ -297,7 +297,7 @@ const mockAPI: t.API = {
     }
   },
 
-  student: {
+  students: {
     async fetch(limit?: number) {
       return students
     },
@@ -309,7 +309,7 @@ const mockAPI: t.API = {
     }
   },
 
-  assessment: {
+  assessments: {
     async get(id: number) {
       return db.assessment[id]
     },
@@ -319,7 +319,7 @@ const mockAPI: t.API = {
     }
   },
 
-  announcement: {
+  announcements: {
     async get(id: number) {
       return db.announcement[id]
     },
@@ -329,7 +329,7 @@ const mockAPI: t.API = {
     }
   },
 
-  user: {
+  users: {
     async get(id: number) {
       return db.user[id]
     },
@@ -339,7 +339,7 @@ const mockAPI: t.API = {
     }
   },
 
-  happening: {
+  happenings: {
     async get(id: number) {
       return db.happening[id]
     },

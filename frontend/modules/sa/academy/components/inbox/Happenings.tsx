@@ -1,15 +1,15 @@
 import * as React from 'react'
 import * as moment from 'moment'
-import { groupBy, keys } from 'lodash'
+import { groupBy, keys, values } from 'lodash'
 import { RouteComponentProps } from 'react-router'
 
 import { IAssessment, IHappening, IUser } from 'sa/core/types'
 import HappeningCard from './HappeningCard'
 
 export type Props = {
-  happening: {[id:number]: IHappening}
-  user: {[id:number]: IUser}
-  assessment: {[id:number]: IAssessment}
+  happenings: {[id:number]: IHappening}
+  users: {[id:number]: IUser}
+  assessments: {[id:number]: IAssessment}
 } & RouteComponentProps<any>
 
 type SectionProps = {
@@ -32,11 +32,8 @@ const Section: React.StatelessComponent<SectionProps> =
     </div>
   )
 
-const Happening: React.StatelessComponent<Props> =
-  ({ happening, user, assessment }) => {
-    const happenings: IHappening[] = keys(happening)
-      .map(k => happening[parseInt(k, 10)])
-
+const Happenings: React.StatelessComponent<Props> =
+  ({ happenings, users, assessments }) => {
     const compare = (n1: number | string, n2: number | string) => {
       if (n1 < n2) {
         return 1
@@ -48,7 +45,7 @@ const Happening: React.StatelessComponent<Props> =
     }
 
     const groups: {[day: number]: IHappening[]} = groupBy(
-      happenings,
+      values(happenings),
       (h) => moment(h.timestamp).startOf('day').valueOf()
     )
 
@@ -67,8 +64,8 @@ const Happening: React.StatelessComponent<Props> =
                 key={key}
                 timestamp={parseInt(key, 10)}
                 happenings={groups[parseInt(key, 10)]}
-                user={user}
-                assessment={assessment}
+                user={users}
+                assessment={assessments}
               />
             ))
         }
@@ -76,4 +73,4 @@ const Happening: React.StatelessComponent<Props> =
     )
   }
 
-export default Happening
+export default Happenings

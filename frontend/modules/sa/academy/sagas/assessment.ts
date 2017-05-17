@@ -11,13 +11,13 @@ import {
 declare const CURRENT_API: API
 
 function* doFetchAssessments() {
-  const assessments = yield call(CURRENT_API.assessment.fetch)
+  const assessments = yield call(CURRENT_API.assessments.fetch)
   yield put(fetchAssessmentsSuccess(assessments))
 }
 
 function* doGetAssessment(action: any) {
   const { id } = action.payload
-  const assessment = yield call(CURRENT_API.assessment.get, id)
+  const assessment = yield call(CURRENT_API.assessments.get, id)
   yield put(getAssessmentSuccess(assessment))
 }
 

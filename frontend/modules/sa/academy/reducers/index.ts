@@ -1,11 +1,11 @@
-import { reducer as assessment } from './assessment'
+import { reducer as assessments } from './assessment'
 import { reducer as currentStudent } from './currentStudent'
-import { reducer as announcement } from './announcement'
-import { reducer as happening } from './happening'
+import { reducer as announcements } from './announcement'
+import { reducer as happenings } from './happening'
 
 export default {
-  assessment,
+  assessments,
   currentStudent,
-  announcement,
-  happening
+  announcements,
+  happenings
 }

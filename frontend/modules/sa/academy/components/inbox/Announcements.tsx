@@ -7,25 +7,25 @@ import { IAnnouncement, IUser } from 'sa/core/types'
 import AnnouncementCard from './AnnouncementCard'
 
 export type Props = {
-  announcement: {[id: number]: IAnnouncement}
-  user: {[id: number]: IUser}
+  announcements: {[id: number]: IAnnouncement}
+  users: {[id: number]: IUser}
 } & RouteComponentProps<any>
 
-const Announcement: React.StatelessComponent<Props> =
-  ({ announcement, user }) => {
+const Announcements: React.StatelessComponent<Props> =
+  ({ announcements, users }) => {
     const [pinned, notPinned] = partition(
-      values(announcement),
+      values(announcements),
       a => a.pinned && moment().isBefore(moment(a.pinExpiry))
     )
     return (
       <div className="sa-announcements">
         {pinned.map(a => <AnnouncementCard
-            pinned announcement={a} poster={user[a.poster]} />)}
+            pinned announcement={a} poster={users[a.poster]} />)}
         <hr />
         {notPinned.map(a => <AnnouncementCard
-            announcement={a} poster={user[a.poster]} />)}
+            announcement={a} poster={users[a.poster]} />)}
       </div>
     )
   }
 
-export default Announcement
+export default Announcements

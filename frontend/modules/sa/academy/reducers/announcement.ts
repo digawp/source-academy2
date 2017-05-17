@@ -14,7 +14,7 @@ export const fetchAnnouncementsSuccess = (announcements: IAnnouncement[]) => ({
   payload: { announcements }
 })
 
-export type State = { [id: number]: IAnnouncement }
+type State = { [id: number]: IAnnouncement }
 
 export const reducer = (state: State = {}, action: any) => {
   switch (action.type) {

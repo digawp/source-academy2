@@ -16,7 +16,7 @@ export const getCurrentStudent = () => ({
   type: GET_CURRENT_STUDENT
 })
 
-export type State = IStudent | null
+type State = IStudent | null
 
 export const reducer = (state = null, action: any) => {
   switch (action.type) {

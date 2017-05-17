@@ -11,7 +11,7 @@ import { getUser } from 'sa/core/reducers/user'
 declare const CURRENT_API: API
 
 function* doFetchAnnouncements() {
-  const announcements: IAnnouncement[] = yield call(CURRENT_API.announcement.fetch)
+  const announcements: IAnnouncement[] = yield call(CURRENT_API.announcements.fetch)
   for (let announcement of announcements) {
     yield put(getUser(announcement.poster))
   }

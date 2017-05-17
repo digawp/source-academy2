@@ -7,7 +7,7 @@ import { IAssessment } from 'sa/core/types'
 import { State } from '../../types'
 import DueSoon from '../../components/inbox/DueSoon'
 
-const getAssessments = (state: State) => state.assessment
+const getAssessments = (state: State) => state.assessments
 
 const selectByType = (type: string) =>
   createSelector(

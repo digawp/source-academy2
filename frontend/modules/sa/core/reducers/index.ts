@@ -1,4 +1,4 @@
 import { reducer as auth } from './auth'
-import { reducer as user } from './user'
+import { reducer as users } from './user'
 
-export default { auth, user }
+export default { auth, users }

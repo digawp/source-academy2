@@ -9,7 +9,7 @@ declare const CURRENT_API: API
 
 function* doFetchAssessments() {
   const effects: Effect[] = []
-  const happenings = yield call(CURRENT_API.happening.fetch)
+  const happenings = yield call(CURRENT_API.happenings.fetch)
 
   for (let happening of happenings) {
     effects.push(put(getUser(happening.user)))

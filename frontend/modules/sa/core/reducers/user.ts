@@ -13,7 +13,7 @@ export const getUserSuccess = (user: IUser) => ({
   payload: { user }
 })
 
-export type State = { [id: number]: IUser }
+type State = { [id: number]: IUser }
 
 export const reducer = (state: State = {}, action: any) => {
   switch(action.type) {

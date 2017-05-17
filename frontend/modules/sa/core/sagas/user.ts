@@ -6,7 +6,7 @@ import { getUserSuccess, GET_USER, } from '../reducers/user'
 declare const CURRENT_API: API
 
 function* doGetUser(action: any) {
-  const user = yield call(CURRENT_API.user.get, action.payload.id)
+  const user = yield call(CURRENT_API.users.get, action.payload.id)
   yield put(getUserSuccess(user))
 }
 

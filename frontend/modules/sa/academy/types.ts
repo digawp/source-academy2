@@ -3,7 +3,7 @@ import { IAnnouncement, IStudent, IHappening, IAssessment,
 
 export type State = {
   currentStudent: IStudent
-  assessment: {[id: number]: IAssessment}
-  announcement: {[id: number]: IAnnouncement}
-  happening: {[id: number]: IHappening}
+  assessments: {[id: number]: IAssessment}
+  announcements: {[id: number]: IAnnouncement}
+  happenings: {[id: number]: IHappening}
 } & CoreState
