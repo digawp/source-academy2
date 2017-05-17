@@ -1,4 +1,4 @@
-import { IUser } from '../types'
+import { IUser, AuthState } from '../types'
 
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const AUTHENTICATE_SUCCESS = 'auth/AUTHENTICATE_SUCCESS'
@@ -13,13 +13,7 @@ export const authenticateSuccess = (currentUser: IUser, token: string) => ({
   payload: { currentUser, token }
 })
 
-export type State = {
-  isAuthenticated: boolean
-  currentUser: IUser | null
-  token: string | null
-}
-
-const initialState = {
+const initialState: AuthState = {
   isAuthenticated: false,
   currentUser: null,
   token: null

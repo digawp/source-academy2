@@ -3,6 +3,7 @@ import * as moment from 'moment'
 import {
   IAssessment,
   IHappening,
+  IUser,
   FIRST_TO_FINISH,
   SECOND_TO_FINISH,
   THIRD_TO_FINISH,
@@ -11,14 +12,10 @@ import {
 } from 'sa/core/types'
 import { Button, Text } from '@blueprintjs/core'
 
-import { State as UserState } from 'sa/core/reducers/user'
-
-import { State as AssessmentState } from '../../reducers/assessment'
-
 export type Props = {
   happening: IHappening
-  assessment: AssessmentState
-  user: UserState
+  assessment: {[id: number]: IAssessment}
+  user: {[id: number]: IUser}
 }
 
 const Content: React.StatelessComponent<Props> =

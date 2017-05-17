@@ -81,6 +81,11 @@ export interface IHappening {
 }
 
 // UI Types
+export type AuthState = {
+  isAuthenticated: boolean
+  currentUser: IUser | null
+  token: string | null
+}
 
 // Globals
 export interface AsyncStore extends Store<any> {
@@ -114,6 +119,11 @@ export interface IAuthApi {
 
 export interface IStudentAPI {
   getByUser(id: number): Promise<IStudent>
+}
+
+export type State = {
+  auth: {[id: number]: AuthState}
+  user: {[id: number]: IUser}
 }
 
 export interface API {

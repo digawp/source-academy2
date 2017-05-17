@@ -1,26 +1,22 @@
-import { groupBy, keys } from 'lodash'
 import * as React from 'react'
 import * as moment from 'moment'
-import { connect, MapStateToProps } from 'react-redux'
+import { groupBy, keys } from 'lodash'
 import { RouteComponentProps } from 'react-router'
-import { IAssessment, IHappening } from 'sa/core/types'
 
-import { State as UserState } from 'sa/core/reducers/user'
-import { State as HappeningState } from '../../reducers/happening'
-import { State as AssessmentState } from '../../reducers/assessment'
+import { IAssessment, IHappening, IUser } from 'sa/core/types'
 import HappeningCard from './HappeningCard'
 
 export type Props = {
-  happening: HappeningState
-  user: UserState
-  assessment: AssessmentState
+  happening: {[id:number]: IHappening}
+  user: {[id:number]: IUser}
+  assessment: {[id:number]: IAssessment}
 } & RouteComponentProps<any>
 
 type SectionProps = {
   timestamp: number
   happenings: IHappening[]
-  user: UserState
-  assessment: AssessmentState
+  user: {[id:number]: IUser}
+  assessment: {[id:number]: IAssessment}
 }
 
 const Section: React.StatelessComponent<SectionProps> =
@@ -29,10 +25,10 @@ const Section: React.StatelessComponent<SectionProps> =
       <h6 className="heading">{moment(timestamp).fromNow()}</h6>
       {happenings.map(happening =>
         <HappeningCard
-          key={happening.id}
-          happening={happening}
-          user={user}
-          assessment={assessment} />)}
+           key={happening.id}
+           happening={happening}
+           user={user}
+           assessment={assessment} />)}
     </div>
   )
 
@@ -80,11 +76,4 @@ const Happening: React.StatelessComponent<Props> =
     )
   }
 
-const mapStateToProps: MapStateToProps<any, RouteComponentProps<any>> =
-  (state) => ({
-    happening: state.happening,
-    user: state.user,
-    assessment: state.assessment
-  })
-
-export default connect(mapStateToProps)(Happening)
+export default Happening
