@@ -5,7 +5,7 @@ import announcementSaga from './announcement'
 import happeningSaga from './happening'
 import journalSaga from './journal'
 import gradingSaga from './grading'
-import answerSaga from './grading'
+import answerSaga from './answer'
 import questionSaga from './question'
 
 function* academySaga() {

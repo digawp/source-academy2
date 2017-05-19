@@ -2,7 +2,7 @@ import { Question } from 'sa/core/types'
 
 // Constants
 export const GET_QUESTION = 'question/GET_QUESTION'
-export const FETCH_QUESTIONS_BY_ASSESSMENT = 'answer/FETCH_QUESTIONS_BY_ASSESSMENT'
+export const FETCH_QUESTIONS_BY_ASSESSMENT = 'question/FETCH_QUESTIONS_BY_ASSESSMENT'
 export const GET_QUESTION_SUCCESS = 'question/GET_QUESTION_SUCCESS'
 export const FETCH_QUESTIONS_SUCCESS = 'question/FETCH_QUESTIONS_SUCCESS'
 

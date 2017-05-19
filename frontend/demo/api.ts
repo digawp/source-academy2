@@ -52,8 +52,9 @@ const mockAPI: t.API = {
 
     async fetchAnswers(id: number, student: number) {
       const questions = values(db.questions).filter(q => q.assessment === id)
-      return values(db.answers).filter(a =>
-        questions.find(q => a.question === q.id) && a.student === student)
+      const answers = values(db.answers)
+      return questions.map(q => answers.find(a =>
+        a.question === q.id && a.student === student))
     },
   },
 

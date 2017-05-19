@@ -22,7 +22,7 @@ export const populateStudent = async () => {
       id: counter - 2,
       user: counter,
       level: 1,
-      experiencePoint: 0,
+      experience: 0,
     }
   }
 

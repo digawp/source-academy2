@@ -123,7 +123,7 @@ const db: DB = {
       id: 0,
       user: 0,
       level: 1,
-      experiencePoint: 0,
+      experience: 0,
     },
   },
 
@@ -142,6 +142,7 @@ const db: DB = {
       coverPicture: 'http://lorempixel.com/150/150/',
       openedAt: moment().subtract(3, 'days').valueOf(),
       dueAt: moment().add(5, 'days').valueOf(),
+      maxExperience: 800,
     },
     1: {
       id: 1,
@@ -153,6 +154,7 @@ const db: DB = {
       coverPicture: 'http://lorempixel.com/150/150/',
       openedAt: 1530444494000,
       dueAt: 1530444494000,
+      maxExperience: 1000,
     },
     2: {
       id: 2,
@@ -164,6 +166,7 @@ const db: DB = {
       coverPicture: 'http://lorempixel.com/150/150/',
       openedAt: moment().subtract(1, 'days').valueOf(),
       dueAt: moment().add(5, 'days').startOf('day').valueOf(),
+      maxExperience: 400,
     },
     3: {
       id: 3,
@@ -175,6 +178,7 @@ const db: DB = {
       coverPicture: 'http://lorempixel.com/150/150/',
       openedAt: 1530444494000,
       dueAt: 1530444494000,
+      maxExperience: 200,
     },
     4: {
       id: 4,
@@ -186,6 +190,7 @@ const db: DB = {
       coverPicture: 'http://lorempixel.com/150/150/',
       openedAt: 15304444940000,
       dueAt: 1530444494000,
+      maxExperience: 300,
     },
     5: {
       id: 5,
@@ -197,6 +202,7 @@ const db: DB = {
       coverPicture: '/assets/demo/path-cover.png',
       openedAt: moment().subtract(3, 'days').valueOf(),
       dueAt: moment().add(5, 'days').startOf('day').valueOf(),
+      maxExperience: 100,
     },
   },
 
@@ -311,6 +317,7 @@ const db: DB = {
       id: 0,
       assessment: 0,
       order: 0,
+      maxMarks: 3,
       answerable: true,
       value: `
         <h1>Factorial Functions</h1>
@@ -327,16 +334,18 @@ const db: DB = {
     1: {
       id: 1,
       assessment: 0,
+      maxMarks: 2,
       order: 1,
       answerable: true,
       value: `
-        What is the runtime complexity of your solution? How about time
+        What is the <b>time</b> complexity of your solution? How about <b>space</b>
         complexity?
       `,
     },
     2: {
       id: 2,
       assessment: 0,
+      maxMarks: 3,
       order: 2,
       answerable: true,
       value: `Rewrite the function factorial as an iterative process`,
@@ -345,8 +354,9 @@ const db: DB = {
   answers: {
     0: {
       id: 0,
-      question: 0,
       student: 0,
+      question: 0,
+      marks: 3,
       value: `
         // factorial: (number) -> number
         function factorial(n) {
@@ -360,8 +370,9 @@ const db: DB = {
     },
     1: {
       id: 1,
-      question: 1,
       student: 0,
+      question: 1,
+      marks: 2,
       value: `
         Time complexity: O(n)
         Space complexity: O(n)
@@ -369,8 +380,9 @@ const db: DB = {
     },
     2: {
       id: 2,
-      question: 2,
       student: 0,
+      question: 2,
+      marks: 2,
       value: `
         function factorial(acc, n) {
           if (n === 0) {

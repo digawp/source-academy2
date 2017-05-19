@@ -1,5 +1,6 @@
 import { History } from 'history'
 import { Store, Reducer } from 'redux'
+import { RouterState } from 'react-router-redux'
 
 // Domain reducers
 export type User = {
@@ -29,21 +30,23 @@ export type Assessment = {
   title: string,
   description: string,
   coverPicture: string,
-  openedAt: number,
+  maxExperience: number,
   dueAt: number,
+  openedAt: number,
 }
 
 export type Student = {
   id: number,
   user: number,
   level: number,
-  experiencePoint: number,
+  experience: number,
 }
 
 export type Answer = {
   id: number,
-  question: number,
   student: number,
+  question: number,
+  marks: number,
   value: string,
 }
 
@@ -52,6 +55,7 @@ export type Question = {
   assessment: number,
   order: number,
   answerable: boolean,
+  maxMarks: number,
   value: string,
 }
 
@@ -157,6 +161,7 @@ export interface IAssessmentAPI {
 export type State = {
   auth: AuthState,
   users: {[id: number]: User},
+  routing: RouterState,
 }
 
 export type API = {

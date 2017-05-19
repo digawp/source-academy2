@@ -1,16 +1,18 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Question, Answer, Assessment } from 'sa/core/types'
+import { Student, Question, Answer, Assessment, Grading } from 'sa/core/types'
 
 export type OwnProps = {
   type: 'assessment' | 'gist',
   id: number,
+  student: Student,
 } & RouteComponentProps<any>
 
 export type Props = {
   assessment?: Assessment,
   questions?: Question[],
-  answers?: {[id: number]: Answer},
+  answers?: Answer[],
+  grading?: Grading,
 } & OwnProps
 
 export const SecondaryNavbar: React.StatelessComponent<Props> =

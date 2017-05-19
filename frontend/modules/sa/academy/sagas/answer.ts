@@ -17,8 +17,8 @@ function* getAnswer(action: any) {
 }
 
 function* fetchAnswersByAssessment(action: any) {
-  const { id, student } = action.payload
-  const answers = yield call(api.assessments.fetchAnswers, id, student)
+  const { assessment, student } = action.payload
+  const answers = yield call(api.assessments.fetchAnswers, assessment, student)
   yield put(fetchAnswersSuccess(answers))
 }
 

@@ -21,9 +21,19 @@ export function* ensureCurrentStudentExists() {
 }
 
 function* getCurrentStudent() {
-  const currentUser: User = yield select((state: any) => state.auth.currentUser)
-  const currentStudent = yield call(api.students.getByUser, currentUser.id)
-  yield put(setCurrentStudent(currentStudent))
+  const currentUser: User = yield select((state: State) => state.auth.currentUser)
+  if (currentUser.role === 'student') {
+    const currentStudent = yield call(api.students.getByUser, currentUser.id)
+    yield put(setCurrentStudent(currentStudent))
+  } else {
+    const location: Location = yield select((state: State) => state.routing.location)
+    const query = new URLSearchParams(location.search)
+    const student = query.get('student')
+    if (student) {
+      const currentStudent = yield call(api.students.getByUser, currentUser.id)
+      yield put(setCurrentStudent(currentStudent))
+    }
+  }
 }
 
 function* studentSaga(): any {
