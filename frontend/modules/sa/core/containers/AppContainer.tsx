@@ -27,6 +27,7 @@ const AppContainer: React.StatelessComponent<Props> = (props) => {
           <div className="sa-content">
             <Switch>
               <Route exact={true} path="/" component={home} />
+              <Route path="/academy" component={academy} />
               <Route path="/academy/:tab" component={academy} />
               <Route component={NotFound} />
             </Switch>

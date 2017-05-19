@@ -28,7 +28,7 @@ const Announcements: React.StatelessComponent<Props> =
       ))
 
     const otherAnnouncements =
-      pinned.map(a => (
+      notPinned.map(a => (
         <AnnouncementCard
           key={a.id}
           announcement={a}

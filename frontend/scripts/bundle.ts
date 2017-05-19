@@ -3,6 +3,7 @@ import * as _debug from 'debug'
 import * as webpack from 'webpack'
 
 const env = (process.env.DEMO_MODE && 'demo') || process.env.NODE_ENV
+// tslint:disable-next-line
 const config = require(`../webpack/webpack.config.${env}`).default
 
 const debug = _debug('source-academy')
@@ -15,9 +16,9 @@ webpack(config).run((error, stats) => {
   const jsonStats = stats.toJson()
   debug('Webpack compile completed')
   debug(stats.toString({
-    chunkModules : false,
-    chunks : true,
-    colors : true
+    chunkModules: false,
+    chunks: true,
+    colors: true,
   }))
 
   if (jsonStats.errors.length > 0) {

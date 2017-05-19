@@ -15,9 +15,6 @@ config.plugins.push(
   }),
 )
 
-config.resolve.alias['sa/core/api'] =
-  path.resolve(__dirname, '..', 'demo', 'api')
-
 if (process.env.NODE_ENV === 'production') {
   config.output.path = path.resolve(__dirname, '..', 'demo-dist')
 }
