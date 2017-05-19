@@ -14,7 +14,7 @@ import { getGrading } from '../reducers/grading'
 import { State } from '../types'
 import api from 'sa/core/api'
 
-function* fetchAssessment() {
+function* fetchAssessments() {
   const assessments = yield call(api.assessments.fetch)
   const user: User = yield select((state: State) => state.auth.currentUser)
   if (user.role === 'student') {
@@ -27,7 +27,6 @@ function* fetchAssessment() {
 function* getAssessment(action: any) {
   const { id, withQuestions, answerOfStudent } = action.payload
   const assessment = yield call(api.assessments.get, id)
-  const user: User = yield select((state: State) => state.auth.currentUser)
   const effects: Effect[] = []
   if (withQuestions) {
     effects.push(put(fetchQuestionsByAssessment(id)))
@@ -40,7 +39,7 @@ function* getAssessment(action: any) {
 }
 
 function* assessmentsSaga() {
-  yield takeEvery(FETCH_ASSESSMENTS, fetchAssessment)
+  yield takeEvery(FETCH_ASSESSMENTS, fetchAssessments)
   yield takeEvery(GET_ASSESSMENT, getAssessment)
 }
 
