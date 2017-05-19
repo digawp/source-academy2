@@ -307,10 +307,80 @@ const db: DB = {
     },
   },
   questions: {
-
+    0: {
+      id: 0,
+      assessment: 0,
+      order: 0,
+      answerable: true,
+      value: `
+        <h1>Factorial Functions</h1>
+        Write a function <code>factorial</code> that takes in a number n
+        and should return the factorial of n. Factorial of n is defined as
+        follows:
+        <ul>
+          <li><pre>factorial(0) = 1</pre>
+          <li><pre>factorial(n) = n * factorial(n - 1)</pre>
+        </ul>
+        <b>Use recursive process </b>
+      `,
+    },
+    1: {
+      id: 1,
+      assessment: 0,
+      order: 1,
+      answerable: true,
+      value: `
+        What is the runtime complexity of your solution? How about time
+        complexity?
+      `,
+    },
+    2: {
+      id: 2,
+      assessment: 0,
+      order: 2,
+      answerable: true,
+      value: `Rewrite the function factorial as an iterative process`,
+    },
   },
   answers: {
-
+    0: {
+      id: 0,
+      question: 0,
+      student: 0,
+      value: `
+        // factorial: (number) -> number
+        function factorial(n) {
+          if (n === 0) {
+            return 1;
+          } else {
+            return n * factorial(n - 1);
+          }
+        }
+      `,
+    },
+    1: {
+      id: 1,
+      question: 1,
+      student: 0,
+      value: `
+        Time complexity: O(n)
+        Space complexity: O(n)
+      `,
+    },
+    2: {
+      id: 2,
+      question: 2,
+      student: 0,
+      value: `
+        function factorial(acc, n) {
+          if (n === 0) {
+            return acc;
+          } else {
+            return factorial(n * acc, n - 1);
+          }
+        }
+      `,
+    },
   },
 }
 
