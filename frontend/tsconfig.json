@@ -1,16 +1,29 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "module": "es6",
+    "module": "es2015",
     "target": "es2015",
     "moduleResolution": "node",
     "jsx": "preserve",
-    "noImplicitAny": true,
-    "removeComments": false,
+    "removeComments": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
+    "declaration": false,
     "sourceMap": true,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "importHelpers": true, 
+    "noEmitHelpers": true, 
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "pretty": true,
     "baseUrl": ".",
+    "lib": [
+      "dom",
+      "es2016",
+      "es2017.object"
+    ],
     "paths": {
       "*": [
         "*",
