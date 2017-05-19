@@ -5,11 +5,11 @@ import { IAppDelegate, BundleLoader } from './types'
 
 export type Props = {
   app: IAppDelegate
-  loader: BundleLoader 
+  loader: BundleLoader,
 }
 
 export type State = {
-  component: React.ComponentClass<any> | null
+  component: React.ComponentClass<any> | null,
 }
 
 class Bundle extends React.Component<Props, State> {

@@ -7,7 +7,7 @@ import { State } from '../../types'
 const mapStateToProps =
   (state: State, ownProps: RouteComponentProps<any>) => ({
     users: state.users,
-    announcements: state.announcements
+    announcements: state.announcements,
   })
 
 export default connect(mapStateToProps)(Announcements)

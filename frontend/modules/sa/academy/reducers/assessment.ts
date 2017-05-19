@@ -1,4 +1,4 @@
-import { IAssessment } from 'sa/core/types'
+import { Assessment } from 'sa/core/types'
 
 // Constants
 export const GET_ASSESSMENT = 'assessment/GET_ASSESSMENT'
@@ -8,26 +8,25 @@ export const FETCH_ASSESSMENTS_SUCCESS = 'assessment/FETCH_ASSESSMENTS_SUCCESS'
 
 // Creators
 export const fetchAssessments = () => ({
-  type: FETCH_ASSESSMENTS
+  type: FETCH_ASSESSMENTS,
 })
 
-export const fetchAssessmentsSuccess = (assessments: IAssessment[]) => ({
+export const fetchAssessmentsSuccess = (assessments: Assessment[]) => ({
   type: FETCH_ASSESSMENTS_SUCCESS,
-  payload: { assessments }
+  payload: { assessments },
 })
 
 export const getAssessment = (id: number) => ({
   type: GET_ASSESSMENT,
-  payload: { id }
+  payload: { id },
 })
 
-export const getAssessmentSuccess = (assessment: IAssessment) => ({
+export const getAssessmentSuccess = (assessment: Assessment) => ({
   type: GET_ASSESSMENT_SUCCESS,
-  payload: { assessment }
+  payload: { assessment },
 })
 
-
-type State = { [id: number]: IAssessment }
+type State = { [id: number]: Assessment }
 
 export const reducer = (state: State = {}, action: any) => {
   switch (action.type) {
@@ -36,7 +35,7 @@ export const reducer = (state: State = {}, action: any) => {
       return {...state, [assessment.id]: assessment}
 
     case FETCH_ASSESSMENTS_SUCCESS:
-      const assessments: IAssessment[] = action.payload.assessments
+      const assessments: Assessment[] = action.payload.assessments
       const newState: State = {}
       assessments.forEach(a => newState[a.id] = a)
       return {...state, ...newState}

@@ -2,28 +2,45 @@ import * as React from 'react'
 import * as moment from 'moment'
 import { values, partition } from 'lodash'
 import { RouteComponentProps } from 'react-router'
-import { IAnnouncement, IUser } from 'sa/core/types'
+import { Announcement, User } from 'sa/core/types'
 
 import AnnouncementCard from './AnnouncementCard'
 
 export type Props = {
-  announcements: {[id: number]: IAnnouncement}
-  users: {[id: number]: IUser}
+  announcements: {[id: number]: Announcement},
+  users: {[id: number]: User},
 } & RouteComponentProps<any>
 
 const Announcements: React.StatelessComponent<Props> =
   ({ announcements, users }) => {
     const [pinned, notPinned] = partition(
       values(announcements),
-      a => a.pinned && moment().isBefore(moment(a.pinExpiry))
+      a => a.pinned && moment().isBefore(moment(a.pinExpiry)),
     )
+    const pinnedAnnouncements =
+      pinned.map(a => (
+        <AnnouncementCard
+          key={a.id}
+          pinned={true}
+          announcement={a}
+          poster={users[a.poster]}
+        />
+      ))
+
+    const otherAnnouncements =
+      pinned.map(a => (
+        <AnnouncementCard
+          key={a.id}
+          announcement={a}
+          poster={users[a.poster]}
+        />
+      ))
+
     return (
       <div className="sa-announcements">
-        {pinned.map(a => <AnnouncementCard key={a.id}
-            pinned announcement={a} poster={users[a.poster]} />)}
+        {pinnedAnnouncements}
         <hr />
-        {notPinned.map(a => <AnnouncementCard key={a.id}
-            announcement={a} poster={users[a.poster]} />)}
+        {otherAnnouncements}
       </div>
     )
   }

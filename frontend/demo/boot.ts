@@ -34,7 +34,7 @@ const populateStudent = async () => {
   db.students[5].level = 2
 }
 
-const students: t.IStudent[] = values(db.students) 
+const students: t.Student[] = values(db.students) 
 
 const mockAPI: t.API = {
   auth: {
@@ -124,7 +124,7 @@ const mockAPI: t.API = {
     },
 
     async attemptAssessment(assessment: number, student: number) {
-      const grading: t.IGrading = values(db.gradings).find(g =>
+      const grading: t.Grading = values(db.gradings).find(g =>
            g.assessment === assessment
         && g.student === student
       )!
@@ -137,7 +137,7 @@ const mockAPI: t.API = {
     },
 
     async unlockAssessment(assessment: number, student: number) {
-      const grading: t.IGrading = values(db.gradings).find(g =>
+      const grading: t.Grading = values(db.gradings).find(g =>
            g.assessment === assessment
         && g.student === student
       )!

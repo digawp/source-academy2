@@ -15,15 +15,16 @@ const boot = (api: API, container = document.getElementById('sa-root')!) => {
       <HotContainer>
         <AppContainer app={app} />
       </HotContainer>,
-      container
+      container,
     )
   }
 
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
       module.hot.accept('./core/containers/AppContainer', () => {
-        container && unmountComponentAtNode(container)
-
+        if (container) {
+          unmountComponentAtNode(container)
+        }
         doRender()
       })
     }

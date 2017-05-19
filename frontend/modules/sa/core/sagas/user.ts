@@ -1,7 +1,7 @@
 import { select, takeEvery, call, put } from 'redux-saga/effects'
 
-import { API, IUser } from '../types'
-import { getUserSuccess, GET_USER, } from '../reducers/user'
+import { API, User } from '../types'
+import { getUserSuccess, GET_USER } from '../reducers/user'
 
 declare const CURRENT_API: API
 

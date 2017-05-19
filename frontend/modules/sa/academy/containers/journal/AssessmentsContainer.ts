@@ -14,14 +14,14 @@ const selectAssessments = createSelector(
     let assessmentType: string = paths[paths.length - 1] || 'missions'
     assessmentType = assessmentType.substring(0, assessmentType.length - 1)
     return values(assessments).filter(a =>
-      a.type === assessmentType
+      a.type === assessmentType,
     )
   })
 
 const mapStateToProps =
   (state: State, ownProps: RouteComponentProps<any>) => ({
     gradings: state.gradings,
-    assessments: selectAssessments(state)
+    assessments: selectAssessments(state),
   })
 
 export default connect(mapStateToProps)(Assessments)

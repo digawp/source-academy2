@@ -1,22 +1,22 @@
-import { IStudent } from 'sa/core/types'
+import { Student } from 'sa/core/types'
 
 // Constants
 export const SET_CURRENT_STUDENT = 'currentStudent/SET_CURRENT_STUDENT'
 export const GET_CURRENT_STUDENT = 'currentStudent/GET_CURRENT_STUDENT'
 
 // Creators
-export const setCurrentStudent = (student: IStudent) => ({
+export const setCurrentStudent = (student: Student) => ({
   type: SET_CURRENT_STUDENT,
   payload: {
-    currentStudent: student
-  }
+    currentStudent: student,
+  },
 })
 
 export const getCurrentStudent = () => ({
-  type: GET_CURRENT_STUDENT
+  type: GET_CURRENT_STUDENT,
 })
 
-type State = IStudent | null
+type State = Student | null
 
 export const reducer = (state = null, action: any) => {
   switch (action.type) {

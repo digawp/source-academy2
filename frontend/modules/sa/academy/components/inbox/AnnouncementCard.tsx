@@ -1,21 +1,21 @@
 import * as React from 'react'
 import * as moment from 'moment'
-import { IAnnouncement, IUser } from 'sa/core/types'
+import { Announcement, User } from 'sa/core/types'
 import { Button, Text } from '@blueprintjs/core'
 
 export type Props = {
-  announcement: IAnnouncement
-  poster: IUser
-  pinned?: boolean
+  announcement: Announcement,
+  poster: User,
+  pinned?: boolean,
 }
 
 type FooterProps = {
-  user: IUser
+  user: User,
 }
 
 type BodyProps = {
-  title: string
-  content: string
+  title: string,
+  content: string,
 }
 
 const Footer: React.StatelessComponent<FooterProps> = ({ user }) => (
@@ -38,7 +38,7 @@ const Body: React.StatelessComponent<BodyProps> = ({ title, content }) => (
 )
 
 const PinnedAnnouncement = (
-  <Button disabled className="pt-minimal pin" iconName="pin">
+  <Button disabled={true} className="pt-minimal pin" iconName="pin">
     Pinned
   </Button>
 )
@@ -47,8 +47,8 @@ const AnnouncementCard: React.StatelessComponent<Props> =
   ({ announcement, pinned, poster }) => (
     <div className="announcement">
       <Body title={announcement.title} content={announcement.content} />
-      { poster && <Footer user={poster} /> }
-      { pinned && PinnedAnnouncement }
+      {poster && <Footer user={poster} />}
+      {pinned && PinnedAnnouncement}
     </div>
   )
 

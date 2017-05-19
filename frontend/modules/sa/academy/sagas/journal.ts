@@ -23,7 +23,7 @@ function* fetchRequiredResource() {
 function* journalSaga() {
   yield takeEvery([
     ACADEMY_BUNDLE_LOADED,
-    LOCATION_CHANGE
+    LOCATION_CHANGE,
   ], fetchRequiredResource)
 }
 

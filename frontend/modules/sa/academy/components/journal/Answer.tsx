@@ -5,12 +5,9 @@ export type Props = {
 } & RouteComponentProps<any>
 
 export const Navbar: React.StatelessComponent<Props> =
-  (props) => (<div className="answer-navbar"></div>)
+  (props) => (<div className="answer-navbar" />)
 
 const Answer: React.StatelessComponent<Props> =
-  () => (
-    <div className="sa-answer">
-    </div>
-  )
+  () => (<div className="sa-answer" />)
 
 export default Answer

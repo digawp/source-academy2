@@ -1,6 +1,6 @@
 import { BundleLoader } from 'sa/core/types'
 
-const loader: BundleLoader = (app, bundleLoaded) => 
+const loader: BundleLoader = (app, bundleLoaded) =>
   require.ensure([], () => {
     const HomeContainer = require('./containers/HomeContainer').default
 
@@ -14,7 +14,7 @@ const loader: BundleLoader = (app, bundleLoaded) =>
         })
       }
     }
-    
+
     bundleLoaded(HomeContainer)
   }, 'home')
 

@@ -4,58 +4,67 @@ import { values } from 'lodash'
 import { RouteComponentProps } from 'react-router'
 import { Button, Intent, Text } from '@blueprintjs/core'
 
-import { IAssessment, IGrading } from 'sa/core/types'
+import { Assessment, Grading } from 'sa/core/types'
 import AssessmentCard from '../assessment/AssessmentCard'
 
 export type Props = {
-  gradings: {[id: number]: IGrading}
-  missions: IAssessment[]
-  sidequests: IAssessment[]
-  paths: IAssessment[]
+  gradings: {[id: number]: Grading},
+  missions: Assessment[],
+  sidequests: Assessment[],
+  paths: Assessment[],
 } & RouteComponentProps<any>
 
 export type SectionProps = {
-  title: string
-  assessments: IAssessment[]
-  gradings: {[id: number]: IGrading}
+  title: string,
+  assessments: Assessment[],
+  gradings: {[id: number]: Grading},
 }
 
 function dueAtToString(dueAt: number): string {
-  return (moment(dueAt)).format("DD MMMM")
+  return (moment(dueAt)).format('DD MMMM')
 }
 
 const Section: React.StatelessComponent<SectionProps> =
-  ({ title, assessments, gradings }) => (
-    <div className="section">
-      <div className="heading">{title}</div>
-      {assessments.map((assessment) => {
-        const grading = values(gradings).find(g =>
-          g.assessment == assessment.id)!
-        return <AssessmentCard
-                  key={assessment.id}
-                  grading={grading}
-                  assessment={assessment} />
-      })}
-    </div>
-  )
+  ({ title, assessments, gradings }) => {
+    const assessmentCards = assessments.map((assessment) => {
+      const grading = values(gradings)
+        .find(g => g.assessment.toString() === assessment.id.toString())!
+
+      return (
+        <AssessmentCard
+           key={assessment.id}
+           grading={grading}
+           assessment={assessment}
+        />
+      )
+    })
+
+    return (
+      <div className="section">
+        <div className="heading">{title}</div>
+        {assessmentCards}
+      </div>
+    )
+  }
 
 const DueSoon: React.StatelessComponent<Props> =
-  ({missions, sidequests, paths, gradings}) => (
-    <div className="sa-duesoon">
-      { missions && missions.length &&
-        (<Section title="Missions"
-            gradings={gradings}
-            assessments={missions} />) }
-      { sidequests && sidequests.length &&
-        (<Section title="Sidequests"
-            gradings={gradings}
-            assessments={sidequests} />) }
-      { paths && paths.length && (
-          <Section
-            title="Paths"
-            gradings={gradings}
-            assessments={paths} />) }
-    </div>
-  )
+  ({missions, sidequests, paths, gradings}) => {
+    const missionsDueSoon = missions && missions.length &&
+      (<Section title="Missions" gradings={gradings} assessments={missions} />)
+
+    const sidequestsDueSoon = sidequests && sidequests.length &&
+      (<Section title="Sidequests" gradings={gradings} assessments={sidequests} />)
+
+    const pathsDueSoon = paths && paths.length &&
+      (<Section title="Paths" gradings={gradings} assessments={paths} />)
+
+    return (
+      <div className="sa-duesoon">
+        {missionsDueSoon}
+        {pathsDueSoon}
+        {sidequestsDueSoon}
+      </div>
+    )
+  }
 
 export default DueSoon

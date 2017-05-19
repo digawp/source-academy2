@@ -1,23 +1,23 @@
-import { IUser, AuthState } from '../types'
+import { User, AuthState } from '../types'
 
 export const AUTHENTICATE = 'auth/AUTHENTICATE'
 export const AUTHENTICATE_SUCCESS = 'auth/AUTHENTICATE_SUCCESS'
 
 export const authenticate = (username: string, password: string) => ({
   type: AUTHENTICATE,
-  payload: { username, password }
+  payload: { username, password },
 })
 
-export const authenticateSuccess = (currentUser: IUser, token: string) => ({
+export const authenticateSuccess = (currentUser: User, token: string) => ({
   type: AUTHENTICATE_SUCCESS,
-  payload: { currentUser, token }
+  payload: { currentUser, token },
 })
 
 const initialState: AuthState = {
   isAuthenticated: false,
   currentUser: null,
-  token: null
-} 
+  token: null,
+}
 
 export const reducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ export const reducer = (state = initialState, action: any) => {
         ...state,
         currentUser,
         token,
-        isAuthenticated: true
+        isAuthenticated: true,
       }
 
     default:

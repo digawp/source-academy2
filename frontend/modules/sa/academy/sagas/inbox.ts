@@ -1,6 +1,6 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
-import { API, IUser } from 'sa/core/types'
+import { API, User } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 
 import { fetchAssessments } from '../reducers/assessment'
@@ -25,11 +25,10 @@ function* fetchRequiredResource() {
   }
 }
 
-
 function* inboxSaga() {
   yield takeEvery([
     ACADEMY_BUNDLE_LOADED,
-    LOCATION_CHANGE
+    LOCATION_CHANGE,
   ], fetchRequiredResource)
 }
 

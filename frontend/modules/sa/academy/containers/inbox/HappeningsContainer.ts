@@ -6,7 +6,7 @@ import Happenings from '../../components/inbox/Happenings'
 const mapStateToProps = (state: State, ownProps: RouteComponentProps<any>) => ({
   happenings: state.happenings,
   users: state.users,
-  assessments: state.assessments
+  assessments: state.assessments,
 })
 
 export default connect(mapStateToProps)(Happenings)

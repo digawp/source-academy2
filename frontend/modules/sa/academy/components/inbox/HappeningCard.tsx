@@ -1,39 +1,47 @@
 import * as React from 'react'
 import * as moment from 'moment'
 import {
-  IAssessment,
-  IHappening,
-  IUser,
+  Assessment,
+  Happening,
+  User,
   FIRST_TO_FINISH,
   SECOND_TO_FINISH,
   THIRD_TO_FINISH,
   ACHIEVEMENT_GOT,
-  LEVEL_UP
+  LEVEL_UP,
 } from 'sa/core/types'
 import { Button, Text } from '@blueprintjs/core'
 
 export type Props = {
-  happening: IHappening
-  assessment: {[id: number]: IAssessment}
-  user: {[id: number]: IUser}
+  happening: Happening,
+  assessment: {[id: number]: Assessment},
+  users: {[id: number]: User},
 }
 
 const Content: React.StatelessComponent<Props> =
-  ({ happening, user, assessment }) => {
-    const student = user[happening.user]
-    if (!student) { return <span></span>}
-   
-    let asmt: IAssessment
+  ({ happening, users, assessment }) => {
+    const student = users[happening.user]
 
-    const toFinish = (nth: string) =>
-      <span><strong>{student.firstName}</strong> is the {nth} to
-        finish <strong>{asmt.title}</strong></span>
+    if (!student) {
+      return <span />
+    }
+
+    let asmt: Assessment
+
+    const toFinish = (nth: string) => (
+      <span>
+        <strong>{student.firstName}</strong> is the {nth} to
+        finish <strong>{asmt.title}</strong>
+      </span>
+    )
 
     if (typeof happening.assessment !== 'undefined') {
       asmt = assessment[happening.assessment]
-      if (!asmt) { return <span></span> }
+      if (!asmt) {
+        return <span />
+      }
     }
-    
+
     switch (happening.type) {
       case FIRST_TO_FINISH:
         return toFinish('first')
@@ -42,20 +50,34 @@ const Content: React.StatelessComponent<Props> =
       case THIRD_TO_FINISH:
         return toFinish('third')
       case ACHIEVEMENT_GOT:
-        return <span><strong>{student.firstName}</strong> has been conferred the achievement</span>
+        return (
+          <span>
+            <strong>{student.firstName}</strong> has been
+            conferred the achievement
+          </span>
+        )
       case LEVEL_UP:
-        return <span><strong>{student.firstName}</strong> has reached <strong>level {happening.level}</strong></span>
+        return (
+          <span>
+            <strong>{student.firstName}</strong> has reached
+            <strong>level {happening.level}</strong>
+          </span>
+        )
       default:
         return <span>Unknown type</span>
     }
   }
 
-const Picture: React.StatelessComponent<Props> = ({ happening, user }) => (
-  <div className="picture">
-    { user[happening.user] &&
-      <img src={user[happening.user].profilePicture} /> }
-  </div>
-)
+const Picture: React.StatelessComponent<Props> = ({ happening, users }) => {
+  const profileImage = users[happening.user] &&
+    <img src={users[happening.user].profilePicture} />
+
+  return (
+    <div className="picture">
+      {profileImage}
+    </div>
+  )
+}
 
 const HappeningCard: React.StatelessComponent<Props> =
   (props) => (

@@ -1,7 +1,7 @@
 import { takeEvery, select, call, put } from 'redux-saga/effects'
 import { API } from 'sa/core/types'
 import { State } from '../types'
-import { getGradingSuccess, GET_GRADING, } from '../reducers/grading'
+import { getGradingSuccess, GET_GRADING } from '../reducers/grading'
 import { getGrading } from '../reducers/grading'
 
 declare const CURRENT_API: API
@@ -12,7 +12,7 @@ function* doGetGrading(action: any) {
   const grading = yield call(
     CURRENT_API.gradings.getByAssessment,
     assessment,
-    id
+    id,
   )
   yield put(getGradingSuccess(grading))
 }

@@ -1,17 +1,21 @@
 import { combineReducers, Reducer, Store, compose,
   createStore, applyMiddleware } from 'redux'
-import { routerReducer } from 'react-router-redux'
-import { routerMiddleware as createRouterMiddleware } from 'react-router-redux'
-import createSagaMiddleware, { SagaIterator } from 'redux-saga'
+import { History } from 'history'
+import {
+  routerReducer,
+  routerMiddleware as createRouterMiddleware,
+} from 'react-router-redux'
+import createSagaMiddleware, { SagaIterator, SagaMiddleware } from 'redux-saga'
 import createBrowserHistory from 'history/createBrowserHistory'
+
 import coreReducers from './reducers'
 import mainSaga from './sagas'
 import { IAppDelegate, AsyncStore } from './types'
 
 export default class App implements IAppDelegate {
   store: AsyncStore
-  sagaMiddleware = createSagaMiddleware()
-  history = createBrowserHistory()
+  sagaMiddleware: SagaMiddleware<any> = createSagaMiddleware()
+  history: History = createBrowserHistory()
 
   private coreReducers: { [name: string]: Reducer<any> } = coreReducers
 
@@ -30,15 +34,15 @@ export default class App implements IAppDelegate {
     const routerMiddleware = createRouterMiddleware(this.history)
 
     // Create Store
-    const store = <AsyncStore> createStore(
+    const store = createStore(
       this.createRootReducer({}),
       composeEnchancers(
         applyMiddleware(
           this.sagaMiddleware,
-          routerMiddleware
-        )
-      )
-    )
+          routerMiddleware,
+        ),
+      ),
+    ) as AsyncStore
 
     store.asyncReducers = {}
     store.asyncSagas = []
@@ -56,30 +60,31 @@ export default class App implements IAppDelegate {
     }
 
     // Run Saga
-    this.injectSaga('mainSaga', mainSaga) 
+    this.injectSaga('mainSaga', mainSaga)
   }
 
-  createRootReducer(asyncReducers: {[name:string]: Reducer<any>}) {
+  createRootReducer(asyncReducers: {[name: string]: Reducer<any>}) {
     return combineReducers({
       ...this.coreReducers,
       ...asyncReducers,
-      routing: routerReducer
+      routing: routerReducer,
     })
   }
-  
+
   injectReducers(reducers: {[name: string]: Reducer<any>}) {
-    for (let key of Object.keys(reducers)) {
+    for (const key of Object.keys(reducers)) {
       this.store.asyncReducers[key] = reducers[key]
     }
     this.store.replaceReducer(
-      this.createRootReducer(this.store.asyncReducers)
+      this.createRootReducer(this.store.asyncReducers),
     )
   }
 
   injectSaga(key: string, saga: () => Iterator<any>) {
-    if (this.store.asyncSagas.find(k => k === key)) return
+    if (this.store.asyncSagas.find(k => k === key)) {
+      return
+    }
     this.store.asyncSagas = [...this.store.asyncSagas, key]
     this.sagaMiddleware.run(saga)
   }
 }
-

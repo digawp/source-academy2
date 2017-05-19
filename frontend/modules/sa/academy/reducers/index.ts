@@ -9,5 +9,5 @@ export default {
   currentStudent,
   announcements,
   happenings,
-  gradings
+  gradings,
 }

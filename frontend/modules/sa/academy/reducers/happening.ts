@@ -1,4 +1,4 @@
-import { IHappening } from 'sa/core/types'
+import { Happening } from 'sa/core/types'
 
 // Constants
 export const FETCH_HAPPENINGS = 'announcement/FETCH_HAPPENINGS'
@@ -6,20 +6,20 @@ export const FETCH_HAPPENINGS_SUCCESS = 'announcement/FETCH_HAPPENINGS_SUCCESS'
 
 // Creators
 export const fetchHappenings = () => ({
-  type: FETCH_HAPPENINGS
+  type: FETCH_HAPPENINGS,
 })
 
-export const fetchHappeningsSuccess = (happenings: IHappening[]) => ({
+export const fetchHappeningsSuccess = (happenings: Happening[]) => ({
   type: FETCH_HAPPENINGS_SUCCESS,
-  payload: { happenings }
+  payload: { happenings },
 })
 
-type State = { [id: number]: IHappening }
+type State = { [id: number]: Happening }
 
 export const reducer = (state: State = {}, action: any) => {
   switch (action.type) {
     case FETCH_HAPPENINGS_SUCCESS:
-      const happenings: IHappening[] = action.payload.happenings
+      const happenings: Happening[] = action.payload.happenings
       const newState: State = {}
       happenings.forEach((h) => { newState[h.id] = h })
       return {...state, ...newState}

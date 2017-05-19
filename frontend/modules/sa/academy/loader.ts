@@ -7,7 +7,7 @@ const loader: BundleLoader = (app, bundleLoaded) => {
     const academySaga = require('./sagas').default
     const reducers = require('./reducers').default
 
-    require("./styles/index.scss")
+    require('./styles/index.scss')
 
     app.injectReducers(reducers)
     app.injectSaga('academy', academySaga)
@@ -17,10 +17,10 @@ const loader: BundleLoader = (app, bundleLoaded) => {
         module.hot.accept('./containers/AcademyContainer', () => {
           const NewContainer = require('./containers/AcademyContainer').default
           bundleLoaded(NewContainer)
-        });
+        })
         module.hot.accept('./reducers', () => {
-          const reducers = require('./reducers').default
-          app.injectReducers(reducers)
+          const newReducers = require('./reducers').default
+          app.injectReducers(newReducers)
         })
       }
     }

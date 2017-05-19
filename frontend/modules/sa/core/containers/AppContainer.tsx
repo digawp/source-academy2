@@ -9,10 +9,11 @@ import NotFound from '../components/NotFound'
 import { Home, Academy } from '../bundles'
 import { IAppDelegate } from '../types'
 
+// tslint:disable-next-line:no-import-side-effect
 import '../styles/index.scss'
 
 export type Props = {
-  app: IAppDelegate
+  app: IAppDelegate,
 }
 
 const AppContainer: React.StatelessComponent<Props> = (props) => {
@@ -25,13 +26,8 @@ const AppContainer: React.StatelessComponent<Props> = (props) => {
         <ConnectedRouter history={props.app.history}>
           <div className="sa-content">
             <Switch>
-              <Route exact path="/" component={home} />
-
-              <Route path="/academy/inbox" component={academy} />
-              <Route path="/academy/journal" component={academy} />
-              <Route path="/academy/materials" component={academy} />
-              <Route path="/academy" component={academy} />
-
+              <Route exact={true} path="/" component={home} />
+              <Route path="/academy/:tab" component={academy} />
               <Route component={NotFound} />
             </Switch>
           </div>
