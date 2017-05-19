@@ -5,6 +5,7 @@
 @import 'happening';
 @import 'navbar';
 @import 'inbox';
+@import 'workspace';
 
 .sa-academy {
   background: white;
@@ -20,8 +21,8 @@
   }
 
   > .content > div {
-    overflow-y: auto;
-    height: 87vh;
+    overflow-y: scroll;
+    height: 84vh;
   }
 
   ::-webkit-scrollbar-track {

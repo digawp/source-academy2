@@ -4,6 +4,8 @@
   position: fixed;
   top: 0px;
   width: 100%;
+  margin-left: 0;
+  margin-right: 0;
   background: $dark-gray4;
 
   .resume-game {
@@ -78,6 +80,8 @@
   background: $light-gray1;
   padding: 10px;
   text-align: center;
+  margin-left: 0;
+  margin-right: 0;
 
   .pt-button-group {
     color: $dark-gray3;

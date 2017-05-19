@@ -38,5 +38,6 @@ export function withStudent<P extends CurrentStudentProps>(
     (state: State, ownProps: P) => ({
       student: state.currentStudent,
     })
+
   return connect(mapStateToProps)(WrappedComponent)
 }

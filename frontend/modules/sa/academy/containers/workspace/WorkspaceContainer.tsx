@@ -1,10 +1,15 @@
 import { values, sortBy } from 'lodash'
-import { connect } from 'react-redux'
+import { connect, Dispatch } from 'react-redux'
 import { createSelector } from 'reselect'
+import { push } from 'react-router-redux'
 
 import { State } from '../../types'
 import { Answer, Question } from 'sa/core/types'
-import Workspace, { OwnProps } from '../../components/workspace/Workspace'
+import Workspace, {
+  OwnProps,
+  SecondaryNavbar,
+  NavbarOwnProps,
+} from '../../components/workspace/Workspace'
 import { withStudent } from '../../decorators'
 
 const getAssessments = (state: State) => state.assessments
@@ -71,5 +76,28 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
     return ownProps
   }
 }
+
+const mapStateToNavbarProps = (state: State, ownProps: NavbarOwnProps) => {
+  const { location } = state.routing
+  const paths = location!.pathname.split('/')
+  const isJournal = paths[2] === 'journal'
+
+  if (isJournal) {
+    const id = parseInt(paths[paths.length - 1], 10)
+    const assessment = selectAssessment(id)(state)
+    return { assessment: assessment! }
+  } else {
+    return {}
+  }
+}
+
+const mapDispatchToNavbarProps = (dispatch: Dispatch<State>) => ({
+  backToAssessments(type: string) {
+    dispatch(push(`/academy/journal/assessments/${type}s`))
+  },
+})
+
+export const SecondaryWorkspaceNavbarContainer =
+  connect(mapStateToNavbarProps, mapDispatchToNavbarProps)(SecondaryNavbar)
 
 export default connect(mapStateToProps)(withStudent(Workspace))
