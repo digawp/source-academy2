@@ -8,12 +8,26 @@ export const getQuestions = (state: State) => state.questions
 export const getAnswers = (state: State) => state.answers
 export const getCurrentStudent = (state: State) => state.currentStudent
 export const getGradings = (state: State) => state.gradings
+export const getLocation = (state: State) => state.routing.location
 
 export const selectAssessment = (id: number) =>
   createSelector(
     getAssessments,
     (assessments) => values(assessments).find(a => a.id === id),
   )
+
+export const selectPaths =
+  createSelector(
+    getLocation,
+    (location) => location!.pathname.split('/'),
+  )
+
+export const selectAssessmentsByType = (type: string) =>
+  createSelector(
+    getAssessments,
+    (assessments) => {
+      return values(assessments).filter(a => a.type === type)
+    })
 
 export const selectGrading = (assessment: number) =>
   createSelector(
