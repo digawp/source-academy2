@@ -19,7 +19,7 @@
     "test": "jest --coverage",
     "test-ci": "npm run test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test-watch": "jest --watch",
-    "lint": "tslint -c tslint.json 'modules/**/*.ts' 'modules/**/*.tsx'"
+    "lint": "tslint -c tslint.json 'modules/**/*.ts' 'modules/**/*.tsx' 'demo/**/*.ts' 'demo/**/*.tsx'"
   },
   "dependencies": {
     "@blueprintjs/core": "^1.16.0",

@@ -23,6 +23,8 @@ const getActionName = (grading: Grading) => {
       return 'Submitted'
     case 'graded':
       return 'Graded'
+    default:
+      return 'Locked'
   }
 }
 
