@@ -8,18 +8,17 @@ import {
   FETCH_ASSESSMENTS,
 } from '../reducers/assessment'
 import { getGrading } from '../reducers/grading'
-
-declare const CURRENT_API: API
+import api from 'sa/core/api'
 
 function* doFetchAssessments() {
-  const assessments = yield call(CURRENT_API.assessments.fetch)
+  const assessments = yield call(api.assessments.fetch)
   yield all(assessments.map((a: Assessment) => put(getGrading(a.id))))
   yield put(fetchAssessmentsSuccess(assessments))
 }
 
 function* doGetAssessment(action: any) {
   const { id } = action.payload
-  const assessment = yield call(CURRENT_API.assessments.get, id)
+  const assessment = yield call(api.assessments.get, id)
   yield put(getAssessmentSuccess(assessment))
 }
 

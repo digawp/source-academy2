@@ -5,8 +5,6 @@ const api = axios.create({
   baseURL: process.env.API_HOST || location.host,
 })
 
-const defaultAPI: any = {
-  // Implement later
-}
+const defaultAPI: API = [] as any
 
 export default defaultAPI

@@ -4,12 +4,11 @@ import { API, User } from 'sa/core/types'
 import { fetchHappeningsSuccess, FETCH_HAPPENINGS } from '../reducers/happening'
 import { getAssessment } from '../reducers/assessment'
 import { getUser } from 'sa/core/reducers/user'
-
-declare const CURRENT_API: API
+import api from 'sa/core/api'
 
 function* doFetchAssessments() {
   const effects: Effect[] = []
-  const happenings = yield call(CURRENT_API.happenings.fetch)
+  const happenings = yield call(api.happenings.fetch)
 
   for (const happening of happenings) {
     effects.push(put(getUser(happening.user)))

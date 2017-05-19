@@ -6,12 +6,11 @@ import {
   FETCH_ANNOUNCEMENTS,
   FETCH_ANNOUNCEMENTS_SUCCESS,
 } from '../reducers/announcement'
+import api from 'sa/core/api'
 import { getUser } from 'sa/core/reducers/user'
 
-declare const CURRENT_API: API
-
 function* doFetchAnnouncements() {
-  const announcements: Announcement[] = yield call(CURRENT_API.announcements.fetch)
+  const announcements: Announcement[] = yield call(api.announcements.fetch)
   for (const announcement of announcements) {
     yield put(getUser(announcement.poster))
   }

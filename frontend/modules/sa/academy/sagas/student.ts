@@ -3,12 +3,11 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 import { API, User } from 'sa/core/types'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 import { setCurrentStudent, GET_CURRENT_STUDENT } from '../reducers/currentStudent'
-
-declare const CURRENT_API: API
+import api from 'sa/core/api'
 
 function* getCurrentStudent() {
   const currentUser: User = yield select((state: any) => state.auth.currentUser)
-  const currentStudent = yield call(CURRENT_API.students.getByUser, currentUser.id)
+  const currentStudent = yield call(api.students.getByUser, currentUser.id)
   yield put(setCurrentStudent(currentStudent))
 }
 

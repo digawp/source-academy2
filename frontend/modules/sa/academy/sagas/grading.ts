@@ -3,14 +3,13 @@ import { API } from 'sa/core/types'
 import { State } from '../types'
 import { getGradingSuccess, GET_GRADING } from '../reducers/grading'
 import { getGrading } from '../reducers/grading'
-
-declare const CURRENT_API: API
+import api from 'sa/core/api'
 
 function* doGetGrading(action: any) {
   const { assessment } = action.payload
   const { id } = yield select((state: State) => state.currentStudent)
   const grading = yield call(
-    CURRENT_API.gradings.getByAssessment,
+    api.gradings.getByAssessment,
     assessment,
     id,
   )

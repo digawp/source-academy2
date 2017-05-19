@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-reference
 /// <reference path='webpack.d.ts' />
 
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
@@ -18,8 +19,8 @@ export default merge(baseConfig, {
 
   entry: {
     core: [
-      path.resolve(__dirname, '..', 'index.ts')
-    ]
+      path.resolve(__dirname, '..', 'index.ts'),
+    ],
   },
 
   module: {
@@ -31,25 +32,25 @@ export default merge(baseConfig, {
           use: [
             'css-loader?minimize',
             'postcss-loader',
-            'sass-loader'
-          ]
-        })
-      }
-    ]
+            'sass-loader',
+          ],
+        }),
+      },
+    ],
   },
 
   output: {
     filename: '[name].[hash].min.js',
     chunkFilename: '[name].[chunkhash].min.js',
     path: path.join(__dirname, '../dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
 
   plugins: (process.env.SKIP_BA ? [] : [
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
   ]).concat([
     new ParallelUglifyPlugin({
-      cacheDir: path.resolve(__dirname, '../.uglifycache')
+      cacheDir: path.resolve(__dirname, '../.uglifycache'),
     }),
     new LodashModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
@@ -57,20 +58,19 @@ export default merge(baseConfig, {
       filename: 'index.html',
       inject: 'body',
       template: path.resolve(__dirname, '../index.html'),
-      chunksSortMode: packageSort(['vendor', 'core'])
+      chunksSortMode: packageSort(['vendor', 'core']),
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /sg/),
     new webpack.optimize.OccurrenceOrderPlugin(false),
     new ExtractTextPlugin({
       allChunks: true,
-      filename: '[name].min.css'
+      filename: '[name].min.css',
     }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        DEMO_MODE: JSON.stringify(process.env.DEMO_MODE ? true : false)
-      }
-    })
-  ])
+        DEMO_MODE: JSON.stringify(process.env.DEMO_MODE ? true : false),
+      },
+    }),
+  ]),
 })
-

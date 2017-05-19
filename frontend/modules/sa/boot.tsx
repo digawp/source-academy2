@@ -7,7 +7,7 @@ import App from 'sa/core'
 import AppContainer from 'sa/core/containers/AppContainer'
 import { API } from 'sa/core/types'
 
-const boot = (api: API, container = document.getElementById('sa-root')!) => {
+const boot = (container = document.getElementById('sa-root')!) => {
   const app = new App()
 
   const doRender = () => {
@@ -29,8 +29,6 @@ const boot = (api: API, container = document.getElementById('sa-root')!) => {
       })
     }
   }
-
-  (global as any).CURRENT_API = api
 
   // Render the application
   doRender()

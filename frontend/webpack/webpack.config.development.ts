@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-reference
 /// <reference path='webpack.d.ts' />
 
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
@@ -13,8 +14,7 @@ const port = process.env.PORT || 8000
 
 const publicPath = `http://localhost:${port}/`
 
-const hot = 'webpack-hot-middleware/client?path=' +
-  publicPath + '__webpack_hmr'
+const hot = `webpack-hot-middleware/client?path=${publicPath}__webpack_hmr`
 
 const config: webpack.Configuration = {
   devtool: 'inline-source-map',
@@ -23,8 +23,8 @@ const config: webpack.Configuration = {
     core: [
       'react-hot-loader/patch',
       hot,
-      path.resolve(__dirname, '..', 'index.ts')
-    ]
+      path.resolve(__dirname, '..', 'index.ts'),
+    ],
   },
 
   module: {
@@ -33,21 +33,21 @@ const config: webpack.Configuration = {
         enforce: 'pre',
         exclude: ['node_modules'],
         test: /\.js$/,
-        use: ['source-map-loader']
+        use: ['source-map-loader'],
       },
       {
         test: /\.scss$/,
         use: [
           'style-loader',
           'css-loader?sourceMap',
-          'sass-loader'
-        ]
-      }
-     ]
+          'sass-loader',
+        ],
+      },
+     ],
   },
 
   output: {
-    publicPath
+    publicPath,
   },
 
   plugins: [
@@ -60,14 +60,14 @@ const config: webpack.Configuration = {
       filename: 'index.html',
       inject: 'body',
       template: path.resolve(__dirname, '../index.html'),
-      chunksSortMode: packageSort(['vendor', 'core'])
+      chunksSortMode: packageSort(['vendor', 'core']),
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
-    })
-  ]
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+  ],
 }
 
 export default merge(baseConfig, config)
