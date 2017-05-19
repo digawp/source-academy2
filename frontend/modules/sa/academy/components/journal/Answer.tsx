@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 export type Props = {
 } & RouteComponentProps<any>
 
-export const Navbar: React.StatelessComponent<Props> =
+export const SecondaryNavbar: React.StatelessComponent<Props> =
   (props) => (<div className="answer-navbar" />)
 
 const Answer: React.StatelessComponent<Props> =

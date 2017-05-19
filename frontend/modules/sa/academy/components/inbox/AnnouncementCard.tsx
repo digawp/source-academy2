@@ -45,7 +45,7 @@ const PinnedAnnouncement = (
 
 const AnnouncementCard: React.StatelessComponent<Props> =
   ({ announcement, pinned, poster }) => (
-    <div className="announcement">
+    <div className="sa-announcement-card">
       <Body title={announcement.title} content={announcement.content} />
       {poster && <Footer user={poster} />}
       {pinned && PinnedAnnouncement}

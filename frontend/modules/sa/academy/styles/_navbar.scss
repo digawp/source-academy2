@@ -1,9 +1,9 @@
 @import '~sa-variables';
 
-.sa-academy-navbar {
-  padding-right: 10px;
-  margin-left: 0px;
-  margin-right: 0px;
+.sa-primary-navbar {
+  position: fixed;
+  top: 0px;
+  width: 100%;
   background: $dark-gray4;
 
   .resume-game {
@@ -32,7 +32,8 @@
     color: $gray5;
   }
 
-  .navigation-buttons {
+  .tabs {
+    margin-left: 50px;
     padding-top: 8px;
     max-width: 480px;
 
@@ -71,6 +72,8 @@
 }
 
 .sa-secondary-navbar {
+  position: fixed;
+  top: $pt-navbar-height;
   width: 100%;
   background: $light-gray1;
   padding: 10px;

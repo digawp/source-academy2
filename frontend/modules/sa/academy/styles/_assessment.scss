@@ -1,4 +1,4 @@
-.assessment {
+.sa-assessment-card {
   background: white;
   position: relative;
   max-width: 800px;
@@ -6,7 +6,6 @@
   margin-top: 20px;
   height: 200px;
   padding: 0;
-  border: 2px solid $light-gray4;
   border-radius: 5px;
   padding-bottom: 1vh;
 
@@ -49,11 +48,16 @@
     }
 
     .due-at {
-      padding-top: 10px;
-
+      padding-top: 15px;
+      color: black;
+      font-weight: 500;
+      span {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
     }
 
-    .continue-button {
+    .pt-button {
       padding: 0;
       border-radius: 0px;
       color: $dark-gray2;
@@ -61,7 +65,20 @@
       width: 100%;
       height: 100%;
     }
+
+    .pt-button.locked {
+      color: $gray4
+    }
+
+    .pt-button.graded {
+      color: $blue3
+    }
+
+    .pt-button.unlocked, .pt-button.attempting {
+      color: $green3
+    }
   }
+
   @media(max-width: 768px) {
     .cover {
       display: none
@@ -72,12 +89,12 @@
     position: absolute;
     background: $light-gray4;
     bottom: 0px;
-    right: 6px;
+    right: 8px;
     height: 50px;
     left: 8px;
   }
  }
 
-.assessment.row {
+.sa-assessment-card.row {
   padding: 0;
 }

@@ -26,9 +26,9 @@ const Navbar: React.StatelessComponent<Props> =
                       tab === 'settings', <span>Settings</span>)
 
     return (
-      <div className="sa-academy-navbar pt-navbar pt-navbar-dark row">
+      <div className="sa-primary-navbar pt-navbar pt-navbar-dark row">
         <div className="resume-game col-xs-2" />
-        <div className="navigation-buttons pt-navbar-group pt-button-group pt-large pt-fill col-xs-10">
+        <div className="tabs pt-navbar-group pt-button-group pt-large pt-fill col-xs-10">
           {inboxTab}
           {journalTab}
           {materialsTab}

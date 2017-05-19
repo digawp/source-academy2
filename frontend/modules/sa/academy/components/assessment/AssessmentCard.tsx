@@ -10,7 +10,7 @@ export type Props = {
 }
 
 function dueAtToString(dueAt: number): string {
-  return (moment(dueAt)).format('DD MMMM')
+  return 'Due ' + moment(dueAt).fromNow()
 }
 
 const getActionName = (grading: Grading) => {
@@ -20,23 +20,16 @@ const getActionName = (grading: Grading) => {
     case 'unlocked':
       return 'Attempt'
     case 'submitted':
-      return 'Submitted'
+      return 'View Answer'
     case 'graded':
-      return 'Graded'
+      return 'View Grade'
     default:
       return 'Locked'
   }
 }
 
-const getIntent = (grading: Grading) => {
-  if (grading.status === 'unlocked') {
-    return Intent.SUCCESS
-  } else if (grading.status === 'graded') {
-    return Intent.PRIMARY
-  } else {
-    return Intent.NONE
-  }
-}
+const getActionButtonClassNames = (grading: Grading) =>
+  classnames('pt-minimal', 'pt-large', grading.status)
 
 const Cover: React.StatelessComponent<Props> =
   ({ grading, assessment }) => (
@@ -50,8 +43,7 @@ const Description: React.StatelessComponent<Props> =
     const actionButton = grading && (
         <Button
           disabled={grading.status === 'locked'}
-          intent={getIntent(grading)}
-          className="pt-minimal continue-button pt-large"
+          className={getActionButtonClassNames(grading)}
         >
           {getActionName(grading)}
         </Button>
@@ -66,9 +58,8 @@ const Description: React.StatelessComponent<Props> =
         <Text>{assessment.description}</Text>
         <div className="row controls">
           <div className="due-at col-xs-6 col-md-8">
-            <Button disabled={true} className="pt-minimal" iconName="time">
-              <b>{dueAtToString(assessment.dueAt)}</b>
-            </Button>
+            <span className="pt-icons pt-icon-time" />
+            {dueAtToString(assessment.dueAt)}
           </div>
           <div className="col-xs">
             {actionButton}
@@ -80,7 +71,7 @@ const Description: React.StatelessComponent<Props> =
 
 const AssessmentCard: React.StatelessComponent<Props> =
   (props) => (
-    <div className="assessment row">
+    <div className="sa-assessment-card row">
       <Cover {...props} />
       <Description {...props} />
     </div>

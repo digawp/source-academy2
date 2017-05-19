@@ -14,7 +14,7 @@ export type Props = {
 
 export type NavbarProps = RouteComponentProps<any>
 
-export const Navbar: React.StatelessComponent<NavbarProps> =
+export const SecondaryNavbar: React.StatelessComponent<NavbarProps> =
   ({ location }) => {
     const paths = location.pathname.split('/')
     const activeTab = paths[paths.length - 1]
