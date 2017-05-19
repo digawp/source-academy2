@@ -1,9 +1,11 @@
 import { values } from 'lodash'
-import { connect } from 'react-redux'
+import { connect, Dispatch } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import { createSelector } from 'reselect'
+import { push } from 'react-router-redux'
 import { State } from '../../types'
-import Assessments from '../../components/journal/Assessments'
+import Assessments, { OwnProps } from '../../components/journal/Assessments'
+import { withViewAssessment } from '../../decorators'
 
 const getAssessments = (state: State) => state.assessments
 
@@ -19,9 +21,9 @@ const selectAssessments = createSelector(
   })
 
 const mapStateToProps =
-  (state: State, ownProps: RouteComponentProps<any>) => ({
+  (state: State, ownProps: OwnProps) => ({
     gradings: state.gradings,
     assessments: selectAssessments(state),
   })
 
-export default connect(mapStateToProps)(Assessments)
+export default withViewAssessment(connect(mapStateToProps)(Assessments))

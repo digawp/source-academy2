@@ -7,6 +7,8 @@ import { Button, Text, Intent } from '@blueprintjs/core'
 export type Props = {
   assessment: Assessment,
   grading: Grading,
+
+  handleView: () => void,
 }
 
 function dueAtToString(dueAt: number): string {
@@ -39,10 +41,11 @@ const Cover: React.StatelessComponent<Props> =
   )
 
 const Description: React.StatelessComponent<Props> =
-   ({ grading, assessment }) => {
+   ({ grading, assessment, handleView }) => {
     const actionButton = grading && (
         <Button
           disabled={grading.status === 'locked'}
+          onClick={handleView}
           className={getActionButtonClassNames(grading)}
         >
           {getActionName(grading)}

@@ -16,9 +16,9 @@ export const fetchAssessmentsSuccess = (assessments: Assessment[]) => ({
   payload: { assessments },
 })
 
-export const getAssessment = (id: number) => ({
+export const getAssessment = (id: number, withQuestions?: boolean, answerOfStudent?: number) => ({
   type: GET_ASSESSMENT,
-  payload: { id },
+  payload: { id, withQuestions, answerOfStudent },
 })
 
 export const getAssessmentSuccess = (assessment: Assessment) => ({

@@ -5,7 +5,8 @@ import { RouteComponentProps } from 'react-router'
 import { connect } from 'react-redux'
 import { Assessment } from 'sa/core/types'
 import { State } from '../../types'
-import DueSoon from '../../components/inbox/DueSoon'
+import DueSoon, { OwnProps } from '../../components/inbox/DueSoon'
+import { withViewAssessment } from '../../decorators'
 
 const getAssessments = (state: State) => state.assessments
 
@@ -24,11 +25,11 @@ const selectByType = (type: string) =>
       }),
   )
 
-const mapStateToProps = (state: State, ownProps: RouteComponentProps<any>) => ({
+const mapStateToProps = (state: State, ownProps: OwnProps) => ({
   gradings: state.gradings,
   sidequests: selectByType('sidequest')(state),
   paths: selectByType('path')(state),
   missions: selectByType('mission')(state),
 })
 
-export default connect(mapStateToProps)(DueSoon)
+export default withViewAssessment(connect(mapStateToProps)(DueSoon))

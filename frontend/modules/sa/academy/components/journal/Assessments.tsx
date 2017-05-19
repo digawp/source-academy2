@@ -8,8 +8,12 @@ import AssessmentCard from '../assessment/AssessmentCard'
 import SecondaryTab, {Props as SecondaryTabProps} from '../SecondaryTab'
 
 export type Props = {
-  assessments: Assessment[]
+  assessments: Assessment[],
   gradings: {[id: number]: Grading},
+} & OwnProps
+
+export type OwnProps = {
+  viewAssessment: (assessment: number, student?: number) => void,
 } & RouteComponentProps<any>
 
 export type NavbarProps = RouteComponentProps<any>
@@ -36,14 +40,18 @@ export const SecondaryNavbar: React.StatelessComponent<NavbarProps> =
   }
 
 const Assessments: React.StatelessComponent<Props> =
-  ({ assessments, gradings }) => {
-    const assessmentCards = assessments && assessments.map(assessment => (
-      <AssessmentCard
-        grading={values(gradings).find(g => g.assessment === assessment.id)!}
-        key={assessment.id}
-        assessment={assessment}
-      />
-    ))
+  ({ assessments, gradings, viewAssessment }) => {
+    const assessmentCards = assessments && assessments.map(assessment => {
+      const handleView = () => viewAssessment(assessment.id)
+      return (
+        <AssessmentCard
+          grading={values(gradings).find(g => g.assessment === assessment.id)!}
+          key={assessment.id}
+          assessment={assessment}
+          handleView={handleView}
+        />
+      )
+    })
 
     return (
       <div className="assessment-list">

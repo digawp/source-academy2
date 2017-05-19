@@ -5,9 +5,9 @@ import { Assessment } from 'sa/core/types'
 
 import NotFound from 'sa/core/components/NotFound'
 import AssessmentsContainer from '../../containers/journal/AssessmentsContainer'
-import AnswerContainer from '../../containers/journal/AnswerContainer'
+import WorkspaceContainer from '../../containers/workspace/WorkspaceContainer'
 import { SecondaryNavbar as AssessmentsNavbar } from './Assessments'
-import { SecondaryNavbar as AnswerNavbar } from './Answer'
+import { SecondaryNavbar as WorkspaceNavbar } from '../workspace/Workspace'
 
 export type Props = {
   assessments: {[id: number]: Assessment},
@@ -18,7 +18,7 @@ export const SecondaryNavbar: React.StatelessComponent<Props> =
     <Switch>
       <Redirect exact={true} path={match.url} to={`${match.url}/assessments/missions`} />
       <Route path={`${match.url}/assessments/:tab`} component={AssessmentsNavbar} />
-      <Route path={`${match.url}/answers/:id`} component={AnswerNavbar} />
+      <Route path={`${match.url}/workspaces/:id`} component={WorkspaceNavbar} />
       <Route component={AssessmentsNavbar} />
     </Switch>
   )
@@ -29,7 +29,7 @@ const Journal: React.StatelessComponent<Props> =
       <Switch>
         <Redirect exact={true} path={match.url} to={`${match.url}/assessments/missions`} />
         <Route path={`${match.url}/assessments/:tab`} component={AssessmentsContainer} />
-        <Route path={`${match.url}/answers/:id`} component={AnswerContainer} />
+        <Route path={`${match.url}/workspaces/:id`} component={WorkspaceContainer} />
         <Route component={NotFound} />
       </Switch>
     </div>

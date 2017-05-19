@@ -6,7 +6,7 @@ import { getAssessment } from '../reducers/assessment'
 import { getUser } from 'sa/core/reducers/user'
 import api from 'sa/core/api'
 
-function* doFetchAssessments() {
+function* fetchHappenings() {
   const effects: Effect[] = []
   const happenings = yield call(api.happenings.fetch)
 
@@ -21,7 +21,7 @@ function* doFetchAssessments() {
 }
 
 function* happeningsSaga(): any {
-  yield takeEvery(FETCH_HAPPENINGS, doFetchAssessments)
+  yield takeEvery(FETCH_HAPPENINGS, fetchHappenings)
 }
 
 export default happeningsSaga

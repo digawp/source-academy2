@@ -2,12 +2,14 @@ import * as moment from 'moment'
 import * as types from 'sa/core/types'
 
 export type DB = {
-  users: { [id: string]: types.User },
   announcements: { [id: string]: types.Announcement },
-  students: { [id: string]: types.Student },
+  answers: { [id: string]: types.Answer },
   assessments: { [id: string]: types.Assessment },
-  happenings: { [id: string]: types.Happening },
   gradings: { [id: string]: types.Grading },
+  happenings: { [id: string]: types.Happening },
+  questions: { [id: string]: types.Question },
+  students: { [id: string]: types.Student },
+  users: { [id: string]: types.User },
 }
 
 const TODAY = moment().startOf('day')
@@ -303,6 +305,12 @@ const db: DB = {
       type: 'first_to_finish',
       assessment: 0,
     },
+  },
+  questions: {
+
+  },
+  answers: {
+
   },
 }
 

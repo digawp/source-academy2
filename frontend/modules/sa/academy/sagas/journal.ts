@@ -1,8 +1,14 @@
-import { takeEvery, put } from 'redux-saga/effects'
+import { takeEvery, put, select } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
+import { State } from '../types'
+import { User, Student } from 'sa/core/types'
+import { ensureCurrentStudentExists } from './student'
 
-import { fetchAssessments } from '../reducers/assessment'
+import {
+  fetchAssessments,
+  getAssessment,
+} from '../reducers/assessment'
 
 function* fetchRequiredResource() {
   const locations = location.pathname.split('/')
@@ -11,11 +17,19 @@ function* fetchRequiredResource() {
 
   if (isInsideJournal) {
     const tab = locations[3]
-
     if (tab === 'assessments') {
       yield put(fetchAssessments())
-    } else if (tab === 'answers') {
-      const answerId = locations[4]
+    } else if (tab === 'workspaces') {
+      const assessmentId = parseInt(locations[4], 10)
+      const user: User = yield select((state: State) => state.auth.currentUser)
+      if (user.role === 'student') {
+        yield *ensureCurrentStudentExists()
+        const currentStudent: Student = yield select((state: State) => state.currentStudent)
+        yield put(getAssessment(assessmentId, true, currentStudent.id))
+      } else {
+        const student = new URLSearchParams(location.search).get('student')
+        yield put(getAssessment(assessmentId, true, parseInt(student!, 10)))
+      }
     }
   }
 }

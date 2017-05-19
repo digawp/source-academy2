@@ -12,29 +12,34 @@ export type Props = {
   missions: Assessment[],
   sidequests: Assessment[],
   paths: Assessment[],
+} & OwnProps
+
+export type OwnProps = {
+  viewAssessment: (assessment: number, student?: number) => void,
 } & RouteComponentProps<any>
 
 export type SectionProps = {
   title: string,
   assessments: Assessment[],
-  gradings: {[id: number]: Grading},
-}
+} & Props
 
 function dueAtToString(dueAt: number): string {
   return (moment(dueAt)).format('DD MMMM')
 }
 
 const Section: React.StatelessComponent<SectionProps> =
-  ({ title, assessments, gradings }) => {
+  ({ title, assessments, gradings, viewAssessment }) => {
     const assessmentCards = assessments.map((assessment) => {
       const grading = values(gradings)
         .find(g => g.assessment.toString() === assessment.id.toString())!
+      const handleView = () => viewAssessment(assessment.id)
 
       return (
         <AssessmentCard
            key={assessment.id}
            grading={grading}
            assessment={assessment}
+           handleView={handleView}
         />
       )
     })
@@ -48,15 +53,16 @@ const Section: React.StatelessComponent<SectionProps> =
   }
 
 const DueSoon: React.StatelessComponent<Props> =
-  ({missions, sidequests, paths, gradings}) => {
+  (props) => {
+    const { missions, sidequests, paths, gradings } = props
     const missionsDueSoon = missions && missions.length &&
-      (<Section title="Missions" gradings={gradings} assessments={missions} />)
+      (<Section title="Missions" assessments={missions} {...props} />)
 
     const sidequestsDueSoon = sidequests && sidequests.length &&
-      (<Section title="Sidequests" gradings={gradings} assessments={sidequests} />)
+      (<Section title="Sidequests" assessments={sidequests} {...props} />)
 
     const pathsDueSoon = paths && paths.length &&
-      (<Section title="Paths" gradings={gradings} assessments={paths} />)
+      (<Section title="Paths" assessments={paths} {...props} />)
 
     return (
       <div className="sa-duesoon">

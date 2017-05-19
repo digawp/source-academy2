@@ -44,16 +44,37 @@ export type Answer = {
   id: number,
   question: number,
   student: number,
-  code?: string,
-  mcqChoice?: number,
+  value: string,
+}
+
+export type Question = {
+  id: number,
+  assessment: number,
+  order: number,
+  answerable: boolean,
+  value: string,
+}
+
+export type Gist = {
+  id: number,
+  owner: number,
+  private: boolean,
+}
+
+export type GistSegment = {
+  id: number,
+  gist: number,
+  order: number,
+  type: 'code' | 'document',
+  value: string,
 }
 
 export type Grading = {
   id: number,
   status: 'locked' | 'unlocked' | 'attempting' | 'submitted' | 'graded',
   assessment: number,
-  autoGraded?: boolean,
   student: number,
+  autoGraded?: boolean,
   gradedBy?: number,
   gradedAt?: number,
   marksObtained?: number,
@@ -128,17 +149,24 @@ export interface IGradingAPI {
   unlockAssessment(assessment: number, student: number): Promise<boolean>,
 }
 
+export interface IAssessmentAPI {
+  fetchQuestions(assessment: number): Promise<Question[]>
+  fetchAnswers(assessment: number, student: number): Promise<Answer[]>
+}
+
 export type State = {
-  auth: {[id: number]: AuthState},
+  auth: AuthState,
   users: {[id: number]: User},
 }
 
 export type API = {
   auth: IAuthApi,
-  assessments: IResource<Assessment>,
+  assessments: IResource<Assessment> & IAssessmentAPI,
   announcements: IResource<Announcement>,
   users: IResource<User>,
   students: IResource<Student> & IStudentAPI,
   happenings: IResource<Happening>,
   gradings: IResource<Grading> & IGradingAPI,
+  questions: IResource<Question>
+  answers: IResource<Answer>,
 }

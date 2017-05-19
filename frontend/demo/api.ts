@@ -45,6 +45,36 @@ const mockAPI: t.API = {
     async fetch(limit?: number) {
       return values(db.assessments)
     },
+
+    async fetchQuestions(id: number) {
+      return values(db.questions).filter(q => q.assessment === id)
+    },
+
+    async fetchAnswers(id: number, student: number) {
+      const questions = values(db.questions).filter(q => q.assessment === id)
+      return values(db.answers).filter(a =>
+        questions.find(q => a.question === q.id) && a.student === student)
+    },
+  },
+
+  answers: {
+    async get(id: number) {
+      return db.answers[id]
+    },
+
+    async fetch(limit?: number) {
+      return values(db.answers)
+    },
+  },
+
+  questions: {
+    async get(id: number) {
+      return db.questions[id]
+    },
+
+    async fetch(limit?: number) {
+      return values(db.questions)
+    },
   },
 
   announcements: {

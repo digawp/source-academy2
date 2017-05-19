@@ -3,9 +3,9 @@ import { Grading } from 'sa/core/types'
 export const GET_GRADING = 'grading/GET_GRADING'
 export const GET_GRADING_SUCCESS = 'grading/GET_GRADING_SUCCESS'
 
-export const getGrading = (assessment: number) => ({
+export const getGrading = (assessment: number, student: number) => ({
   type: GET_GRADING,
-  payload: { assessment },
+  payload: { assessment, student },
 })
 
 export const getGradingSuccess = (grading: Grading) => ({

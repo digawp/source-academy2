@@ -5,6 +5,8 @@ import announcementSaga from './announcement'
 import happeningSaga from './happening'
 import journalSaga from './journal'
 import gradingSaga from './grading'
+import answerSaga from './grading'
+import questionSaga from './question'
 
 function* academySaga() {
   // Main Resource Sagas
@@ -13,6 +15,8 @@ function* academySaga() {
   yield* announcementSaga()
   yield* happeningSaga()
   yield* gradingSaga()
+  yield* answerSaga()
+  yield* questionSaga()
 
   // Page Specific Sagas
   yield* inboxSaga()

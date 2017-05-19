@@ -1,5 +1,6 @@
 import { RouteComponentProps } from 'react-router'
-import { connect } from 'react-redux'
+import { connect, Dispatch } from 'react-redux'
+import { push } from 'react-router-redux'
 import { State } from '../../types'
 import Happenings from '../../components/inbox/Happenings'
 
@@ -9,4 +10,15 @@ const mapStateToProps = (state: State, ownProps: RouteComponentProps<any>) => ({
   assessments: state.assessments,
 })
 
-export default connect(mapStateToProps)(Happenings)
+const mapDispatchToProps =
+  (dispatch: Dispatch<State>) => ({
+    viewAssessment(assessment: number, student?: number) {
+      let url = `/academy/journal/workspaces/${assessment}`
+      if (student) {
+        url += `?student=${student}`
+      }
+      dispatch(push(url))
+    },
+  })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Happenings)
