@@ -6,14 +6,16 @@ import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 import { fetchAssessments } from '../reducers/assessment'
 import { fetchAnnouncements } from '../reducers/announcement'
 import { fetchHappenings } from '../reducers/happening'
+import { State } from '../types'
 
 function* fetchRequiredResource() {
-  const locations = location.pathname.split('/')
+  const { location } = yield select((state: State) => state.routing)
+  const paths = location.pathname.split('/')
   const isInsideInbox =
-    locations[1] === 'academy' && locations[2] === 'inbox'
+    paths[1] === 'academy' && paths[2] === 'inbox'
 
   if (isInsideInbox) {
-    const tab = locations[3]
+    const tab = paths[3]
 
     if (tab === 'soon') {
       yield put(fetchAssessments())

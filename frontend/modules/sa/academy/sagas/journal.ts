@@ -11,16 +11,17 @@ import {
 } from '../reducers/assessment'
 
 function* fetchRequiredResource() {
-  const locations = location.pathname.split('/')
+  const { location } = yield select((state: State) => state.routing)
+  const paths = location.pathname.split('/')
   const isInsideJournal =
-    locations[1] === 'academy' && locations[2] === 'journal'
+    paths[1] === 'academy' && paths[2] === 'journal'
 
   if (isInsideJournal) {
-    const tab = locations[3]
+    const tab = paths[3]
     if (tab === 'assessments') {
       yield put(fetchAssessments())
     } else if (tab === 'workspaces') {
-      const assessmentId = parseInt(locations[4], 10)
+      const assessmentId = parseInt(paths[4], 10)
       const user: User = yield select((state: State) => state.auth.currentUser)
       if (user.role === 'student') {
         yield *ensureCurrentStudentExists()
