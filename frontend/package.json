@@ -11,7 +11,7 @@
     "npm": ">=3.x"
   },
   "scripts": {
-    "clean": "rimraf dist .awcache .uglifycache coverage",
+    "clean": "rimraf dist demo-dist .awcache .uglifycache coverage",
     "dev-demo": "DEMO_MODE=true npm run dev",
     "dev": "cross-env DEBUG=source-academy,express NODE_ENV=development ts-node -P scripts scripts/server.ts",
     "bundle-demo": "DEMO_MODE=true npm run bundle",
