@@ -11,22 +11,19 @@ export type Props = {
 } & RouteComponentProps<any>
 
 const Navbar: React.StatelessComponent<Props> =
-  ({ match, currentUser, currentStudent }) => {
-    const isInboxTabActive = match.url.endsWith('inbox')
-    const isJournalTabActive = match.url.endsWith('journal')
-    const isMaterialsTabActive = match.url.endsWith('materials')
-    const isSettingsTabActive = match.url.endsWith('settings')
-
+  ({ location, currentUser, currentStudent }) => {
+    const paths = location.pathname.split('/')
+    const tab = paths[2]
     const getClassNames = (icon: string) => `pt-button pt-minimal pt-icon-${icon}`
 
     const inboxTab = createLink(`/academy/inbox`, getClassNames('inbox'),
-                      isInboxTabActive, <span>Inbox</span>)
+                      tab === 'inbox', <span>Inbox</span>)
     const journalTab = createLink(`/academy/journal`, getClassNames('book'),
-                      isJournalTabActive, <span>Journal</span>)
+                      tab === 'journal', <span>Journal</span>)
     const materialsTab = createLink(`/academy/materials`, getClassNames('folder-open'),
-                      isMaterialsTabActive, <span>Materials</span>)
+                      tab === 'materials', <span>Materials</span>)
     const settingsTab = createLink(`/academy/settings`, getClassNames('cog'),
-                      isSettingsTabActive, <span>Settings</span>)
+                      tab === 'settings', <span>Settings</span>)
 
     return (
       <div className="sa-academy-navbar pt-navbar pt-navbar-dark row">
