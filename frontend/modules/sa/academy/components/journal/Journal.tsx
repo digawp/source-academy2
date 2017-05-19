@@ -5,9 +5,8 @@ import { Assessment } from 'sa/core/types'
 
 import NotFound from 'sa/core/components/NotFound'
 import AssessmentsContainer from '../../containers/journal/AssessmentsContainer'
-import WorkspaceContainer, {
-  SecondaryWorkspaceNavbarContainer,
-} from '../../containers/workspace/WorkspaceContainer'
+import WorkspaceContainer from '../../containers/workspace/WorkspaceContainer'
+import WorkspaceSecondaryNavbarContainer from '../../containers/workspace/WorkspaceSecondaryNavbarContainer'
 import { SecondaryNavbar as AssessmentsNavbar } from './Assessments'
 
 export type Props = {
@@ -19,10 +18,7 @@ export const SecondaryNavbar: React.StatelessComponent<Props> =
     <Switch>
       <Redirect exact={true} path={match.url} to={`${match.url}/assessments/missions`} />
       <Route path={`${match.url}/assessments/:tab`} component={AssessmentsNavbar} />
-      <Route
-        path={`${match.url}/workspaces/:id`}
-        component={SecondaryWorkspaceNavbarContainer}
-      />
+      <Route path={`${match.url}/workspaces/:id`} component={WorkspaceSecondaryNavbarContainer} />
       <Route component={AssessmentsNavbar} />
     </Switch>
   )
