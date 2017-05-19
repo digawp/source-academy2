@@ -23,11 +23,11 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
     )
     const title = assessment && ([
       (
-        <span className="assessment-type">
+        <span key="type" className="assessment-type">
           {capitalize(assessment.type)} {assessment.order}
         </span>),
-      <br/>,
-      <Text ellipsize={true}>{assessment.title}</Text>,
+      <br key="br"/>,
+      <Text key="title" ellipsize={true}>{assessment.title}</Text>,
     ])
     const toolbar = assessment && (
       <div className="pt-button-group">

@@ -14,10 +14,11 @@ import {
 const mapStateToProps =
   (state: State, ownProps: OwnProps) => {
     const paths = selectPaths(state)
+    const last = paths[paths.length - 1]
     return {
       gradings: state.gradings,
       assessments: selectAssessmentsByType(
-        paths[paths.length - 1].substring(0, paths.length - 1))(state),
+        last.substring(0, last.length - 1))(state),
     }
   }
 
