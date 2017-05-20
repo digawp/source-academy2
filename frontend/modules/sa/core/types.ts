@@ -114,9 +114,17 @@ export type AuthState = {
   token: string | null,
 }
 
+export enum LayoutType {
+  SplitHorizontal,
+  SplitVertical,
+  AnswerOnly,
+  QuestionOnly,
+}
+
 export type WorkspaceState = {
   activeQuestion: number,
   assessment: number,
+  layoutType: LayoutType,
 }
 
 // Globals

@@ -3,7 +3,7 @@ import { capitalize } from 'lodash'
 import { RouteComponentProps } from 'react-router-dom'
 import { Slider, Button, IconClasses } from '@blueprintjs/core'
 import { Student, Question, Answer, Assessment,
-  Grading, WorkspaceState } from 'sa/core/types'
+  Grading, WorkspaceState, LayoutType } from 'sa/core/types'
 
 import QuestionsSlider from './QuestionsSlider'
 
@@ -28,13 +28,16 @@ type QuestionContentProps = {
 
 const QuestionContent: React.StatelessComponent<QuestionContentProps> =
   ({ question }) => (
-    <div dangerouslySetInnerHTML={{__html: question.value}} />
+    <div className="question-content" dangerouslySetInnerHTML={{__html: question.value}} />
   )
 
 const Workspace: React.StatelessComponent<Props> =
   (props) => {
     const { questions, answers, workspace, nextQuestion, previousQuestion } = props
-    const questionsReady = questions && questions.length > 0
+
+    const questionsReady = questions && workspace && questions.length > 0 &&
+      questions[workspace.activeQuestion]
+
     const questionsSlider = questionsReady && (
       <QuestionsSlider
         workspace={workspace}
@@ -47,15 +50,39 @@ const Workspace: React.StatelessComponent<Props> =
     const questionContent = questionsReady &&
       <QuestionContent question={questions![workspace.activeQuestion]} />
 
-    return (
-      <div className="sa-workspace">
-        {questionsSlider}
+    let content: React.ReactNode = null
+
+    if (!workspace) {
+      content = null
+    } else if (workspace.layoutType === LayoutType.SplitHorizontal) {
+      content = (
         <div className="row">
           <div className="question-container col-xs-6">
             {questionContent}
           </div>
           <div className="answer-container col-xs" />
         </div>
+      )
+    } else if (workspace.layoutType === LayoutType.AnswerOnly) {
+      content = (
+        <div className="row">
+          <div className="answer-container col-xs-12" />
+        </div>
+      )
+    } else if (workspace.layoutType === LayoutType.QuestionOnly) {
+      content = (
+        <div className="row">
+          <div className="question-container col-xs-12">
+            {questionContent}
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="sa-workspace">
+        {questionsSlider}
+        {content}
       </div>
     )
   }
