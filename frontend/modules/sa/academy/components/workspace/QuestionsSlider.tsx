@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Button, IconClasses, Slider } from '@blueprintjs/core'
 import { WorkspaceState, Question } from 'sa/core/types'
 
