@@ -7,6 +7,7 @@ export type Props = {
   initialValue: string
   editorTheme: 'github' | 'tomorrow_night',
   editorFontSize: number
+  isReadOnly: boolean
 
   increaseEditorFontSize(): void,
   decreaseEditorFontSize(): void,
@@ -35,6 +36,7 @@ class Editor extends React.Component<Props, State> {
       if (nextProps.resource !== this.props.resource) {
         this.silent = true
         editor.setValue(nextProps.initialValue)
+        editor.clearSelection()
         this.silent = false
         this.setChangeHandler(editor)
       }
@@ -71,10 +73,12 @@ class Editor extends React.Component<Props, State> {
       require('brace/theme/github')
 
       const editor = ace.edit(findDOMNode(this.editor) as HTMLElement)
+      editor.setReadOnly(this.props.isReadOnly)
       editor.session.setMode('ace/mode/javascript')
       editor.setTheme(`ace/theme/${this.props.editorTheme}`)
       editor.setFontSize(`${this.props.editorFontSize}px`)
       editor.setValue(this.props.initialValue)
+      editor.clearSelection()
       editor.$blockScrolling = Infinity
       this.setChangeHandler(editor)
     })

@@ -1,6 +1,6 @@
 import { connect, Dispatch } from 'react-redux'
 import { push } from 'react-router-redux'
-import { selectAssessment } from '../../selectors'
+import { selectAssessment, selectGrading } from '../../selectors'
 import { State } from '../../types'
 import WorkspaceSecondaryNavbar, { OwnProps } from '../../components/workspace/WorkspaceSecondaryNavbar'
 import { LayoutType } from 'sa/core/types'
@@ -15,7 +15,8 @@ const mapStateToNavbarProps = (state: State, ownProps: OwnProps) => {
   if (isJournal) {
     const id = parseInt(paths[paths.length - 1], 10)
     const assessment = selectAssessment(id)(state)
-    return { ...baseProps, assessment: assessment! }
+    const grading = selectGrading(id)(state)
+    return { ...baseProps, assessment: assessment!, grading }
   } else {
     return baseProps
   }

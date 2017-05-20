@@ -3,11 +3,12 @@ import { capitalize } from 'lodash'
 import { RouteComponentProps } from 'react-router'
 import { Button, IconClasses, Intent, Text,
   Popover, Menu, MenuItem, Position } from '@blueprintjs/core'
-import { Assessment, LayoutType, WorkspaceState } from 'sa/core/types'
+import { Assessment, LayoutType, WorkspaceState, Grading } from 'sa/core/types'
 
 export type OwnProps = RouteComponentProps<any>
 
 export type Props = {
+  grading: Grading
   assessment: Assessment,
   workspace: WorkspaceState,
 
@@ -16,7 +17,7 @@ export type Props = {
 } & OwnProps
 
 const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
-  ({ assessment, workspace, backToAssessments, setLayoutType }) => {
+  ({ assessment, grading, workspace, backToAssessments, setLayoutType }) => {
     const handleClick = assessment && (() => backToAssessments(assessment.type))
     const backButton = assessment && (
       <Button
@@ -63,15 +64,44 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
       )
     }
 
-    const toolbar = assessment && (
-      <div className="pt-button-group">
-        {selectLayoutButton}
+    const saveButton = grading
+      && (grading.status === 'unlocked' || grading.status === 'attempting')
+      && (
         <Button intent={Intent.PRIMARY} iconName={IconClasses.FLOPPY_DISK}>
           Save
         </Button>
-        <Button intent={Intent.SUCCESS} iconName={IconClasses.SEND_TO}>
-          Submit
+      )
+
+    const submitButtonDisabled = grading && grading.status === 'graded'
+
+    const submitButtonLabel = submitButtonDisabled
+      ? 'Submitted'
+      : 'Submit'
+
+    const submitButtonIntent = submitButtonDisabled
+      ? Intent.NONE
+      : Intent.SUCCESS
+
+    const submitButtonIcon = submitButtonDisabled
+      ? IconClasses.ENDORSED
+      : IconClasses.SEND_TO
+
+    const submitButton = grading
+      && (
+        <Button
+          intent={submitButtonIntent}
+          disabled={submitButtonDisabled}
+          iconName={submitButtonIcon}
+        >
+          {submitButtonLabel}
         </Button>
+      )
+
+    const toolbar = assessment && (
+      <div className="pt-button-group">
+        {selectLayoutButton}
+        {saveButton}
+        {submitButton}
       </div>
     )
 

@@ -42,12 +42,12 @@ const QuestionContent: React.StatelessComponent<QuestionContentProps> =
 const Workspace: React.StatelessComponent<Props> =
   (props) => {
     const {
-      questions, answers, workspace, nextQuestion, previousQuestion,
+      questions, answers, workspace, nextQuestion, previousQuestion, grading,
       setActiveAnswerTab, increaseEditorFontSize, decreaseEditorFontSize,
       setEditorTheme, setAnswerValue,
     } = props
 
-    const activeQuestion = questions && workspace && questions.length > 0 &&
+    const activeQuestion = grading && questions && workspace && questions.length > 0 &&
       questions[workspace.activeQuestion]
 
     const activeAnswer = activeQuestion && answers && answers.find(a =>
@@ -70,6 +70,7 @@ const Workspace: React.StatelessComponent<Props> =
         answer={activeAnswer}
         question={activeQuestion}
         workspace={workspace}
+        grading={grading!}
         handleTabChange={setActiveAnswerTab}
         setAnswerValue={setAnswerValue}
         {...{increaseEditorFontSize, decreaseEditorFontSize, setEditorTheme }}

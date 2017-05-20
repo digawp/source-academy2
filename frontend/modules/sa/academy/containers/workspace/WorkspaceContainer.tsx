@@ -12,7 +12,7 @@ import {
   decreaseEditorFontSize,
 } from '../../reducers/currentWorkspace'
 import {
-  setAnswerValue
+  setAnswerValue,
 } from '../../reducers/answer'
 
 import {

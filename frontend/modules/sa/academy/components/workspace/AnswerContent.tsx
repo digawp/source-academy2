@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Tabs2, Tab2 } from '@blueprintjs/core'
 import { Answer, Question, WorkspaceState,
-  AnswerTabType } from 'sa/core/types'
+  AnswerTabType, Grading } from 'sa/core/types'
 
 import Editor, { Props as EditorProps } from './Editor'
 
 export type Props = {
+  grading: Grading,
   question: Question,
   answer: Answer,
   workspace: WorkspaceState,
@@ -22,7 +23,7 @@ const AnswerContent: React.StatelessComponent<Props> =
     const {
       question, answer, workspace, handleTabChange,
       increaseEditorFontSize, decreaseEditorFontSize,
-      setEditorTheme, setAnswerValue,
+      setEditorTheme, setAnswerValue, grading,
     } = props
 
     const tabs = (
@@ -56,6 +57,9 @@ const AnswerContent: React.StatelessComponent<Props> =
     }
 
     if (workspace.activeAnswerTab === AnswerTabType.Code) {
+      const isReadOnly = (grading.status === 'submitted')
+        || (grading.status === 'graded')
+
       const editorProps: EditorProps = {
         editorTheme: workspace.editorTheme,
         editorFontSize: workspace.editorFontSize,
@@ -64,6 +68,7 @@ const AnswerContent: React.StatelessComponent<Props> =
         toggleLightDarkTheme,
         initialValue: answer.value,
         resource: answer.id,
+        isReadOnly,
         onCodeChange: (newValue: string) => {
           setAnswerValue(answer.id, newValue)
         },
