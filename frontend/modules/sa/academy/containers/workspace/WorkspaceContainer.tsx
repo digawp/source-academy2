@@ -1,8 +1,9 @@
-import { connect, Dispatch } from 'react-redux'
+import { connect, Dispatch, MapDispatchToPropsObject } from 'react-redux'
 import { State } from '../../types'
 import { Answer, Question } from 'sa/core/types'
 import Workspace, { OwnProps } from '../../components/workspace/Workspace'
 import { withStudent } from '../../decorators'
+import { nextQuestion, previousQuestion } from '../../reducers/currentWorkspace'
 import {
   selectAssessment,
   selectQuestions,
@@ -35,4 +36,10 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
   }
 }
 
-export default connect(mapStateToProps)(withStudent(Workspace))
+const mapDispatchToProps: MapDispatchToPropsObject = {
+  nextQuestion,
+  previousQuestion,
+}
+
+export default connect(mapStateToProps,
+  mapDispatchToProps)(withStudent(Workspace))

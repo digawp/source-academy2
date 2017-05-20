@@ -15,25 +15,43 @@ export type Props = {
   questions?: Question[],
   answers?: Answer[],
   grading?: Grading,
-} & OwnProps
 
-type QuestionsSliderProps = {
-  questions: Question[],
-  workspace: WorkspaceState,
-}
+  nextQuestion(): void,
+  previousQuestion(): void,
+} & OwnProps
 
 type QuestionContentProps = {
   question: Question,
 }
 
-const QuestionsSlider: React.StatelessComponent<QuestionsSliderProps> =
-  ({ questions, workspace }) => {
+const QuestionsSlider: React.StatelessComponent<Props> =
+  ({ questions, workspace, nextQuestion, previousQuestion }) => {
+    const enablePreviousQuestionButton = workspace.activeQuestion >= 1
+    const enableNextQuestionButton = workspace.activeQuestion <= questions!.length - 2
+    const nextQuestionButton = (
+      <Button
+        className="pt-minimal"
+        disabled={!enableNextQuestionButton}
+        onClick={nextQuestion}
+        iconName={IconClasses.CHEVRON_RIGHT}
+      />
+    )
+    const previousQuestionButton = (
+      <Button
+        disabled={!enablePreviousQuestionButton}
+        className="pt-minimal"
+        onClick={previousQuestion}
+        iconName={IconClasses.CHEVRON_LEFT}
+      />
+    )
+    const activeQuestionTitle = questions![workspace.activeQuestion].title
+
     return (
       <div className="questions-slider-container">
         <Slider
           className="questions-slider"
           initialValue={1}
-          max={questions.length}
+          max={questions!.length}
           min={1}
           stepSize={1}
           showTrackFill={true}
@@ -42,10 +60,10 @@ const QuestionsSlider: React.StatelessComponent<QuestionsSliderProps> =
           value={workspace.activeQuestion + 1}
         />
         <div className="questions-picker row">
-          <Button className="pt-minimal" iconName={IconClasses.CHEVRON_LEFT} />
-          <Button className="pt-minimal" iconName={IconClasses.CHEVRON_RIGHT} />
+          {previousQuestionButton}
+          {nextQuestionButton}
           <div className="current-question-title col-xs-10">
-            {questions[workspace.activeQuestion].title}
+            {activeQuestionTitle}
           </div>
         </div>
       </div>
@@ -58,10 +76,11 @@ const QuestionContent: React.StatelessComponent<QuestionContentProps> =
   )
 
 const Workspace: React.StatelessComponent<Props> =
-  ({ questions, answers, workspace }) => {
+  (props) => {
+    const { questions, answers, workspace } = props
     const questionsReady = questions && questions.length > 0
     const questionsSlider = questionsReady &&
-      <QuestionsSlider questions={questions!} workspace={workspace} />
+      <QuestionsSlider {...props} />
 
     const questionContent = questionsReady &&
       <QuestionContent question={questions![workspace.activeQuestion]} />
