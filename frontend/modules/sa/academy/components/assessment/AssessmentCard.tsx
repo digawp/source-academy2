@@ -56,7 +56,7 @@ const Description: React.StatelessComponent<Props> =
       <div className="description col-xs">
         <h4>{assessment.title}</h4>
         <h6 className="order">
-          {assessment.type.toUpperCase()} {assessment.order} | 400XP
+          {assessment.type.toUpperCase()} {assessment.order} | {assessment.maxExperience}XP
         </h6>
         <Text>{assessment.description}</Text>
         <div className="row controls">
