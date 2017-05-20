@@ -75,6 +75,7 @@ class Editor extends React.Component<Props, State> {
       editor.setTheme(`ace/theme/${this.props.editorTheme}`)
       editor.setFontSize(`${this.props.editorFontSize}px`)
       editor.setValue(this.props.initialValue)
+      editor.$blockScrolling = Infinity
       this.setChangeHandler(editor)
     })
   }
