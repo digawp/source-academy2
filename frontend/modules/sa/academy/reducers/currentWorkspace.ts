@@ -43,7 +43,7 @@ const initialState: WorkspaceState = {
   answer: null,
   layoutType: LayoutType.SplitHorizontal,
   activeAnswerTab: AnswerTabType.Code,
-  editorTheme: 'github',
+  editorTheme: 'tomorrow',
   editorFontSize: 14,
 }
 

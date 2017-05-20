@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Tabs2, Tab2 } from '@blueprintjs/core'
 import { Answer, Question, WorkspaceState,
-  AnswerTabType, Grading } from 'sa/core/types'
+  AnswerTabType, Grading, InterpreterOutput } from 'sa/core/types'
 
 import Editor, { Props as EditorProps } from './Editor'
 import Interpreter from './Interpreter'
@@ -19,7 +19,7 @@ export type Props = {
   setAnswerValue(answer: number, value: string): void,
 }
 
-const outputs = [
+const outputs: InterpreterOutput[] = [
   {
     code: `function foo(n) {
    return 2 * n;
@@ -29,7 +29,7 @@ const outputs = [
   },
   {
     code: 'foo(2 + 2);',
-    value: 'undefined',
+    value: '8',
     status: 'error',
   },
 ]
@@ -65,10 +65,10 @@ const AnswerContent: React.StatelessComponent<Props> =
     let content: React.ReactNode = null
 
     const toggleLightDarkTheme = () => {
-      if (workspace.editorTheme === 'github') {
+      if (workspace.editorTheme === 'tomorrow') {
         setEditorTheme('tomorrow_night')
       } else {
-        setEditorTheme('github')
+        setEditorTheme('tomorrow')
       }
     }
 

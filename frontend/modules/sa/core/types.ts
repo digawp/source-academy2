@@ -133,7 +133,7 @@ export type WorkspaceState = {
   answer: number | null,
   layoutType: LayoutType,
   activeAnswerTab: AnswerTabType,
-  editorTheme: 'github' | 'tomorrow_night',
+  editorTheme: 'tomorrow' | 'tomorrow_night',
   editorFontSize: number,
 }
 

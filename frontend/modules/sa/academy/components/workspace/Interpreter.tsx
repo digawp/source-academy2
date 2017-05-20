@@ -12,6 +12,10 @@ type OutputProps = {
   refFn: (instance: React.ReactInstance) => any,
 }
 
+type InputProps = {
+  refFn: (instance: React.ReactInstance) => any,
+}
+
 const Output: React.StatelessComponent<OutputProps> =
   ({ output, refFn }) => (
     <div className="output">
@@ -26,32 +30,72 @@ const Output: React.StatelessComponent<OutputProps> =
     </div>
   )
 
+const Input: React.StatelessComponent<InputProps> =
+  ({ refFn }) => (
+    <div className="input">
+       <Button className="pt-minimal in-icon" iconName={IconClasses.CODE} />
+       <div ref={refFn} className="input-editor" />
+    </div>
+  )
+
 class Interpreter extends React.Component<Props, void> {
+  hjs: any
   outputs: React.ReactInstance[] = []
+  input: React.ReactInstance
 
   componentDidMount() {
     require.ensure([], () => {
+      require('brace')
+      require('brace/theme/tomorrow')
+      require('brace/mode/javascript')
+
       const hjs = require('highlight.js/lib/highlight')
       const javascript = require('highlight.js/lib/languages/javascript')
 
-      require('highlight.js/styles/github.css')
+      require('highlight.js/styles/tomorrow.css')
       hjs.registerLanguage('javascript', javascript)
 
-      this.outputs.forEach(i => {
-        const el = findDOMNode(i)
-        hjs.highlightBlock(el)
-      })
-    }, 'syntax-highlighter')
+      this.hjs = hjs
+      this.setupInputEditor()
+      this.highlightOutputCodes()
+    }, 'interpreter')
+  }
+
+  componentDidUpdate() {
+    this.highlightOutputCodes()
+  }
+
+  setupInputEditor() {
+    const $input = findDOMNode(this.input) as HTMLElement
+    const editor = ace.edit($input)
+    editor.setTheme('ace/theme/tomorrow')
+    editor.session.setMode('ace/mode/javascript')
+    editor.$blockScrolling = Infinity
+    editor.renderer.setShowGutter(false)
+  }
+
+  highlightOutputCodes() {
+    this.outputs.forEach(i => {
+      const el = findDOMNode(i)
+      if (this.hjs) {
+        this.hjs.highlightBlock(el)
+      }
+    })
   }
 
   render() {
     const { outputs } = this.props
-    const ref = (instance: React.ReactInstance) => this.outputs.push(instance)
+    const outputRef = (instance: React.ReactInstance) => this.outputs.push(instance)
+    const inputRef = (instance: React.ReactInstance) => this.input = instance
     const outputComponents = outputs.map(
-       (output, idx) => <Output output={output} key={idx} refFn={ref} />)
+       (output, idx) => <Output output={output} key={idx} refFn={outputRef} />)
+    const handleSubmit = (code: string) => {
+      return
+    }
     return (
       <div className="sa-interpreter">
         {outputComponents}
+        <Input refFn={inputRef} />
       </div>
     )
   }

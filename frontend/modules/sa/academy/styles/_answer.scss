@@ -48,9 +48,31 @@
   width: 100%;
   height: 70vh;
 
+  .input {
+    position: relative;
+    background: white;
+    min-height: 50px;
+    padding: 15px 40px;
+    font-family: monospace;
+    font-weight: 500;
+    border-top: 4px solid $light-gray3;
+
+    .in-icon {
+      position: absolute;
+      left: 15px;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      color: $gray5;
+    }
+
+    .input-editor {
+      height: 80px;
+    }
+  }
+
   .output {
     border-bottom: 1px solid $light-gray4;
-    background:#f8f8f8;
+    background:white;
 
     .code {
       padding: 5px 40px;

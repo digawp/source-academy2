@@ -5,7 +5,7 @@ import { Button, IconClasses } from '@blueprintjs/core'
 export type Props = {
   resource: number
   initialValue: string
-  editorTheme: 'github' | 'tomorrow_night',
+  editorTheme: 'tomorrow' | 'tomorrow_night',
   editorFontSize: number
   isReadOnly: boolean
 
@@ -70,7 +70,7 @@ class Editor extends React.Component<Props, State> {
       require('brace')
       require('brace/mode/javascript')
       require('brace/theme/tomorrow_night')
-      require('brace/theme/github')
+      require('brace/theme/tomorrow')
 
       const editor = ace.edit(findDOMNode(this.editor) as HTMLElement)
       editor.setReadOnly(this.props.isReadOnly)
