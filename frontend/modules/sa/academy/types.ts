@@ -7,12 +7,14 @@ import {
   Question,
   State as CoreState,
   Student,
+  WorkspaceState,
 } from 'sa/core/types'
 
 export type State = {
-  currentStudent: Student
-  assessments: {[id: number]: Assessment}
-  announcements: {[id: number]: Announcement}
+  currentStudent: Student,
+  currentWorkspace: WorkspaceState,
+  assessments: {[id: number]: Assessment},
+  announcements: {[id: number]: Announcement},
   happenings: {[id: number]: Happening},
   gradings: {[id: number]: Grading},
   answers: {[id: number]: Answer},

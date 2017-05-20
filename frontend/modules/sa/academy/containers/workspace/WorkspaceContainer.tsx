@@ -27,6 +27,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
       assessment,
       answers,
       questions,
+      workspace: state.currentWorkspace,
       grading: grading!,
     }
   } else {

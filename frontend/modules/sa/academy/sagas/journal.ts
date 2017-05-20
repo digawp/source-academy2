@@ -2,8 +2,9 @@ import { takeEvery, put, select } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { ACADEMY_BUNDLE_LOADED } from 'sa/core/util'
 import { State } from '../types'
-import { User, Student } from 'sa/core/types'
+import { User, Student, WorkspaceState } from 'sa/core/types'
 import { ensureCurrentStudentExists } from './student'
+import { resetWorkspace } from '../reducers/currentWorkspace'
 
 import {
   fetchAssessments,
@@ -30,6 +31,10 @@ function* fetchRequiredResource() {
       } else {
         const student = new URLSearchParams(location.search).get('student')
         yield put(getAssessment(assessmentId, true, parseInt(student!, 10)))
+      }
+      const currentWorkspace: WorkspaceState = yield select((state: State) => state.currentWorkspace)
+      if (!currentWorkspace || currentWorkspace.assessment !== assessmentId) {
+        yield put(resetWorkspace(assessmentId))
       }
     }
   }

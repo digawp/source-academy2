@@ -31,10 +31,9 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
     ])
     const toolbar = assessment && (
       <div className="pt-button-group">
-        <Button className="pt-minimal" iconName={IconClasses.LIST_DETAIL_VIEW}>
-          Sidebar
+        <Button intent={Intent.PRIMARY} iconName={IconClasses.FLOPPY_DISK}>
+          Save
         </Button>
-        <Button intent={Intent.PRIMARY} iconName={IconClasses.FLOPPY_DISK} />
         <Button intent={Intent.SUCCESS} iconName={IconClasses.SEND_TO}>
           Submit
         </Button>

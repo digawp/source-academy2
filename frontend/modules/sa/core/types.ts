@@ -56,6 +56,7 @@ export type Question = {
   order: number,
   answerable: boolean,
   maxMarks: number,
+  title: string,
   value: string,
 }
 
@@ -111,6 +112,11 @@ export type AuthState = {
   isAuthenticated: boolean,
   currentUser: User | null,
   token: string | null,
+}
+
+export type WorkspaceState = {
+  activeQuestion: number,
+  assessment: number,
 }
 
 // Globals

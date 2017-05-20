@@ -17,12 +17,11 @@
   > .content {
     background: $light-gray5;
     padding-top: 2 * $pt-navbar-height;
-    min-height: 100vh;
   }
 
   > .content > div {
     overflow-y: scroll;
-    height: 84vh;
+    height: 87vh;
   }
 
   ::-webkit-scrollbar-track {

@@ -319,16 +319,17 @@ const db: DB = {
       order: 0,
       maxMarks: 3,
       answerable: true,
+      title: 'Factorial',
       value: `
-        <h1>Factorial Functions</h1>
-        Write a function <code>factorial</code> that takes in a number n
-        and should return the factorial of n. Factorial of n is defined as
-        follows:
-        <ul>
-          <li><pre>factorial(0) = 1</pre>
-          <li><pre>factorial(n) = n * factorial(n - 1)</pre>
-        </ul>
-        <b>Use recursive process </b>
+        Write a function <code>factorial</code> that takes in a number and return
+        its factorial.
+        You can use the following definition for reference:
+<pre>
+factorial(0) = 1
+factorial(n) = n * factorial(n - 1)
+</pre>
+        <blockquote>For this question, you need to write <code>factorial</code>
+          such that it rises to a recursive process.</blockquote>
       `,
     },
     1: {
@@ -337,6 +338,7 @@ const db: DB = {
       maxMarks: 2,
       order: 1,
       answerable: true,
+      title: 'Time Complexity',
       value: `
         What is the <b>time</b> complexity of your solution? How about <b>space</b>
         complexity?
@@ -348,6 +350,7 @@ const db: DB = {
       maxMarks: 3,
       order: 2,
       answerable: true,
+      title: 'Iterative Factorial',
       value: `Rewrite the function factorial as an iterative process`,
     },
   },
