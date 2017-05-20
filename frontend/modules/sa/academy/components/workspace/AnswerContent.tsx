@@ -4,6 +4,7 @@ import { Answer, Question, WorkspaceState,
   AnswerTabType, Grading } from 'sa/core/types'
 
 import Editor, { Props as EditorProps } from './Editor'
+import Interpreter from './Interpreter'
 
 export type Props = {
   grading: Grading,
@@ -17,6 +18,21 @@ export type Props = {
   setEditorTheme(theme: string): void,
   setAnswerValue(answer: number, value: string): void,
 }
+
+const outputs = [
+  {
+    code: `function foo() {
+      return 2;
+    }`,
+    value: 'undefined',
+    status: 'success',
+  },
+  {
+    code: 'foo(2);',
+    value: 'undefined',
+    status: 'error',
+  },
+]
 
 const AnswerContent: React.StatelessComponent<Props> =
   (props) => {
@@ -74,6 +90,8 @@ const AnswerContent: React.StatelessComponent<Props> =
         },
       }
       content = <Editor {...editorProps} />
+    } else if (workspace.activeAnswerTab === AnswerTabType.Interpreter) {
+      content = <Interpreter outputs={outputs} />
     }
 
     return (

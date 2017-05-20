@@ -36,6 +36,15 @@ export default merge(baseConfig, {
           ],
         }),
       },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?minimize',
+          ],
+        }),
+      },
     ],
   },
 
@@ -72,5 +81,9 @@ export default merge(baseConfig, {
         DEMO_MODE: JSON.stringify(process.env.DEMO_MODE ? true : false),
       },
     }),
+    new webpack.ContextReplacementPlugin(
+      /highlight\.js\/lib\/languages$/,
+      new RegExp(`^./(${['javascript'].join('|')})$`),
+    ),
   ]),
 })

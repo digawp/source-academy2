@@ -199,3 +199,9 @@ export type API = {
   questions: IResource<Question>
   answers: IResource<Answer>,
 }
+
+export type InterpreterOutput = {
+  code: string,
+  value: string,
+  status: 'error' | 'warning' | 'success',
+}
