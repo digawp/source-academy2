@@ -11,10 +11,19 @@ export type Props = {
   workspace: WorkspaceState,
 
   handleTabChange(id: AnswerTabType): void,
+  increaseEditorFontSize(): void,
+  decreaseEditorFontSize(): void,
+  setEditorTheme(theme: string): void,
 }
 
 const AnswerContent: React.StatelessComponent<Props> =
-  ({ question, answer, workspace, handleTabChange }) => {
+  (props) => {
+    const {
+      question, answer, workspace, handleTabChange,
+      increaseEditorFontSize, decreaseEditorFontSize,
+      setEditorTheme,
+    } = props
+
     const tabs = (
       <Tabs2
         id="answer-tab"
@@ -37,14 +46,30 @@ const AnswerContent: React.StatelessComponent<Props> =
 
     let content: React.ReactNode = null
 
+    const toggleLightDarkTheme = () => {
+      if (workspace.editorTheme === 'github') {
+        setEditorTheme('tomorrow_night')
+      } else {
+        setEditorTheme('github')
+      }
+    }
+
+    const editorProps = {
+      editorTheme: workspace.editorTheme,
+      editorFontSize: workspace.editorFontSize,
+      increaseEditorFontSize,
+      decreaseEditorFontSize,
+      toggleLightDarkTheme,
+    }
+
     if (workspace.activeAnswerTab === AnswerTabType.Code) {
-      content = <Editor />
+      content = <Editor {...editorProps} />
     }
 
     return (
       <div className="sa-answer">
         {tabs}
-        <div className="row">
+        <div className="tab-content row">
           {content}
         </div>
       </div>

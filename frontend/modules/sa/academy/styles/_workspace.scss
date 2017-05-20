@@ -1,8 +1,6 @@
 @import '~sa-variables';
 
 .workspace-navbar {
-  max-width: 1024px;
-  margin: 0 auto;
   text-align: left !important;
 
   .assessment-title {
@@ -78,8 +76,11 @@
     padding: 20px 30px;
     font-family: 'Roboto Slab', serif;
     line-height: 1.5em;
+    overflow-y: auto;
+
     .question-content {
       max-width: 1024px;
+      height: 72vh;
       margin: 0 auto;
     }
   }

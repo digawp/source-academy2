@@ -25,9 +25,21 @@
       padding: 0px 10px;
     }
   }
-}
 
-.sa-editor {
-  width: 100%;
-  height: 72vh;
+  .sa-editor-container {
+    padding: 0
+  }
+
+  .editor-toolbar {
+    padding: 0px 15px;
+    flex-basis: 100%;
+
+    .pt-button {
+      font-weight: 500;
+    }
+  }
+
+  .sa-editor {
+    height: 71vh;
+  }
 }

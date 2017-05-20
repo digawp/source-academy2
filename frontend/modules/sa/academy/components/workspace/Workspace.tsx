@@ -22,6 +22,10 @@ export type Props = {
   nextQuestion(): void,
   previousQuestion(): void,
   setActiveAnswerTab(answerTab: AnswerTabType): void,
+
+  increaseEditorFontSize(): void,
+  decreaseEditorFontSize(): void,
+  setEditorTheme(theme: string): void,
 } & OwnProps
 
 type QuestionContentProps = {
@@ -34,7 +38,19 @@ const QuestionContent: React.StatelessComponent<QuestionContentProps> =
   )
 
 const Workspace: React.StatelessComponent<Props> =
-  ({ questions, answers, workspace, nextQuestion, previousQuestion, setActiveAnswerTab }) => {
+  (props) => {
+    const {
+      questions,
+      answers,
+      workspace,
+      nextQuestion,
+      previousQuestion,
+      setActiveAnswerTab,
+      increaseEditorFontSize,
+      decreaseEditorFontSize,
+      setEditorTheme,
+    } = props
+
     const activeQuestion = questions && workspace && questions.length > 0 &&
       questions[workspace.activeQuestion]
 
@@ -51,7 +67,7 @@ const Workspace: React.StatelessComponent<Props> =
     )
 
     const questionContent = activeQuestion &&
-      <QuestionContent question={questions![workspace.activeQuestion]} />
+      <QuestionContent question={activeQuestion} />
 
     const answerContent = activeQuestion && activeAnswer && (
       <AnswerContent
@@ -59,13 +75,22 @@ const Workspace: React.StatelessComponent<Props> =
         question={activeQuestion}
         workspace={workspace}
         handleTabChange={setActiveAnswerTab}
+        {...{increaseEditorFontSize, decreaseEditorFontSize, setEditorTheme }}
       />
     )
 
     let content: React.ReactNode = null
 
-    if (!workspace) {
+    if (!workspace || !activeQuestion) {
       content = null
+    } else if (activeQuestion && !activeQuestion.answerable) {
+      content = (
+        <div className="row">
+          <div className="question-container col-xs-12">
+            {questionContent}
+          </div>
+        </div>
+      )
     } else if (workspace.layoutType === LayoutType.SplitHorizontal) {
       content = (
         <div className="row">

@@ -129,9 +129,12 @@ export enum AnswerTabType {
 
 export type WorkspaceState = {
   activeQuestion: number,
-  assessment: number,
+  assessment: number | null,
+  answer: number | null,
   layoutType: LayoutType,
   activeAnswerTab: AnswerTabType,
+  editorTheme: 'github' | 'tomorrow_night',
+  editorFontSize: number,
 }
 
 // Globals
