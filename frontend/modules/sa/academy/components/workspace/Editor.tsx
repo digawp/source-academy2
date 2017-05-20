@@ -81,7 +81,7 @@ class Editor extends React.Component<Props, State> {
       editor.clearSelection()
       editor.$blockScrolling = Infinity
       this.setChangeHandler(editor)
-    })
+    }, 'editor')
   }
 
   componentWillUnmount() {

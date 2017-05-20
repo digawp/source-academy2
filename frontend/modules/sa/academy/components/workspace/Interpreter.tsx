@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Button, IconClasses } from '@blueprintjs/core'
 import { InterpreterOutput } from 'sa/core/types'
 import { findDOMNode } from 'react-dom'
 
@@ -21,7 +22,7 @@ class Interpreter extends React.Component<Props, void> {
         const el = findDOMNode(i)
         hjs.highlightBlock(el)
       })
-    })
+    }, 'syntax-highlighter')
   }
 
   renderOutput(output: InterpreterOutput, key: number) {
@@ -30,9 +31,11 @@ class Interpreter extends React.Component<Props, void> {
     return (
       <div key={key} className="output">
         <div className="code">
+          <span className="pt-icons pt-icon-code in-icon" />
           <pre ref={outputRef}><code className="javascript">{code}</code></pre>
         </div>
         <div className={`value value-${status}`}>
+          <Button className="pt-minimal out-icon" iconName={IconClasses.CHEVRON_RIGHT} />
           {value}
         </div>
       </div>

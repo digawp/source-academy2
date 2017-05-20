@@ -46,28 +46,45 @@
 
 .sa-interpreter {
   width: 100%;
-  padding-top: 10px;
   height: 70vh;
 
   .output {
-    margin-bottom: 10px;
     border-bottom: 1px solid $light-gray4;
     background:#f8f8f8;
 
     .code {
       padding: 5px 40px;
+      position: relative;
+
       pre {
         box-shadow: none;
         border-radius: 0;
         padding: 0;
+      }
+
+      .in-icon {
+        position: absolute;
+        left: 15px;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        color: $gray5;
       }
     }
 
     .value {
       background: $light-gray4; 
       padding: 5px 40px;
+      position: relative;
       font-weight: 500;
       font-family: monospace;
+
+      .out-icon {
+        position: absolute;
+        left: 15px;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        color: $gray5;
+      }
     }
   }
 }

@@ -21,14 +21,14 @@ export type Props = {
 
 const outputs = [
   {
-    code: `function foo() {
-      return 2;
-    }`,
+    code: `function foo(n) {
+   return 2 * n;
+}`,
     value: 'undefined',
     status: 'success',
   },
   {
-    code: 'foo(2);',
+    code: 'foo(2 + 2);',
     value: 'undefined',
     status: 'error',
   },
