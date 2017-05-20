@@ -55,7 +55,7 @@
     padding: 15px 40px;
     font-family: monospace;
     font-weight: 500;
-    border-top: 4px solid $light-gray3;
+    border-top: 4px solid $green5;
 
     .in-icon {
       position: absolute;
@@ -73,15 +73,19 @@
   .output {
     border-bottom: 1px solid $light-gray4;
     background:white;
+    pre {
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
+      font-size: 14px;
+    }
 
     .code {
       padding: 5px 40px;
       position: relative;
 
-      pre {
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
+      pre > code {
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
       }
 
       .in-icon {
@@ -97,8 +101,12 @@
       background: $light-gray4; 
       padding: 5px 40px;
       position: relative;
+      font-size: 14px;
       font-weight: 500;
-      font-family: monospace;
+
+      span {
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      }
 
       .out-icon {
         position: absolute;

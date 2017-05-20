@@ -20,12 +20,12 @@ const Output: React.StatelessComponent<OutputProps> =
   ({ output, refFn }) => (
     <div className="output">
       <div className="code">
-        <span className="pt-icons pt-icon-code in-icon" />
+        <span className="pt-icons pt-icon-chevron-left in-icon" />
         <pre ref={refFn}><code className="javascript">{output.code}</code></pre>
       </div>
       <div className={`value value-${status}`}>
         <Button className="pt-minimal out-icon" iconName={IconClasses.CHEVRON_RIGHT} />
-        {output.value}
+        <span>{output.value}</span>
       </div>
     </div>
   )
@@ -33,7 +33,7 @@ const Output: React.StatelessComponent<OutputProps> =
 const Input: React.StatelessComponent<InputProps> =
   ({ refFn }) => (
     <div className="input">
-       <Button className="pt-minimal in-icon" iconName={IconClasses.CODE} />
+       <Button className="pt-minimal in-icon" iconName={IconClasses.CHEVRON_RIGHT} />
        <div ref={refFn} className="input-editor" />
     </div>
   )
@@ -72,6 +72,8 @@ class Interpreter extends React.Component<Props, void> {
     editor.session.setMode('ace/mode/javascript')
     editor.$blockScrolling = Infinity
     editor.renderer.setShowGutter(false)
+    editor.setFontSize('14px')
+    editor.focus()
   }
 
   highlightOutputCodes() {

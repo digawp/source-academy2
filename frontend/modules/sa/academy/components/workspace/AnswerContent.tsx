@@ -54,7 +54,7 @@ const AnswerContent: React.StatelessComponent<Props> =
           <span className="pt-icons pt-icon-code" />
         </Tab2>
         <Tab2 id={AnswerTabType.Interpreter}>
-          <span className="pt-icons pt-icon-control" />
+          <span className="pt-icons pt-icon-desktop" />
         </Tab2>
         <Tab2 id={AnswerTabType.Comments}>
           <span className="pt-icons pt-icon-comment" />
