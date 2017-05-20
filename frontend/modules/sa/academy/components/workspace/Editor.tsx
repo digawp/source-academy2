@@ -3,6 +3,8 @@ import { findDOMNode } from 'react-dom'
 import { Button, IconClasses } from '@blueprintjs/core'
 
 export type Props = {
+  resource: number
+  initialValue: string
   editorTheme: 'github' | 'tomorrow_night',
   editorFontSize: number
 
@@ -14,31 +16,51 @@ export type Props = {
 
 export type State = {
   editor: AceAjax.Editor | null,
+  changeHandler: (() => void) | null,
 }
 
 class Editor extends React.Component<Props, State> {
   editor: React.ReactInstance
-  subscription: () => void
+
+  silent: boolean
 
   state: State = {
     editor: null,
+    changeHandler: null,
   }
 
   componentWillReceiveProps(nextProps: Props) {
     const editor = this.state.editor
     if (editor) {
+      if (nextProps.resource !== this.props.resource) {
+        this.silent = true
+        editor.setValue(nextProps.initialValue)
+        this.silent = false
+        this.setChangeHandler(editor)
+      }
       if (nextProps.editorTheme !== this.props.editorTheme) {
         editor.setTheme(`ace/theme/${nextProps.editorTheme}`)
       }
       if (nextProps.editorFontSize !== this.props.editorFontSize) {
         editor.setFontSize(`${nextProps.editorFontSize}px`)
       }
-      if (nextProps.onCodeChange !== this.props.onCodeChange) {
-        if (this.subscription) {
-          (editor.session as any).off('change', this.subscription)
-        }
+    }
+  }
+
+  setChangeHandler(editor: AceAjax.Editor) {
+    if (this.state.changeHandler) {
+      (editor.session as any).off('change', this.state.changeHandler)
+    }
+    const changeHandler = () => {
+      if (!this.silent) {
+        this.props.onCodeChange(editor.getValue())
       }
     }
+    editor.session.on('change', changeHandler)
+    this.setState({
+      editor,
+      changeHandler,
+    })
   }
 
   componentDidMount() {
@@ -52,7 +74,8 @@ class Editor extends React.Component<Props, State> {
       editor.session.setMode('ace/mode/javascript')
       editor.setTheme(`ace/theme/${this.props.editorTheme}`)
       editor.setFontSize(`${this.props.editorFontSize}px`)
-      this.setState({ editor })
+      editor.setValue(this.props.initialValue)
+      this.setChangeHandler(editor)
     })
   }
 

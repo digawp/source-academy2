@@ -3,7 +3,7 @@ import { Tabs2, Tab2 } from '@blueprintjs/core'
 import { Answer, Question, WorkspaceState,
   AnswerTabType } from 'sa/core/types'
 
-import Editor from './Editor'
+import Editor, { Props as EditorProps } from './Editor'
 
 export type Props = {
   question: Question,
@@ -14,6 +14,7 @@ export type Props = {
   increaseEditorFontSize(): void,
   decreaseEditorFontSize(): void,
   setEditorTheme(theme: string): void,
+  setAnswerValue(answer: number, value: string): void,
 }
 
 const AnswerContent: React.StatelessComponent<Props> =
@@ -21,7 +22,7 @@ const AnswerContent: React.StatelessComponent<Props> =
     const {
       question, answer, workspace, handleTabChange,
       increaseEditorFontSize, decreaseEditorFontSize,
-      setEditorTheme,
+      setEditorTheme, setAnswerValue,
     } = props
 
     const tabs = (
@@ -54,15 +55,19 @@ const AnswerContent: React.StatelessComponent<Props> =
       }
     }
 
-    const editorProps = {
-      editorTheme: workspace.editorTheme,
-      editorFontSize: workspace.editorFontSize,
-      increaseEditorFontSize,
-      decreaseEditorFontSize,
-      toggleLightDarkTheme,
-    }
-
     if (workspace.activeAnswerTab === AnswerTabType.Code) {
+      const editorProps: EditorProps = {
+        editorTheme: workspace.editorTheme,
+        editorFontSize: workspace.editorFontSize,
+        increaseEditorFontSize,
+        decreaseEditorFontSize,
+        toggleLightDarkTheme,
+        initialValue: answer.value,
+        resource: answer.id,
+        onCodeChange: (newValue: string) => {
+          setAnswerValue(answer.id, newValue)
+        },
+      }
       content = <Editor {...editorProps} />
     }
 

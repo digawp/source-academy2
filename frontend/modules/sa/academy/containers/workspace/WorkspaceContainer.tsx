@@ -11,6 +11,9 @@ import {
   increaseEditorFontSize,
   decreaseEditorFontSize,
 } from '../../reducers/currentWorkspace'
+import {
+  setAnswerValue
+} from '../../reducers/answer'
 
 import {
   selectAssessment,
@@ -51,6 +54,7 @@ const mapDispatchToProps: MapDispatchToPropsObject = {
   setEditorTheme,
   increaseEditorFontSize,
   decreaseEditorFontSize,
+  setAnswerValue,
 }
 
 export default connect(mapStateToProps,

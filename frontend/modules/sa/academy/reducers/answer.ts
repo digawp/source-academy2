@@ -5,6 +5,7 @@ export const GET_ANSWER = 'answer/GET_ANSWER'
 export const FETCH_ANSWERS_BY_ASSESSMENT = 'answer/FETCH_ANSWERS_BY_ASSESSMENT'
 export const FETCH_ANSWERS_SUCCESS = 'answer/FETCH_ANSWERS_SUCCESS'
 export const GET_ANSWER_SUCCESS = 'answer/GET_ANSWER_SUCCESS'
+export const SET_ANSWER_VALUE = 'answer/SET_ANSWER_VALUE'
 
 // Creators
 export const getAnswer = (id: number) => ({
@@ -27,6 +28,11 @@ export const getAnswerSuccess = (answer: Answer) => ({
   payload: { answer },
 })
 
+export const setAnswerValue = (answer: number, value: string) => ({
+  type: SET_ANSWER_VALUE,
+  payload: { answer, value },
+})
+
 type State = { [id: number]: Answer }
 
 export const reducer = (state: State = {}, action: any) => {
@@ -40,6 +46,16 @@ export const reducer = (state: State = {}, action: any) => {
       const newState: State = {}
       answers.forEach(a => newState[a.id] = a)
       return {...state, ...newState}
+
+    case SET_ANSWER_VALUE:
+      const { answer: id, value }  = action.payload
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          value,
+        },
+      }
 
     default:
       return state

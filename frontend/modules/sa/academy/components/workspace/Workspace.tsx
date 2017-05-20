@@ -26,6 +26,8 @@ export type Props = {
   increaseEditorFontSize(): void,
   decreaseEditorFontSize(): void,
   setEditorTheme(theme: string): void,
+
+  setAnswerValue(answer: number, value: string): void,
 } & OwnProps
 
 type QuestionContentProps = {
@@ -40,15 +42,9 @@ const QuestionContent: React.StatelessComponent<QuestionContentProps> =
 const Workspace: React.StatelessComponent<Props> =
   (props) => {
     const {
-      questions,
-      answers,
-      workspace,
-      nextQuestion,
-      previousQuestion,
-      setActiveAnswerTab,
-      increaseEditorFontSize,
-      decreaseEditorFontSize,
-      setEditorTheme,
+      questions, answers, workspace, nextQuestion, previousQuestion,
+      setActiveAnswerTab, increaseEditorFontSize, decreaseEditorFontSize,
+      setEditorTheme, setAnswerValue,
     } = props
 
     const activeQuestion = questions && workspace && questions.length > 0 &&
@@ -75,6 +71,7 @@ const Workspace: React.StatelessComponent<Props> =
         question={activeQuestion}
         workspace={workspace}
         handleTabChange={setActiveAnswerTab}
+        setAnswerValue={setAnswerValue}
         {...{increaseEditorFontSize, decreaseEditorFontSize, setEditorTheme }}
       />
     )
