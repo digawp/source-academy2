@@ -7,6 +7,25 @@ export type Props = {
   outputs: InterpreterOutput[],
 }
 
+type OutputProps = {
+  output: InterpreterOutput,
+  refFn: (instance: React.ReactInstance) => any,
+}
+
+const Output: React.StatelessComponent<OutputProps> =
+  ({ output, refFn }) => (
+    <div className="output">
+      <div className="code">
+        <span className="pt-icons pt-icon-code in-icon" />
+        <pre ref={refFn}><code className="javascript">{output.code}</code></pre>
+      </div>
+      <div className={`value value-${status}`}>
+        <Button className="pt-minimal out-icon" iconName={IconClasses.CHEVRON_RIGHT} />
+        {output.value}
+      </div>
+    </div>
+  )
+
 class Interpreter extends React.Component<Props, void> {
   outputs: React.ReactInstance[] = []
 
@@ -25,26 +44,11 @@ class Interpreter extends React.Component<Props, void> {
     }, 'syntax-highlighter')
   }
 
-  renderOutput(output: InterpreterOutput, key: number) {
-    const { code, value } = output
-    const outputRef = (i: React.ReactInstance) => this.outputs.push(i)
-    return (
-      <div key={key} className="output">
-        <div className="code">
-          <span className="pt-icons pt-icon-code in-icon" />
-          <pre ref={outputRef}><code className="javascript">{code}</code></pre>
-        </div>
-        <div className={`value value-${status}`}>
-          <Button className="pt-minimal out-icon" iconName={IconClasses.CHEVRON_RIGHT} />
-          {value}
-        </div>
-      </div>
-    )
-  }
-
   render() {
     const { outputs } = this.props
-    const outputComponents = outputs.map((output, idx) => this.renderOutput(output, idx))
+    const ref = (instance: React.ReactInstance) => this.outputs.push(instance)
+    const outputComponents = outputs.map(
+       (output, idx) => <Output output={output} key={idx} refFn={ref} />)
     return (
       <div className="sa-interpreter">
         {outputComponents}
