@@ -22,8 +22,8 @@ const Navbar: React.StatelessComponent<Props> =
                       tab === 'journal', <span>Journal</span>)
     const materialsTab = createLink(`/academy/materials`, getClassNames('folder-open'),
                       tab === 'materials', <span>Materials</span>)
-    const settingsTab = createLink(`/academy/settings`, getClassNames('cog'),
-                      tab === 'settings', <span>Settings</span>)
+    const settingsTab = createLink(`/academy/profile`, getClassNames('mugshot'),
+                      tab === 'profile', <span>Profile</span>)
 
     return (
       <div className="sa-primary-navbar pt-navbar pt-navbar-dark row">
