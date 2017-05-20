@@ -24,7 +24,7 @@ const getActionName = (grading: Grading) => {
     case 'submitted':
       return 'View Answer'
     case 'graded':
-      return 'View Grade'
+      return 'View Grading'
     default:
       return 'Locked'
   }
@@ -42,6 +42,7 @@ const Cover: React.StatelessComponent<Props> =
 
 const Description: React.StatelessComponent<Props> =
    ({ grading, assessment, handleView }) => {
+    const assessmentDone = (grading.status === 'graded' || grading.status === 'submitted') 
     const actionButton = grading && (
         <Button
           disabled={grading.status === 'locked'}
@@ -52,6 +53,9 @@ const Description: React.StatelessComponent<Props> =
         </Button>
     )
 
+    const leftIcon = assessmentDone ? 'tick' : 'time'
+    const leftLabel = assessmentDone ? 'Finished' : dueAtToString(assessment.dueAt)
+
     return (
       <div className="description col-xs">
         <h4>{assessment.title}</h4>
@@ -61,8 +65,8 @@ const Description: React.StatelessComponent<Props> =
         <Text>{assessment.description}</Text>
         <div className="row controls">
           <div className="due-at col-xs-6 col-md-8">
-            <span className="pt-icons pt-icon-time" />
-            {dueAtToString(assessment.dueAt)}
+            <span className={`pt-icons pt-icon-${leftIcon}`} />
+            {leftLabel}
           </div>
           <div className="col-xs">
             {actionButton}
