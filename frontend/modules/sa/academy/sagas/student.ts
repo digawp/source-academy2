@@ -12,7 +12,7 @@ export function* ensureCurrentStudentExists() {
   while (true) {
     const currentStudent: Student = yield select((state: State) => state.currentStudent)
     const currentUser: User = yield select((state: State) => state.auth.currentUser)
-    if (currentStudent || (currentUser && currentUser.role !== 'student')) {
+    if (currentStudent) {
       break
     } else {
       yield delay(100)
