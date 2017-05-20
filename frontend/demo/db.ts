@@ -411,15 +411,15 @@ factorial(n) = n * factorial(n - 1)
       question: 0,
       marks: 3,
       value: `
-        // factorial: (number) -> number
-        function factorial(n) {
-          if (n === 0) {
-            return 1;
-          } else {
-            return n * factorial(n - 1);
-          }
-        }
-      `,
+// factorial: (number) -> number
+function factorial(n) {
+  if (n === 0) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+}
+`,
     },
     1: {
       id: 1,
@@ -427,9 +427,12 @@ factorial(n) = n * factorial(n - 1)
       question: 1,
       marks: 2,
       value: `
-        Time complexity: O(n)
-        Space complexity: O(n)
-      `,
+// Write what you think is the time complexity of factorial below
+// Time complexity: O(n)
+
+// Write what you think is the space complexity of factorial below
+// Space complexity: O(n)
+`,
     },
     2: {
       id: 2,
@@ -437,14 +440,14 @@ factorial(n) = n * factorial(n - 1)
       question: 2,
       marks: 2,
       value: `
-        function factorial(acc, n) {
-          if (n === 0) {
-            return acc;
-          } else {
-            return factorial(n * acc, n - 1);
-          }
-        }
-      `,
+function factorial(acc, n) {
+  if (n === 0) {
+    return acc;
+  } else {
+    return factorial(n * acc, n - 1);
+  }
+}
+`,
     },
     3: {
       id: 3,
