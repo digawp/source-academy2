@@ -56,7 +56,7 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
       )
       selectLayoutButton = (
         <Popover content={layoutMenu} position={Position.BOTTOM}>
-          <Button className="pt-minimal" iconName={IconClasses.CONTROL}>
+          <Button className="pt-minimal" iconName={IconClasses.GRID_VIEW}>
             {labelOfLayoutType[workspace.layoutType]}
           </Button>
         </Popover>
@@ -74,6 +74,7 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
         </Button>
       </div>
     )
+
     return (
       <div className="workspace-navbar row">
         {backButton}

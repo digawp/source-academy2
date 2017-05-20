@@ -1,0 +1,33 @@
+@import '~sa-variables';
+
+.sa-answer {
+  .answer-tab {
+    background: $light-gray4;
+    text-align: center;
+
+    .pt-tab-list {
+      width: 100%;
+    }
+
+    .pt-tab[aria-selected="true"] {
+      color: $dark-gray4;
+      font-weight: 700;
+      border-bottom: 2px solid $dark-gray4;
+    }
+    
+    .pt-tab-indicator-wrapper {
+      display: none;
+    }
+
+    .pt-tab {
+      text-transform: uppercase;
+      flex-basis: 25%;
+      padding: 0px 10px;
+    }
+  }
+}
+
+.sa-editor {
+  width: 100%;
+  height: 72vh;
+}

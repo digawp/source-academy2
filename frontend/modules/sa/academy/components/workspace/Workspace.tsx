@@ -3,9 +3,10 @@ import { capitalize } from 'lodash'
 import { RouteComponentProps } from 'react-router-dom'
 import { Slider, Button, IconClasses } from '@blueprintjs/core'
 import { Student, Question, Answer, Assessment,
-  Grading, WorkspaceState, LayoutType } from 'sa/core/types'
+  Grading, WorkspaceState, LayoutType, AnswerTabType } from 'sa/core/types'
 
 import QuestionsSlider from './QuestionsSlider'
+import AnswerContent from './AnswerContent'
 
 export type OwnProps = {
   student: Student,
@@ -20,6 +21,7 @@ export type Props = {
 
   nextQuestion(): void,
   previousQuestion(): void,
+  setActiveAnswerTab(answerTab: AnswerTabType): void,
 } & OwnProps
 
 type QuestionContentProps = {
@@ -32,13 +34,14 @@ const QuestionContent: React.StatelessComponent<QuestionContentProps> =
   )
 
 const Workspace: React.StatelessComponent<Props> =
-  (props) => {
-    const { questions, answers, workspace, nextQuestion, previousQuestion } = props
-
-    const questionsReady = questions && workspace && questions.length > 0 &&
+  ({ questions, answers, workspace, nextQuestion, previousQuestion, setActiveAnswerTab }) => {
+    const activeQuestion = questions && workspace && questions.length > 0 &&
       questions[workspace.activeQuestion]
 
-    const questionsSlider = questionsReady && (
+    const activeAnswer = activeQuestion && answers && answers.find(a =>
+      a.question === activeQuestion.id)
+
+    const questionsSlider = activeQuestion && (
       <QuestionsSlider
         workspace={workspace}
         questions={questions!}
@@ -47,8 +50,17 @@ const Workspace: React.StatelessComponent<Props> =
       />
     )
 
-    const questionContent = questionsReady &&
+    const questionContent = activeQuestion &&
       <QuestionContent question={questions![workspace.activeQuestion]} />
+
+    const answerContent = activeQuestion && activeAnswer && (
+      <AnswerContent
+        answer={activeAnswer}
+        question={activeQuestion}
+        workspace={workspace}
+        handleTabChange={setActiveAnswerTab}
+      />
+    )
 
     let content: React.ReactNode = null
 
@@ -60,13 +72,17 @@ const Workspace: React.StatelessComponent<Props> =
           <div className="question-container col-xs-6">
             {questionContent}
           </div>
-          <div className="answer-container col-xs" />
+          <div className="answer-container col-xs">
+            {answerContent}
+          </div>
         </div>
       )
     } else if (workspace.layoutType === LayoutType.AnswerOnly) {
       content = (
         <div className="row">
-          <div className="answer-container col-xs-12" />
+          <div className="answer-container col-xs-12">
+            {answerContent}
+          </div>
         </div>
       )
     } else if (workspace.layoutType === LayoutType.QuestionOnly) {

@@ -121,10 +121,17 @@ export enum LayoutType {
   QuestionOnly,
 }
 
+export enum AnswerTabType {
+  Code,
+  Interpreter,
+  Comments,
+}
+
 export type WorkspaceState = {
   activeQuestion: number,
   assessment: number,
   layoutType: LayoutType,
+  activeAnswerTab: AnswerTabType,
 }
 
 // Globals

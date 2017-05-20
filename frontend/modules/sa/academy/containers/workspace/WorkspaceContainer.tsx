@@ -3,7 +3,8 @@ import { State } from '../../types'
 import { Answer, Question } from 'sa/core/types'
 import Workspace, { OwnProps } from '../../components/workspace/Workspace'
 import { withStudent } from '../../decorators'
-import { nextQuestion, previousQuestion } from '../../reducers/currentWorkspace'
+import { nextQuestion, previousQuestion,
+  setActiveAnswerTab } from '../../reducers/currentWorkspace'
 import {
   selectAssessment,
   selectQuestions,
@@ -39,6 +40,7 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps: MapDispatchToPropsObject = {
   nextQuestion,
   previousQuestion,
+  setActiveAnswerTab,
 }
 
 export default connect(mapStateToProps,
