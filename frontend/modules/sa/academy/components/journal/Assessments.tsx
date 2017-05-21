@@ -41,7 +41,15 @@ export const SecondaryNavbar: React.StatelessComponent<NavbarProps> =
 
 const Assessments: React.StatelessComponent<Props> =
   ({ assessments, gradings, viewAssessment }) => {
-    const assessmentCards = assessments && assessments.map(assessment => {
+    const assessmentCards = assessments && assessments
+      .sort((a1, a2) => {
+        if (a1.order < a2.order) {
+          return 1
+        } else {
+          return -1
+        }
+      })
+      .map(assessment => {
       const handleView = () => viewAssessment(assessment.id)
       return (
         <AssessmentCard

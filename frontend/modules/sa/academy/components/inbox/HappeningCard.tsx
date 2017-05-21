@@ -53,13 +53,13 @@ const Content: React.StatelessComponent<Props> =
         return (
           <span>
             <strong>{student.firstName}</strong> has been
-            conferred the achievement
+            conferred the achievement <strong>First Initiate</strong>
           </span>
         )
       case LEVEL_UP:
         return (
           <span>
-            <strong>{student.firstName}</strong> has reached
+            <strong>{student.firstName}</strong> has reached &nbsp;
             <strong>level {happening.level}</strong>
           </span>
         )

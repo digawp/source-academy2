@@ -39,6 +39,7 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
       [LayoutType.AnswerOnly]: 'Answer Only',
       [LayoutType.QuestionOnly]: 'Question Only',
       [LayoutType.SplitHorizontal]: 'Split Horizontal',
+      [LayoutType.SplitVertical]: 'Split Vertical',
     }
 
     let selectLayoutButton: React.ReactNode = null
@@ -46,12 +47,14 @@ const WorkspaceSecondaryNavbar: React.StatelessComponent<Props> =
     if (workspace) {
       const onClickAnswerOnly = () => setLayoutType(LayoutType.AnswerOnly)
       const onClickQuestionOnly = () => setLayoutType(LayoutType.QuestionOnly)
+      const onClickSplitVertical = () => setLayoutType(LayoutType.SplitVertical)
       const onClickSplitHorizontal = () => setLayoutType(LayoutType.SplitHorizontal)
 
       const layoutMenu = (
         <Menu>
           <MenuItem onClick={onClickAnswerOnly} text={labelOfLayoutType[LayoutType.AnswerOnly]} />
           <MenuItem onClick={onClickQuestionOnly} text={labelOfLayoutType[LayoutType.QuestionOnly]} />
+          <MenuItem onClick={onClickSplitVertical} text={labelOfLayoutType[LayoutType.SplitVertical]} />
           <MenuItem onClick={onClickSplitHorizontal} text={labelOfLayoutType[LayoutType.SplitHorizontal]} />
         </Menu>
       )

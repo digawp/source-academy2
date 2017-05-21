@@ -42,7 +42,7 @@ const Cover: React.StatelessComponent<Props> =
 
 const Description: React.StatelessComponent<Props> =
    ({ grading, assessment, handleView }) => {
-    const assessmentDone = (grading.status === 'graded' || grading.status === 'submitted') 
+    const assessmentDone = grading && (grading.status === 'graded' || grading.status === 'submitted')
     const actionButton = grading && (
         <Button
           disabled={grading.status === 'locked'}

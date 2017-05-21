@@ -89,13 +89,24 @@ const Workspace: React.StatelessComponent<Props> =
           </div>
         </div>
       )
-    } else if (workspace.layoutType === LayoutType.SplitHorizontal) {
+    } else if (workspace.layoutType === LayoutType.SplitVertical) {
       content = (
         <div className="row">
           <div className="question-container col-xs-6">
             {questionContent}
           </div>
           <div className="answer-container col-xs">
+            {answerContent}
+          </div>
+        </div>
+      )
+    }  else if (workspace.layoutType === LayoutType.SplitHorizontal) {
+      content = (
+        <div className="split-horizontal">
+          <div className="question-container">
+            {questionContent}
+          </div>
+          <div className="answer-container">
             {answerContent}
           </div>
         </div>

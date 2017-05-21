@@ -2,8 +2,9 @@
 
 .sa-answer {
   .answer-tab {
-    background: $light-gray4;
+    padding-left: 20px;
     text-align: center;
+    max-width: 400px;
 
     .pt-tab-list {
       width: 100%;
@@ -12,7 +13,12 @@
     .pt-tab[aria-selected="true"] {
       color: $dark-gray4;
       font-weight: 700;
-      border-bottom: 2px solid $dark-gray4;
+      background: white;
+      border-top: 2px solid $dark-gray4;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-left: 1px solid $light-gray2;
+      border-right: 1px solid $light-gray2;
     }
     
     .pt-tab-indicator-wrapper {
@@ -27,12 +33,16 @@
   }
 
   .sa-editor-container {
-    padding: 0
+    padding: 0;
+    > .row {
+      margin: 0
+    }
   }
 
   .editor-toolbar {
-    padding: 0px 15px;
-    flex-basis: 100%;
+    background: white;
+    width: 100%;
+    margin-bottom: 5px;
 
     .pt-button {
       font-weight: 500;
@@ -55,7 +65,7 @@
     padding: 15px 40px;
     font-family: monospace;
     font-weight: 500;
-    border-top: 4px solid $green5;
+    border-left: 3px solid $green5;
 
     .in-icon {
       position: absolute;

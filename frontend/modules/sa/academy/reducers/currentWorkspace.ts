@@ -41,7 +41,7 @@ const initialState: WorkspaceState = {
   activeQuestion: 0,
   assessment: null,
   answer: null,
-  layoutType: LayoutType.SplitHorizontal,
+  layoutType: LayoutType.SplitVertical,
   activeAnswerTab: AnswerTabType.Code,
   editorTheme: 'tomorrow',
   editorFontSize: 14,

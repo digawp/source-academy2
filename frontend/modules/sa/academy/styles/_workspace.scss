@@ -57,6 +57,20 @@
     height: 80vh;
   }
 
+  .split-horizontal .question-container .question-content {
+    height: auto;
+    max-height: 30vh !important;
+    margin: 0;
+  }
+
+  .split-horizontal .answer-container {
+    height: 43vh !important;
+  }
+
+  .split-horizontal .sa-editor, .split-horizontal .sa-interpreter {
+    height: 35vh !important;
+  }
+
   .question-container {
     h1 {
       font-size: 1.5em
