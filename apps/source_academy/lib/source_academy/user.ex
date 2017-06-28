@@ -41,9 +41,9 @@ defmodule SourceAcademy.User do
     |> validate_format(:email, ~r/.*@.*/)
   end
 
-  def make_admin!(user) do
+  def make_staff!(user) do
     user
-    |> cast(%{is_admin: true}, ~w(is_admin)a)
+    |> cast(%{role: "staff"}, ~w(role)a)
     |> Repo.update!
   end
 end
