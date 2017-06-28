@@ -32,7 +32,12 @@ defmodule SourceAcademy.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:postgrex, ">= 0.0.0"},
-     {:ecto, "~> 2.1"}]
+     {:ecto, "~> 2.1"},
+     {:comeonin, "~> 3.1"},
+     {:guardian, "~> 0.14"},
+     {:ueberauth, "~> 0.4"},
+     {:ueberauth_identity, "~> 0.2"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
