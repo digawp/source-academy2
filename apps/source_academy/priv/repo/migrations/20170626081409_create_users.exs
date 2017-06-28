@@ -3,7 +3,8 @@ defmodule SourceAcademy.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
+      add :first_name, :string
+      add :last_name, :string
       add :email, :string
       add :is_admin, :boolean, default: false
 

@@ -10,7 +10,8 @@ defmodule SourceAcademy.User do
   @type t :: %__MODULE__{}
 
   schema "users" do
-    field :name, :string
+    field :first_name, :string
+    field :last_name, :string
     field :email, :string
     field :is_admin, :boolean
 
@@ -19,8 +20,8 @@ defmodule SourceAcademy.User do
     timestamps()
   end
 
-  @required_fields ~w(name email)a
-  @optional_fields ~w()a
+  @required_fields ~w(first_name email)a
+  @optional_fields ~w(last_name)a
 
   def build(params) do
     changeset(%SourceAcademy.User{}, params)
@@ -28,7 +29,7 @@ defmodule SourceAcademy.User do
 
   def registration_changeset(user, params \\ :empty) do
     user
-    |> cast(params, ~w(email name)a)
+    |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_format(:email, ~r/.*@.*/)
   end
