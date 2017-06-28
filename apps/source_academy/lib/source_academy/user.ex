@@ -13,7 +13,7 @@ defmodule SourceAcademy.User do
     field :first_name, :string
     field :last_name, :string
     field :email, :string
-    field :is_admin, :boolean
+    field :role, :string
 
     has_many :authorizations, SourceAcademy.Authorization
 

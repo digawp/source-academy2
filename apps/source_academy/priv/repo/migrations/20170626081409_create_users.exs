@@ -6,7 +6,7 @@ defmodule SourceAcademy.Repo.Migrations.CreateUsers do
       add :first_name, :string
       add :last_name, :string
       add :email, :string
-      add :is_admin, :boolean, default: false
+      add :role, :string, default: "student"
 
       timestamps()
     end
