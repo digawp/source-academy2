@@ -7,6 +7,8 @@ defmodule SourceAcademy.Repo.Migrations.CreateUsers do
       add :last_name, :string
       add :email, :string
       add :role, :string, default: "student"
+      add :passwd_reset_id, :string
+      add :passwd_reset_id_expiry, :utc_datetime
 
       timestamps()
     end

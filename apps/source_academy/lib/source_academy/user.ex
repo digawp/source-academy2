@@ -14,6 +14,8 @@ defmodule SourceAcademy.User do
     field :last_name, :string
     field :email, :string
     field :role, :string
+    field :passwd_reset_id, :string
+    field :passwd_reset_id_expiry, :utc_datetime
 
     has_many :authorizations, SourceAcademy.Authorization
 
