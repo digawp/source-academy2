@@ -12,5 +12,6 @@ defmodule SourceAcademy.Repo.Migrations.CreateUsers do
     end
 
     create index(:users, [:email], unique: true)
+    create index(:users, [:id], where: "role = 'student'")
   end
 end
