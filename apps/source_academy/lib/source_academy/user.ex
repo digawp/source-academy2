@@ -24,6 +24,7 @@ defmodule SourceAcademy.User do
 
   @required_fields ~w(first_name email)a
   @optional_fields ~w(last_name)a
+  @user_roles ~w(admin staff student)s
 
   def build(params) do
     changeset(%SourceAcademy.User{}, params)
@@ -40,12 +41,13 @@ defmodule SourceAcademy.User do
     user
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> validate_inclusion(:role, @user_roles)
     |> validate_format(:email, ~r/.*@.*/)
   end
 
   def make_staff!(user) do
     user
-    |> cast(%{role: "staff"}, ~w(role)a)
+    |> cast(%{role: Enum.at(@user_roles, 1)}, ~w(role)a)
     |> Repo.update!
   end
 end
