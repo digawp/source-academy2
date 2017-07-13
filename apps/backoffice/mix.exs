@@ -1,8 +1,8 @@
-defmodule SourceAcademy.Web.Mixfile do
+defmodule Backoffice.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :source_academy_web,
+    [app: :backoffice,
      version: "0.0.1",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -20,7 +20,7 @@ defmodule SourceAcademy.Web.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {SourceAcademy.Web.Application, []},
+    [mod: {Backoffice.Application, []},
      extra_applications: [:logger, :runtime_tools]]
   end
 
@@ -35,16 +35,24 @@ defmodule SourceAcademy.Web.Mixfile do
     [{:phoenix, "~> 1.3.0-rc", override: true},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2"},
+     {:postgrex, ">= 0.0.0"},
+     {:phoenix_html, "~> 2.6"},
+     {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:source_academy, in_umbrella: true},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:source_academy, in_umbrella: true}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
-  # For example, we extend the test task to create and migrate the database.
+  # For example, to create, migrate and run the seeds file at once:
+  #
+  #     $ mix ecto.setup
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

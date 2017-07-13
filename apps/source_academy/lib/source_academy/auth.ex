@@ -107,9 +107,12 @@ defmodule SourceAcademy.Auth do
   end
 
   defp create_user(auth, repo) do
-    name = name_from_auth(auth)
     result = User.registration_changeset(%User{},
-      scrub(%{email: auth.info.email, name: name}))
+      scrub(%{
+        email: auth.info.email,
+        first_name: auth.info.first_name,
+        last_name: auth.info.last_name
+      }))
     case repo.insert(result) do
       {:ok, user} -> user
       {:error, reason} -> repo.rollback(reason)
@@ -166,16 +169,6 @@ defmodule SourceAcademy.Auth do
     case repo.insert(changeset) do
       {:ok, the_auth} -> the_auth
       {:error, reason} -> repo.rollback(reason)
-    end
-  end
-
-  defp name_from_auth(auth) do
-    if auth.info.name do
-      auth.info.name
-    else
-      [auth.info.first_name, auth.info.last_name]
-      |> Enum.filter(&(&1 != nil and String.strip(&1) != ""))
-      |> Enum.join(" ")
     end
   end
 

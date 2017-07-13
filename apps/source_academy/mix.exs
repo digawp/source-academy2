@@ -35,6 +35,7 @@ defmodule SourceAcademy.Mixfile do
      {:ecto, "~> 2.1"},
      {:comeonin, "~> 3.1"},
      {:guardian, "~> 0.14"},
+     {:guardian_db, "~> 0.8.0"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_identity, "~> 0.2"}
     ]

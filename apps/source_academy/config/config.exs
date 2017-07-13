@@ -8,10 +8,10 @@ config :ueberauth, Ueberauth,
   ]
 
 config :guardian, Guardian,
-  issuer: "Auth.#{Mix.env}",
+  issuer: "SourceAcademy.#{Mix.env}",
   ttl: {30, :days},
   verify_issuer: true,
-  serializer: Auth.GuardianSerializer,
+  serializer: SourceAcademy.GuardianSerializer,
   secret_key: to_string(Mix.env),
   hooks: GuardianDb,
   permissions: %{
@@ -24,7 +24,7 @@ config :guardian, Guardian,
   }
 
 config :guardian_db, GuardianDb,
-  repo: Auth.Repo,
+  repo: SourceAcademy.Repo,
   sweep_interval: 60 # 60 minutes
 
 import_config "#{Mix.env}.exs"
