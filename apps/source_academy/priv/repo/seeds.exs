@@ -11,8 +11,9 @@
 # and so on) as they will fail if something goes wrong.
 alias SourceAcademy.User
 
-SourceAcademy.Repo.insert!(%User{
+User.create(%{
   first_name: "Administrator",
-  email: "admin@sourceacademy.com",
-  role: "admin"
-})
+  email: "admin@example.org",
+  password: "password",
+  password_confirmation: "password"
+}, nil, SourceAcademy.Repo)

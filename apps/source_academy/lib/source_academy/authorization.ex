@@ -6,6 +6,9 @@ defmodule SourceAcademy.Authorization do
   """
   use Ecto.Schema
   import Ecto.Changeset
+  alias SourceAcademy.User
+  alias SourceAcademy.Repo
+  alias SourceAcademy.Util
 
   @type t :: %__MODULE__{}
 
@@ -18,7 +21,7 @@ defmodule SourceAcademy.Authorization do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
-    belongs_to :user, SourceAcademy.User
+    belongs_to :user, User
 
     timestamps()
   end
@@ -26,11 +29,31 @@ defmodule SourceAcademy.Authorization do
   @required_fields ~w(provider uid user_id token)a
   @optional_fields ~w(refresh_token expires_at)a
 
-  def changeset(model, params \\ :empty) do
-    model
+  def create_identity(params, user) do
+    authorization = Ecto.build_assoc(user, :authorizations)
+    changeset = identity_registration_changeset(authorization, Util.scrub(params))
+    Repo.insert(changeset)
+  end
+
+  def find_by_uid_and_provider(uid, provider) do
+    case Repo.get_by(__MODULE__, uid: uid, provider: provider) do
+      nil -> {:error, :not_found}
+      authorization -> {:ok, authorization}
+    end
+  end
+
+  def identity_registration_changeset(authorization, params) do
+    authorization
+    |> changeset(params)
+    |> validate_length(:password, min: 8)
+    |> validate_confirmation(:password)
+  end
+
+  def changeset(authorization, params \\ :empty) do
+    authorization
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> foreign_key_constraint(:user_id)
-    |> unique_constraint(:provider_uid)
+    |> unique_constraint(:uid)
   end
 end

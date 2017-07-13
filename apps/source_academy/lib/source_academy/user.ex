@@ -5,9 +5,10 @@ defmodule SourceAcademy.User do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias SourceAcademy.Repo
 
-  @type t :: %__MODULE__{}
+  alias SourceAcademy.Authorization
+  alias SourceAcademy.Repo
+  alias SourceAcademy.Util
 
   schema "users" do
     field :first_name, :string
@@ -17,7 +18,7 @@ defmodule SourceAcademy.User do
     field :passwd_reset_id, :string
     field :passwd_reset_id_expiry, :utc_datetime
 
-    has_many :authorizations, SourceAcademy.Authorization
+    has_many :authorizations, Authorization
 
     timestamps()
   end
@@ -27,7 +28,29 @@ defmodule SourceAcademy.User do
   @user_roles ~w(admin staff student)s
 
   def build(params) do
-    changeset(%SourceAcademy.User{}, params)
+    changeset(%__MODULE__{}, params)
+  end
+
+  def create(params, admin \\ false) do
+    changeset = registration_changeset(%__MODULE__{}, Util.scrub(params))
+    changeset = if admin do
+      cast(changeset, %{role: "admin"}, ~w(role)a)
+    else
+      changeset
+    end
+    Repo.insert(changeset)
+  end
+
+  def authorizations(nil), do: []
+  def authorizations(user) do
+    Repo.all(Ecto.assoc(user, :authorizations))
+  end
+
+  def find_by_authorization(authorization) do
+    case Repo.one(Ecto.assoc(authorization, :user)) do
+      nil -> {:error, :user_not_found}
+      user -> {:ok, user}
+    end
   end
 
   def registration_changeset(user, params \\ :empty) do
@@ -42,7 +65,7 @@ defmodule SourceAcademy.User do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_inclusion(:role, @user_roles)
-    |> validate_format(:email, ~r/.*@.*/)
+    |> validate_format(:email, ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
   end
 
   def make_staff!(user) do

@@ -5,7 +5,8 @@ defmodule Backoffice.Web.AuthController do
   The actual creation and lookup of users/authorizations is handled by UserFromAuth
   """
   use Backoffice.Web, :controller
-  use Guardian.Phoenix.Controller
+  use SourceAcademy.Phoenix.Controller
+
   alias SourceAcademy.Repo
   alias SourceAcademy.Auth
   alias SourceAcademy.User
@@ -13,32 +14,34 @@ defmodule Backoffice.Web.AuthController do
   plug Ueberauth
 
   def login(conn, _params, current_user, _claims) do
-    render conn, "login.html", current_user: current_user,
-      current_auths: auths(current_user)
+    if current_user do
+      redirect(conn, to: user_path(conn, :show, current_user.id))
+    else
+      render(conn, "login.html", current_user: current_user,
+        current_auths: User.authorizations(current_user))
+    end
   end
 
-  def callback(%Plug.Conn{assigns: %{ueberauth_failure: fails}} = conn,
+  def callback(%{assigns: %{ueberauth_failure: fails}} = conn,
     _params, current_user, _claims) do
     conn
     |> put_flash(:error, hd(fails.errors).message)
     |> render("login.html", current_user: current_user,
-         current_auths: auths(current_user))
+         current_auths: User.authorizations(current_user))
   end
 
-  def callback(%Plug.Conn{assigns: %{ueberauth_auth: auth}} = conn, _params,
-     current_user, _claims) do
-    case Auth.get_or_register(auth, current_user, Repo) do
+  def identity_callback(conn, _params, current_user, _claims) do
+    case Auth.Identity.authenticate(conn) do
       {:ok, user} ->
         conn
+        |> Guardian.Plug.sign_in(user, :access, perms: %{default: Guardian.Permissions.max})
         |> put_flash(:info, "Signed in as #{user.first_name}")
-        |> Guardian.Plug.sign_in(user, :access,
-           perms: %{default: Guardian.Permissions.max})
         |> redirect(to: user_path(conn, :show, user.id))
       {:error, reason} ->
         conn
         |> put_flash(:error, "Could not authenticate. Error: #{reason}")
         |> render("login.html", current_user: current_user,
-           current_auths: auths(current_user))
+            current_auths: Auth.get_authorizations(current_user))
     end
   end
 
@@ -53,13 +56,5 @@ defmodule Backoffice.Web.AuthController do
       |> put_flash(:info, "Not logged in")
       |> redirect(to: "/")
     end
-  end
-
-  defp auths(nil), do: []
-  defp auths(%User{} = user) do
-    authorizations = Ecto.assoc(user, :authorizations)
-    authorizations
-    |> Repo.all
-    |> Enum.map(&(&1.provider))
   end
 end

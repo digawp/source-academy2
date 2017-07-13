@@ -30,9 +30,9 @@ defmodule Backoffice.Web.Router do
     pipe_through [:browser, :browser_auth]
 
     get "/logout", AuthController, :logout
-    get "/:identity", AuthController, :request
-    get "/:identity/callback", AuthController, :callback
-    post "/:identity/callback", AuthController, :callback
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/identity/callback", AuthController, :identity_callback
   end
   # Other scopes may use custom stacks.
   # scope "/api", Backoffice.Web do

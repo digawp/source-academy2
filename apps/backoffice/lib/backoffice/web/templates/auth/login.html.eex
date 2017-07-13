@@ -15,7 +15,6 @@
         <button class='btn btn-primary'>Login</button>
       </div>
     <% end %>
-
     <%= link "Sign Up with e-mail", to: user_path(@conn, :new) %>
   <% end %>
 </div>
