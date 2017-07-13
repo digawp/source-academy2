@@ -21,7 +21,19 @@ defmodule Backoffice.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Backoffice.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     applications: [
+       :phoenix,
+       :phoenix_html,
+       :phoenix_ecto,
+       :phoenix_pubsub,
+       :cowboy,
+       :logger,
+       :gettext,
+       :runtime_tools,
+       :postgrex,
+       :source_academy
+     ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
