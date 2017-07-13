@@ -57,7 +57,7 @@ defmodule SourceAcademy.User do
     user
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> validate_format(:email, ~r/.*@.*/)
+    |> validate_email
   end
 
   def changeset(user, params \\ :empty) do
@@ -65,7 +65,11 @@ defmodule SourceAcademy.User do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_inclusion(:role, @user_roles)
-    |> validate_format(:email, ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+    |> validate_email
+  end
+
+  defp validate_email(user) do
+    validate_format(user, :email, ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
   end
 
   def make_staff!(user) do
