@@ -8,8 +8,6 @@ defmodule Backoffice.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
-      supervisor(Backoffice.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Backoffice.Web.Endpoint, []),
       # Start your own worker by calling: Backoffice.Worker.start_link(arg1, arg2, arg3)
