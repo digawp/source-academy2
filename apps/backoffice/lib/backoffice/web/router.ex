@@ -23,6 +23,7 @@ defmodule Backoffice.Web.Router do
 
     get "/", PageController, :index
     get "/login", AuthController, :login
+    resources "/users", UserController
   end
 
   scope "/auth", Backoffice.Web do
