@@ -47,7 +47,7 @@ defmodule SourceAcademy.User do
 
   def make_staff!(user) do
     user
-    |> cast(%{role: Enum.at(@user_roles, 1)}, ~w(role)a)
+    |> cast(%{role: "staff"}, ~w(role)a)
     |> Repo.update!
   end
 end
