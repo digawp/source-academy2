@@ -6,16 +6,16 @@
 use Mix.Config
 
 # General application configuration
-config :source_academy_web,
-  namespace: SourceAcademy.Web,
+config :api,
+  namespace: Api,
   ecto_repos: [SourceAcademy.Repo]
 
 # Configures the endpoint
-config :source_academy_web, SourceAcademy.Web.Endpoint,
+config :api, Api.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "iHkIEp2Ld/8/OGNMlxyR+uyq3SmPfVc1Zi3TstorSjVsTNGSqkU75aVRcBYAxOUV",
-  render_errors: [view: SourceAcademy.Web.ErrorView, accepts: ~w(json)],
-  pubsub: [name: SourceAcademy.Web.PubSub,
+  render_errors: [view: Api.ErrorView, accepts: ~w(json)],
+  pubsub: [name: Api.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

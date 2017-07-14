@@ -1,4 +1,4 @@
-# SourceAcademy.Web
+# Api
 
 To start your Phoenix server:
 

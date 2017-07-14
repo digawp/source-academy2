@@ -1,15 +1,7 @@
-defmodule SourceAcademy.Web.Endpoint do
-  use Phoenix.Endpoint, otp_app: :source_academy_web
+defmodule Api.Endpoint do
+  use Phoenix.Endpoint, otp_app: :api
 
-  socket "/socket", SourceAcademy.Web.UserSocket
-
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phoenix.digest
-  # when deploying your static files in production.
-  plug Plug.Static,
-    at: "/", from: :source_academy_web, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+  socket "/socket", Api.UserSocket
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -33,10 +25,10 @@ defmodule SourceAcademy.Web.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_source_academy_web_key",
+    key: "_api_key",
     signing_salt: "GW5tOTJ/"
 
-  plug SourceAcademy.Web.Router
+  plug Api.Router
 
   @doc """
   Dynamically loads configuration from the system environment

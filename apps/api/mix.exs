@@ -1,8 +1,8 @@
-defmodule SourceAcademy.Web.Mixfile do
+defmodule Api.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :source_academy_web,
+    [app: :api,
      version: "0.0.1",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -20,7 +20,7 @@ defmodule SourceAcademy.Web.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {SourceAcademy.Web.Application, []},
+    [mod: {Api.Application, []},
      extra_applications: [:logger, :runtime_tools]]
   end
 
