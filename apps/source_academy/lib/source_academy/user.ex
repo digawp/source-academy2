@@ -13,6 +13,7 @@ defmodule SourceAcademy.User do
   schema "users" do
     field :first_name, :string
     field :last_name, :string
+    field :bio, :string
     field :email, :string
     field :role, :string
     field :passwd_reset_id, :string
@@ -24,7 +25,7 @@ defmodule SourceAcademy.User do
   end
 
   @required_fields ~w(first_name email)a
-  @optional_fields ~w(last_name)a
+  @optional_fields ~w(last_name bio)a
   @user_roles ~w(admin staff student)s
 
   def build(params) do
