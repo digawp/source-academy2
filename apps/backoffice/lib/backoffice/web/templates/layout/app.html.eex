@@ -7,26 +7,24 @@
         <%= render "header.html", conn: @conn, current_user: assigns[:current_user] %>
       </div>
     </header>
-    <div class="container">
-      <main role="main">
-        <div class="columns">
-          <%= if assigns[:use_sidebar] do %>
-            <div class="column is-one-quarter">
-              <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
-            </div>
-            <div class="column">
-              <%= render "flash.html", conn: @conn %>
-              <%= render @view_module, @view_template, assigns %>
-            </div>
-          <% else %>
-            <div class="column is-full">
-              <%= render "flash.html", conn: @conn %>
-              <%= render @view_module, @view_template, assigns %>
-            </div>
-          <% end %>
-        </div>
-      </main>
-    </div> <!-- /container -->
+    <main role="main">
+      <div class="columns">
+        <%= if assigns[:use_sidebar] do %>
+          <div class="column is-one-quarter">
+            <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
+          </div>
+          <div class="column">
+            <%= render "flash.html", conn: @conn %>
+            <%= render @view_module, @view_template, assigns %>
+          </div>
+        <% else %>
+          <div class="column is-full">
+            <%= render "flash.html", conn: @conn %>
+            <%= render @view_module, @view_template, assigns %>
+          </div>
+        <% end %>
+      </div>
+    </main>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -14,8 +14,12 @@
   color: white;
 }
 
+.header {
+  z-index: 9;
+}
+
 main {
-  padding-top: 70px;
+  margin-top: 70px;
   padding-left: 15px;
   padding-right: 15px;
 }
