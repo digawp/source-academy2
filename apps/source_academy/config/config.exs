@@ -20,6 +20,9 @@ config :guardian, Guardian,
       :write_profile,
       :read_token,
       :revoke_token,
+    ],
+    backoffice: [
+      :access
     ]
   }
 

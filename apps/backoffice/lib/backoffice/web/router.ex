@@ -7,11 +7,13 @@ defmodule Backoffice.Web.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
   end
 
   pipeline :browser_auth do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
+    plug Guardian.Plug.EnsurePermissions, handler: Backoffice.Web.AuthController, backoffice: [:access]
   end
 
   pipeline :api do
@@ -22,14 +24,15 @@ defmodule Backoffice.Web.Router do
     pipe_through [:browser, :browser_auth]
 
     get "/", PageController, :index
-    get "/login", AuthController, :login
-    resources "/users", UserController
+    resources "/users", UserController, except: [:new]
   end
 
   scope "/auth", Backoffice.Web do
-    pipe_through [:browser, :browser_auth]
+    pipe_through [:browser]
 
+    get "/login", AuthController, :login
     get "/logout", AuthController, :logout
+    get "/signup", UserController, :new
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     post "/identity/callback", AuthController, :identity_callback

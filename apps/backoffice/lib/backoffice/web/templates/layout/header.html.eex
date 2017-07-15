@@ -1,12 +1,28 @@
-<nav role="navigation">
-  <ul class="nav nav-pills pull-right">
-    <%= if @current_user do %>
-      <%= link @current_user.first_name, to: user_path(@conn, :edit, @current_user.id) %> |
-      <%= link "Sign out", to: auth_path(@conn, :logout) %>
-    <% else %>
-      <%= link "Login", to: auth_path(@conn, :login), class: "pt-button pt-minimal" %> |
-      <%= link "Sign Up", to: user_path(@conn, :new), class: "pt-button pt-minimal" %>
-    <% end %>
-  </ul>
+<nav role="navigation" class="navbar">
+  <div class="navbar-brand">
+    <%= link "Source Academy Backoffice", to: page_path(@conn, :index), class: "navbar-item" %>
+    <div class="navbar-burger burger" data-target="menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div id="menu" class="navbar-menu">
+    <div class="navbar-end">
+      <%= if @current_user do %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class='navbar-link' href='javascript:;'>
+            <%= @current_user.first_name %>
+          </a>
+          <div class="navbar-dropdown">
+            <%= link "Profile", class: "navbar-item", to: user_path(@conn, :edit, @current_user.id) %>
+            <%= link "Sign out", class: "navbar-item", to: auth_path(@conn, :logout) %>
+          </div>
+        </div>
+      <% else %>
+        <%= link "Login", class: "navbar-item", to: auth_path(@conn, :login) %>
+        <%= link "Sign Up", class: "navbar-item", to: user_path(@conn, :new) %>
+      <% end %>
+    </div>
+  </div>
 </nav>
-<h1>Backoffice | Source Academy</h1>

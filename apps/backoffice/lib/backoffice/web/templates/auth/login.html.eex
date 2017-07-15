@@ -1,20 +1,19 @@
-<div>
-  <%= if not Enum.member?(@current_auths, "identity") do %>
-    <%= form_tag auth_path(@conn, :callback, "identity"), method: "post" do %>
-      <div class='control-group'>
-        <label class='control-label' for='email-input'>Email</label>
-        <input class='form-control' type='email' name='email' value='<%= @conn.params["email"] %>' required/>
-      </div>
+<h2 class="title is-2">Staff Sign In</h2>
+ <%= if not Enum.member?(@current_auths, "identity") do %>
+  <%= form_tag auth_path(@conn, :callback, "identity"), method: "post" do %>
+    <div class='field'>
+      <label class='label' for='email-input'>Email</label>
+      <input class='input' type='email' name='email' value='<%= @conn.params["email"] %>' required/>
+    </div>
 
-      <div class='control-group'>
-        <label class='control-label' for='password-input'>Password</label>
-        <input class='form-control' type='password' name='password' required/>
-      </div>
+    <div class='field'>
+      <label class='label' for='password-input'>Password</label>
+      <input class='input' type='password' name='password' required/>
+    </div>
 
-      <div class='control-group'>
-        <button class='btn btn-primary'>Login</button>
-      </div>
-    <% end %>
-    <%= link "Sign Up with e-mail", to: user_path(@conn, :new) %>
+    <div class='field'>
+      <button class='button is-success'>Sign In</button>
+    </div>
   <% end %>
-</div>
+<% end %>
+

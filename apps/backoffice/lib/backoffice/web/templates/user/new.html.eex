@@ -1,33 +1,39 @@
-<h2>New User</h2>
+<h2 class="title is-2">
+  Sign Up
+</h2>
 
 <%= form_tag auth_path(@conn, :callback, "identity"), [method: "POST"] do %>
-  <div class='control-group'>
-    <label class='control-label' for='name-input'>First Name</label>
-    <input name='first_name' required class='form-control'/>
+  <div class='field'>
+    <label class='label' for='name-input'>First Name</label>
+    <input name='first_name' required class='input'/>
   </div>
 
-  <div class='control-group'>
-    <label class='control-label' for='name-input'>Last Name</label>
-    <input name='last_name' class='form-control'/>
+  <div class='field'>
+    <label class='label' for='name-input'>Last Name (Optional)</label>
+    <input name='last_name' class='input'/>
   </div>
 
-  <div class='control-group'>
-    <label class='control-label' for='email-input'>Email</label>
-    <input type='email' name='email' required class='form-control'/>
+  <div class='field'>
+    <label class='label' for='email-input'>NUSNET Email</label>
+    <input type='email' name='email' required class='input'/>
   </div>
 
-  <div class='control-group'>
-    <label class='control-label' for='password-input'>Password</label>
-    <input type='password' name='password' required class='form-control'/>
+  <div class='field'>
+    <label class='label' for='password-input'>Password</label>
+    <input type='password' name='password' required class='input'/>
   </div>
 
-  <div class='control-group'>
-    <label class='control-label' for='password-confirmation-input'>Confirm Password</label>
-    <input type='password' name='password_confirmation' required class='form-control'/>
+  <div class='field'>
+    <label class='label' for='password-confirmation-input'>Confirm Password</label>
+    <input type='password' name='password_confirmation' required class='input'/>
   </div>
 
-  <div class='control-group'>
-    <button class='btn btn-primary'>Sign up</button>
+  <div class='notification'>
+    <strong>Note to Avengers</strong><br />
+    For verification purposes, please wait up to 1 working day
+    for the administrator upgrade your account into staff. <br />
+    During processing time you will not be able to access
+    backoffice functionality.
   </div>
+  <button class='button is-success'>Sign Up</button>
 <% end %>
-

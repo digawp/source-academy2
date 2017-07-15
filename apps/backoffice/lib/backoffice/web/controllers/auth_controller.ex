@@ -34,7 +34,7 @@ defmodule Backoffice.Web.AuthController do
     case Auth.Identity.authenticate(conn) do
       {:ok, user} ->
         conn
-        |> Guardian.Plug.sign_in(user, :access, perms: %{default: Guardian.Permissions.max})
+        |> guardian_sign_in(user)
         |> put_flash(:info, "Signed in as #{user.first_name}")
         |> redirect(to: user_path(conn, :show, user.id))
       {:error, reason} ->
@@ -55,6 +55,23 @@ defmodule Backoffice.Web.AuthController do
       conn
       |> put_flash(:info, "Not logged in")
       |> redirect(to: "/")
+    end
+  end
+
+  def unauthorized(conn, _params) do
+    conn
+    |> put_view(Backoffice.Web.AuthView)
+    |> render("unauthorized.html", layout: {Backoffice.Web.LayoutView, "app.html"})
+  end
+
+  defp guardian_sign_in(conn, user) do
+    if user.role == "staff" || user.role == "admin" do
+      Guardian.Plug.sign_in(conn, user, :access, perms: %{
+        default: Guardian.Permissions.max,
+        backoffice: [:access]
+      })
+    else
+      Guardian.Plug.sign_in(conn, user, :access, perms: %{default: Guardian.Permissions.max})
     end
   end
 end

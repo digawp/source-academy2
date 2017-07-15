@@ -1,0 +1,10 @@
+<h3 class="title is-3"><strong>401</strong> Unauthorized</h3>
+<article class="message is-danger">
+  <div class="message-body">
+    You must be logged in as course staff to view this page.<br />
+
+    <%= link "Logout", to: auth_path(@conn, :logout) %> |
+    <%= link "Back to Source Academy", to: auth_path(@conn, :login) %>
+  </div>
+</article>
+
