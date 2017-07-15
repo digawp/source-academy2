@@ -1,23 +1,23 @@
-<h2>Show User</h2>
-
-<ul>
-
-  <li>
-    <strong>First name:</strong>
-    <%= @current_user.first_name %>
-  </li>
-
-  <li>
-    <strong>Last name:</strong>
-    <%= @current_user.last_name %>
-  </li>
-
-  <li>
-    <strong>Email:</strong>
-    <%= @current_user.email %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: user_path(@conn, :edit, @current_user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">
+          <strong><%= @user.first_name %></strong>
+          <%= @user.last_name %>
+        </p>
+        <p class="subtitle is-6">
+          <%= @user.email %>
+        </p>
+      </div>
+    </div>
+    <div class="content">
+      <%= @user.bio || "This user likes to keep an air of mystery among him/herself" %>
+    </div>
+  </div>
+</div>
