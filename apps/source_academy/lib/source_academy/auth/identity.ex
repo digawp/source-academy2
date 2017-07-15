@@ -26,15 +26,15 @@ defmodule SourceAcademy.Auth.Identity do
     end
   end
 
-  def register(%{assigns: %{ueberauth_auth: auth}} = conn) do
+  def register(%{assigns: %{ueberauth_auth: auth}}) do
     Repo.transaction fn ->
       {:ok, user} = User.create(Map.from_struct(auth.info))
-      {:ok, authorization} = create_authorization(user, auth)
+      {:ok, _} = create_authorization(user, auth)
       user
     end
   end
 
-  def sign_in(%{assigns: %{ueberauth_auth: auth}} = conn, authorization) do
+  def sign_in(%{assigns: %{ueberauth_auth: auth}}, authorization) do
     case password_from_auth(auth) do
       pass when is_binary(pass) ->
         if Comeonin.Bcrypt.checkpw(pass, authorization.token) do
@@ -52,8 +52,8 @@ defmodule SourceAcademy.Auth.Identity do
         provider: to_string(auth.provider),
         uid: uid_from_auth(auth),
         token: token_from_auth(auth),
-        refresh_token: auth.credentials.refresh_token,
-        expires_at: auth.credentials.expires_at,
+        refresh_token: refresh_token_from_auth(auth),
+        expires_at: expires_at_from_auth(auth),
         password: password_from_auth(auth),
         password_confirmation: password_confirmation_from_auth(auth)
       },
@@ -62,9 +62,9 @@ defmodule SourceAcademy.Auth.Identity do
   end
 
   # TODO Separate the "from_auth" functions in a helper module
-  defp refresh_token_from_auth, do: auth.credentials.refresh_token
+  defp refresh_token_from_auth(auth), do: auth.credentials.refresh_token
 
-  defp expires_at_from_auth, do: auth.credentials.expires_at
+  defp expires_at_from_auth(auth), do: auth.credentials.expires_at
 
   defp token_from_auth(%{provider: :identity} = auth) do
     case auth do

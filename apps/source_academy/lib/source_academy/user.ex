@@ -32,14 +32,10 @@ defmodule SourceAcademy.User do
     changeset(%__MODULE__{}, params)
   end
 
-  def create(params, admin \\ false) do
-    changeset = registration_changeset(%__MODULE__{}, Util.scrub(params))
-    changeset = if admin do
-      cast(changeset, %{role: "admin"}, ~w(role)a)
-    else
-      changeset
-    end
-    Repo.insert(changeset)
+  def create(params, role \\ "student") do
+    registration_changeset(%__MODULE__{}, Util.scrub(params))
+    |> cast(%{role: role}, ~w(role)a)
+    |> Repo.insert
   end
 
   def authorizations(nil), do: []

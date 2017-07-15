@@ -9,11 +9,22 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias SourceAcademy.User
+import SourceAcademy.SeedHelper
 
-User.create(%{
-  first_name: "Administrator",
-  email: "admin@example.org",
-  password: "password",
-  password_confirmation: "password"
-}, nil, SourceAcademy.Repo)
+add_user(%{
+  first_name: "Admin",
+  last_name: "Guy",
+  email: "admin@example.org"
+}, "admin")
+
+add_user(%{
+  first_name: "Staff",
+  last_name: "One",
+  email: "staffone@example.org"
+})
+
+add_user(%{
+  first_name: "Staff",
+  last_name: "Two",
+  email: "stafftwo@example.org"
+})
