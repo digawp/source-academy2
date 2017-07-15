@@ -9,6 +9,7 @@
       <li><a>View Submissions</a></li>
       <li><a>Grant XP</a></li>
       <li><a>Grant Achievement</a></li>
+      <li><a>Upload Materials</a></li>
     </ul>
     <p class="menu-label">
       Announcements
@@ -34,7 +35,7 @@
       <li><a>Manage Paths</a></li>
     </ul>
     <p class="menu-label">
-      Users
+      Admin
     </p>
     <ul class="menu-list">
       <li><a>Manage DGs</a></li>
