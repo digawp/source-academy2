@@ -9,6 +9,7 @@ defmodule SourceAcademy.Auth.Identity do
   alias SourceAcademy.Authorization
   alias SourceAcademy.Repo
   alias SourceAcademy.User
+  alias SourceAcademy.Student
   alias SourceAcademy.Util
   alias Ueberauth.Auth, as: UAuth
 
@@ -30,6 +31,7 @@ defmodule SourceAcademy.Auth.Identity do
     Repo.transaction fn ->
       {:ok, user} = User.create(Map.from_struct(auth.info))
       {:ok, _} = create_authorization(user, auth)
+      {:ok, _} = Student.create(user, user.role == "student")
       user
     end
   end

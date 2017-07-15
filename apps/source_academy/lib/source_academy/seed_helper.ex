@@ -2,11 +2,12 @@ defmodule SourceAcademy.SeedHelper do
   alias SourceAcademy.User
   alias SourceAcademy.Authorization
   alias SourceAcademy.Repo
+  alias SourceAcademy.Student
 
   def add_user(params, role \\ "staff") do
     Repo.transaction(fn ->
       {:ok, user} = User.create(params, role)
-      Authorization.create_identity(
+      {:ok, _} = Authorization.create_identity(
         %{
           provider: "provider",
           uid: params.email,
@@ -18,6 +19,8 @@ defmodule SourceAcademy.SeedHelper do
         },
         user
       )
+      {:ok, _} = Student.create(user, user.role == "student")
+      user
     end)
   end
 end

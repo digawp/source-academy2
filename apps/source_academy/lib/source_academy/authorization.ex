@@ -30,9 +30,9 @@ defmodule SourceAcademy.Authorization do
   @optional_fields ~w(refresh_token expires_at)a
 
   def create_identity(params, user) do
-    authorization = Ecto.build_assoc(user, :authorizations)
-    changeset = identity_registration_changeset(authorization, Util.scrub(params))
-    Repo.insert(changeset)
+    Ecto.build_assoc(user, :authorizations)
+    |> identity_registration_changeset(Util.scrub(params))
+    |> Repo.insert
   end
 
   def find_by_uid_and_provider(uid, provider) do
