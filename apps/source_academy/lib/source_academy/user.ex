@@ -20,7 +20,7 @@ defmodule SourceAcademy.User do
     field :passwd_reset_id, :string
     field :passwd_reset_id_expiry, :utc_datetime
 
-    has_many :authorizations, Authorization
+    has_many :authorizations, Authorization, on_delete: :delete_all
     has_one :student, Student, on_delete: :delete_all
 
     timestamps()
