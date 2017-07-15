@@ -10,10 +10,12 @@ defmodule Backoffice.Web.Router do
 
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
+    plug Backoffice.Plug.AssignCurrentUser
   end
 
   pipeline :browser_auth do
     plug Guardian.Plug.EnsurePermissions, handler: Backoffice.Web.AuthController, backoffice: [:access]
+    plug Backoffice.Plug.AssignUseSidebarFlag
   end
 
   pipeline :api do

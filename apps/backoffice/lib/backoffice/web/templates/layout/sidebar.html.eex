@@ -1,0 +1,45 @@
+  <aside class="menu">
+    <p class="menu-label">
+      Quick Links
+    </p>
+    <ul class="menu-list">
+      <li><a>Grading (8/192)</a></li>
+      <li><a>Comments (8/200)</a></li>
+      <li><a>Open Missions</a></li>
+      <li><a>View Submissions</a></li>
+      <li><a>Grant XP</a></li>
+      <li><a>Grant Achievement</a></li>
+    </ul>
+    <p class="menu-label">
+      Announcements
+    </p>
+    <ul class="menu-list">
+      <li><a>New Announcement</a></li>
+      <li><a>Manage Announcements</a></li>
+    </ul>
+    <p class="menu-label">
+      Achievements
+    </p>
+    <ul class="menu-list">
+      <li><a>Create Achievement</a></li>
+      <li><a>Manage Achievements</a></li>
+    </ul>
+    <p class="menu-label">
+      Assessments
+    </p>
+    <ul class="menu-list">
+      <li><a>Create Mission</a></li>
+      <li><a>Manage Missions</a></li>
+      <li><a>Create Path</a></li>
+      <li><a>Manage Paths</a></li>
+    </ul>
+    <p class="menu-label">
+      Users
+    </p>
+    <ul class="menu-list">
+      <li><a>Manage DGs</a></li>
+      <li><a>Manage Students</a></li>
+      <li><a>Manage Staffs</a></li>
+    </ul>
+  </aside>
+

@@ -58,6 +58,10 @@ exports.config = {
 
   npm: {
     enabled: true,
+    globals: {
+      $: 'jquery',
+      jQuery: 'jquery'
+    },
     styles: {
       bulma: ['css/bulma.css']
     }

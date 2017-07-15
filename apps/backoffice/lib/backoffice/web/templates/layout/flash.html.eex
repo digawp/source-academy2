@@ -1,0 +1,12 @@
+<%= if get_flash(@conn, :info) != nil do %>
+  <div id="main-notification" class="notification">
+    <button id="dismiss" class="delete"></button>
+    <%= get_flash(@conn, :info) %>
+  </div>
+<% end %>
+<%= if get_flash(@conn, :error) != nil do %>
+  <div id="main-notification" class="notification is-error">
+    <button id="dismiss" class="delete"></button>
+    <%= get_flash(@conn, :error) %>
+  </div>
+<% end %>

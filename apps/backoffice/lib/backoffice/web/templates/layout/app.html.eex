@@ -1,40 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SA Backoffice</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
-
+  <%= render "head.html", conn: @conn %>
   <body>
-    <div class="container">
-      <header class="header">
+    <header class="header">
+      <div class="container">
         <%= render "header.html", conn: @conn, current_user: assigns[:current_user] %>
-      </header>
-
-      <%= if get_flash(@conn, :info) != nil do %>
-        <article class="message is-info" role="alert">
-          <div class="message-body">
-            <%= get_flash(@conn, :info) %>
-          </div>
-        </article>
-      <% end %>
-
-      <%= if get_flash(@conn, :error) != nil do %>
-        <article class="message is-error" role="alert">
-          <div class="message-body">
-            <%= get_flash(@conn, :error) %>
-          </div>
-        </article>
-      <% end %>
-
+      </div>
+    </header>
+    <div class="container">
       <main role="main">
-        <%= render @view_module, @view_template, assigns %>
+        <div class="columns">
+          <%= if assigns[:use_sidebar] do %>
+            <div class="column is-one-quarter">
+              <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
+            </div>
+            <div class="column">
+              <%= render "flash.html", conn: @conn %>
+              <%= render @view_module, @view_template, assigns %>
+            </div>
+          <% else %>
+            <div class="column is-full">
+              <%= render "flash.html", conn: @conn %>
+              <%= render @view_module, @view_template, assigns %>
+            </div>
+          <% end %>
+        </div>
       </main>
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
