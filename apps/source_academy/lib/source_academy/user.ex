@@ -5,9 +5,11 @@ defmodule SourceAcademy.User do
   """
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias SourceAcademy.Authorization
   alias SourceAcademy.Student
+  alias SourceAcademy.GiveXP
   alias SourceAcademy.Repo
   alias SourceAcademy.Util
 
@@ -22,6 +24,7 @@ defmodule SourceAcademy.User do
 
     has_many :authorizations, Authorization, on_delete: :delete_all
     has_one :student, Student, on_delete: :delete_all
+    has_many :give_xp, GiveXP
 
     timestamps()
   end
@@ -40,6 +43,14 @@ defmodule SourceAcademy.User do
     |> Repo.insert
   end
 
+  def all_staffs() do
+    Repo.all(from u in __MODULE__, where: u.role == "staff")
+  end
+
+  def all() do
+    Repo.all(__MODULE__)
+  end
+
   def authorizations(nil), do: []
   def authorizations(user) do
     Repo.all(Ecto.assoc(user, :authorizations))
@@ -50,6 +61,10 @@ defmodule SourceAcademy.User do
       nil -> {:error, :user_not_found}
       user -> {:ok, user}
     end
+  end
+
+  def find_by_id(id) do
+    Repo.get(__MODULE__, id)
   end
 
   def registration_changeset(user, params \\ :empty) do

@@ -38,7 +38,7 @@
       Admin
     </p>
     <ul class="menu-list">
-      <li><a>Manage DGs</a></li>
+      <li><%= link "Manage DG", to: discussion_group_path(@conn, :index) %></li>
       <li><%= link "Manage Students", to: student_path(@conn, :index) %></li>
       <li><a>Manage Staffs</a></li>
     </ul>

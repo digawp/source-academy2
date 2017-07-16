@@ -1,0 +1,11 @@
+<h4>Discussion Group</h4>
+<%= for staff <- @staffs do %>
+  <%= render "table.html",
+    conn: @conn,
+    staff: staff,
+    discussion_group_changeset: @discussion_group_changeset,
+    students: @students,
+    discussion_groups:
+      @discussion_groups
+      |> Enum.filter(&(&1.user.id == staff.id)) %>
+<% end %>

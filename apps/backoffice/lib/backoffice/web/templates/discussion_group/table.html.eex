@@ -1,0 +1,43 @@
+<%= @staff.first_name <> " " <> @staff.last_name %>
+<%= render "form.html",
+      conn: @conn,
+      staff: @staff,
+      students: @students,
+      discussion_group_changeset: @discussion_group_changeset %>
+<%= if Enum.empty?(@discussion_groups) do %>
+<div class="notification">
+  There are no students
+</div>
+<% else %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for dg <- @discussion_groups do %>
+      <tr>
+        <td>
+          <%= dg.student.user.first_name <> " " <> dg.student.user.last_name %>
+          </td>
+        <td>
+          <%= dg.student.level %>
+        </td>
+        <td>
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link "View", class: "button is-small", to: student_path(@conn, :show, dg.student.id) %>
+            </p>
+            <p class="control">
+              <%= link "Remove", class: "button is-small", to: discussion_group_path(@conn, :delete_entry, dg.id) %>
+            </p>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

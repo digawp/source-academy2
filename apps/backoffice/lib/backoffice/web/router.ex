@@ -30,6 +30,10 @@ defmodule Backoffice.Web.Router do
     resources "/students", StudentController do
       resources "/xp_history", GiveXPController, only: [:create, :delete]
     end
+
+    resources "/discussion_groups", DiscussionGroupController, only: [:index, :create]
+
+    get "/students/:discussion_group_id/delete", DiscussionGroupController, :delete_entry
     get "/students/:student_id/toggle_phantom", StudentController, :toggle_phantom
   end
 
