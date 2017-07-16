@@ -9,7 +9,7 @@ defmodule SourceAcademy.SeedHelper do
       {:ok, user} = User.create(params, role)
       {:ok, _} = Authorization.create_identity(
         %{
-          provider: "provider",
+          provider: "identity",
           uid: params.email,
           token: Comeonin.Bcrypt.hashpwsalt("password"),
           refresh_token: nil,
