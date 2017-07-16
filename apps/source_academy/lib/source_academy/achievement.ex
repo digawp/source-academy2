@@ -13,6 +13,9 @@ defmodule SourceAcademy.Achievement do
     field :category, :string
     field :query, :string
 
+    has_many :_dependencies, SourceAcademy.AchievementDependency
+    has_many :dependencies, through: [:_dependencies, :dependency]
+
     timestamps()
   end
 
