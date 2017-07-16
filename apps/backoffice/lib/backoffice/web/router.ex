@@ -30,6 +30,7 @@ defmodule Backoffice.Web.Router do
     resources "/students", StudentController do
       resources "/xp_history", GiveXPController, only: [:create, :delete]
     end
+    get "/students/:student_id/toggle_phantom", StudentController, :toggle_phantom
   end
 
   scope "/auth", Backoffice.Web do

@@ -54,6 +54,12 @@ defmodule SourceAcademy.Student do
     |> Repo.update
   end
 
+  def toggle_phantom(student) do
+    student
+    |> cast(%{is_phantom: !student.is_phantom}, [:is_phantom] )
+    |> Repo.update
+  end
+
   def changeset(student, params) do
     student
     |> cast(params, @required_fields ++ @optional_fields)

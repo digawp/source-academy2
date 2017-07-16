@@ -29,6 +29,13 @@
                 Achievements
               </a>
             </p>
+            <p class="control">
+              <%= link (if student.is_phantom,
+                      do: "To Student",
+                      else: "To Phantom"),
+                  to: student_path(@conn, :toggle_phantom, student.id),
+                  class: "button is-small" %>
+            </p>
           </div>
         </td>
       </tr>

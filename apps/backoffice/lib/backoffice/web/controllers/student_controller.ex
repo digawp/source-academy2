@@ -21,4 +21,10 @@ defmodule Backoffice.Web.StudentController do
       give_xp_changeset: give_xp_changeset
     )
   end
+
+  def toggle_phantom(conn, %{"student_id" => student_id}) do
+    student = Student.find_by_id(student_id)
+    Student.toggle_phantom(student)
+    redirect(conn, to: student_path(conn, :index))
+  end
 end
