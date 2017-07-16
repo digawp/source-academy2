@@ -16,7 +16,7 @@
       <tr>
         <td>
           <strong>[<%= student.level %>]</strong>
-          <%= student_name(student) %>
+          <%= display_name(student) %>
           </td>
         <td><%= student.experience_point %></td>
         <td>

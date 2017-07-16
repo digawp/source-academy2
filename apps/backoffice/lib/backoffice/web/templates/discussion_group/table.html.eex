@@ -21,7 +21,7 @@
     <%= for dg <- @discussion_groups do %>
       <tr>
         <td>
-          <%= dg.student.user.first_name <> " " <> dg.student.user.last_name %>
+          <%= display_name(dg.student) %>
           </td>
         <td>
           <%= dg.student.level %>

@@ -39,6 +39,7 @@ defmodule Backoffice.Web do
       import Backoffice.Web.Router.Helpers
       import Backoffice.Web.ErrorHelpers
       import Backoffice.Web.Gettext
+      import Backoffice.Web.ViewHelpers
     end
   end
 

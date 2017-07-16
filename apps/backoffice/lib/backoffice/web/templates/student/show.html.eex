@@ -1,4 +1,4 @@
-<h3 class="title is-3"><%= student_name(@student) %></h3>
+<h3 class="title is-3"><%= display_name(@student) %></h3>
 
 <div class="columns">
   <div class="column is-half">
