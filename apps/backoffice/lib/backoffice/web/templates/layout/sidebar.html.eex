@@ -39,7 +39,7 @@
     </p>
     <ul class="menu-list">
       <li><a>Manage DGs</a></li>
-      <li><a>Manage Students</a></li>
+      <li><%= link "Manage Students", to: student_path(@conn, :index) %></li>
       <li><a>Manage Staffs</a></li>
     </ul>
   </aside>

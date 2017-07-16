@@ -4,6 +4,7 @@ defmodule SourceAcademy.Student do
 
   alias SourceAcademy.User
   alias SourceAcademy.Repo
+  alias SourceAcademy.GiveXP
 
   schema "students" do
     field :is_phantom, :boolean, default: false
@@ -13,16 +14,44 @@ defmodule SourceAcademy.Student do
 
     belongs_to :user, User
 
+    has_many :give_xp, GiveXP
+
     timestamps()
   end
 
   @required_fields ~w(is_phantom experience_point level)s
   @optional_fields ~w(latest_story)s
 
+  def all(), do: all(preload_user: true)
+  def all(preload_user: with_user) do
+    students = Repo.all(__MODULE__)
+    if with_user do
+      Repo.preload(students, :user)
+    else
+      students
+    end
+  end
+
+  def find_by_id(id), do: find_by_id(id, preload_user: true)
+  def find_by_id(id, preload_user: with_user) do
+    student = Repo.get(__MODULE__, id)
+    if with_user do
+      Repo.preload(student, :user)
+    else
+      student
+    end
+  end
+
   def create(user, is_phantom \\ false) do
     Ecto.build_assoc(user, :student)
     |> changeset(%{is_phantom: is_phantom})
     |> Repo.insert
+  end
+
+  def increase_xp(student, amount) do
+    student
+    |> cast(%{experience_point: student.experience_point + amount }, [:experience_point])
+    |> Repo.update
   end
 
   def changeset(student, params) do

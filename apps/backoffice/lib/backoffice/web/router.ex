@@ -27,6 +27,9 @@ defmodule Backoffice.Web.Router do
 
     get "/", PageController, :index
     resources "/users", UserController, except: [:new]
+    resources "/students", StudentController do
+      resources "/xp_history", GiveXPController, only: [:create, :delete]
+    end
   end
 
   scope "/auth", Backoffice.Web do

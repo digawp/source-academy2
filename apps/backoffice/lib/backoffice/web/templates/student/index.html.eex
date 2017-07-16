@@ -1,0 +1,9 @@
+<h2 class="title is-2">
+  Students
+</h2>
+
+<h4 class="title is-4">Phantom Students</h4>
+<%= render "table.html", conn: @conn, students: show_students(@students, is_phantom: true) %>
+
+<h4 class="title is-4">Students</h4>
+<%= render "table.html", conn: @conn, students: show_students(@students, is_phantom: false) %>

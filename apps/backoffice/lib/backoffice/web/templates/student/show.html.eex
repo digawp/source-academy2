@@ -1,0 +1,23 @@
+<h3 class="title is-3"><%= student_name(@student) %></h3>
+
+<div class="columns">
+  <div class="column is-half">
+    <article class="message is-info">
+      <div class="message-header">Information</div>
+      <div class="message-body">
+      </div>
+    </article>
+  </div>
+  <div class="column is-half">
+    <article class="message">
+      <div class="message-header">Manually Give XP</div>
+      <div class="message-body">
+        <%= render "give_xp_form.html",
+              conn: @conn,
+              give_xp_changeset: @give_xp_changeset,
+              student: @student,
+              giver: @current_user %>
+      </div>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<%= if Enum.empty?(@students) do %>
+<div class="notification">
+  There are no students
+</div>
+<% else %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>XP</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for student <- @students do %>
+      <tr>
+        <td>
+          <strong>[<%= student.level %>]</strong>
+          <%= student_name(student) %>
+          </td>
+        <td><%= student.experience_point %></td>
+        <td>
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link "XP History", class: "button is-small", to: student_path(@conn, :show, student) %>
+            </p>
+            <p class="control">
+              <a class="button is-small">
+                Achievements
+              </a>
+            </p>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
