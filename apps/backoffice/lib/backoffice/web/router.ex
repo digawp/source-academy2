@@ -32,6 +32,7 @@ defmodule Backoffice.Web.Router do
     end
 
     resources "/discussion_groups", DiscussionGroupController, only: [:index, :create]
+    resources "/achievements", AchievementController, except: [:show]
 
     get "/students/:discussion_group_id/delete", DiscussionGroupController, :delete_entry
     get "/students/:student_id/toggle_phantom", StudentController, :toggle_phantom

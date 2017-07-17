@@ -22,8 +22,8 @@
       Achievements
     </p>
     <ul class="menu-list">
-      <li><a>Create Achievement</a></li>
-      <li><a>Manage Achievements</a></li>
+      <li><%= link "Create Achievement", to: achievement_path(@conn, :new) %></li>
+      <li><%= link "Manage Achievements", to: achievement_path(@conn, :index) %></li>
     </ul>
     <p class="menu-label">
       Assessments
