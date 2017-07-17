@@ -8,7 +8,7 @@
       <li><a>Open Missions</a></li>
       <li><a>View Submissions</a></li>
       <li><a>Grant XP</a></li>
-      <li><a>Grant Achievement</a></li>
+      <li><%= link "Grant Achievement", to: student_achievement_path(@conn, :new) %></li>
       <li><a>Upload Materials</a></li>
     </ul>
     <p class="menu-label">
