@@ -42,7 +42,7 @@ defmodule Backoffice.Web.Router do
 
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout
-    get "/signup", UserController, :new
+    get "/signup", AuthController, :signup
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     post "/identity/callback", AuthController, :identity_callback

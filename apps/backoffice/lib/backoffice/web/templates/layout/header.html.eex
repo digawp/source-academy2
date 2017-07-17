@@ -14,7 +14,7 @@
         <%= link "Sign out", class: "navbar-item", to: auth_path(@conn, :logout) %>
       <% else %>
         <%= link "Login", class: "navbar-item", to: auth_path(@conn, :login) %>
-        <%= link "Sign Up", class: "navbar-item", to: user_path(@conn, :new) %>
+        <%= link "Sign Up", class: "navbar-item", to: auth_path(@conn, :signup) %>
       <% end %>
     </div>
   </div>

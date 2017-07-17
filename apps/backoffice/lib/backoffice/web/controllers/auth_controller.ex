@@ -13,12 +13,14 @@ defmodule Backoffice.Web.AuthController do
   plug Ueberauth
 
   def login(conn, _params) do
-    current_user = conn.assigns[:current_user]
-    if current_user do
-      redirect(conn, to: user_path(conn, :show, current_user.id))
-    else
-      render(conn, "login.html", current_user: current_user,
-        current_auths: User.authorizations(current_user))
+    redirect_if_logged_in conn, fn conn ->
+      render(conn, "login.html")
+    end
+  end
+
+  def signup(conn, _params) do
+    redirect_if_logged_in conn, fn conn ->
+      render(conn, "signup.html")
     end
   end
 
@@ -79,6 +81,15 @@ defmodule Backoffice.Web.AuthController do
       })
     else
       Guardian.Plug.sign_in(conn, user, :access, perms: %{default: Guardian.Permissions.max})
+    end
+  end
+
+  defp redirect_if_logged_in(conn, otherwise) do
+    current_user = conn.assigns[:current_user]
+    if current_user do
+      redirect(conn, to: page_path(conn, :index))
+    else
+      otherwise.(conn)
     end
   end
 end
