@@ -1,6 +1,7 @@
 defmodule SourceAcademy.StudentAchievement do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
@@ -27,6 +28,12 @@ defmodule SourceAcademy.StudentAchievement do
       {:ok, student_achievement} = Repo.insert(changeset)
       student_achievement
     end
+  end
+
+  def find_by_student_id(student_id) do
+    query = from sa in __MODULE__, where: sa.student_id == ^student_id
+    Repo.all(query)
+    |> Repo.preload(:achievement)
   end
 
   def changeset(student_achievement, params) do
