@@ -5,7 +5,6 @@ defmodule Backoffice.Web.AuthController do
   The actual creation and lookup of users/authorizations is handled by UserFromAuth
   """
   use Backoffice.Web, :controller
-  use SourceAcademy.Phoenix.Controller
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Auth
@@ -13,7 +12,8 @@ defmodule Backoffice.Web.AuthController do
 
   plug Ueberauth
 
-  def login(conn, _params, current_user, _claims) do
+  def login(conn, _params) do
+    current_user = conn.assigns[:current_user]
     if current_user do
       redirect(conn, to: user_path(conn, :show, current_user.id))
     else
@@ -22,15 +22,20 @@ defmodule Backoffice.Web.AuthController do
     end
   end
 
-  def callback(%{assigns: %{ueberauth_failure: fails}} = conn,
-    _params, current_user, _claims) do
+  def callback(conn, _params) do
+    fails = conn.assigns[:ueberauth_failure]
+    current_user = conn.assigns[:current_user]
+
     conn
     |> put_flash(:error, hd(fails.errors).message)
-    |> render("login.html", current_user: current_user,
+    |> render("login.html",
+         current_user: current_user,
          current_auths: User.authorizations(current_user))
   end
 
-  def identity_callback(conn, _params, current_user, _claims) do
+  def identity_callback(conn, _params) do
+    current_user = conn.assigns[:current_user]
+
     case Auth.Identity.authenticate(conn) do
       {:ok, user} ->
         conn
@@ -45,7 +50,9 @@ defmodule Backoffice.Web.AuthController do
     end
   end
 
-  def logout(conn, _params, current_user, _claims) do
+  def logout(conn, _params) do
+    current_user = conn.assigns[:current_user]
+
     if current_user do
       conn
       |> Guardian.Plug.sign_out
