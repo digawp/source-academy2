@@ -8,6 +8,7 @@ defmodule SourceAcademy.User do
   import Ecto.Query
 
   alias SourceAcademy.Authorization
+  alias SourceAcademy.Announcement
   alias SourceAcademy.Student
   alias SourceAcademy.GiveXP
   alias SourceAcademy.Repo
@@ -23,7 +24,8 @@ defmodule SourceAcademy.User do
     field :passwd_reset_id_expiry, :utc_datetime
 
     has_many :authorizations, Authorization, on_delete: :delete_all
-    has_one :student, Student, on_delete: :delete_all
+    has_many :announcements, Announcement
+    has_one  :student, Student, on_delete: :delete_all
     has_many :give_xp, GiveXP
 
     timestamps()

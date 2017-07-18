@@ -1,0 +1,16 @@
+<h3 class="title is-3">Announcements</h3>
+<%= for announcement <- @announcements do %>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <strong><%= announcement.title %></strong>
+        <small>Posted by <strong><%= display_name(announcement.poster) %></strong></small>
+        <div class="block">
+          <%= link "View/Edit", to: announcement_path(@conn, :edit, announcement.id), class: "button is-small" %>
+          <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "button is-small" %>
+          <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "button is-small" %>
+        </div>
+      </div>
+    </article>
+  </div>
+<% end %>

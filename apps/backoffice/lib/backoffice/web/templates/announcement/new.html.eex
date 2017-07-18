@@ -1,0 +1,4 @@
+<h3 class="title is-3">Create Announcement</h3>
+<%= render "form.html",
+      announcement_changeset: @announcement_changeset,
+      action: announcement_path(@conn, :create) %>

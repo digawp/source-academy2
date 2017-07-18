@@ -30,6 +30,9 @@ defmodule Backoffice.Web.Router do
     resources "/students", StudentController do
       resources "/xp_history", GiveXPController, only: [:create, :delete]
     end
+    resources "/announcements", AnnouncementController, except: [:show]
+    get "/announcements/:announcement_id/toggle_pin", AnnouncementController, :toggle_pin
+    get "/announcements/:announcement_id/toggle_publish", AnnouncementController, :toggle_publish
 
     resources "/discussion_groups", DiscussionGroupController, only: [:index, :create]
 

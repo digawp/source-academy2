@@ -15,8 +15,12 @@
       Announcements
     </p>
     <ul class="menu-list">
-      <li><a>New Announcement</a></li>
-      <li><a>Manage Announcements</a></li>
+      <li>
+        <%= link "New Announcement", to: announcement_path(@conn, :new) %>
+      </li>
+      <li>
+        <%= link "Manage Announcements", to: announcement_path(@conn, :index) %>
+      </li>
     </ul>
     <p class="menu-label">
       Achievements
@@ -38,8 +42,8 @@
       Admin
     </p>
     <ul class="menu-list">
-      <li><%= link "Manage DG", to: discussion_group_path(@conn, :index) %></li>
-      <li><%= link "Manage Students", to: student_path(@conn, :index) %></li>
+      <li><%= link "Discussion Groups", to: discussion_group_path(@conn, :index) %></li>
+      <li><%= link "Students", to: student_path(@conn, :index) %></li>
     </ul>
   </aside>
 
