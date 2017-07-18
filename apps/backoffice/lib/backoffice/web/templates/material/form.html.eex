@@ -1,0 +1,47 @@
+<%= form_for @changeset, material_path(@conn, :create), [multipart: true], fn f -> %>
+  <%= hidden_input f, :token, value: @current_token %>
+  <div class="field">
+    <label class="label">Title</label>
+    <div class="control">
+      <%= text_input f, :title, class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Category</label>
+    <div class="control">
+      <div class="select">
+        <%= select f, :category_id, Enum.map(@categories, &({&1.name, &1.id})) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Description</label>
+    <div class="control">
+      <%= textarea f, :description, class: "textarea" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">File to Upload</label>
+    <div class="control">
+      <%= file_input f, :url, class: "button" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <label class="checkbox">
+        <%= checkbox f, :is_public %>
+        Published
+      </label>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= submit "Upload", class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>

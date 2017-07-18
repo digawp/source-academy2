@@ -1,0 +1,22 @@
+<h3 class="title is-3">
+  Upload Material
+</h3>
+
+<div class="message">
+  <div class="message-header">Upload</div>
+  <div class="message-body">
+    <%= render "form.html",
+        conn: @conn,
+        current_token: @current_token,
+        categories: @categories,
+        changeset: @changeset %>
+  </div>
+</div>
+
+<div class="message">
+  <div class="message-header">Add Category</div>
+  <div class="message-body">
+    <%= render "category.form.html", conn: @conn, changeset: @category_changeset %>
+  </div>
+</div>
+

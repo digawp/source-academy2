@@ -13,7 +13,7 @@ config :backoffice,
 # Configures the endpoint
 config :backoffice, Backoffice.Web.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "dp8Stozd/vddAsbklrU4j+g2SFwNsl6kEmWWdTtse4ujCnG3nD13NrtwgivYggHQ",
+  secret_key_base: "GMXlMQRXuzMAc0Hv59jSNp1GYWmEBkRgsMbm4xX1NoYpmLQiqBZZb8UjcxO04ayl",
   render_errors: [view: Backoffice.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Backoffice.PubSub,
            adapter: Phoenix.PubSub.PG2]

@@ -9,7 +9,6 @@
       <li><a>View Submissions</a></li>
       <li><a>Grant XP</a></li>
       <li><a>Grant Achievement</a></li>
-      <li><a>Upload Materials</a></li>
     </ul>
     <p class="menu-label">
       Announcements
@@ -20,6 +19,17 @@
       </li>
       <li>
         <%= link "Manage Announcements", to: announcement_path(@conn, :index) %>
+      </li>
+    </ul>
+    <p class="menu-label">
+      Materials
+    </p>
+    <ul class="menu-list">
+      <li>
+        <%= link "Upload Material", to: material_path(@conn, :new) %>
+      </li>
+      <li>
+        <%= link "Manage Materials", to: material_path(@conn, :index) %>
       </li>
     </ul>
     <p class="menu-label">

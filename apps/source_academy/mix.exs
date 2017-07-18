@@ -20,7 +20,7 @@ defmodule SourceAcademy.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {SourceAcademy.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,8 @@ defmodule SourceAcademy.Mixfile do
      {:guardian, "~> 0.14"},
      {:guardian_db, "~> 0.8.0"},
      {:ueberauth, "~> 0.4"},
-     {:ueberauth_identity, "~> 0.2"}
+     {:ueberauth_identity, "~> 0.2"},
+     {:arc_ecto, "~> 0.7.0"}
     ]
   end
 

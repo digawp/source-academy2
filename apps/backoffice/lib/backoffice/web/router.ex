@@ -3,17 +3,20 @@ defmodule Backoffice.Web.Router do
 
   pipeline :browser do
     plug :accepts, ["html"]
+
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
 
+  pipeline :browser_auth do
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
     plug Backoffice.Plug.AssignCurrentUser
   end
 
-  pipeline :browser_auth do
+  pipeline :ensure_staff do
     plug Guardian.Plug.EnsurePermissions, handler: Backoffice.Web.AuthController, backoffice: [:access]
     plug Backoffice.Plug.AssignUseSidebarFlag
   end
@@ -23,7 +26,7 @@ defmodule Backoffice.Web.Router do
   end
 
   scope "/", Backoffice.Web do
-    pipe_through [:browser, :browser_auth]
+    pipe_through [:browser, :browser_auth, :ensure_staff]
 
     get "/", PageController, :index
     resources "/users", UserController, except: [:new]
@@ -36,12 +39,17 @@ defmodule Backoffice.Web.Router do
 
     resources "/discussion_groups", DiscussionGroupController, only: [:index, :create]
 
+    resources "/materials", MaterialController, only: [:index, :new, :create, :delete]
+    get "/materials/:id/delete", MaterialController, :delete_entry
+    post "/materials_category", MaterialController, :create_category
+    delete "/materials_category", MaterialController, :delete_category
+
     get "/students/:discussion_group_id/delete", DiscussionGroupController, :delete_entry
     get "/students/:student_id/toggle_phantom", StudentController, :toggle_phantom
   end
 
   scope "/auth", Backoffice.Web do
-    pipe_through [:browser]
+    pipe_through [:browser, :browser_auth]
 
     get "/login", AuthController, :login
     get "/logout", AuthController, :logout
