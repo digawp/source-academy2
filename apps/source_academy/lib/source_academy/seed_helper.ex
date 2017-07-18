@@ -20,7 +20,7 @@ defmodule SourceAcademy.SeedHelper do
         },
         user
       )
-      {:ok, _} = Student.create(user, user.role == "student")
+      {:ok, _} = Student.create(user, user.role == "staff")
       user
     end)
   end

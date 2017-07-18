@@ -29,6 +29,18 @@ add_user(%{
   email: "stafftwo@example.org"
 })
 
+add_user(%{
+  first_name: "Student",
+  last_name: "One",
+  email: "studentone@example.org"
+}, "student")
+
+add_user(%{
+  first_name: "Student",
+  last_name: "Two",
+  email: "studenttwo@example.org"
+}, "student")
+
 add_achievement(%{
   title: "Master of the Force",
   description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
