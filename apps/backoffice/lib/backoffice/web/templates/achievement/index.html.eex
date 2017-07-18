@@ -1,0 +1,35 @@
+<h2 class="title">Listing achievements</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Display order</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th>Query</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for achievement <- @achievements do %>
+    <tr>
+      <td><%= achievement.display_order %></td>
+      <td><%= achievement.title %></td>
+      <td><%= achievement.description %></td>
+      <td><%= achievement.points %></td>
+      <td><%= achievement.image_src %></td>
+      <td><%= achievement.category %></td>
+      <td><%= achievement.query %></td>
+      <td>
+        <span><%= link "Edit", to: achievement_path(@conn, :edit, achievement), class: "button is-small" %></span>
+        <span><%= link "Delete", to: achievement_path(@conn, :delete, achievement), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger is-small" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New achievement", to: achievement_path(@conn, :new) %></span>

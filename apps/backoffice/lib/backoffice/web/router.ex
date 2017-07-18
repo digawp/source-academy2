@@ -38,6 +38,8 @@ defmodule Backoffice.Web.Router do
     get "/announcements/:announcement_id/toggle_publish", AnnouncementController, :toggle_publish
 
     resources "/discussion_groups", DiscussionGroupController, only: [:index, :create]
+    resources "/achievements", AchievementController, except: [:show]
+    resources "/student_achievements", StudentAchievementController, only: [:new, :create]
 
     resources "/materials", MaterialController, only: [:index, :new, :create, :delete]
     get "/materials/:id/delete", MaterialController, :delete_entry

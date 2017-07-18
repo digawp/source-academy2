@@ -5,6 +5,11 @@
     <article class="message is-info">
       <div class="message-header">Information</div>
       <div class="message-body">
+      <ul>
+      <%= for achievement <- @achievements do %>
+        <li><%= achievement.title %></li>
+      <% end %>
+      </ul>
       </div>
     </article>
   </div>
