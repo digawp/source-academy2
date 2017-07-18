@@ -3,6 +3,7 @@ defmodule SourceAcademy.SeedHelper do
   alias SourceAcademy.Authorization
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
+  alias SourceAcademy.Achievement
 
   def add_user(params, role \\ "staff") do
     Repo.transaction(fn ->
@@ -22,5 +23,9 @@ defmodule SourceAcademy.SeedHelper do
       {:ok, _} = Student.create(user, user.role == "student")
       user
     end)
+  end
+
+  def add_achievement(params) do
+    Achievement.create(params)
   end
 end

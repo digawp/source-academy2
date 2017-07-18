@@ -28,3 +28,48 @@ add_user(%{
   last_name: "Two",
   email: "stafftwo@example.org"
 })
+
+add_achievement(%{
+  title: "Master of the Force",
+  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  points: 1000,
+  display_order: 999,
+  image_src: "somewhere",
+  category: "end_game",
+  query: "SELECT * WHERE 1=1;"
+})
+
+add_achievement(%{
+  title: "Initiate",
+  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  points: 1,
+  display_order: 1,
+  image_src: "somewhere",
+  category: "start_game",
+  query: "SELECT * WHERE 1=1;"
+})
+
+add_achievement(%{
+  title: "Easily distracted",
+  description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  points: 250,
+  display_order: 500,
+  image_src: "somewhere",
+  category: "some_cat",
+  query: "SELECT * WHERE 1=1;"
+})

@@ -1,0 +1,6 @@
+<h2 class="title">Edit achievement</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: achievement_path(@conn, :update, @achievement) %>
+
+<span><%= link "Back", to: achievement_path(@conn, :index) %></span>

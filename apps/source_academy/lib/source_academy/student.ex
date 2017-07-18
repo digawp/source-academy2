@@ -5,6 +5,7 @@ defmodule SourceAcademy.Student do
   alias SourceAcademy.User
   alias SourceAcademy.Repo
   alias SourceAcademy.GiveXP
+  alias SourceAcademy.StudentAchievement
 
   schema "students" do
     field :is_phantom, :boolean, default: false
@@ -15,6 +16,9 @@ defmodule SourceAcademy.Student do
     belongs_to :user, User
 
     has_many :give_xp, GiveXP
+
+    has_many :_achievements, StudentAchievement # intermediate table
+    has_many :achievements, through: [:_achievements, :achievement]
 
     timestamps()
   end
