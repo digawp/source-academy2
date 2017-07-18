@@ -1,10 +1,14 @@
-<h3 class="title is-3"><strong>401</strong> Unauthorized</h3>
-<article class="message is-danger">
-  <div class="message-body">
-    You must be logged in as course staff to view this page.<br />
+<h3 class="title is-3">
+  <strong>401</strong>&nbsp;
+  Unauthorized Access
+</h3>
+<article class="notification">
+  You must be logged in as course staff to view this page.<br />
+  <%= if @current_user do %>
+    Your current role is <%= @current_user.role %>
+  <% end %>
 
-    <%= link "Logout", to: auth_path(@conn, :logout) %> |
-    <%= link "Back to Source Academy", to: auth_path(@conn, :login) %>
-  </div>
+  <%= link "Logout", to: auth_path(@conn, :logout) %> |
+  <%= link "Back to Source Academy", to: auth_path(@conn, :login) %>
 </article>
 

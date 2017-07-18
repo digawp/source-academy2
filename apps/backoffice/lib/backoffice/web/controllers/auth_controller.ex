@@ -70,7 +70,9 @@ defmodule Backoffice.Web.AuthController do
   def unauthorized(conn, _params) do
     conn
     |> put_view(Backoffice.Web.AuthView)
-    |> render("unauthorized.html", layout: {Backoffice.Web.LayoutView, "app.html"})
+    |> render("unauthorized.html",
+      layout: {Backoffice.Web.LayoutView, "app.html"},
+      current_user: conn.assigns[:current_user])
   end
 
   defp guardian_sign_in(conn, user) do
