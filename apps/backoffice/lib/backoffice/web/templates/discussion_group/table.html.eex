@@ -1,4 +1,6 @@
-<%= @staff.first_name <> " " <> @staff.last_name %>
+<h4 class="title is-4">
+  <%= display_name(@staff) %>
+</h4>
 <%= render "form.html",
       conn: @conn,
       staff: @staff,

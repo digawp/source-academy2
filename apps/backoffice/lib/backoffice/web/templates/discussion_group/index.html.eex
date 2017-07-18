@@ -1,4 +1,4 @@
-<h4>Discussion Group</h4>
+<h4 class="title is-3">Discussion Group</h4>
 <%= for staff <- @staffs do %>
   <%= render "table.html",
     conn: @conn,
