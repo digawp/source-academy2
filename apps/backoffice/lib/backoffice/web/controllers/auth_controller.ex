@@ -47,8 +47,7 @@ defmodule Backoffice.Web.AuthController do
       {:error, reason} ->
         conn
         |> put_flash(:error, "Could not authenticate. Error: #{reason}")
-        |> render("login.html", current_user: current_user,
-            current_auths: Auth.get_authorizations(current_user))
+        |> render("login.html", current_user: current_user)
     end
   end
 
