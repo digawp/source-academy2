@@ -9,5 +9,6 @@ defmodule Api.Router do
     pipe_through :api
 
     resources "/status", StatusController, only: [:index]
+    resources "/announcements", AnnouncementController, only: [:index]
   end
 end
