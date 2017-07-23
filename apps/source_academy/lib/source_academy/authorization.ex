@@ -18,6 +18,9 @@ defmodule SourceAcademy.Authorization do
     field :token, :string
     field :refresh_token, :string
     field :expires_at, :integer
+
+    field :first_name, :string, virtual: true
+    field :last_name, :string, virtual: true, default: ''
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
@@ -26,14 +29,8 @@ defmodule SourceAcademy.Authorization do
     timestamps()
   end
 
-  @required_fields ~w(provider uid user_id token)a
+  @required_fields ~w(provider uid token)a
   @optional_fields ~w(refresh_token expires_at)a
-
-  def create_identity(params, user) do
-    Ecto.build_assoc(user, :authorizations)
-    |> identity_registration_changeset(Util.scrub(params))
-    |> Repo.insert
-  end
 
   def find_by_uid_and_provider(uid, provider) do
     case Repo.get_by(__MODULE__, uid: uid, provider: provider) do
@@ -42,18 +39,11 @@ defmodule SourceAcademy.Authorization do
     end
   end
 
-  def identity_registration_changeset(authorization, params) do
-    authorization
-    |> changeset(params)
-    |> validate_length(:password, min: 8)
-    |> validate_confirmation(:password)
-  end
-
   def changeset(authorization, params \\ :empty) do
     authorization
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> foreign_key_constraint(:user_id)
+    |> foreign_key_constraint(:uid)
     |> unique_constraint(:uid)
   end
 end

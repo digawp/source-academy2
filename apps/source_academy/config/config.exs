@@ -4,7 +4,10 @@ config :source_academy, ecto_repos: [SourceAcademy.Repo]
 
 config :ueberauth, Ueberauth,
   providers: [
-    identity: {Ueberauth.Strategy.Identity, [callback_methods: ["POST"]]}
+    identity: {Ueberauth.Strategy.Identity, [
+      callback_methods: ["POST"],
+      param_nesting: "authorization"
+    ]}
   ]
 
 config :guardian, Guardian,

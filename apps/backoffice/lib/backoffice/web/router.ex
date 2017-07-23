@@ -58,7 +58,7 @@ defmodule Backoffice.Web.Router do
     get "/signup", AuthController, :signup
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
-    post "/identity/callback", AuthController, :identity_callback
+    post "/identity/callback", AuthController, :callback
   end
   # Other scopes may use custom stacks.
   # scope "/api", Backoffice.Web do

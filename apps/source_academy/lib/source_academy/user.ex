@@ -41,6 +41,13 @@ defmodule SourceAcademy.User do
     changeset(%__MODULE__{}, params)
   end
 
+  def build_registration(params) do
+    registration_changeset(%__MODULE__{
+      student: %Student{},
+      authorizations: [%Authorization{}
+    ]}, params)
+  end
+
   def create(params, role \\ "student") do
     registration_changeset(%__MODULE__{}, Util.scrub(params))
     |> cast(%{role: role}, ~w(role)a)
@@ -76,6 +83,7 @@ defmodule SourceAcademy.User do
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_email
+    |> unique_constraint(:email)
   end
 
   def changeset(user, params \\ :empty) do

@@ -1,17 +1,19 @@
 <h2 class="title is-2">Staff Sign In</h2>
-<%= form_tag auth_path(@conn, :callback, "identity"), method: "post" do %>
+<%= form_for @changeset, @action, fn f -> %>
   <div class='field'>
     <label class='label' for='email-input'>Email</label>
-    <input class='input' type='email' name='email' value='<%= @conn.params["email"] %>' required/>
+    <%= email_input f, :uid, class: "input" %>
+    <%= error_tag f, :uid %>
   </div>
 
   <div class='field'>
     <label class='label' for='password-input'>Password</label>
-    <input class='input' type='password' name='password' required/>
+    <%= password_input f, :password, class: "input" %>
+    <%= error_tag f, :password %>
   </div>
 
   <div class='field'>
-    <button class='button is-success'>Sign In</button>
+    <%= submit "Sign In", class: "button is-success" %>
   </div>
 <% end %>
 

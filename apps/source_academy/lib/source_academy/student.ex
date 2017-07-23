@@ -23,8 +23,7 @@ defmodule SourceAcademy.Student do
     timestamps()
   end
 
-  @required_fields ~w(is_phantom experience_point level)s
-  @optional_fields ~w(latest_story)s
+  @student_fields ~w(is_phantom experience_point level latest_story)s
 
   def all(), do: all(preload_user: true)
   def all(preload_user: with_user) do
@@ -66,7 +65,7 @@ defmodule SourceAcademy.Student do
 
   def changeset(student, params) do
     student
-    |> cast(params, @required_fields ++ @optional_fields)
+    |> cast(params, @student_fields)
     |> validate_number(:level, greater_than_or_equal_to: 1)
     |> validate_number(:experience_point, greater_than_or_equal_to: 0)
   end

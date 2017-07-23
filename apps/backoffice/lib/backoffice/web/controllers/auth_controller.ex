@@ -8,47 +8,68 @@ defmodule Backoffice.Web.AuthController do
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Auth
+  alias SourceAcademy.Authorization
+  alias SourceAcademy.Authorization.Identity
   alias SourceAcademy.User
 
   plug Ueberauth
 
   def login(conn, _params) do
     redirect_if_logged_in conn, fn conn ->
-      render(conn, "login.html")
+      changeset = Identity.build_login(%{})
+      action = auth_path(conn, :callback, "identity", type: "login")
+      render(conn, "login.html", changeset: changeset, action: action)
     end
   end
 
   def signup(conn, _params) do
     redirect_if_logged_in conn, fn conn ->
-      render(conn, "signup.html")
+      changeset = User.build_registration(%{})
+      action = auth_path(conn, :callback, "identity", type: "register")
+      render(conn, "signup.html", changeset: changeset, action: action)
     end
   end
 
-  def callback(conn, _params) do
-    fails = conn.assigns[:ueberauth_failure]
-    current_user = conn.assigns[:current_user]
+  def callback(conn, %{"type" => "register", "user" => params}) do
+    action = auth_path(conn, :callback, "identity", type: "register")
 
-    conn
-    |> put_flash(:error, hd(fails.errors).message)
-    |> render("login.html",
-         current_user: current_user,
-         current_auths: User.authorizations(current_user))
-  end
-
-  def identity_callback(conn, _params) do
-    current_user = conn.assigns[:current_user]
-
-    case Auth.Identity.authenticate(conn) do
+    case Identity.register(params) do
       {:ok, user} ->
         conn
         |> guardian_sign_in(user)
         |> put_flash(:info, "Signed in as #{user.first_name}")
-        |> redirect(to: user_path(conn, :show, user.id))
+        |> redirect(to: page_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "signup.html", action: action, changeset: changeset)
+    end
+  end
+
+  def callback(conn, %{"type" => "login", "authorization" => params}) do
+    changeset = Identity.build_login(params)
+    action = auth_path(conn, :callback, "identity", type: "login")
+
+    case Identity.sign_in(params) do
+      {:ok, user} ->
+        conn
+        |> guardian_sign_in(user)
+        |> put_flash(:info, "Signed in as #{user.first_name}")
+        |> redirect(to: page_path(conn, :index))
       {:error, reason} ->
         conn
         |> put_flash(:error, "Could not authenticate. Error: #{reason}")
-        |> render("login.html", current_user: current_user)
+        |> render("login.html", action: action, changeset: changeset)
     end
+  end
+
+  def callback(%{assigns: %{ueberauth_failure: fails}} = conn, %{"type" => "login"}) do
+    fails = conn.assigns[:ueberauth_failure]
+    params = fails.extra.raw_info["authorization"]
+    changeset = Identity.build_login(params)
+    action = auth_path(conn, :callback, "identity", type: "login")
+
+    conn
+    |> put_flash(:error, hd(fails.errors).message)
+    |> render("login.html", changeset: changeset, action: action)
   end
 
   def logout(conn, _params) do
@@ -58,11 +79,11 @@ defmodule Backoffice.Web.AuthController do
       conn
       |> Guardian.Plug.sign_out
       |> put_flash(:info, "Signed out")
-      |> redirect(to: "/")
+      |> redirect(to: auth_path(conn, :login))
     else
       conn
       |> put_flash(:info, "Not logged in")
-      |> redirect(to: "/")
+      |> redirect(to: auth_path(conn, :login))
     end
   end
 
