@@ -1,11 +1,15 @@
 <h4 class="title is-4">
   <%= display_name(@staff) %>
 </h4>
-<%= render "form.html",
-      conn: @conn,
-      staff: @staff,
-      students: @students,
-      discussion_group_changeset: @discussion_group_changeset %>
+
+<%= if !Enum.empty?(@students) do %>
+  <%= render "form.html",
+        conn: @conn,
+        staff: @staff,
+        students: @students,
+        discussion_group_changeset: @discussion_group_changeset %>
+<% end %>
+
 <%= if Enum.empty?(@discussion_groups) do %>
 <div class="notification">
   There are no students
@@ -14,8 +18,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Level</th>
+      <th style="width:400px;">Name</th>
+      <th style="width:20px;">Level</th>
       <th>Actions</th>
     </tr>
   </thead>

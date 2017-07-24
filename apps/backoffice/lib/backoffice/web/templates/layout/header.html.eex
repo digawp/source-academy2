@@ -1,13 +1,8 @@
 <nav role="navigation" class="navbar">
   <div class="navbar-brand">
-    <%= link "Source Academy Backoffice", to: page_path(@conn, :index), class: "navbar-item" %>
-    <div class="navbar-burger burger" data-target="menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+    <%= link "BackOffice", to: page_path(@conn, :index), class: "navbar-item" %>
   </div>
-  <div id="menu" class="navbar-menu">
+  <div id="menu" class="navbar-menu is-mobile">
     <div class="navbar-end">
       <%= if @current_user do %>
         <%= link @current_user.first_name, class: "navbar-item", to: user_path(@conn, :edit, @current_user.id) %>
