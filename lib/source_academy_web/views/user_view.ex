@@ -1,3 +1,3 @@
-defmodule SourceAcademy.Web.UserView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.UserView do
+  use SourceAcademyWeb, :view
 end

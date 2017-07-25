@@ -1,3 +1,3 @@
-defmodule SourceAcademy.Web.DiscussionGroupView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.DiscussionGroupView do
+  use SourceAcademyWeb, :view
 end

@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.MaterialController do
-  use SourceAcademy.Web, :controller
+defmodule SourceAcademyWeb.MaterialController do
+  use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Repo
   alias SourceAcademy.GuardianSerializer

@@ -1,12 +1,12 @@
-defmodule SourceAcademy.Web do
+defmodule SourceAcademyWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use SourceAcademy.Web, :controller
-      use SourceAcademy.Web, :view
+      use SourceAcademyWeb, :controller
+      use SourceAcademyWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule SourceAcademy.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: SourceAcademy.Web
+      use Phoenix.Controller, namespace: SourceAcademyWeb
       import Plug.Conn
-      import SourceAcademy.Web.Router.Helpers
-      import SourceAcademy.Web.Gettext
+      import SourceAcademyWeb.Router.Helpers
+      import SourceAcademyWeb.Gettext
     end
   end
 
   def view do
     quote do
       use Phoenix.View, root: "lib/source_academy_web/templates",
-                        namespace: SourceAcademy.Web
+                        namespace: SourceAcademyWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [
@@ -40,10 +40,10 @@ defmodule SourceAcademy.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import SourceAcademy.Web.Router.Helpers
-      import SourceAcademy.Web.ErrorHelpers
-      import SourceAcademy.Web.Gettext
-      import SourceAcademy.Web.ViewHelpers
+      import SourceAcademyWeb.Router.Helpers
+      import SourceAcademyWeb.ErrorHelpers
+      import SourceAcademyWeb.Gettext
+      import SourceAcademyWeb.ViewHelpers
     end
   end
 
@@ -58,7 +58,7 @@ defmodule SourceAcademy.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import SourceAcademy.Web.Gettext
+      import SourceAcademyWeb.Gettext
     end
   end
 

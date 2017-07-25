@@ -1,4 +1,4 @@
-defmodule SourceAcademy.Web.ErrorHelpers do
+defmodule SourceAcademyWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule SourceAcademy.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(SourceAcademy.Web.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(SourceAcademyWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(SourceAcademy.Web.Gettext, "errors", msg, opts)
+      Gettext.dgettext(SourceAcademyWeb.Gettext, "errors", msg, opts)
     end
   end
 end

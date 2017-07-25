@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.MaterialView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.MaterialView do
+  use SourceAcademyWeb, :view
   alias SourceAcademy.Material.File
 
   def display_url(material) do

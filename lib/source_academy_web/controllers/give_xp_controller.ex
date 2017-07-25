@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.GiveXPController do
-  use SourceAcademy.Web, :controller
+defmodule SourceAcademyWeb.GiveXPController do
+  use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student

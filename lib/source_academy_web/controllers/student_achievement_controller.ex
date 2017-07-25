@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.StudentAchievementController do
-  use SourceAcademy.Web, :controller
+defmodule SourceAcademyWeb.StudentAchievementController do
+  use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Achievement
   alias SourceAcademy.Student

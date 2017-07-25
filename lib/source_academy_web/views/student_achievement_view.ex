@@ -1,3 +1,3 @@
-defmodule SourceAcademy.Web.StudentAchievementView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.StudentAchievementView do
+  use SourceAcademyWeb, :view
 end

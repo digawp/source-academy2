@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Api.AnnouncementController do
-  use SourceAcademy.Api, :controller
+defmodule SourceAcademyApi.AnnouncementController do
+  use SourceAcademyApi, :controller
 
   alias SourceAcademy.Announcement
 

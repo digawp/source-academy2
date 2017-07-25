@@ -1,4 +1,4 @@
-defmodule SourceAcademy.Web.ChannelCase do
+defmodule SourceAcademyWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,7 +22,7 @@ defmodule SourceAcademy.Web.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint SourceAcademy.Web.Endpoint
+      @endpoint SourceAcademyWeb.Endpoint
     end
   end
 

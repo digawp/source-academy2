@@ -7,7 +7,7 @@ defmodule SourceAcademy.Application do
 
     children = [
       worker(SourceAcademy.Repo, []),
-      supervisor(SourceAcademy.Web.Endpoint, []),
+      supervisor(SourceAcademyWeb.Endpoint, []),
     ]
 
     Supervisor.start_link(children,

@@ -1,4 +1,4 @@
-defmodule SourceAcademy.Web.Endpoint do
+defmodule SourceAcademyWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :source_academy
 
   # Serve at "/" the static files from "priv/static" directory.
@@ -39,7 +39,7 @@ defmodule SourceAcademy.Web.Endpoint do
     key: "_source_academy_key",
     signing_salt: "Qad5WbQ/"
 
-  plug SourceAcademy.Web.Router
+  plug SourceAcademyWeb.Router
 
   @doc """
   Dynamically loads configuration from the system environment

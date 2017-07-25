@@ -1,12 +1,12 @@
-defmodule SourceAcademy.Api do
+defmodule SourceAcademyApi do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use SourceAcademy.Api, :controller
-      use SourceAcademy.Api, :view
+      use SourceAcademyApi, :controller
+      use SourceAcademyApi, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,27 +18,27 @@ defmodule SourceAcademy.Api do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: SourceAcademy.Web
+      use Phoenix.Controller, namespace: SourceAcademyApi
       import Plug.Conn
-      import SourceAcademy.Web.Gettext
+      import SourceAcademyWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, namespace: SourceAcademy.Api,
+      use Phoenix.View, namespace: SourceAcademyApi,
                         root: "lib/source_academy_api/templates"
 
-      import SourceAcademy.Web.ErrorHelpers
-      import SourceAcademy.Web.Gettext
-      import SourceAcademy.Web.ViewHelpers
+      import SourceAcademyWeb.ErrorHelpers
+      import SourceAcademyWeb.Gettext
+      import SourceAcademyWeb.ViewHelpers
     end
   end
 
   def channel do
     quote do
       use Phoenix.Channel
-      import SourceAcademy.Web.Gettext
+      import SourceAcademyWeb.Gettext
     end
   end
 

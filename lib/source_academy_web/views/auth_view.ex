@@ -1,3 +1,3 @@
-defmodule SourceAcademy.Web.AuthView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.AuthView do
+  use SourceAcademyWeb, :view
 end

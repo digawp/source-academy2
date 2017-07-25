@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.AnnouncementView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.AnnouncementView do
+  use SourceAcademyWeb, :view
 
   def toggle_pin_label(announcement) do
     if announcement.is_pinned, do: "Unpin", else: "Pin"

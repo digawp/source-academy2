@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.DiscussionGroupController do
-  use SourceAcademy.Web, :controller
+defmodule SourceAcademyWeb.DiscussionGroupController do
+  use SourceAcademyWeb, :controller
 
   alias SourceAcademy.User
   alias SourceAcademy.DiscussionGroup

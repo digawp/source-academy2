@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.ErrorView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.ErrorView do
+  use SourceAcademyWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

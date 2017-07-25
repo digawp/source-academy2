@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.StudentView do
-  use SourceAcademy.Web, :view
+defmodule SourceAcademyWeb.StudentView do
+  use SourceAcademyWeb, :view
 
   def show_students(students, [is_phantom: is_phantom]), do:
     show_students(students, [is_phantom: is_phantom, sort_by: :name])

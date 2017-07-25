@@ -1,9 +1,9 @@
-defmodule SourceAcademy.Web.AuthController do
+defmodule SourceAcademyWeb.AuthController do
   @moduledoc false
-  use SourceAcademy.Web, :controller
+  use SourceAcademyWeb, :controller
 
-  alias SourceAcademy.Web.AuthView
-  alias SourceAcademy.Web.LayoutView
+  alias SourceAcademyWeb.AuthView
+  alias SourceAcademyWeb.LayoutView
   alias SourceAcademy.Repo
   alias SourceAcademy.Auth
   alias SourceAcademy.Authorization.Identity

@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.Router do
-  use SourceAcademy.Web, :router
+defmodule SourceAcademyWeb.Router do
+  use SourceAcademyWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,7 +18,7 @@ defmodule SourceAcademy.Web.Router do
 
   pipeline :ensure_staff do
     plug Guardian.Plug.EnsurePermissions,
-      handler: SourceAcademy.Web.AuthController,
+      handler: SourceAcademyWeb.AuthController,
       admin: [:access]
     plug SourceAcademy.Plug.AssignUseSidebarFlag
   end
@@ -32,7 +32,7 @@ defmodule SourceAcademy.Web.Router do
     plug Guardian.Plug.LoadResource
   end
 
-  scope "/api/v1", SourceAcademy.Api, as: :api_v1 do
+  scope "/api/v1", SourceAcademyApi, as: :api_v1 do
     pipe_through [:api, :api_auth]
 
     resources "/announcements", AnnouncementController, only: [:index]
@@ -42,7 +42,7 @@ defmodule SourceAcademy.Web.Router do
     pipe_through [:browser, :browser_auth]
   end
 
-  scope "/admin", SourceAcademy.Web do
+  scope "/admin", SourceAcademyWeb do
     pipe_through [:browser, :browser_auth, :ensure_staff]
 
     get "/", PageController, :index
@@ -69,7 +69,7 @@ defmodule SourceAcademy.Web.Router do
     get "/students/:student_id/toggle_phantom", StudentController, :toggle_phantom
   end
 
-  scope "/auth", SourceAcademy.Web do
+  scope "/auth", SourceAcademyWeb do
     pipe_through [:browser, :browser_auth]
 
     get "/login", AuthController, :login

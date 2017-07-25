@@ -1,4 +1,4 @@
-defmodule SourceAcademy.Web.ViewHelpers do
+defmodule SourceAcademyWeb.ViewHelpers do
   @moduledoc false
   alias SourceAcademy.User
   alias SourceAcademy.Student

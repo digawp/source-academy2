@@ -6,10 +6,10 @@ config :source_academy,
   ecto_repos: [SourceAcademy.Repo]
 
 # Endpoint
-config :source_academy, SourceAcademy.Web.Endpoint,
+config :source_academy, SourceAcademyWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "GMXlMQRXuzMAc0Hv59jSNp1GYWmEBkRgsMbm4xX1NoYpmLQiqBZZb8UjcxO04ayl",
-  render_errors: [view: SourceAcademy.Web.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: SourceAcademyWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: SourceAcademy.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

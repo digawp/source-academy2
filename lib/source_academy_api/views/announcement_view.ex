@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Api.AnnouncementView do
-  use SourceAcademy.Api, :view
+defmodule SourceAcademyApi.AnnouncementView do
+  use SourceAcademyApi, :view
 
   def render("index.json", %{announcements: announcements}) do
     render_many(announcements, __MODULE__, "announcement.json")

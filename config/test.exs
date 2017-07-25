@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :source_academy, SourceAcademy.Web.Endpoint,
+config :source_academy, SourceAcademyWeb.Endpoint,
   http: [port: 4001],
   server: false
 

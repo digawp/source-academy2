@@ -8,7 +8,7 @@ config :source_academy, SourceAcademy.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :source_academy, SourceAcademy.Web.Endpoint,
+config :source_academy, SourceAcademyWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,

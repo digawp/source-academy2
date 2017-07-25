@@ -1,5 +1,5 @@
-defmodule SourceAcademy.Web.UserController do
-  use SourceAcademy.Web, :controller
+defmodule SourceAcademyWeb.UserController do
+  use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Repo
   alias SourceAcademy.User
