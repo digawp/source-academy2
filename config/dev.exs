@@ -14,14 +14,16 @@ config :source_academy, SourceAcademyWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: ["node_modules/brunch/bin/brunch", "watch", "--stdin"]
+    node: [
+      "scripts/start.js",
+      cd: Path.expand("../priv/frontend", __DIR__)
+    ]
   ],
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/source_academy/web/views/.*(ex)$},
-      ~r{lib/source_academy/templates/.*(eex)$}
+      ~r{lib/source_academy_web/views/.*(ex)$},
+      ~r{lib/source_academy_web/templates/.*(eex)$}
     ]
   ]
 

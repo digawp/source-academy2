@@ -3,10 +3,8 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
@@ -53,14 +51,26 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    common: [
+      'react',
+      'react-dom',
+      'react-addons-css-transition-group',
+      '@blueprintjs/core',
+      path.resolve(__dirname, '../src/common/index.js')
+    ],
+    academy: [
+      require.resolve('./polyfills'),
+      paths.appIndexJs
+    ]
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'static/js/[name].[chunkhash:8].js',
+    filename: 'static/js/[name].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
@@ -83,7 +93,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -172,7 +182,7 @@ module.exports = {
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         loader: ExtractTextPlugin.extract(
           Object.assign(
             {
@@ -204,6 +214,9 @@ module.exports = {
                     ],
                   },
                 },
+                {
+                  loader: require.resolve('sass-loader')
+                }
               ],
             },
             extractTextPluginOptions
@@ -216,29 +229,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // Makes some environment variables available in index.html.
-    // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
-    // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    // In production, it will be an empty string unless you specify "homepage"
-    // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(env.raw),
-    // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.

@@ -1,7 +1,6 @@
-// Customize then Load Blueprint CSS
 @import '~flexboxgrid/dist/flexboxgrid.css';
 @import 'variables';
-@import '~@blueprintjs/core/src/blueprint';
+@import '~@blueprintjs/core/src/blueprint.scss';
 
 .pt-navbar {
   background: white;
@@ -13,4 +12,8 @@
 .pt-navbar.pt-dark {
   color: white;
   background: $dark-gray1;
+}
+
+body {
+  background: black;
 }

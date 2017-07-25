@@ -16,11 +16,11 @@ defmodule SourceAcademyWeb.Router do
     plug SourceAcademy.Plug.AssignCurrentUser
   end
 
-  pipeline :ensure_staff do
+  pipeline :admin do
+    plug :put_layout, {SourceAcademyWeb.AdminView, :admin}
     plug Guardian.Plug.EnsurePermissions,
       handler: SourceAcademyWeb.AuthController,
       admin: [:access]
-    plug SourceAcademy.Plug.AssignUseSidebarFlag
   end
 
   pipeline :api do
@@ -38,12 +38,14 @@ defmodule SourceAcademyWeb.Router do
     resources "/announcements", AnnouncementController, only: [:index]
   end
 
-  scope "/" do
+  scope "/", SourceAcademyWeb do
     pipe_through [:browser, :browser_auth]
+
+    get "/", PageController, :index
   end
 
   scope "/admin", SourceAcademyWeb do
-    pipe_through [:browser, :browser_auth, :ensure_staff]
+    pipe_through [:browser, :browser_auth, :admin]
 
     get "/", PageController, :index
 

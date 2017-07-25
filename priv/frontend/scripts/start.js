@@ -24,7 +24,6 @@ const {
   prepareProxy,
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
-const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
@@ -33,12 +32,12 @@ const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appIndexJs])) {
   process.exit(1);
 }
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 4001;
 const HOST = process.env.HOST || '0.0.0.0';
 
 // We attempt to use the default port but if it is busy, we offer the user to
@@ -72,7 +71,11 @@ choosePort(HOST, DEFAULT_PORT)
         clearConsole();
       }
       console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
+    });
+
+    process.stdin.on('close', function () {
+      devServer.close();
+      process.exit();
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {

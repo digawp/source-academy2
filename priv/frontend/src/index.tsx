@@ -1,11 +1,10 @@
+// Academy Interface Entry
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import { render } from 'react-dom';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root') as HTMLElement
-);
-registerServiceWorker();
+const div = (<div className="pt-card">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec dapibus et mauris,
+  vitae dictum metuss.
+</div>);
+
+render(div, document.querySelector('.sa-root'));
