@@ -9,6 +9,7 @@ defmodule SourceAcademy.Repo.Migrations.AddAchievementDependencies do
       timestamps()
     end
 
-    create index(:achievement_dependencies, [:achievement_id, :dependency_id], unique: true)
+    create index(:achievement_dependencies,
+      [:achievement_id, :dependency_id], unique: true)
   end
 end

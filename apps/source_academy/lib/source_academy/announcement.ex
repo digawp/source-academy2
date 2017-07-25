@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Announcement do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -24,14 +25,16 @@ defmodule SourceAcademy.Announcement do
   end
 
   def create(params, poster) do
-    build(params)
+    announcement = build(params)
+
+    announcement
     |> put_assoc(:poster, poster)
     |> Repo.insert
   end
 
   def delete(announcement) do
-    Repo.get(__MODULE__, announcement.id)
-    |> Repo.delete
+    announcement = Repo.get(__MODULE__, announcement.id)
+    Repo.delete(announcement)
   end
 
   def find_by_id(announcement_id) do
@@ -39,20 +42,22 @@ defmodule SourceAcademy.Announcement do
   end
 
   def update(announcement, params) do
-    changeset(announcement, params)
-    |> Repo.update
+    announcement = changeset(announcement, params)
+    Repo.update(announcement)
   end
 
   def toggle_pin(announcement) do
-    update(announcement, %{ is_pinned: !announcement.is_pinned })
+    update(announcement, %{is_pinned: !announcement.is_pinned})
   end
 
   def toggle_publish(announcement) do
-    update(announcement, %{ is_published: !announcement.is_published })
+    update(announcement, %{is_published: !announcement.is_published})
   end
 
-  def all() do
-    Repo.all(__MODULE__)
+  def all do
+    announcements = Repo.all(__MODULE__)
+
+    announcements
     |> Repo.preload(:poster)
     |> Enum.sort_by(&(&1.inserted_at))
     |> Enum.reverse

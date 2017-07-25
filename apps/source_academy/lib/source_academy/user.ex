@@ -1,8 +1,5 @@
 defmodule SourceAcademy.User do
-  @moduledoc """
-    The User entity contains basic user data such as name and e-mail.
-    A user can have many authorisations from different providers.
-  """
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
@@ -36,6 +33,7 @@ defmodule SourceAcademy.User do
   @required_fields ~w(first_name email)a
   @optional_fields ~w(last_name bio)a
   @user_roles ~w(admin staff student)s
+  @email_format ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
 
   def build(params) do
     changeset(%__MODULE__{}, params)
@@ -49,17 +47,17 @@ defmodule SourceAcademy.User do
   end
 
   def create(params, role \\ "student") do
-    registration_changeset(%__MODULE__{}, Util.scrub(params))
+    user = registration_changeset(%__MODULE__{}, params)
+
+    user
     |> cast(%{role: role}, ~w(role)a)
     |> Repo.insert
   end
 
-  def all_staffs() do
-    Repo.all(from u in __MODULE__, where: u.role == "staff")
-  end
+  def all, do: Repo.all(__MODULE__)
 
-  def all() do
-    Repo.all(__MODULE__)
+  def all_staffs do
+    Repo.all(from u in __MODULE__, where: u.role == "staff")
   end
 
   def authorizations(nil), do: []
@@ -95,7 +93,7 @@ defmodule SourceAcademy.User do
   end
 
   defp validate_email(user) do
-    validate_format(user, :email, ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+    validate_format(user, :email, @email_format)
   end
 
   def make_staff!(user) do

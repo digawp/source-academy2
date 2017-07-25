@@ -11,7 +11,9 @@ defmodule SourceAcademy.DataCase do
   inside a transaction which is reset at the beginning
   of the test unless the test case is marked as async.
   """
-
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Changeset
+  alias SourceAcademy.Repo
   use ExUnit.CaseTemplate
 
   using do
@@ -26,10 +28,10 @@ defmodule SourceAcademy.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(SourceAcademy.Repo)
+    :ok = Sandbox.checkout(Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(SourceAcademy.Repo, {:shared, self()})
+     Sandbox.mode(Repo, {:shared, self()})
     end
 
     :ok
@@ -44,7 +46,7 @@ defmodule SourceAcademy.DataCase do
 
   """
   def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Changeset.traverse_errors(changeset, fn {message, opts} ->
       Enum.reduce(opts, message, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)

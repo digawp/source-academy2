@@ -12,8 +12,11 @@ defmodule Api.ConnCase do
   inside a transaction which is reset at the beginning
   of the test unless the test case is marked as async.
   """
-
   use ExUnit.CaseTemplate
+
+  alias Ecto.Adapters.SQL.Sandbox
+  alias SourceAcademy.Repo
+  alias Phoenix.ConnTest
 
   using do
     quote do
@@ -26,13 +29,12 @@ defmodule Api.ConnCase do
     end
   end
 
-
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(SourceAcademy.Repo)
+    :ok = Sandbox.checkout(Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(SourceAcademy.Repo, {:shared, self()})
+      Sandbox.mode(Repo, {:shared, self()})
     end
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: ConnTest.build_conn()}
   end
 
 end

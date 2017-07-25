@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Achievement do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -19,19 +20,19 @@ defmodule SourceAcademy.Achievement do
     timestamps()
   end
 
-  @required_fields ~w(title description points display_order image_src category)a
-  @optional_fields ~w(query)a
+  @required_fields ~w(title description category)a
+  @optional_fields ~w(query image_src points display_order)a
 
   def build(params) do
     changeset(%__MODULE__{}, params)
   end
 
   def create(params) do
-    changeset(%__MODULE__{}, params)
-    |> Repo.insert
+    achievement = build(params)
+    Repo.insert(achievement)
   end
 
-  def all() do
+  def all do
     Repo.all(__MODULE__)
   end
 

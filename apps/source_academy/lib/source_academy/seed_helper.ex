@@ -1,9 +1,11 @@
 defmodule SourceAcademy.SeedHelper do
+  @moduledoc false
   alias SourceAcademy.User
   alias SourceAcademy.Authorization
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
   alias SourceAcademy.Achievement
+  alias Comeonin.Bcrypt
 
   def add_user(params, role \\ "staff") do
     Repo.transaction(fn ->
@@ -12,7 +14,7 @@ defmodule SourceAcademy.SeedHelper do
         %{
           provider: "identity",
           uid: params.email,
-          token: Comeonin.Bcrypt.hashpwsalt("password"),
+          token: Bcrypt.hashpwsalt("password"),
           refresh_token: nil,
           expires_at: nil,
           password: "password",

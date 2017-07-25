@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Material.Category do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -22,20 +23,20 @@ defmodule SourceAcademy.Material.Category do
   end
 
   def create(params) do
-    build(params)
-    |> Repo.insert
+    category = build(params)
+    Repo.insert(category)
   end
 
   def delete(category) do
-    Repo.get(__MODULE__, category.id)
-    |> Repo.delete
+    changeset = Repo.get(__MODULE__, category.id)
+    Repo.delete(changeset)
   end
 
   def find_by_id(category_id) do
     Repo.get(__MODULE__, category_id)
   end
 
-  def all() do
+  def all do
     Repo.all(__MODULE__)
   end
 

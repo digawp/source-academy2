@@ -18,11 +18,9 @@ defmodule Backoffice.Web.MaterialController do
     changeset = Material.build(%{})
     category_changeset = Category.build(%{})
     categories = Category.all()
-    token = Guardian.Plug.current_token(conn)
     render(conn, "new.html",
       categories: categories,
       changeset: changeset,
-      current_token: token,
       category_changeset: category_changeset)
   end
 

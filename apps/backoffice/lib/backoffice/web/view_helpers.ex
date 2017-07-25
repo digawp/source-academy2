@@ -1,4 +1,6 @@
 defmodule Backoffice.Web.ViewHelpers do
+  @moduledoc false
+
   def display_name(%SourceAcademy.User{} = user) do
     user.first_name <> " " <> user.last_name
   end

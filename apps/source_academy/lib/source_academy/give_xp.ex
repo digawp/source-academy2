@@ -1,8 +1,6 @@
 defmodule SourceAcademy.GiveXP do
-  @moduledoc """
-    The User entity contains basic user data such as name and e-mail.
-    A user can have many authorisations from different providers.
-  """
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -28,7 +26,8 @@ defmodule SourceAcademy.GiveXP do
   def create(params, student_id, giver) do
     Repo.transaction fn ->
       student = Student.find_by_id(student_id)
-      changeset = build(params)
+      give_xp = build(params)
+      changeset = give_xp
         |> put_assoc(:user, giver)
         |> put_assoc(:student, student)
       {:ok, give_xp} = Repo.insert(changeset)

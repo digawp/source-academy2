@@ -7,7 +7,6 @@
   <div class="message-body">
     <%= render "form.html",
         conn: @conn,
-        current_token: @current_token,
         categories: @categories,
         changeset: @changeset %>
   </div>

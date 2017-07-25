@@ -1,2 +1,0 @@
- 
-0 * * * * php /path/to/JFDI/private/cron/cron.php

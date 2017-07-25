@@ -17,7 +17,9 @@ defmodule Backoffice.Web.Router do
   end
 
   pipeline :ensure_staff do
-    plug Guardian.Plug.EnsurePermissions, handler: Backoffice.Web.AuthController, backoffice: [:access]
+    plug Guardian.Plug.EnsurePermissions,
+      handler: Backoffice.Web.AuthController,
+      backoffice: [:access]
     plug Backoffice.Plug.AssignUseSidebarFlag
   end
 
@@ -60,8 +62,4 @@ defmodule Backoffice.Web.Router do
     get "/:provider/callback", AuthController, :callback
     post "/identity/callback", AuthController, :callback
   end
-  # Other scopes may use custom stacks.
-  # scope "/api", Backoffice.Web do
-  #   pipe_through :api
-  # end
 end

@@ -1,7 +1,4 @@
 defmodule SourceAcademy.Authorization.Identity do
-  # TODO: These should be generalised using protocol
-  # TODO: Handle change&reset password (these replace authorization)
-
   @moduledoc """
     This module contains the logic of authentication using Ueberauth
     with the Identity strategy
@@ -13,6 +10,7 @@ defmodule SourceAcademy.Authorization.Identity do
   alias SourceAcademy.User
   alias SourceAcademy.Student
   alias SourceAcademy.Util
+  alias Comeonin.Bcrypt
   alias Ueberauth.Auth, as: UAuth
 
   @required_login_fields ~w(uid password)a
@@ -40,7 +38,8 @@ defmodule SourceAcademy.Authorization.Identity do
     Repo.transaction fn ->
       with {:ok, user} <- %User{}
         |> User.registration_changeset(params)
-        |> cast_assoc(:authorizations, required: true, with: &registration_changeset/2)
+        |> cast_assoc(:authorizations,
+             required: true, with: &registration_changeset/2)
         |> put_identity_data()
         |> Repo.insert,
         {:ok, _} <- Student.create(user, true),
@@ -51,23 +50,30 @@ defmodule SourceAcademy.Authorization.Identity do
   def sign_in(%{"uid" => uid, "password"=> password}) do
     case Authorization.find_by_uid_and_provider(uid, "identity") do
       {:ok, auth} ->
-        case password do
-          password when is_binary(password) ->
-            if Comeonin.Bcrypt.checkpw(password, auth.token) do
-              User.find_by_authorization(auth)
-            else
-              {:error, :password_does_not_match}
-            end
-          _ -> {:error, :empty_password}
+        case check_password(password, auth.token) do
+          :ok -> User.find_by_authorization(auth)
+          {:error, reason} -> {:error, reason}
         end
       _ -> {:error, :email_not_found}
+    end
+  end
+
+  defp check_password(password, hash) do
+    case password do
+      password when is_binary(password) ->
+        if Bcrypt.checkpw(password, hash) do
+          :ok
+        else
+          {:error, :password_does_not_match}
+        end
+      _ -> {:error, :empty_password}
     end
   end
 
   defp put_password_in_token(changeset, params) do
     if changeset.valid? do
       password = params["password"]
-      token = Comeonin.Bcrypt.hashpwsalt(password)
+      token = Bcrypt.hashpwsalt(password)
       cast(changeset, %{token: token}, [:token])
     else
       changeset

@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Util do
+  @moduledoc false
   # Scrub params by removing nil values and empty strings.
   def scrub(params) do
     result = Enum.filter(params, fn

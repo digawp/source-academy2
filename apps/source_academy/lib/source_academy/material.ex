@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Material do
+  @moduledoc false
   use Ecto.Schema
   use Arc.Ecto.Schema
   import Ecto.Changeset
@@ -7,8 +8,6 @@ defmodule SourceAcademy.Material do
   alias SourceAcademy.User
   alias SourceAcademy.Material.File
   alias SourceAcademy.Material.Category
-
-  require Logger
 
   schema "materials" do
     field :title, :string
@@ -32,15 +31,17 @@ defmodule SourceAcademy.Material do
   end
 
   def create(params, uploader, category) do
-    build(params)
+    material = build(params)
+
+    material
     |> put_assoc(:uploader, uploader)
     |> put_assoc(:category, category)
     |> Repo.insert!
   end
 
   def delete(material) do
-    Repo.get(__MODULE__, material.id)
-    |> Repo.delete
+    material = Repo.get(__MODULE__, material.id)
+    Repo.delete(material)
   end
 
   def find_by_id(material_id) do
@@ -48,12 +49,14 @@ defmodule SourceAcademy.Material do
   end
 
   def update(material, params) do
-    changeset(material, params)
-    |> Repo.update
+    changeset = changeset(material, params)
+    Repo.update(changeset)
   end
 
-  def all() do
-    Repo.all(__MODULE__)
+  def all do
+    materials = Repo.all(__MODULE__)
+
+    materials
     |> Repo.preload(:uploader)
     |> Repo.preload(:category)
     |> Enum.sort_by(&(&1.inserted_at))

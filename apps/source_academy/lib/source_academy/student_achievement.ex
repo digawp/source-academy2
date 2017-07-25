@@ -1,4 +1,5 @@
 defmodule SourceAcademy.StudentAchievement do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, only: [from: 2]
@@ -14,7 +15,7 @@ defmodule SourceAcademy.StudentAchievement do
     timestamps()
   end
 
-  def build() do
+  def build do
     changeset(%__MODULE__{}, %{})
   end
 
@@ -22,7 +23,8 @@ defmodule SourceAcademy.StudentAchievement do
     Repo.transaction fn ->
       student = Student.find_by_id(student_id)
       achievement = Achievement.find_by_id(achievement_id)
-      changeset = build()
+      student_achievement = build()
+      changeset = student_achievement
         |> put_assoc(:student, student)
         |> put_assoc(:achievement, achievement)
       {:ok, student_achievement} = Repo.insert(changeset)
@@ -32,8 +34,7 @@ defmodule SourceAcademy.StudentAchievement do
 
   def find_by_student_id(student_id) do
     query = from sa in __MODULE__, where: sa.student_id == ^student_id
-    Repo.all(query)
-    |> Repo.preload(:achievement)
+    Repo.preload(Repo.all(query), :achievement)
   end
 
   def changeset(student_achievement, params) do

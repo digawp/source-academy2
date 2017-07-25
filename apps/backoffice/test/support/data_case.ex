@@ -11,6 +11,9 @@ defmodule Backoffice.DataCase do
   inside a transaction which is reset at the beginning
   of the test unless the test case is marked as async.
   """
+  alias Ecto.Adapters.SQL.Sandbox
+  alias Ecto.Changeset
+  alias Backoffice.Repo
 
   use ExUnit.CaseTemplate
 
@@ -26,10 +29,10 @@ defmodule Backoffice.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Backoffice.Repo)
+    :ok = Sandbox.checkout(Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Backoffice.Repo, {:shared, self()})
+      Sandbox.mode(Repo, {:shared, self()})
     end
 
     :ok
@@ -44,7 +47,7 @@ defmodule Backoffice.DataCase do
 
   """
   def errors_on(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+    Changeset.traverse_errors(changeset, fn {message, opts} ->
       Enum.reduce(opts, message, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)

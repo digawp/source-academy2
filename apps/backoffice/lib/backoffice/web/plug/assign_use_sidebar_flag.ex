@@ -1,7 +1,10 @@
 defmodule Backoffice.Plug.AssignUseSidebarFlag do
+  @moduledoc false
+  import Plug.Conn
+
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    Plug.Conn.assign(conn, :use_sidebar, true)
+    assign(conn, :use_sidebar, true)
   end
 end

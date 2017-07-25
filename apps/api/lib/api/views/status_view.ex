@@ -2,6 +2,6 @@ defmodule Api.StatusView do
   use Api, :view
 
   def render("status.json", _params) do
-    %{ status: "running" }
+    %{status: "running"}
   end
 end

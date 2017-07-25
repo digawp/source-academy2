@@ -1,16 +1,17 @@
 defmodule Backoffice.Web.AuthController do
-  @moduledoc """
-  Handles the Überauth integration.
-  This controller implements the request and callback phases for all providers.
-  The actual creation and lookup of users/authorizations is handled by UserFromAuth
-  """
+  @moduledoc false
   use Backoffice.Web, :controller
+
+  alias Backoffice.Web.AuthView
+  alias Backoffice.Web.LayoutView
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Auth
-  alias SourceAcademy.Authorization
   alias SourceAcademy.Authorization.Identity
   alias SourceAcademy.User
+
+  alias Guardian.Plug, as: GPlug
+  alias Guardian.Permissions
 
   plug Ueberauth
 
@@ -77,7 +78,7 @@ defmodule Backoffice.Web.AuthController do
 
     if current_user do
       conn
-      |> Guardian.Plug.sign_out
+      |> GPlug.sign_out
       |> put_flash(:info, "Signed out")
       |> redirect(to: auth_path(conn, :login))
     else
@@ -89,20 +90,20 @@ defmodule Backoffice.Web.AuthController do
 
   def unauthorized(conn, _params) do
     conn
-    |> put_view(Backoffice.Web.AuthView)
+    |> put_view(AuthView)
     |> render("unauthorized.html",
-      layout: {Backoffice.Web.LayoutView, "app.html"},
-      current_user: conn.assigns[:current_user])
+        layout: {LayoutView, "app.html"},
+        current_user: conn.assigns[:current_user])
   end
 
   defp guardian_sign_in(conn, user) do
     if user.role == "staff" || user.role == "admin" do
-      Guardian.Plug.sign_in(conn, user, :access, perms: %{
-        default: Guardian.Permissions.max,
+      GPlug.sign_in(conn, user, :access, perms: %{
+        default: Permissions.max,
         backoffice: [:access]
       })
     else
-      Guardian.Plug.sign_in(conn, user, :access, perms: %{default: Guardian.Permissions.max})
+      GPlug.sign_in(conn, user, :access, perms: %{default: Permissions.max})
     end
   end
 

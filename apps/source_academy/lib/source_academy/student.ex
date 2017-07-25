@@ -1,4 +1,5 @@
 defmodule SourceAcademy.Student do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -25,7 +26,7 @@ defmodule SourceAcademy.Student do
 
   @student_fields ~w(is_phantom experience_point level latest_story)s
 
-  def all(), do: all(preload_user: true)
+  def all, do: all(preload_user: true)
   def all(preload_user: with_user) do
     students = Repo.all(__MODULE__)
     if with_user do
@@ -46,20 +47,23 @@ defmodule SourceAcademy.Student do
   end
 
   def create(user, is_phantom \\ false) do
-    Ecto.build_assoc(user, :student)
+    student = Ecto.build_assoc(user, :student)
+
+    student
     |> changeset(%{is_phantom: is_phantom})
     |> Repo.insert
   end
 
   def increase_xp(student, amount) do
+    experience_point = student.experience_point + amount
     student
-    |> cast(%{experience_point: student.experience_point + amount }, [:experience_point])
+    |> cast(%{experience_point: experience_point}, [:experience_point])
     |> Repo.update
   end
 
   def toggle_phantom(student) do
     student
-    |> cast(%{is_phantom: !student.is_phantom}, [:is_phantom] )
+    |> cast(%{is_phantom: !student.is_phantom}, [:is_phantom])
     |> Repo.update
   end
 

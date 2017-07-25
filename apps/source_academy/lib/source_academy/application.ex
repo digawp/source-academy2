@@ -1,12 +1,5 @@
 defmodule SourceAcademy.Application do
-  @moduledoc """
-  The SourceAcademy Application Service.
-
-  The source_academy system business domain lives in this application.
-
-  Exposes API to clients such as the `SourceAcademy.Web` application
-  for use in channels, controllers, and elsewhere.
-  """
+  @moduledoc false
   use Application
 
   def start(_type, _args) do

@@ -1,4 +1,5 @@
 defmodule SourceAcademy.DiscussionGroup do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
@@ -14,12 +15,14 @@ defmodule SourceAcademy.DiscussionGroup do
     timestamps()
   end
 
-  def build() do
+  def build do
     changeset(%__MODULE__{}, %{})
   end
 
-  def all() do
-    Repo.all(__MODULE__)
+  def all do
+    discussion_groups = Repo.all(__MODULE__)
+
+    discussion_groups
     |> Repo.preload(:user)
     |> Repo.preload([student: :user])
   end
@@ -37,8 +40,8 @@ defmodule SourceAcademy.DiscussionGroup do
   end
 
   def delete(id) do
-    Repo.get(__MODULE__, id)
-    |> Repo.delete
+    discussion_group = Repo.get(__MODULE__, id)
+    Repo.delete(discussion_group)
   end
 
   def changeset(dg, params) do
