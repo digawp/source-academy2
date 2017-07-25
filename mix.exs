@@ -41,7 +41,6 @@ defmodule SourceAcademy.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix, "~> 1.3.0-rc", override: true},
-      {:plug_static_index_html, "~> 0.1.3"},
       {:postgrex, ">= 0.0.0"},
       {:ueberauth_identity, "~> 0.2"},
       {:ueberauth, "~> 0.4"}
