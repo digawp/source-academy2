@@ -1,0 +1,51 @@
+<h2 class="title is-2">
+  Sign Up
+</h2>
+
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class='notification'>
+      <strong>Error</strong>: Please fix the problem below
+    </div>
+  <% end %>
+  <div class='field'>
+    <label class='label' for='name-input'>First Name</label>
+    <%= text_input f, :first_name, class: "input" %>
+    <%= error_tag f, :first_name %>
+  </div>
+
+  <div class='field'>
+    <label class='label' for='name-input'>Last Name (Optional)</label>
+    <%= text_input f, :last_name, class: "input" %>
+    <%= error_tag f, :last_name %>
+  </div>
+
+  <div class='field'>
+    <label class='label' for='email-input'>NUSNET Email</label>
+    <%= email_input f, :email, class: "input" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <%= inputs_for f, :authorizations, fn a -> %>
+    <div class='field'>
+      <label class='label' for='password-input'>Password</label>
+      <%= password_input a, :password, class: "input" %>
+      <%= error_tag a, :password %>
+    </div>
+
+    <div class='field'>
+      <label class='label' for='password-confirmation-input'>Confirm Password</label>
+      <%= password_input a, :password_confirmation, class: "input" %>
+      <%= error_tag a, :password_confirmation %>
+    </div>
+  <% end %>
+
+  <div class='notification'>
+    <strong>Note to Avengers</strong><br />
+    For verification purposes, please wait up to 1 working day
+    for the administrator upgrade your account into staff. <br />
+    During processing time you will not be able to access
+    SourceAcademy functionality.
+  </div>
+  <%= submit "Sign Up", class: "button is-success" %>
+<% end %>
