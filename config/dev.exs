@@ -14,10 +14,7 @@ config :source_academy, SourceAcademyWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: [
-      "node_modules/brunch/bin/brunch", "watch", "--stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    node: ["node_modules/brunch/bin/brunch", "watch", "--stdin"]
   ],
   live_reload: [
     patterns: [
