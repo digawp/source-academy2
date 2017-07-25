@@ -7,8 +7,5 @@
   <%= if @current_user do %>
     Your current role is <%= @current_user.role %>
   <% end %>
-
-  <%= link "Logout", to: auth_path(@conn, :logout) %> |
-  <%= link "Back to Source Academy", to: auth_path(@conn, :login) %>
 </article>
 

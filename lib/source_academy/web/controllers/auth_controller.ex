@@ -98,7 +98,7 @@ defmodule SourceAcademy.Web.AuthController do
     if user.role == "staff" || user.role == "admin" do
       GPlug.sign_in(conn, user, :access, perms: %{
         default: Permissions.max,
-        SourceAcademy: [:access]
+        admin: [:access]
       })
     else
       GPlug.sign_in(conn, user, :access, perms: %{default: Permissions.max})

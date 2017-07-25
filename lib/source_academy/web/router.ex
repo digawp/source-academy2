@@ -19,7 +19,7 @@ defmodule SourceAcademy.Web.Router do
   pipeline :ensure_staff do
     plug Guardian.Plug.EnsurePermissions,
       handler: SourceAcademy.Web.AuthController,
-      SourceAcademy: [:access]
+      admin: [:access]
     plug SourceAcademy.Plug.AssignUseSidebarFlag
   end
 
@@ -32,16 +32,21 @@ defmodule SourceAcademy.Web.Router do
     plug Guardian.Plug.LoadResource
   end
 
-  scope "/api", SourceAcademy.Api do
+  scope "/api/v1", SourceAcademy.Api, as: :api_v1 do
     pipe_through [:api, :api_auth]
 
     resources "/announcements", AnnouncementController, only: [:index]
   end
 
-  scope "/", SourceAcademy.Web do
+  scope "/" do
+    pipe_through [:browser, :browser_auth]
+  end
+
+  scope "/admin", SourceAcademy.Web do
     pipe_through [:browser, :browser_auth, :ensure_staff]
 
     get "/", PageController, :index
+
     resources "/users", UserController, except: [:new]
     resources "/students", StudentController do
       resources "/xp_history", GiveXPController, only: [:create, :delete]
