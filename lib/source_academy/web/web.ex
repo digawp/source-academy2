@@ -27,7 +27,7 @@ defmodule SourceAcademy.Web do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/SourceAcademy/web/templates",
+      use Phoenix.View, root: "lib/source_academy/web/templates",
                         namespace: SourceAcademy.Web
 
       # Import convenience functions from controllers

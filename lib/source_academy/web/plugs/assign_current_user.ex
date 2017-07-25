@@ -6,7 +6,7 @@ defmodule SourceAcademy.Plug.AssignCurrentUser do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    current_user = Gplug.current_resource(conn)
+    current_user = GPlug.current_resource(conn)
     if current_user != nil do
       assign(conn, :current_user, current_user)
     else
