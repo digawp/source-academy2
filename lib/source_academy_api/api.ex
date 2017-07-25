@@ -27,7 +27,7 @@ defmodule SourceAcademy.Api do
   def view do
     quote do
       use Phoenix.View, namespace: SourceAcademy.Api,
-                        root: "lib/source_academy/api/templates"
+                        root: "lib/source_academy_api/templates"
 
       import SourceAcademy.Web.ErrorHelpers
       import SourceAcademy.Web.Gettext
