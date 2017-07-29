@@ -4,14 +4,17 @@ defmodule SourceAcademyWeb.Endpoint do
   # Enable CORSPlug only for Webpack served SPA
   plug CORSPlug, origin: ["http://localhost:4001"]
 
+  plug Plug.Static,
+    at: "/", from: {:source_academy, "priv/frontend/build/"}, gzip: true,
+    only: ~w(favicon.ico static)
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: {:source_academy, "priv/frontend/build/"},
-    gzip: false,
-    only: ~w(favicon.ico static)
+    at: "/", from: {:source_academy, "priv/static"}, gzip: false,
+    only: ~w(images)
 
   plug Plug.Static,
     at: "/uploads", from: Path.expand('./uploads'), gzip: false

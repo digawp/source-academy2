@@ -1,13 +1,13 @@
 <%= form_for @give_xp_changeset, student_give_xp_path(@conn, :create, @student.id), fn f -> %>
-  <div class='field'>
+  <div class="pt-input-group">
     <label class='label' for='XP amount'>XP Amount</label>
-    <%= text_input f, :amount, class: "input" %>
+    <%= text_input f, :amount, class: "pt-input" %>
   </div>
-  <div class='field'>
+  <div class="pt-input-group">
     <label class='label' for='password-input'>Reason</label>
-    <%= text_input f, :reason, class: "input" %>
+    <%= text_input f, :reason, class: "pt-input" %>
   </div>
-  <div class='field'>
+  <div class="pt-input-group">
     <%= submit "Give XP", class: "button is-primary" %>
   </div>
 <% end %>

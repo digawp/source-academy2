@@ -1,19 +1,22 @@
-<h2 class="title is-2">Staff Sign In</h2>
-<%= form_for @changeset, @action, fn f -> %>
-  <div class='field'>
-    <label class='label' for='email-input'>Email</label>
-    <%= email_input f, :uid, class: "input" %>
-    <%= error_tag f, :uid %>
-  </div>
-
-  <div class='field'>
-    <label class='label' for='password-input'>Password</label>
-    <%= password_input f, :password, class: "input" %>
-    <%= error_tag f, :password %>
-  </div>
-
-  <div class='field'>
-    <%= submit "Sign In", class: "button is-success" %>
-  </div>
-<% end %>
-
+<div class="sa-auth pt-card pt-elevation-4">
+  <h3 class="heading">Login</h3>
+  <%= form_for @changeset, @action, fn f -> %>
+    <div class="pt-input-group">
+      <%= email_input f, :uid,
+            placeholder: "Email Address",
+            class: "pt-input pt-large" %>
+      <%= error_tag f, :uid %>
+    </div>
+    <div class="pt-input-group">
+      <%= password_input f, :password,
+              placeholder: "Password",
+              class: "pt-input pt-large" %>
+      <%= error_tag f, :password %>
+    </div>
+    <%= submit "Login", class: "signin-button pt-button pt-large pt-intent-success" %>
+    <hr />
+    <div class="row">
+      First time here?&nbsp;<%= link "Sign Up", to: auth_path(@conn, :signup) %>
+    </div>
+  <% end %>
+</div>

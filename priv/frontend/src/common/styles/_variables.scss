@@ -1,6 +1,17 @@
 /* Modify BlueprintJS variables here */
-$pt-font-family: 'Noto Sans', sans-serif;
-$pt-navbar-height: 3.125rem;
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-@import '~@blueprintjs/core/dist/variables';
+$icon-font-path: "~@blueprintjs/core/resources/icons" !default;
+$pt-font-family: 'Raleway' !default;
+$pt-font-size: 14px !default;
+$pt-navbar-height: 50px !default;
+
+/* Source Academy Colors */
+$sa-black: #06060D !default;
+$sa-dark-blue: #101E35 !default;
+$sa-light-blue: #71BCB0 !default;
+
+$pt-intent-primary: #0F79E3 !default;
+
+/* Colors */
+@import '~@blueprintjs/core/src/common/variables';

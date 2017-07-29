@@ -1,51 +1,52 @@
-<h2 class="title is-2">
-  Sign Up
-</h2>
-
-<%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class='notification'>
-      <strong>Error</strong>: Please fix the problem below
+<div class="sa-auth pt-card pt-elevation-4">
+  <h3 class="heading">Sign Up</h3>
+  <hr />
+  <%= form_for @changeset, @action, fn f -> %>
+    <%= if @changeset.action do %>
+      <div class='notification'>
+        <strong>Error</strong>: Please fix the problem below
+      </div>
+    <% end %>
+    <h5 class="heading">Identity</h5>
+    <div class="pt-input-group pt-large">
+      <%= text_input f, :first_name,
+          placeholder: "First Name",
+          class: "pt-input" %>
+      <%= error_tag f, :first_name %>
     </div>
+
+    <div class="pt-input-group pt-large">
+      <%= text_input f, :last_name,
+           placeholder: "Last Name (Optional)",
+           class: "pt-input" %>
+      <%= error_tag f, :last_name %>
+    </div>
+
+    <div class="pt-input-group pt-large">
+      <%= email_input f, :email,
+           placeholder: "NUSNET Email",
+           class: "pt-input" %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <h5 class="heading">Password</h5>
+    <%= inputs_for f, :authorizations, fn a -> %>
+      <div class="pt-input-group pt-large">
+        <%= password_input a, :password,
+              placeholder: "Password",
+              class: "pt-input" %>
+        <%= error_tag a, :password %>
+      </div>
+
+      <div class="pt-input-group pt-large">
+        <%= password_input a, :password_confirmation,
+                placeholder: "Confirm Password",
+                class: "pt-input" %>
+        <%= error_tag a, :password_confirmation %>
+      </div>
+    <% end %>
+    <%= submit "Sign Up", class: "pt-large pt-button pt-intent-success" %>
+    <hr />
+    Already have an account? <%= link "Sign In", to: auth_path(@conn, :login) %>
   <% end %>
-  <div class='field'>
-    <label class='label' for='name-input'>First Name</label>
-    <%= text_input f, :first_name, class: "input" %>
-    <%= error_tag f, :first_name %>
-  </div>
-
-  <div class='field'>
-    <label class='label' for='name-input'>Last Name (Optional)</label>
-    <%= text_input f, :last_name, class: "input" %>
-    <%= error_tag f, :last_name %>
-  </div>
-
-  <div class='field'>
-    <label class='label' for='email-input'>NUSNET Email</label>
-    <%= email_input f, :email, class: "input" %>
-    <%= error_tag f, :email %>
-  </div>
-
-  <%= inputs_for f, :authorizations, fn a -> %>
-    <div class='field'>
-      <label class='label' for='password-input'>Password</label>
-      <%= password_input a, :password, class: "input" %>
-      <%= error_tag a, :password %>
-    </div>
-
-    <div class='field'>
-      <label class='label' for='password-confirmation-input'>Confirm Password</label>
-      <%= password_input a, :password_confirmation, class: "input" %>
-      <%= error_tag a, :password_confirmation %>
-    </div>
-  <% end %>
-
-  <div class='notification'>
-    <strong>Note to Avengers</strong><br />
-    For verification purposes, please wait up to 1 working day
-    for the administrator upgrade your account into staff. <br />
-    During processing time you will not be able to access
-    SourceAcademy functionality.
-  </div>
-  <%= submit "Sign Up", class: "button is-success" %>
-<% end %>
+</div>

@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label">Title</label>
     <div class="control">
-      <%= text_input f, :title, class: "input" %>
+      <%= text_input f, :title, class: "pt-input" %>
     </div>
   </div>
 

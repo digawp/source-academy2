@@ -7,37 +7,37 @@
 
   <div class="field">
     <label class="label">Title</label>
-    <%= text_input f, :title, class: "input" %>
+    <%= text_input f, :title, class: "pt-input" %>
     <%= error_tag f, :title %>
   </div>
   <div class="field">
     <label class="label">Description</label>
-    <%= textarea f, :description, class: "input" %>
+    <%= textarea f, :description, class: "pt-input" %>
     <%= error_tag f, :description %>
   </div>
   <div class="field">
     <label class="label">Points</label>
-    <%= number_input f, :points, class: "input" %>
+    <%= number_input f, :points, class: "pt-input" %>
     <%= error_tag f, :points %>
   </div>
   <div class="field">
     <label class="label">Display order</label>
-    <%= number_input f, :display_order, class: "input" %>
+    <%= number_input f, :display_order, class: "pt-input" %>
     <%= error_tag f, :display_order %>
   </div>
   <div class="field">
     <label class="label">Image source</label>
-    <%= text_input f, :image_src, class: "input" %>
+    <%= text_input f, :image_src, class: "pt-input" %>
     <%= error_tag f, :image_src %>
   </div>
   <div class="field">
     <label class="label">Category</label>
-    <%= text_input f, :category, class: "input" %>
+    <%= text_input f, :category, class: "pt-input" %>
     <%= error_tag f, :category %>
   </div>
   <div class="field">
     <label class="label">Trigger query</label>
-    <%= textarea f, :query, class: "input" %>
+    <%= textarea f, :query, class: "pt-input" %>
     <%= error_tag f, :query %>
   </div>
 

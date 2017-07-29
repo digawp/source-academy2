@@ -9,7 +9,7 @@
     <%= label f, :student_id, class: "label" %>
 
     <div class="select">
-      <%= select f, :student_id, Enum.map(@students, &({display_name(&1), &1.id})), class: "input" %>
+      <%= select f, :student_id, Enum.map(@students, &({display_name(&1), &1.id})), class: "pt-input" %>
     </div>
 
     <%= error_tag f, :student_id %>
@@ -18,7 +18,7 @@
   <div class="field">
     <%= label f, :achievement_id, class: "label" %>
     <div class="select">
-      <%= select f, :achievement_id, Enum.map(@achievements, &({&1.title, &1.id})), class: "input" %>
+      <%= select f, :achievement_id, Enum.map(@achievements, &({&1.title, &1.id})), class: "pt-input" %>
     </div>
     <%= error_tag f, :achievement_id %>
   </div>

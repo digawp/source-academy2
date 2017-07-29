@@ -13,11 +13,9 @@
     <% end %>
   </head>
   <body>
+    <div class="sa-logo-container">
+      <img class="sa-logo" src="<%= static_path(@conn, "/images/logo.png") %>" />
+    </div>
     <%= render @view_module, @view_template, assigns %>
-    <%= if Mix.env == :dev do %>
-      <script src="http://localhost:4001/static/js/academy.js"></script>
-    <% else %>
-      <script src="<%= static_path(@conn, "/js/academy.js") %>"></script>
-    <% end %>
   </body>
 </html>

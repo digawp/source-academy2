@@ -1,6 +1,17 @@
 @import '~flexboxgrid/dist/flexboxgrid.css';
+@import '~normalize.css';
 @import 'variables';
-@import '~@blueprintjs/core/src/blueprint.scss';
+@import '~@blueprintjs/core/src/blueprint';
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700 !important;
+}
+
+$body-background-color: $sa-black;
+
+body {
+  background: $body-background-color;
+}
 
 .pt-navbar {
   background: white;
@@ -14,6 +25,56 @@
   background: $dark-gray1;
 }
 
-body {
-  background: black;
+.pt-button {
+  box-shadow: none !important;
+  border-radius: 5px;
+  font-weight: 500;
+  font-family: 'Raleway', sans-serif;
+}
+
+.sa-logo-container {
+  max-width: 500px;
+  margin: auto;
+}
+
+.sa-logo {
+  width: 100%;
+}
+
+.sa-auth {
+  background: $sa-light-blue;
+  border-radius: 0;
+  padding: 25px;
+  max-width: 500px;
+  margin: 0 auto;
+
+  color: darken($sa-light-blue, 30%);
+
+  h1,h2,h3,h4,h5,h6 {
+    color: darken($sa-light-blue, 50%);
+  }
+
+  .heading {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .pt-button {
+    width: 100%;
+    background-color: darken($sa-light-blue, 20%);
+  }
+
+  .pt-button:hover {
+    background-color: darken($sa-light-blue, 30%);
+  }
+
+  a {
+    color: darken($sa-light-blue, 40%);
+    font-weight: 700;
+  }
+
+  .heading, .pt-input-group {
+    margin-bottom: 25px;
+  }
 }

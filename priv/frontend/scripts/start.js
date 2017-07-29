@@ -74,6 +74,7 @@ choosePort(HOST, DEFAULT_PORT)
     });
 
     process.stdin.on('close', function () {
+      console.log(chalk.cyan('Aborting the development server...\n'))
       devServer.close();
       process.exit();
     });
