@@ -1,6 +1,5 @@
 <%= admin_header @conn, "Achievements", fn -> %>
   <%= link "Create Achievement", to: achievement_path(@conn, :new), class: "pt-button pt-intent-success" %>
-  <%= link "Grant Achievement", to: achievement_path(@conn, :new), class: "pt-button" %>
 <% end %>
 
 <div class="sa-admin-content">

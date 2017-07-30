@@ -1,6 +1,11 @@
 <%= admin_header @conn, "New Achievement" %>
 
 <div class="sa-admin-content">
+  <%= if @changeset.action do %>
+    <div class="pt-callout pt-intent-danger">
+      Please fix the following problem
+    </div>
+  <% end %>
   <%= render "form.html", changeset: @changeset,
                           method: "post",
                           action: achievement_path(@conn, :create) %>

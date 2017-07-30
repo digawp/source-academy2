@@ -27,20 +27,20 @@ defmodule SourceAcademy.Achievement do
   end
 
   def create(params) do
-    achievement = build(params)
     Repo.transaction fn ->
+      changeset = build(params)
       achievements = Repo.all(__MODULE__)
-      if Enum.empty?(achievements) do
-        achievement
-        |> change(%{ display_order: 0 })
-        |> Repo.insert!
+      changeset = if Enum.empty?(achievements) do
+        change(changeset, %{ display_order: 0 })
       else
         last_achievement = Enum.max_by(achievements, &(&1.display_order))
-        achievement
-        |> change(%{
+        change(changeset, %{
           display_order: last_achievement.display_order + 1
         })
-        |> Repo.insert!
+      end
+      case Repo.insert(changeset) do
+        {:ok, achievement} -> achievement
+        {:error, changeset} -> Repo.rollback(changeset)
       end
     end
   end
