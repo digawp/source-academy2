@@ -67,6 +67,6 @@ defmodule SourceAcademy.Material do
     material
     |> cast(params, @required_fields ++ @optional_fields)
     |> cast_attachments(params, @required_file_fields)
-    |> validate_required(@required_fields)
+    |> validate_required(@required_fields ++ @required_file_fields)
   end
 end

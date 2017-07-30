@@ -1,5 +1,7 @@
 defmodule SourceAcademyWeb.AchievementController do
   use SourceAcademyWeb, :controller
+  import Ecto.Query
+  import Ecto.Changeset
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Achievement
@@ -27,7 +29,7 @@ defmodule SourceAcademyWeb.AchievementController do
 
   def edit(conn, %{"id" => id}) do
     achievement = Achievement.find_by_id(id)
-    changeset = Achievement.build(Map.from_struct(achievement))
+    changeset = Achievement.changeset(achievement, %{})
     render(conn, "edit.html", achievement: achievement, changeset: changeset)
   end
 
@@ -39,9 +41,59 @@ defmodule SourceAcademyWeb.AchievementController do
       {:ok, achievement} ->
         conn
         |> put_flash(:info, "Achievement updated successfully.")
-        |> redirect(to: achievement_path(conn, :show, achievement))
+        |> redirect(to: achievement_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", achievement: achievement, changeset: changeset)
+    end
+  end
+
+  def move_up(conn, %{"id" => id}) do
+    achievement = Achievement.find_by_id(id)
+    result = Repo.transaction fn ->
+      previous_display_order = achievement.display_order - 1
+      previous_achievement =
+        Repo.one(from u in Achievement, where: u.display_order == ^previous_display_order)
+      if previous_achievement != nil do
+        Repo.update!(change(achievement, %{
+          display_order: achievement.display_order - 1
+        }))
+        Repo.update!(change(previous_achievement, %{
+          display_order: previous_achievement.display_order + 1
+        }))
+      end
+    end
+    case result do
+      {:ok, _} -> redirect(conn, to: achievement_path(conn, :index))
+      {:error, _} ->
+         conn
+         |> put_flash(:error, "Error when updating achievement")
+         |> redirect(to: achievement_path(conn, :index))
+    end
+  end
+
+  def move_down(conn, %{"id" => id}) do
+    achievement = Achievement.find_by_id(id)
+    result = Repo.transaction fn ->
+      next_display_order = achievement.display_order + 1
+      next_achievement =
+        Repo.one(
+          from u in Achievement,
+          where: u.display_order == ^next_display_order)
+      if next_achievement != nil do
+        Repo.update!(change(achievement, %{
+          display_order: achievement.display_order + 1
+        }))
+        Repo.update!(change(next_achievement, %{
+          display_order: next_achievement.display_order - 1
+        }))
+      end
+    end
+    case result do
+      {:ok, _} -> redirect(conn, to: achievement_path(conn, :index))
+      {:error, _} ->
+         conn
+         |> put_flash(:error, "Error when updating achievement")
+         |> redirect(to: achievement_path(conn, :index))
     end
   end
 

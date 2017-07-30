@@ -1,10 +1,7 @@
-<h2 class="title">
-  Create Achievement
-</h2>
+<%= admin_header @conn, "New Achievement" %>
 
-<%= render "form.html", changeset: @changeset,
-                        action: achievement_path(@conn, :create) %>
-
-<span>
-  <%= link "Back", to: achievement_path(@conn, :index) %>
-</span>
+<div class="sa-admin-content">
+  <%= render "form.html", changeset: @changeset,
+                          method: "post",
+                          action: achievement_path(@conn, :create) %>
+</div>

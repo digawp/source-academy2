@@ -1,23 +1,26 @@
 defmodule SourceAcademy.Achievement do
   @moduledoc false
   use SourceAcademy, :model
+  use Arc.Ecto.Schema
 
   alias SourceAcademy.Repo
+  alias SourceAcademy.Achievement.Image
 
   schema "achievements" do
     field :title, :string
     field :description, :string
-    field :points, :integer
     field :display_order, :integer
-    field :image_src, :string
+    field :image_url, Image.Type
     field :category, :string
     field :query, :string
 
     timestamps()
   end
 
-  @required_fields ~w(title description category)a
-  @optional_fields ~w(query image_src points display_order)a
+  @required_fields ~w(title)a
+  @optional_fields ~w(description query category)a
+
+  @optional_file_fields ~w(image_url)a
 
   def build(params) do
     changeset(%__MODULE__{}, params)
@@ -25,7 +28,21 @@ defmodule SourceAcademy.Achievement do
 
   def create(params) do
     achievement = build(params)
-    Repo.insert(achievement)
+    Repo.transaction fn ->
+      achievements = Repo.all(__MODULE__)
+      if Enum.empty?(achievements) do
+        achievement
+        |> change(%{ display_order: 0 })
+        |> Repo.insert!
+      else
+        last_achievement = Enum.max_by(achievements, &(&1.display_order))
+        achievement
+        |> change(%{
+          display_order: last_achievement.display_order + 1
+        })
+        |> Repo.insert!
+      end
+    end
   end
 
   def all do
@@ -40,6 +57,6 @@ defmodule SourceAcademy.Achievement do
     achievement
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> validate_number(:points, greater_than_or_equal_to: 0)
+    |> cast_attachments(params, @optional_file_fields)
   end
 end
