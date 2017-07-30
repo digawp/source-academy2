@@ -1,11 +1,11 @@
 defmodule SourceAcademy.Student do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
+  use SourceAcademy, :model
 
   alias SourceAcademy.User
   alias SourceAcademy.Repo
   alias SourceAcademy.XPHistory
+  alias SourceAcademy.DiscussionGroup
   alias SourceAcademy.StudentAchievement
 
   schema "students" do
@@ -17,9 +17,8 @@ defmodule SourceAcademy.Student do
     belongs_to :user, User
 
     has_many :xp_history, XPHistory
-
-    has_many :_achievements, StudentAchievement # intermediate table
-    has_many :achievements, through: [:_achievements, :achievement]
+    has_one  :discussion_group, DiscussionGroup
+    has_many :achievements, StudentAchievement # intermediate table
 
     timestamps()
   end
@@ -42,7 +41,7 @@ defmodule SourceAcademy.Student do
     if with_user do
       student
       |> Repo.preload(:user)
-      |> Repo.preload(:xp_history)
+      |> Repo.preload([xp_history: :user, discussion_group: :user])
     else
       student
     end

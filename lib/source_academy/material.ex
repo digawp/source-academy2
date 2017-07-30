@@ -1,8 +1,8 @@
 defmodule SourceAcademy.Material do
   @moduledoc false
-  use Ecto.Schema
+  use SourceAcademy, :model
+
   use Arc.Ecto.Schema
-  import Ecto.Changeset
 
   alias SourceAcademy.Repo
   alias SourceAcademy.User

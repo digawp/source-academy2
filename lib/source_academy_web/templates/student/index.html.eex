@@ -1,13 +1,16 @@
 <%= admin_header @conn, "Students" %>
-
+<% phantom_students = show_students(@students, is_phantom: true) %>
+<% students = show_students(@students, is_phantom: false) %>
 <div class="pt-callout pt-intent-success">
-  <h4 class="title is-4">Phantom Students</h4>
-  <%= render "table.html", conn: @conn,
-        students: show_students(@students, is_phantom: true) %>
+  <h4 class="title is-4">
+    Phantom Students (<%= Enum.count phantom_students %>)
+  </h4>
+  <%= render "table.html", conn: @conn, students: phantom_students %>
 </div>
 
 <div class="pt-callout">
-  <h4 class="title is-4">Students</h4>
-  <%= render "table.html", conn: @conn,
-        students: show_students(@students, is_phantom: false) %>
+  <h4 class="title is-4">
+    Students (<%= Enum.count students %>)
+  </h4>
+  <%= render "table.html", conn: @conn, students: students  %>
 </div>

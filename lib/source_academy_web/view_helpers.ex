@@ -3,10 +3,20 @@ defmodule SourceAcademyWeb.ViewHelpers do
   alias SourceAcademy.User
   alias SourceAcademy.Student
   alias SourceAcademyWeb.HelperView
+  alias Timex.Timezone
+
+  require Logger
 
   def display_name(%Student{} = student), do: display_name(student.user)
   def display_name(%User{} = user) do
     user.first_name <> " " <> user.last_name
+  end
+
+  def display_datetime(date) do
+    timezone = Timezone.get("Asia/Singapore", Timex.now)
+    date = Timezone.convert(date, timezone)
+    Logger.info inspect(date)
+    Timex.format!(date, "%d/%m %H:%M", :strftime)
   end
 
   # Non Ideal State

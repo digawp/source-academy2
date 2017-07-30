@@ -1,7 +1,6 @@
 defmodule SourceAcademy.XPHistory do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
+  use SourceAcademy, :model
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student

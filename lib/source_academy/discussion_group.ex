@@ -1,8 +1,6 @@
 defmodule SourceAcademy.DiscussionGroup do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use SourceAcademy, :model
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student

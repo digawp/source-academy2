@@ -1,8 +1,6 @@
 defmodule SourceAcademy.User do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query
+  use SourceAcademy, :model
 
   alias SourceAcademy.Authorization
   alias SourceAcademy.Announcement

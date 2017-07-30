@@ -42,6 +42,8 @@ defmodule SourceAcademy.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix, "~> 1.3.0-rc", override: true},
       {:postgrex, ">= 0.0.0"},
+      {:timex, "~> 3.0"},
+      {:timex_ecto, "~> 3.0"},
       {:ueberauth_identity, "~> 0.2"},
       {:ueberauth, "~> 0.4"}
     ]

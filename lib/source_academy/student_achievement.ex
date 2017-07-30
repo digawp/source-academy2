@@ -1,8 +1,6 @@
 defmodule SourceAcademy.StudentAchievement do
   @moduledoc false
-  use Ecto.Schema
-  import Ecto.Changeset
-  import Ecto.Query, only: [from: 2]
+  use SourceAcademy, :model
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
