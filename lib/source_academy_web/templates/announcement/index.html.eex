@@ -1,16 +1,33 @@
-<h3 class="title is-3">Announcements</h3>
-<%= for announcement <- @announcements do %>
-  <div class="box">
-    <article class="media">
-      <div class="media-content">
-        <strong><%= announcement.title %></strong>
-        <small>Posted by <strong><%= display_name(announcement.poster) %></strong></small>
-        <div class="block">
-          <%= link "View/Edit", to: announcement_path(@conn, :edit, announcement.id), class: "button is-small" %>
-          <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "button is-small" %>
-          <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "button is-small" %>
-        </div>
-      </div>
-    </article>
-  </div>
+<%= admin_header @conn, "Announcements", fn -> %>
+  <%= link "New Announcement", to: announcement_path(@conn, :new), class: "pt-button pt-intent-success" %>
 <% end %>
+
+<div class="sa-admin-content">
+  <div class="pt-callout pt-intent-success">
+    <h5>Pinned Announcements</h5>
+    <%= for announcement <- Enum.filter(@announcements, &(&1.is_pinned)) do %>
+      <div class="sa-announcement">
+        <b><%= announcement.title %></b> [
+        <div class="pt-button-group pt-minimal">
+          <%= link "Edit", to: announcement_path(@conn, :edit, announcement.id), class: "pt-button" %>
+          <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "pt-button" %>
+          <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "pt-button" %>
+        </div>
+        ]
+      </div>
+     <% end %>
+  </div>
+  <hr />
+  <h5>Other Announcements</h5>
+  <%= for announcement <- Enum.filter(@announcements, &(!&1.is_pinned)) do %>
+    <div class="sa-announcement">
+      <b><%= announcement.title %></b> [
+      <div class="pt-button-group pt-minimal">
+        <%= link "Edit", to: announcement_path(@conn, :edit, announcement.id), class: "pt-button" %>
+        <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "pt-button" %>
+        <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "pt-button" %>
+      </div>
+        ]
+    </div>
+   <% end %>
+</div>

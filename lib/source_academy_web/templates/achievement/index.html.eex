@@ -1,13 +1,16 @@
-<h2 class="title">Listing achievements</h2>
+<%= admin_header @conn, "Achievements", fn -> %>
+  <%= link "Create Achievement", to: achievement_path(@conn, :new), class: "pt-button pt-intent-success" %>
+  <%= link "Grant Achievement", to: achievement_path(@conn, :new), class: "pt-button" %>
+<% end %>
 
-<table class="table">
+<div class="sa-admin-content row">
+<table class="pt-table">
   <thead>
     <tr>
       <th>Display order</th>
       <th>Title</th>
       <th>Description</th>
       <th>Points</th>
-      <th>Image</th>
       <th>Category</th>
       <th>Query</th>
       <th></th>
@@ -20,7 +23,6 @@
       <td><%= achievement.title %></td>
       <td><%= achievement.description %></td>
       <td><%= achievement.points %></td>
-      <td><%= achievement.image_src %></td>
       <td><%= achievement.category %></td>
       <td><%= achievement.query %></td>
       <td>
@@ -33,3 +35,4 @@
 </table>
 
 <span><%= link "New achievement", to: achievement_path(@conn, :new) %></span>
+</div>

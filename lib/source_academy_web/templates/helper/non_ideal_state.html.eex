@@ -1,0 +1,8 @@
+<div class="pt-non-ideal-state">
+  <h4 class="pt-non-ideal-state-title">
+    <%= @title %>
+  </h4>
+  <div class="pt-non-ideal-state-description">
+    <%= @description %>
+  </div>
+</div>

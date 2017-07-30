@@ -1,59 +1,22 @@
-  <aside class="sidebar menu">
-    <p class="menu-label">
-      Quick Links
-    </p>
-    <ul class="menu-list">
-      <li><a>Grading (8/192)</a></li>
-      <li><a>Comments (8/200)</a></li>
-      <li><a>Open Missions</a></li>
-      <li><a>View Submissions</a></li>
-      <li><a>Grant XP</a></li>
-      <li><%= link "Grant Achievement", to: student_achievement_path(@conn, :new) %></li>
-    </ul>
-    <p class="menu-label">
-      Announcements
-    </p>
-    <ul class="menu-list">
-      <li>
-        <%= link "New Announcement", to: announcement_path(@conn, :new) %>
-      </li>
-      <li>
-        <%= link "Manage Announcements", to: announcement_path(@conn, :index) %>
-      </li>
-    </ul>
-    <p class="menu-label">
-      Materials
-    </p>
-    <ul class="menu-list">
-      <li>
-        <%= link "Upload Material", to: material_path(@conn, :new) %>
-      </li>
-      <li>
-        <%= link "Manage Materials", to: material_path(@conn, :index) %>
-      </li>
-    </ul>
-    <p class="menu-label">
-      Achievements
-    </p>
-    <ul class="menu-list">
-      <li><%= link "Create Achievement", to: achievement_path(@conn, :new) %></li>
-      <li><%= link "Manage Achievements", to: achievement_path(@conn, :index) %></li>
-    </ul>
-    <p class="menu-label">
-      Assessments
-    </p>
-    <ul class="menu-list">
-      <li><a>Create Mission</a></li>
-      <li><a>Manage Missions</a></li>
-      <li><a>Create Path</a></li>
-      <li><a>Manage Paths</a></li>
-    </ul>
-    <p class="menu-label">
-      Admin
-    </p>
-    <ul class="menu-list">
-      <li><%= link "Discussion Groups", to: discussion_group_path(@conn, :index) %></li>
-      <li><%= link "Students", to: student_path(@conn, :index) %></li>
-    </ul>
-  </aside>
+<div class="sa-admin-navbar pt-dark">
+  <div class="container">
+    <div class="row">
+      <div class="pt-button-group col-xs-12 pt-minimal pt-large">
+        <a class="pt-button">My Students</a>
+        <a class="pt-button">Grading</a>
+        <a class="pt-button">Comments</a>
+        <a class="pt-button">Submissions</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="pt-button-group col-xs-12 pt-minimal">
+        <%= link "Announcements", to: announcement_path(@conn, :index), class: "pt-button" %>
+        <%= link "Achievements", to: achievement_path(@conn, :index), class: "pt-button" %>
+        <%= link "Materials", to: material_path(@conn, :index), class: "pt-button" %>
+        <%= link "Discussion Groups", to: discussion_group_path(@conn, :index), class: "pt-button" %>
+        <%= link "Students", to: student_path(@conn, :index), class: "pt-button" %>
+      </div>
+    </div>
+  </div>
+</div>
 

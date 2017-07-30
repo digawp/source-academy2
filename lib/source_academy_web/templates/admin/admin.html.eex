@@ -20,14 +20,10 @@
         <%= render "header.html", conn: @conn, current_user: assigns[:current_user] %>
       </div>
     </header>
-    <main role="main">
-      <div class="columns">
-        <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
-        <div class="column is-full main-content">
-          <%= render "flash.html", conn: @conn %>
-          <%= render @view_module, @view_template, assigns %>
-        </div>
-      </div>
+    <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
+    <main role="main" class="container sa-admin">
+      <%= render "flash.html", conn: @conn %>
+      <%= render @view_module, @view_template, assigns %>
     </main>
   </body>
 </html>

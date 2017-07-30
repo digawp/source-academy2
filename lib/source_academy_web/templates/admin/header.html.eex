@@ -1,17 +1,14 @@
-<nav role="navigation" class="navbar">
-  <div class="navbar-brand">
-    <%= link "SourceAcademy", to: page_path(@conn, :index), class: "navbar-item" %>
-  </div>
-  <div id="menu" class="navbar-menu is-mobile">
-    <div class="navbar-end">
-      <%= if @current_user do %>
-        <%= link @current_user.first_name, class: "navbar-item", to: user_path(@conn, :edit, @current_user.id) %>
-        <%= link "Sign out", class: "navbar-item", to: auth_path(@conn, :logout) %>
-      <% else %>
-        <%= link "Login", class: "navbar-item", to: auth_path(@conn, :login) %>
-        <%= link "Sign Up", class: "navbar-item", to: auth_path(@conn, :signup) %>
-      <% end %>
+<nav role="navigation" class="pt-navbar pt-dark">
+  <div class="pt-navbar-group pt-align-left">
+    <div class="pt-navbar-heading">
+      Source Academy
     </div>
+  </div>
+  <div class="pt-navbar-group pt-align-right">
+    <%= if @current_user do %>
+      <%= link @current_user.first_name, class: "pt-button pt-minimal", to: user_path(@conn, :edit, @current_user.id) %>
+      <%= link "Logout", class: "pt-button pt-minimal pt-intent-danger", to: auth_path(@conn, :logout) %>
+    <% end %>
   </div>
 </nav>
 

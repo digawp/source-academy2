@@ -1,4 +1,11 @@
-<h3 class="title is-3">Edit Announcement</h3>
-<%= render "form.html",
-      announcement_changeset: @announcement_changeset,
-      action: announcement_path(@conn, :update, @announcement.id) %>
+<div class="sa-admin-header row pt-dark">
+  <div class="heading col-xs-12">
+    Edit "<%= @announcement.title %>"
+  </div>
+</div>
+
+<div class="sa-admin-content row col-xs">
+  <%= render "form.html",
+        announcement_changeset: @announcement_changeset,
+        action: announcement_path(@conn, :update, @announcement.id) %>
+</div>

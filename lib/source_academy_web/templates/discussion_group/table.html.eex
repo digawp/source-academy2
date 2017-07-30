@@ -1,49 +1,49 @@
-<h4 class="title is-4">
-  <%= display_name(@staff) %>
-</h4>
-
-<%= if !Enum.empty?(@students) do %>
-  <%= render "form.html",
-        conn: @conn,
-        staff: @staff,
-        students: @students,
-        discussion_group_changeset: @discussion_group_changeset %>
-<% end %>
-
-<%= if Enum.empty?(@discussion_groups) do %>
-<div class="notification">
-  There are no students
-</div>
-<% else %>
-<table class="table">
-  <thead>
-    <tr>
-      <th style="width:400px;">Name</th>
-      <th style="width:20px;">Level</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for dg <- @discussion_groups do %>
-      <tr>
-        <td>
-          <%= display_name(dg.student) %>
-          </td>
-        <td>
-          <%= dg.student.level %>
-        </td>
-        <td>
-          <div class="field is-grouped">
-            <p class="control">
-              <%= link "View", class: "button is-small", to: student_path(@conn, :show, dg.student.id) %>
-            </p>
-            <p class="control">
-              <%= link "Remove", class: "button is-small", to: discussion_group_path(@conn, :delete_entry, dg.id) %>
-            </p>
-          </div>
-        </td>
-      </tr>
+<div class="row">
+  <div class="col-xs-8">
+    <h4><%= display_name(@staff) %></h4>
+  </div>
+  <div class="col-xs">
+    <%= if !Enum.empty?(@students) do %>
+      <%= render "form.html",
+            conn: @conn,
+            staff: @staff,
+            students: @students,
+            discussion_group_changeset: @discussion_group_changeset %>
     <% end %>
-  </tbody>
-</table>
-<% end %>
+  </div>
+</div>
+
+<div class="row col-xs">
+  <%= non_ideal_state "There are no students",
+        Enum.empty?(@discussion_groups),
+        description: "Add some students to this discussion group" %>
+  <%= if !Enum.empty?(@discussion_groups) do %>
+    <table class="pt-table pt-condensed" style="width:100%">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th style="width:20px;">Level</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for dg <- @discussion_groups do %>
+          <tr>
+            <td>
+              <%= display_name(dg.student) %>
+              </td>
+            <td>
+              <%= dg.student.level %>
+            </td>
+            <td>
+              <div class="pt-button-group">
+                <%= link "View", class: "pt-button pt-intent-primary", to: student_path(@conn, :show, dg.student.id) %>
+                <%= link "Remove", class: "pt-button pt-intent-danger", to: discussion_group_path(@conn, :delete_entry, dg.id) %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
