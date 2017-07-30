@@ -1,46 +1,39 @@
 <%= form_for @changeset, material_path(@conn, :create), [multipart: true], fn f -> %>
-  <div class="field">
-    <label class="label">Title</label>
-    <div class="control">
+  <div class="row">
+    <div class="col-xs-8 pt-input-group">
+      <label class="pt-label">Title</label>
       <%= text_input f, :title, class: "pt-input" %>
     </div>
-  </div>
 
-  <div class="field">
-    <label class="label">Category</label>
-    <div class="control">
-      <div class="select">
+    <div class="col-xs pt-input-group">
+      <label class="pt-label">Category</label>
+      <div class="pt-select">
         <%= select f, :category_id, Enum.map(@categories, &({&1.name, &1.id})) %>
       </div>
     </div>
   </div>
 
-  <div class="field">
-    <label class="label">Description</label>
-    <div class="control">
-      <%= textarea f, :description, class: "textarea" %>
-    </div>
+  <div class="pt-input-group">
+    <label class="pt-label">Description</label>
+    <%= textarea f, :description, rows: 5, class: "pt-input" %>
   </div>
 
-  <div class="field">
-    <label class="label">File to Upload</label>
-    <div class="control">
+  <div class="pt-input-group">
+    <label class="pt-label">File to Upload</label>
+    <label class="pt-file-upload">
       <%= file_input f, :url, class: "button" %>
-    </div>
+      <span class="pt-file-upload-input">Choose file...</span>
+    </label>
   </div>
 
-  <div class="field">
-    <div class="control">
-      <label class="checkbox">
-        <%= checkbox f, :is_public %>
-        Published
-      </label>
-    </div>
+  <div class="pt-input-group">
+    <label class="pt-label">Options</label>
+    <label class="pt-control pt-checkbox .modifier">
+      <%= checkbox f, :is_public %>
+      <span class="pt-control-indicator"></span>
+      Publish
+    </label>
   </div>
-
-  <div class="field is-grouped">
-    <div class="control">
-      <%= submit "Upload", class: "button is-primary" %>
-    </div>
-  </div>
+  <hr />
+  <%= submit "Upload", class: "pt-button pt-intent-primary" %>
 <% end %>

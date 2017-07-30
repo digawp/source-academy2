@@ -1,7 +1,13 @@
 <%= admin_header @conn, "Students" %>
 
-<h4 class="title is-4">Phantom Students</h4>
-<%= render "table.html", conn: @conn, students: show_students(@students, is_phantom: true) %>
+<div class="pt-callout pt-intent-success">
+  <h4 class="title is-4">Phantom Students</h4>
+  <%= render "table.html", conn: @conn,
+        students: show_students(@students, is_phantom: true) %>
+</div>
 
-<h4 class="title is-4">Students</h4>
-<%= render "table.html", conn: @conn, students: show_students(@students, is_phantom: false) %>
+<div class="pt-callout">
+  <h4 class="title is-4">Students</h4>
+  <%= render "table.html", conn: @conn,
+        students: show_students(@students, is_phantom: false) %>
+</div>

@@ -16,14 +16,8 @@ defmodule SourceAcademyWeb.StudentController do
       amount: 0,
       reason: ""
     })
-    student_achievements = StudentAchievement.find_by_student_id(student_id)
     achievements = Enum.map(student_achievements, &(&1.achievement))
-
-    render(conn, "show.html",
-      student: student,
-      give_xp_changeset: give_xp_changeset,
-      achievements: achievements
-    )
+    render(conn, "show.html", student: student, give_xp_changeset: give_xp_changeset)
   end
 
   def toggle_phantom(conn, %{"student_id" => student_id}) do

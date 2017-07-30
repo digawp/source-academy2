@@ -3,11 +3,11 @@
   There are no students
 </div>
 <% else %>
-<table class="table">
+<table class="pt-table pt-bordered" style="width:100%">
   <thead>
     <tr>
       <th>Name</th>
-      <th>XP</th>
+      <th style="width:200px">XP</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -20,22 +20,13 @@
           </td>
         <td><%= student.experience_point %></td>
         <td>
-          <div class="field is-grouped">
-            <p class="control">
-              <%= link "XP History", class: "button is-small", to: student_path(@conn, :show, student) %>
-            </p>
-            <p class="control">
-              <a class="button is-small">
-                Achievements
-              </a>
-            </p>
-            <p class="control">
+          <div class="pt-button-group">
+              <%= link "View", class: "pt-button", to: student_path(@conn, :show, student) %>
               <%= link (if student.is_phantom,
                       do: "To Student",
                       else: "To Phantom"),
                   to: student_path(@conn, :toggle_phantom, student.id),
-                  class: "button is-small" %>
-            </p>
+                  class: "pt-button is-small" %>
           </div>
         </td>
       </tr>

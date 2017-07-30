@@ -1,28 +1,53 @@
-<h3 class="title is-3"><%= display_name(@student) %></h3>
+<%= admin_header @conn, display_name(@student) %>
 
-<div class="columns">
-  <div class="column is-half">
-    <article class="message is-info">
-      <div class="message-header">Information</div>
-      <div class="message-body">
-      <ul>
-      <%= for achievement <- @achievements do %>
-        <li><%= achievement.title %></li>
-      <% end %>
-      </ul>
-      </div>
-    </article>
+<div class="row">
+  <div class="col-xs-2">
   </div>
-  <div class="column is-half">
-    <article class="message">
-      <div class="message-header">Manually Give XP</div>
-      <div class="message-body">
-        <%= render "give_xp_form.html",
-              conn: @conn,
-              give_xp_changeset: @give_xp_changeset,
-              student: @student,
-              giver: @current_user %>
+  <div class="col-xs">
+    <div class="pt-callout">
+      <strong>Level 2</strong>
+      <strong>Phantom</strong>
+      <br />
+      <strong>Tutored by</strong>
+      <hr />
+      <div class="row pt-callout">
+        <div class="col-xs-6">
+          <strong>200 XP</strong>
+          <br />
+          <strong>9/10 Achievements Acquired</strong>
+          <br />
+          <strong>18/44 Missions Completed</strong>
+          <br />
+          <strong>9/10 Sidequests Completed</strong>
+          <br />
+          <strong>9/10 Paths Completed</strong>
+          <hr />
+          <div class="pt-button pt-intent-primary">
+            View Submissions
+          </div>
+        </div>
+        <div class="col-xs">
+          <h5>Manually Give XP</h5>
+          <%= render "give_xp_form.html",
+                conn: @conn,
+                give_xp_changeset: @give_xp_changeset,
+                student: @student,
+                giver: @current_user %>
+        </div>
       </div>
-    </article>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-xs-5">
+    <div class="pt-callout pt-intent-success">
+      <h5>Achievements</h5>
+    </div>
+  </div>
+  <div class="col-xs">
+    <div class="pt-callout pt-intent-danger">
+      <h5>XP History</h5>
+    </div>
   </div>
 </div>

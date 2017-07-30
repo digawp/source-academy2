@@ -40,7 +40,9 @@ defmodule SourceAcademy.Student do
   def find_by_id(id, preload_user: with_user) do
     student = Repo.get(__MODULE__, id)
     if with_user do
-      Repo.preload(student, :user)
+      student
+      |> Repo.preload(:user)
+      |> Repo.preload(:give_xp)
     else
       student
     end
