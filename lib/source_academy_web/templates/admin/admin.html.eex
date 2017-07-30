@@ -20,7 +20,7 @@
         <%= render "header.html", conn: @conn, current_user: assigns[:current_user] %>
       </div>
     </header>
-    <%= render "sidebar.html", conn: @conn, current_user: assigns[:current_user] %>
+    <%= render "navbar.html", conn: @conn, current_user: assigns[:current_user] %>
     <main role="main" class="container sa-admin">
       <%= render "flash.html", conn: @conn %>
       <%= render @view_module, @view_template, assigns %>
