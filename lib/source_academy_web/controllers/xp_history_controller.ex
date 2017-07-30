@@ -1,14 +1,14 @@
-defmodule SourceAcademyWeb.GiveXPController do
+defmodule SourceAcademyWeb.XPHistoryController do
   use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
-  alias SourceAcademy.GiveXP
+  alias SourceAcademy.XPHistory
 
-  def create(conn, %{"give_xp" => give_xp_params, "student_id" => student_id}) do
+  def create(conn, %{"xp_history" => xp_history_params, "student_id" => student_id}) do
     giver = conn.assigns.current_user
-    case GiveXP.create(give_xp_params, student_id, giver) do
-      {:ok, give_xp} -> redirect_to_student(conn, student_id)
+    case XPHistory.create(xp_history_params, student_id, giver) do
+      {:ok, xp_history} -> redirect_to_student(conn, student_id)
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)

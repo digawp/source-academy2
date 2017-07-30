@@ -5,7 +5,7 @@ defmodule SourceAcademy.Student do
 
   alias SourceAcademy.User
   alias SourceAcademy.Repo
-  alias SourceAcademy.GiveXP
+  alias SourceAcademy.XPHistory
   alias SourceAcademy.StudentAchievement
 
   schema "students" do
@@ -16,7 +16,7 @@ defmodule SourceAcademy.Student do
 
     belongs_to :user, User
 
-    has_many :give_xp, GiveXP
+    has_many :xp_history, XPHistory
 
     has_many :_achievements, StudentAchievement # intermediate table
     has_many :achievements, through: [:_achievements, :achievement]
@@ -42,7 +42,7 @@ defmodule SourceAcademy.Student do
     if with_user do
       student
       |> Repo.preload(:user)
-      |> Repo.preload(:give_xp)
+      |> Repo.preload(:xp_history)
     else
       student
     end

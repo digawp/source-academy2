@@ -1,4 +1,4 @@
-<%= form_for @give_xp_changeset, student_give_xp_path(@conn, :create, @student.id), fn f -> %>
+<%= form_for @xp_history_changeset, student_xp_history_path(@conn, :create, @student.id), fn f -> %>
   <div class="pt-input-group">
     <label class='pt-label' for='XP amount'>XP Amount</label>
     <%= text_input f, :amount, class: "pt-input" %>

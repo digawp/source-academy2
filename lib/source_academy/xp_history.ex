@@ -1,4 +1,4 @@
-defmodule SourceAcademy.GiveXP do
+defmodule SourceAcademy.XPHistory do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
@@ -25,18 +25,18 @@ defmodule SourceAcademy.GiveXP do
   def create(params, student_id, giver) do
     Repo.transaction fn ->
       student = Student.find_by_id(student_id)
-      give_xp = build(params)
-      changeset = give_xp
+      xp_history = build(params)
+      changeset = xp_history
         |> put_assoc(:user, giver)
         |> put_assoc(:student, student)
-      {:ok, give_xp} = Repo.insert(changeset)
-      {:ok, _} = Student.increase_xp(student, give_xp.amount)
-      give_xp
+      {:ok, xp_history} = Repo.insert(changeset)
+      {:ok, _} = Student.increase_xp(student, xp_history.amount)
+      xp_history
     end
   end
 
-  def changeset(give_xp, params) do
-    give_xp
+  def changeset(xp_history, params) do
+    xp_history
     |> cast(params, @required_fields)
     |> validate_required(@required_fields)
     |> validate_length(:reason, min: 1)

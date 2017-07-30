@@ -51,7 +51,7 @@ defmodule SourceAcademyWeb.Router do
 
     resources "/users", UserController, except: [:new]
     resources "/students", StudentController do
-      resources "/xp_history", GiveXPController, only: [:create, :delete]
+      resources "/xp_history", XPHistoryController, only: [:create, :delete]
     end
 
     resources "/announcements", AnnouncementController, except: [:show]

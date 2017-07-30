@@ -28,9 +28,9 @@
         </div>
         <div class="col-xs">
           <h5>Manually Give XP</h5>
-          <%= render "give_xp_form.html",
+          <%= render "xp_history_form.html",
                 conn: @conn,
-                give_xp_changeset: @give_xp_changeset,
+                xp_history_changeset: @xp_history_changeset,
                 student: @student,
                 giver: @current_user %>
         </div>
@@ -48,6 +48,7 @@
   <div class="col-xs">
     <div class="pt-callout pt-intent-danger">
       <h5>XP History</h5>
+      <%= render "xp_history_table.html", student: @student %>
     </div>
   </div>
 </div>

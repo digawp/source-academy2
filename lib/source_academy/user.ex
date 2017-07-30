@@ -8,7 +8,7 @@ defmodule SourceAcademy.User do
   alias SourceAcademy.Announcement
   alias SourceAcademy.Material
   alias SourceAcademy.Student
-  alias SourceAcademy.GiveXP
+  alias SourceAcademy.XPHistory
   alias SourceAcademy.Repo
   alias SourceAcademy.Util
 
@@ -25,7 +25,7 @@ defmodule SourceAcademy.User do
     has_many :announcements, Announcement
     has_many :materials, Material
     has_one  :student, Student, on_delete: :delete_all
-    has_many :give_xp, GiveXP
+    has_many :xp_history, XPHistory
 
     timestamps()
   end
