@@ -5,37 +5,27 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :first_name, class: "control-label" %>
-    <%= text_input f, :first_name, class: "form-control" %>
-    <%= error_tag f, :first_name %>
+  <div class="row">
+    <div class="col-xs-6 pt-input-group">
+      <%= label f, :first_name, class: "pt-label" %>
+      <%= text_input f, :first_name, class: "pt-input" %>
+      <%= error_tag f, :first_name %>
+    </div>
+    <div class="col-xs pt-input-group">
+      <%= label f, :last_name, class: "pt-label" %>
+      <%= text_input f, :last_name, class: "pt-input" %>
+      <%= error_tag f, :last_name %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= label f, :last_name, class: "control-label" %>
-    <%= text_input f, :last_name, class: "form-control" %>
-    <%= error_tag f, :last_name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :email, class: "control-label" %>
-    <%= text_input f, :email, class: "form-control" %>
+  <div class="pt-input-group">
+    <%= label f, :email, class: "pt-label" %>
+    <%= text_input f, :email, class: "pt-input" %>
     <%= error_tag f, :email %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :password, class: "control-label" %>
-    <%= password_input f, :password, class: "form-control" %>
-    <%= error_tag f, :password %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :password_confirmation, class: "control-label" %>
-    <%= password_input f, :password_confirmation, class: "form-control" %>
-    <%= error_tag f, :password_confirmation %>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <div class="pt-button-group">
+    <%= submit "Save", class: "pt-button pt-intent-success" %>
+    <div class="pt-button">Reset Password</div>
   </div>
 <% end %>
