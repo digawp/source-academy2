@@ -1,0 +1,5 @@
+<%= admin_header @conn, "My Student" %>
+<% students = show_students(@students, is_phantom: false) %>
+<div class="pt-callout">
+  <%= render "table.html", conn: @conn, students: students  %>
+</div>

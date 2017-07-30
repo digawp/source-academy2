@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="pt-button-group col-xs-12 pt-minimal pt-large">
-        <a class="pt-button">My Students</a>
+        <%= link "My Students", to: student_path(@conn, :my_student), class: "pt-button" %>
         <a class="pt-button">Grading</a>
         <a class="pt-button">Comments</a>
         <a class="pt-button">Submissions</a>

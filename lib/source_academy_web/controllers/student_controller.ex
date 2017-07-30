@@ -1,6 +1,7 @@
 defmodule SourceAcademyWeb.StudentController do
   use SourceAcademyWeb, :controller
 
+  alias SourceAcademy.Repo
   alias SourceAcademy.Student
   alias SourceAcademy.XPHistory
   alias SourceAcademy.StudentAchievement
@@ -19,6 +20,16 @@ defmodule SourceAcademyWeb.StudentController do
     render(conn, "show.html",
       student: student,
       xp_history_changeset: xp_history_changeset)
+  end
+
+  def my_student(conn, _params) do
+    current_user = conn.assigns.current_user
+    students = Student.all(preload_user: true)
+      |> Repo.preload([discussion_group: :user])
+      |> Enum.filter(&(
+          (&1.discussion_group != nil) &&
+          (&1.discussion_group.user.id == current_user.id)))
+    render(conn, "my_student.html", students: students)
   end
 
   def toggle_phantom(conn, %{"student_id" => student_id}) do
