@@ -16,7 +16,6 @@ defmodule SourceAcademyWeb.StudentController do
       amount: 0,
       reason: ""
     })
-    achievements = Enum.map(student_achievements, &(&1.achievement))
     render(conn, "show.html",
       student: student,
       xp_history_changeset: xp_history_changeset)
