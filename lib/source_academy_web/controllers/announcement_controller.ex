@@ -1,7 +1,6 @@
 defmodule SourceAcademyWeb.AnnouncementController do
   use SourceAcademyWeb, :controller
 
-  alias SourceAcademy.Repo
   alias SourceAcademy.Announcement
 
   def index(conn, _params) do
@@ -17,7 +16,7 @@ defmodule SourceAcademyWeb.AnnouncementController do
   def create(conn, %{"announcement" => announcement_params}) do
     poster = conn.assigns.current_user
     case Announcement.create(announcement_params, poster) do
-      {:ok, announcement} -> redirect(conn, to: announcement_path(conn, :index))
+      {:ok, _} -> redirect(conn, to: announcement_path(conn, :index))
       {:error, reason} ->
          conn
          |> put_flash(:error, reason)

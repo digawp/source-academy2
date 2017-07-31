@@ -4,7 +4,6 @@ defmodule SourceAcademy.Authorization do
 
   alias SourceAcademy.User
   alias SourceAcademy.Repo
-  alias SourceAcademy.Util
 
   schema "authorizations" do
     field :provider, :string

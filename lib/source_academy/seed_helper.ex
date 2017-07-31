@@ -2,12 +2,8 @@ defmodule SourceAcademy.SeedHelper do
   @moduledoc false
   alias SourceAcademy.Authorization.Identity
   alias SourceAcademy.Repo
-  alias SourceAcademy.Student
   alias SourceAcademy.Achievement
-  alias Comeonin.Bcrypt
   alias Ecto.Changeset
-
-  import Ecto.Query
 
   def add_user(params, role \\ "staff") do
     Repo.transaction fn ->

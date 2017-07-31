@@ -1,8 +1,6 @@
 defmodule SourceAcademyWeb.MaterialController do
   use SourceAcademyWeb, :controller
 
-  alias SourceAcademy.Repo
-  alias SourceAcademy.GuardianSerializer
   alias SourceAcademy.Material
   alias SourceAcademy.Material.Category
 

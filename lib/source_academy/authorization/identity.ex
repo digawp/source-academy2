@@ -9,9 +9,7 @@ defmodule SourceAcademy.Authorization.Identity do
   alias SourceAcademy.Repo
   alias SourceAcademy.User
   alias SourceAcademy.Student
-  alias SourceAcademy.Util
   alias Comeonin.Bcrypt
-  alias Ueberauth.Auth, as: UAuth
 
   @required_login_fields ~w(uid password)a
   @required_registration_fields ~w(password password_confirmation)a

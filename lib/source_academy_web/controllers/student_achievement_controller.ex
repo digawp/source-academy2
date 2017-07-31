@@ -14,10 +14,8 @@ defmodule SourceAcademyWeb.StudentAchievementController do
   end
 
   def create(conn, %{"student_achievement" => %{"student_id" => student_id, "achievement_id" => achievement_id}}) do
-    student = Student.find_by_id(student_id)
-
     case StudentAchievement.grant_achievement(student_id, achievement_id) do
-      {:ok, student_achievement} ->
+      {:ok, _} ->
         conn
         |> put_flash(:info, "Achievement granted successfully.")
         |> redirect(to: student_path(conn, :show, student_id))

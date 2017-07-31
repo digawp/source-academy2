@@ -4,7 +4,6 @@ defmodule SourceAcademyWeb.StudentController do
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
   alias SourceAcademy.XPHistory
-  alias SourceAcademy.StudentAchievement
 
   def index(conn, _params) do
     students = Student.all(preload_user: true)

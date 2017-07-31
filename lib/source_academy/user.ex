@@ -8,7 +8,6 @@ defmodule SourceAcademy.User do
   alias SourceAcademy.Student
   alias SourceAcademy.XPHistory
   alias SourceAcademy.Repo
-  alias SourceAcademy.Util
 
   schema "users" do
     field :first_name, :string

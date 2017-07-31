@@ -4,8 +4,6 @@ defmodule SourceAcademyWeb.AuthController do
 
   alias SourceAcademyWeb.AuthView
   alias SourceAcademyWeb.LayoutView
-  alias SourceAcademy.Repo
-  alias SourceAcademy.Auth
   alias SourceAcademy.Authorization.Identity
   alias SourceAcademy.User
   alias Guardian.Plug, as: GPlug
@@ -61,7 +59,6 @@ defmodule SourceAcademyWeb.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: fails}} = conn, %{"type" => "login"}) do
-    fails = conn.assigns[:ueberauth_failure]
     params = fails.extra.raw_info["authorization"]
     changeset = Identity.build_login(params)
     action = auth_path(conn, :callback, "identity", type: "login")

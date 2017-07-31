@@ -18,7 +18,7 @@ defmodule SourceAcademyWeb.AchievementController do
 
   def create(conn, %{"achievement" => achievement_params}) do
     case Achievement.create(achievement_params) do
-      {:ok, achievement} ->
+      {:ok, _} ->
         conn
         |> put_flash(:info, "Achievement created successfully.")
         |> redirect(to: achievement_path(conn, :index))
@@ -38,7 +38,7 @@ defmodule SourceAcademyWeb.AchievementController do
     changeset = Achievement.changeset(achievement, achievement_params)
 
     case Repo.update(changeset) do
-      {:ok, achievement} ->
+      {:ok, _} ->
         conn
         |> put_flash(:info, "Achievement updated successfully.")
         |> redirect(to: achievement_path(conn, :index))
@@ -52,7 +52,8 @@ defmodule SourceAcademyWeb.AchievementController do
     result = Repo.transaction fn ->
       previous_display_order = achievement.display_order - 1
       previous_achievement =
-        Repo.one(from u in Achievement, where: u.display_order == ^previous_display_order)
+        Repo.one(from u in Achievement,
+          where: u.display_order == ^previous_display_order)
       if previous_achievement != nil do
         Repo.update!(change(achievement, %{
           display_order: achievement.display_order - 1
