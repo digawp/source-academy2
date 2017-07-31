@@ -33,6 +33,7 @@ defmodule SourceAcademy.Mixfile do
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.8"},
       {:ecto, "~> 2.1"},
+      {:ecto_enum, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:guardian_db, "~> 0.8.0"},
       {:guardian, "~> 0.14"},
