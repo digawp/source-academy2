@@ -29,4 +29,15 @@ defmodule SourceAcademyWeb.ViewHelpers do
   def admin_header(conn, title, controls \\ (fn -> "" end)) do
     HelperView.render "admin_header.html", conn: conn, title: title, controls: controls
   end
+
+  def input_group(form, label, field, opts \\ []) do
+    hint = opts[:hint]
+    type = opts[:type] || :text
+    rows = opts[:rows] || 5
+    options = opts[:options] || []
+
+    HelperView.render "input_group.html",
+      form: form, field: field, label: label, hint: hint,
+      type: type, rows: rows, options: options
+  end
 end

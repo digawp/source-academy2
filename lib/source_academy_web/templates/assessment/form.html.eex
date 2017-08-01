@@ -1,0 +1,46 @@
+<%= form_for @changeset, @action, [multipart: true, method: @method], fn f -> %>
+  <div class="pt-callout">
+    <h5>Section 1: Basic Details</h5>
+      <div class="row">
+        <div class="col-xs-2">
+          <%= input_group f, "Type", :type, type: :select,
+                  options: [
+                    {"Mission", "mission"},
+                    {"Sidequest", "sidequest"},
+                    {"Contest", "contest"} ] %>
+        </div>
+        <div class="col-xs-1">
+          <%= input_group f, "Order", :name %>
+        </div>
+        <div class="col-xs">
+          <%= input_group f, "Title", :title, hint: "(e.g Understanding the Force)" %>
+        </div>
+      </div>
+  </div>
+  <br />
+
+  <div class="pt-callout">
+    <h5>Section 2: Story</h5>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= input_group f, "StoryXML File", :story_url, type: :file %>
+      </div>
+      <div class="col-xs">
+        <%= input_group f, "Cover Image", :cover_url, type: :file %>
+      </div>
+    </div>
+    <%= input_group f, "Description", :description,
+              type: :textarea, hint: "Story summary, short" %>
+    <%= input_group f, "Briefing", :briefing,
+              type: :textarea, hint: "Story summary, complete", rows: 10 %>
+  </div>
+  <br />
+
+  <div class="pt-callout">
+    <h5>Section 3: Libraries</h5>
+    <%= input_group f, "Initializer Script", :script_url, type: :file %>
+  </div>
+  <br />
+
+  <%= submit "Submit", class: "pt-button pt-intent-primary pt-large" %>
+<% end %>

@@ -1,0 +1,23 @@
+  <div class="pt-input-group">
+    <label class="pt-label">
+      <strong><%= @label %></strong>
+      <%= if @hint do %>
+        <span class="pt-text-muted">
+          <%= @hint %>
+        </span>
+      <% end %>
+      <%= case @type do %>
+        <% :select -> %>
+          <div class="pt-select">
+            <%= select @form, @field, @options %>
+          </div>
+        <% :file -> %>
+          <%= file_input @form, @field %>
+        <% :textarea -> %>
+          <%= textarea @form, @field, class: "pt-input", rows: @rows %>
+        <% _ -> %>
+          <%= text_input @form, @field, class: "pt-input" %>
+      <% end %>
+      <%= error_tag @form, @field %>
+    </label>
+  </div>

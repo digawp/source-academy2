@@ -1,9 +1,4 @@
 <%= form_for @changeset, @action, [multipart: true, method: @method], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="notification is-danger">
-      Oops, something went wrong! Please check the errors below.
-    </div>
-  <% end %>
   <div class="pt-input-group">
     <label class="pt-label">Title</label>
     <%= text_input f, :title, class: "pt-input" %>
