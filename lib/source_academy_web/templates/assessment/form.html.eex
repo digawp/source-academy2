@@ -16,6 +16,7 @@
           <%= input_group f, "Title", :title, hint: "(e.g Understanding the Force)" %>
         </div>
       </div>
+      <%= date_range_picker f, "Open/Close Date", :open_at, :close_at %>
   </div>
   <br />
 

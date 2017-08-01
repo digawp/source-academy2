@@ -35,6 +35,7 @@ module.exports = {
       'react-dom',
       'react-addons-css-transition-group',
       '@blueprintjs/core',
+      '@blueprintjs/datetime',
       path.resolve(__dirname, '../src/common/index.ts')
     ],
     academy: [

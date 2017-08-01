@@ -40,4 +40,10 @@ defmodule SourceAcademyWeb.ViewHelpers do
       form: form, field: field, label: label, hint: hint,
       type: type, rows: rows, options: options
   end
+
+  def date_range_picker(form, label, start_field, end_field) do
+    HelperView.render "date_range_picker.html",
+      form: form, start_field: start_field, end_field: end_field,
+      label: label
+  end
 end
