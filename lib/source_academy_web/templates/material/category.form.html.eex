@@ -1,7 +1,8 @@
 <%= form_for @changeset, material_path(@conn, :create_category), fn f -> %>
-  <div class="control">
-    <%= text_input f, :name, class: "pt-input", placeholder: "Category Name" %>
+  <div class="row" style="width:300px;">
+    <div class="col-xs">
+      <%= input_group f, "Add Category", :name %>
+      <%= submit "Submit", class: "pt-button pt-intent-success" %>
+    </div>
   </div>
-  <br />
-  <%= submit "Submit", class: "pt-button pt-intent-success" %>
 <% end %>

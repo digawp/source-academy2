@@ -1,31 +1,16 @@
 <%= form_for @changeset, material_path(@conn, :create), [multipart: true], fn f -> %>
   <div class="row">
-    <div class="col-xs-8 pt-input-group">
-      <label class="pt-label">Title</label>
-      <%= text_input f, :title, class: "pt-input" %>
+    <div class="col-xs-8">
+      <%= input_group f, "Title", :title %>
     </div>
-
-    <div class="col-xs pt-input-group">
-      <label class="pt-label">Category</label>
-      <div class="pt-select">
-        <%= select f, :category_id, Enum.map(@categories, &({&1.name, &1.id})) %>
-      </div>
+    <div class="col-xs">
+      <%= input_group f, "Category", :category_id,
+            type: :select,
+            options: Enum.map(@categories, &({&1.name, &1.id})) %>
     </div>
   </div>
-
-  <div class="pt-input-group">
-    <label class="pt-label">Description</label>
-    <%= textarea f, :description, rows: 5, class: "pt-input" %>
-  </div>
-
-  <div class="pt-input-group">
-    <label class="pt-label">File to Upload</label>
-    <label class="pt-file-upload">
-      <%= file_input f, :url, class: "button" %>
-      <span class="pt-file-upload-input">Choose file...</span>
-    </label>
-  </div>
-
+  <%= input_group f, "Description", :description, type: :textarea, rows: 5 %>
+  <%= input_group f, "Upload File", :url, type: :file  %>
   <div class="pt-input-group">
     <label class="pt-label">Options</label>
     <label class="pt-control pt-checkbox .modifier">
