@@ -8,13 +8,14 @@ defmodule SourceAcademy.Assessment do
   alias SourceAcademy.Repo
   alias SourceAcademy.Assessment.Attachment
   alias SourceAcademy.Assessment.TypeEnum
+  alias SourceAcademy.Assessment.Question
   alias Timex.Timezone
 
   schema "assessments" do
     field :name, :string
     field :title, :string
-    field :description, :string
-    field :briefing, :string
+    field :description, :string, default: ""
+    field :briefing, :string, default: ""
     field :type, TypeEnum
 
     field :is_published, :boolean, default: false
@@ -25,6 +26,8 @@ defmodule SourceAcademy.Assessment do
 
     field :open_at, Timex.Ecto.DateTime
     field :close_at, Timex.Ecto.DateTime
+
+    has_many :questions, Question, on_delete: :delete_all
 
     timestamps()
   end
@@ -50,6 +53,25 @@ defmodule SourceAcademy.Assessment do
 
   def all([type: type]) do
     Repo.all(from s in __MODULE__, where: s.type == ^type)
+  end
+
+  def create_question(assessment, params) do
+    changeset = Question.build(params)
+      |> put_assoc(:assessment, assessment)
+    Repo.transaction fn ->
+      assessment = Repo.preload(assessment, :questions)
+      display_order = if Enum.empty?(assessment.questions) do
+        1
+      else
+        last_question = Enum.max_by(assessment.questions, &(&1.display_order))
+        last_question.display_order + 1
+      end
+      changeset = change(changeset, %{display_order: display_order})
+      case Repo.insert(changeset) do
+        {:ok, question} -> question
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
+    end
   end
 
   def changeset(assessment, params) do

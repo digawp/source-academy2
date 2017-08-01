@@ -68,7 +68,10 @@ defmodule SourceAcademyWeb.Router do
 
     resources "/student_achievements", StudentAchievementController, only: [:new, :create]
 
-    resources "/assessments", AssessmentController
+    resources "/assessments", AssessmentController do
+      resources "/questions", AssessmentQuestionController, as: :question,
+        only: [:edit, :create, :update]
+    end
 
     resources "/materials", MaterialController, only: [:index, :new, :create, :delete]
     get "/materials/:id/delete", MaterialController, :delete_entry

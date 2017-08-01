@@ -1,0 +1,13 @@
+<%= form_for @changeset, @action, [method: @method], fn f -> %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= input_group f, "Title", :title %>
+    </div>
+    <div class="col-xs-2">
+      <%= input_group f, "Weight", :weight %>
+    </div>
+    <div class="col-xs">
+      <%= submit "Add Question", class: "pt-button pt-intent-success" %>
+    </div>
+  </div>
+<% end %>

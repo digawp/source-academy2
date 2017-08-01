@@ -2,6 +2,7 @@ defmodule SourceAcademyWeb.AssessmentController do
   use SourceAcademyWeb, :controller
 
   alias SourceAcademy.Assessment
+  alias SourceAcademy.Assessment.Question
   alias SourceAcademy.Repo
 
   def index(conn, _params) do
@@ -12,6 +13,13 @@ defmodule SourceAcademyWeb.AssessmentController do
   def new(conn, _params) do
     changeset = Assessment.build(%{})
     render(conn, "new.html", changeset: changeset)
+  end
+
+  def show(conn, %{"id" => id}) do
+    assessment = Repo.get(Assessment, id)
+    question_changeset = Question.build(%{})
+    render(conn, "show.html", assessment: assessment,
+      question_changeset: question_changeset)
   end
 
   def edit(conn, %{"id" => id}) do
