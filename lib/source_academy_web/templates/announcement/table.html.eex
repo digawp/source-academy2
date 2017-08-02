@@ -1,0 +1,24 @@
+<%= non_ideal_state "No Announcements", Enum.empty?(@announcements),
+      description: "No Announcements Posted Under this Category" %>
+<%= if !Enum.empty?(@announcements) do %>
+ <table class="pt-table pt-condensed" style="width:100%">
+  <thead>
+    <th style="min-width:200px">Title</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <%= for announcement <- @announcements do %>
+      <tr>
+        <td><%= announcement.title %></td>
+        <td>
+          <div class="pt-button-group pt-minimal">
+            <%= link "Edit", to: announcement_path(@conn, :edit, announcement.id), class: "pt-button pt-intent-success" %>
+            <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "pt-button pt-intent-warning" %>
+            <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "pt-button pt-intent-warning" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

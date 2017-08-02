@@ -10,7 +10,7 @@ defmodule SourceAcademyWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn (error) ->
-      content_tag :strong, translate_error(error)
+      content_tag :strong, translate_error(error), class: "sa-error"
     end)
   end
 

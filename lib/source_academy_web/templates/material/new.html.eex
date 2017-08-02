@@ -1,13 +1,24 @@
 <%= admin_header @conn, "Upload Material/Add Category" %>
-<div class="pt-callout">
-  <%= render "category.form.html", conn: @conn, changeset: @category_changeset %>
-</div>
-<div class="pt-callout">
-  <h5>Upload Material</h5>
-  <%= render "form.html",
-      conn: @conn,
-      categories: @categories,
-      changeset: @changeset %>
-</div>
 
+<div class="sa-admin-content">
+  <div class="sa-panel">
+    <div class="heading">
+      Upload Material
+    </div>
+    <div class="body">
+      <%= render "form.html",
+          conn: @conn,
+          categories: @categories,
+          changeset: @changeset %>
+    </div>
+  </div>
 
+  <div class="sa-panel">
+    <div class="heading">
+      Add Category
+    </div>
+    <div class="distinguish">
+      <%= render "category.form.html", conn: @conn, changeset: @category_changeset %>
+    </div>
+  </div>
+</div>

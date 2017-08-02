@@ -3,8 +3,11 @@
 <% end %>
 
 <div class="sa-admin-content">
-  <%= simple_tabs @active_tab, ["Missions", "Sidequests", "Paths"], fn -> %>
-    <%= non_ideal_state "There are no assessments", Enum.empty?(@assessments) %>
-    <%= render "list.html", conn: @conn, assessments: @assessments %>
-  <% end %>
+  <div class="sa-panel">
+    <div class="body">
+      <%= simple_tabs @active_tab, ["Missions", "Sidequests", "Paths"], fn -> %>
+        <%= non_ideal_state "There are no assessments", Enum.empty?(@assessments) %>
+        <%= render "list.html", conn: @conn, assessments: @assessments %>
+      <% end %>
+    </div>
 </div>

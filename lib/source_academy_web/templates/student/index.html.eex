@@ -1,16 +1,13 @@
-<%= admin_header @conn, "Students" %>
-<% phantom_students = show_students(@students, is_phantom: true) %>
-<% students = show_students(@students, is_phantom: false) %>
-<div class="pt-callout pt-intent-success">
-  <h4 class="title is-4">
-    Phantom Students (<%= Enum.count phantom_students %>)
-  </h4>
-  <%= render "table.html", conn: @conn, students: phantom_students %>
-</div>
+<%= admin_header @conn,
+  @active_tab
+  <> "s ("
+  <> Integer.to_string(Enum.count(@students))
+  <> ")" %>
 
-<div class="pt-callout">
-  <h4 class="title is-4">
-    Students (<%= Enum.count students %>)
-  </h4>
-  <%= render "table.html", conn: @conn, students: students  %>
+<div class="sa-panel">
+  <div class="body">
+    <%= simple_tabs @active_tab, ["Student", "Phantom"], fn -> %>
+      <%= render "table.html", conn: @conn, students: @students  %>
+    <% end %>
+  </div>
 </div>

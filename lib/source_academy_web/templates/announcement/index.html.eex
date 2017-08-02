@@ -3,31 +3,21 @@
 <% end %>
 
 <div class="sa-admin-content">
-  <div class="pt-callout pt-intent-success">
-    <h5>Pinned Announcements</h5>
-    <%= for announcement <- Enum.filter(@announcements, &(&1.is_pinned)) do %>
-      <div class="sa-announcement">
-        <b><%= announcement.title %></b> [
-        <div class="pt-button-group pt-minimal">
-          <%= link "Edit", to: announcement_path(@conn, :edit, announcement.id), class: "pt-button" %>
-          <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "pt-button" %>
-          <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "pt-button" %>
-        </div>
-        ]
-      </div>
-     <% end %>
+  <div class="sa-panel">
+    <div class="heading">Pinned Announcements</div>
+    <div class="body">
+      <%= render "table.html",
+              conn: @conn,
+              announcements: Enum.filter(@announcements, &(&1.is_pinned)) %>
+     </div>
   </div>
-  <hr />
-  <h5>Other Announcements</h5>
-  <%= for announcement <- Enum.filter(@announcements, &(!&1.is_pinned)) do %>
-    <div class="sa-announcement">
-      <b><%= announcement.title %></b> [
-      <div class="pt-button-group pt-minimal">
-        <%= link "Edit", to: announcement_path(@conn, :edit, announcement.id), class: "pt-button" %>
-        <%= link toggle_pin_label(announcement), to: announcement_path(@conn, :toggle_pin, announcement.id), class: "pt-button" %>
-        <%= link toggle_publish_label(announcement), to: announcement_path(@conn, :toggle_publish, announcement.id), class: "pt-button" %>
-      </div>
-        ]
-    </div>
-   <% end %>
+
+  <div class="sa-panel">
+    <div class="heading">Other Announcements</div>
+    <div class="body">
+      <%= render "table.html",
+              conn: @conn,
+              announcements: Enum.filter(@announcements, &(!&1.is_pinned)) %>
+     </div>
+  </div>
 </div>

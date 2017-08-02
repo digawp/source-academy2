@@ -7,25 +7,28 @@
       Enum.empty?(@categories),
       description: "Add some category before uploading materials" %>
   <%= for category <- @categories do %>
-    <h5 class="title is-5"><%= category.name %></h5>
-    <% materials = Enum.filter(@materials, &(&1.category.id == category.id)) %>
-    <%= non_ideal_state "No Materials",
-        Enum.empty?(materials),
-        description: "There are no materials under this category" %>
-    <%= for material <- materials do %>
-      <div class="notification">
-        <div class="columns">
-          <div class="column is-half">
-            <strong><%= link material.title, to: display_url(material) %></strong>
-            <small><%= link "[Delete]", to: material_path(@conn, :delete_entry, material.id) %></small>
+    <div class="sa-panel">
+      <div class="heading"><%= category.name %></div>
+      <div class="body">
+        <% materials = Enum.filter(@materials, &(&1.category.id == category.id)) %>
+        <%= non_ideal_state "No Materials",
+            Enum.empty?(materials),
+            description: "There are no materials under this category" %>
+        <%= for material <- materials do %>
+          <div class="notification">
+            <div class="columns">
+              <div class="column is-half">
+                <strong><%= link material.title, to: display_url(material) %></strong>
+                <small><%= link "[Delete]", to: material_path(@conn, :delete_entry, material.id) %></small>
+              </div>
+              <div class="column is-half">
+                <small>Uploaded By <%= display_name(material.uploader) %></small>
+              </div>
+            </div>
+            <p><%= material.description %></p>
           </div>
-          <div class="column is-half">
-            <small>Uploaded By <%= display_name(material.uploader) %></small>
-          </div>
-        </div>
-        <p><%= material.description %></p>
+        <% end %>
       </div>
-    <% end %>
-    <hr />
+    </div>
   <% end %>
 </div>

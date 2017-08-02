@@ -3,25 +3,29 @@
 <% end %>
 
 <div class="sa-admin-content">
-<%= for achievement <- Enum.sort_by(@achievements, &(&1.display_order)) do %>
-  <div class="row">
-    <div class="col-xs-3">
-      <%= achievement.title %>
-    </div>
-    <div class="col-xs-6">
-      <%= achievement.description %>
-    </div>
-    <div class="col-xs pt-button-group pt-dark">
-      <%= link "Edit",
-            to: achievement_path(@conn, :edit, achievement),
-            class: "pt-button" %>
-      <%= link "Delete", to: achievement_path(@conn, :delete, achievement),
-            method: :delete,
-            data: [confirm: ("Are you sure you want to delete " <> achievement.title <> " ?")],
-            class: "pt-button pt-intent-danger" %>
-      <%= link "Up", to: achievement_path(@conn, :move_up, achievement), class: "pt-button" %>
-      <%= link "Down", to: achievement_path(@conn, :move_down, achievement), class: "pt-button" %>
+  <div class="sa-panel">
+    <div class="body">
+      <%= for achievement <- Enum.sort_by(@achievements, &(&1.display_order)) do %>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= link "^", to: achievement_path(@conn, :move_up, achievement), class: "pt-button" %>
+            <%= link "v", to: achievement_path(@conn, :move_down, achievement), class: "pt-button" %>
+            <%= achievement.title %>
+          </div>
+          <div class="col-xs-6">
+            <small><%= achievement.description %></small>
+          </div>
+          <div class="col-xs pt-button-group pt-small">
+            <%= link "Edit",
+                  to: achievement_path(@conn, :edit, achievement),
+                  class: "pt-button pt-intent-primary" %>
+            <%= link "Delete", to: achievement_path(@conn, :delete, achievement),
+                  method: :delete,
+                  data: [confirm: ("Are you sure you want to delete " <> achievement.title <> " ?")],
+                  class: "pt-button pt-intent-danger" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-<% end %>
 </div>

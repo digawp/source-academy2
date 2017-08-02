@@ -1,5 +1,5 @@
 <%= if get_flash(@conn, :info) != nil do %>
-  <div id="main-notification" class="pt-callout pt-intent-primary">
+  <div id="main-notification" class="pt-callout pt-intent-success">
     <%= get_flash(@conn, :info) %>
   </div>
 <% end %>

@@ -1,0 +1,16 @@
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 700 !important;
+}
+
+body {
+  background: $sa-gray5;
+}
+
+header {
+  background: linear-gradient(45deg, $sa-dark-blue, #192C39);
+  border-top: 4px solid $sa-light-blue;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+}

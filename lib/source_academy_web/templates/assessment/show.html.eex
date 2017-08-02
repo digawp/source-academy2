@@ -1,26 +1,23 @@
-<%= admin_header @conn, "View " <> display_assessment_name(@assessment), fn -> %>
+<%= admin_header @conn, display_assessment_name(@assessment) <> " : " <> @assessment.title, fn -> %>
   <%= link "Edit Details", to: assessment_path(@conn, :edit, @assessment.id),
-          class: "pt-button pt-intent-primary" %>
+          class: "pt-button pt-intent-success" %>
 <% end %>
 
 <div class="sa-admin-content">
-  <div class="pt-callout row">
-    <div class="col-xs-6"><%= @assessment.title %></div>
-    <div class="col-xs-3">Open <%= display_datetime(@assessment.open_at) %></div>
-    <div class="col-xs-3">Close <%= display_datetime(@assessment.close_at) %></div>
-  </div>
-  <br />
-  <div class="pt-callout">
-    <h5>Questions</h5>
-    <br />
-    <%= render "question.form.html",
-          assessment: @assessment,
-          method: "post",
-          changeset: @question_changeset,
-          action: assessment_question_path(@conn, :create, @assessment.id) %>
-    <%= render "question.list.html",
-          conn: @conn,
-          assessment: @assessment,
-          questions: @assessment.questions %>
+  <div class="sa-panel">
+    <div class="heading">Questions</div>
+    <div class="distinguish">
+      <%= render "question.form.html",
+            assessment: @assessment,
+            method: "post",
+            changeset: @question_changeset,
+            action: assessment_question_path(@conn, :create, @assessment.id) %>
+    </div>
+    <div class="body">
+      <%= render "question.list.html",
+            conn: @conn,
+            assessment: @assessment,
+            questions: @assessment.questions %>
+    </div>
   </div>
 </div>

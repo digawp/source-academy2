@@ -6,26 +6,16 @@
   <% end %>
 
   <div class="row">
-    <div class="col-xs-6 pt-input-group">
-      <%= label f, :first_name, class: "pt-label" %>
-      <%= text_input f, :first_name, class: "pt-input" %>
-      <%= error_tag f, :first_name %>
+    <div class="col-xs-6">
+      <%= input_group f, "First Name", :first_name %>
     </div>
-    <div class="col-xs pt-input-group">
-      <%= label f, :last_name, class: "pt-label" %>
-      <%= text_input f, :last_name, class: "pt-input" %>
-      <%= error_tag f, :last_name %>
+    <div class="col-xs">
+      <%= input_group f, "Last Name", :last_name %>
     </div>
   </div>
 
-  <div class="pt-input-group">
-    <%= label f, :email, class: "pt-label" %>
-    <%= text_input f, :email, class: "pt-input" %>
-    <%= error_tag f, :email %>
-  </div>
+  <%= input_group f, "Email", :email, type: :email %>
 
-  <div class="pt-button-group">
-    <%= submit "Save", class: "pt-button pt-intent-success" %>
-    <div class="pt-button">Reset Password</div>
-  </div>
+  <%= submit "Save Changes", class: "pt-button pt-intent-success" %>
+  <div class="pt-button pt-intent-primary">Reset Password</div>
 <% end %>

@@ -1,0 +1,37 @@
+/* This stylesheet tweaks the vendor styles */
+.pt-input-group {
+  margin-bottom: 20px;
+}
+
+.pt-callout {
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.pt-input-group {
+  margin-bottom: 10px;
+}
+
+.pt-button {
+  box-shadow: none !important;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  font-weight: 500;
+  font-family: 'Nunito', sans-serif;
+}
+
+.pt-navbar {
+  background: transparent;
+  text-transform: uppercase;
+}
+
+.pt-navbar.pt-dark {
+  box-shadow: none !important;
+  background: transparent;
+}

@@ -1,15 +1,17 @@
-<div class="sa-admin-navbar pt-dark">
-  <div class="container">
-    <div class="row">
-      <div class="pt-button-group col-xs-12 pt-minimal pt-large">
+<div class="sa-admin-navbar">
+  <div class="first-row">
+    <div class="container">
+      <div class="pt-button-group pt-minimal">
         <%= link "My Students", to: student_path(@conn, :my_student), class: "pt-button" %>
         <a class="pt-button">Grading</a>
         <a class="pt-button">Comments</a>
         <a class="pt-button">Submissions</a>
       </div>
     </div>
-    <div class="row">
-      <div class="pt-button-group col-xs-12 pt-minimal">
+  </div>
+  <div class="second-row">
+    <div class="container">
+      <div class="pt-button-group pt-minimal">
         <%= link "Announcements", to: announcement_path(@conn, :index), class: "pt-button" %>
         <%= link "Assessments", to: assessment_path(@conn, :index), class: "pt-button" %>
         <%= link "Achievements", to: achievement_path(@conn, :index), class: "pt-button" %>

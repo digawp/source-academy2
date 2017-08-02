@@ -6,6 +6,9 @@
           <%= @hint %>
         </span>
       <% end %>
+      <span class="pt-text-muted">
+        <%= error_tag @form, @field %>
+      </span>
       <%= case @type do %>
         <% :select -> %>
           <div class="pt-select">
@@ -15,9 +18,12 @@
           <%= file_input @form, @field %>
         <% :textarea -> %>
           <%= textarea @form, @field, class: "pt-input", rows: @rows %>
+        <% :password -> %>
+          <%= password_input @form, @field, class: "pt-input" %>
+        <% :email -> %>
+          <%= email_input @form, @field, class: "pt-input" %>
         <% _ -> %>
           <%= text_input @form, @field, class: "pt-input" %>
       <% end %>
-      <%= error_tag @form, @field %>
     </label>
   </div>

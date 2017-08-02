@@ -104,7 +104,8 @@ defmodule SourceAcademy.Assessment do
   end
 
   defp convert_date(params, field) do
-    if params[field] do
+    if params[field] != "" && params[field] != nil do
+      Logger.info inspect(params[field])
       timezone = Timezone.get("Asia/Singapore", Timex.now)
       date = params[field]
         |> String.to_integer

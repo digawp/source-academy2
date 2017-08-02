@@ -5,15 +5,29 @@
 </div>
 <div class="sa-admin-content">
   <%= for staff <- @staffs do %>
-    <div class="pt-callout">
-      <%= render "table.html",
-        conn: @conn,
-        staff: staff,
-        discussion_group_changeset: @discussion_group_changeset,
-        students: @students,
-        discussion_groups:
-          @discussion_groups
-          |> Enum.filter(&(&1.user.id == staff.id)) %>
+    <div class="sa-panel">
+      <div class="heading">
+       <%= display_name(staff) %>
+      </div>
+      <%= if !Enum.empty?(@students) do %>
+        <div class="distinguish">
+          <%= render "form.html",
+              conn: @conn,
+              staff: staff,
+              students: @students,
+              discussion_group_changeset: @discussion_group_changeset %>
+        </div>
+      <% end %>
+      <div class="body">
+        <%= render "table.html",
+          conn: @conn,
+          staff: staff,
+          discussion_group_changeset: @discussion_group_changeset,
+          students: @students,
+          discussion_groups:
+            @discussion_groups
+            |> Enum.filter(&(&1.user.id == staff.id)) %>
+      </div>
     </div>
     <br />
   <% end %>

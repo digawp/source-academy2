@@ -1,4 +1,4 @@
-<%= admin_header @conn, "Create Mission/Sidequest/Contest" %>
+<%= admin_header @conn, "Create Assessment" %>
 
 <div class="sa-admin-content">
   <%= if @changeset.action do %>

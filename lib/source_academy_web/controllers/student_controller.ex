@@ -1,13 +1,29 @@
 defmodule SourceAcademyWeb.StudentController do
   use SourceAcademyWeb, :controller
 
+  import Ecto.Query
+
   alias SourceAcademy.Repo
   alias SourceAcademy.Student
   alias SourceAcademy.XPHistory
 
-  def index(conn, _params) do
-    students = Student.all(preload_user: true)
-    render(conn, "index.html", students: students)
+  def index(conn, params) do
+    tab = Map.get(params, "tab", "Student")
+    students = case tab do
+      "Student" ->
+        Repo.all(
+          from s in Student,
+          order_by: [desc: s.experience_point],
+          where: s.is_phantom == false)
+      "Phantom" ->
+        Repo.all(
+          from s in Student,
+          where: s.is_phantom == true)
+    end
+    students = Repo.preload(students, :user)
+    render(conn, "index.html",
+      active_tab: tab,
+      students: students)
   end
 
   def show(conn, %{"id" => student_id}) do

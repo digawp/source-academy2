@@ -1,41 +1,27 @@
-<div class="pt-callout" style="width:100%">
-  <%= form_for @announcement_changeset, @action, fn f -> %>
-    <div class="pt-input-group pt-large">
-      <label class="pt-label">Title</label>
-      <div class="pt-form-content">
-        <%= text_input f, :title, class: "pt-input" %>
-      </div>
-    </div>
-    <hr />
+<%= form_for @announcement_changeset, @action, fn f -> %>
+  <%= input_group f, "Title", :title %>
+  <%= input_group f, "Content", :content, type: :textarea %>
 
-    <div class="pt-input-group">
-      <label class="pt-label">Content</label>
-      <div class="pt-form-content">
-        <%= textarea f, :content, class: "pt-input pt-fill" %>
-      </div>
+  <div class="pt-input-group">
+    <label class="pt-label">Options</label>
+    <div class="pt-form-content">
+      <label class="pt-control pt-checkbox">
+        <%= checkbox f, :is_pinned %>
+        <span class="pt-control-indicator"></span>
+        Pin Announcement
+      </label>
     </div>
+  </div>
 
-    <div class="pt-input-group">
-      <label class="pt-label">Options</label>
-      <div class="pt-form-content">
-        <label class="pt-control pt-checkbox">
-          <%= checkbox f, :is_pinned %>
-          <span class="pt-control-indicator"></span>
-          Pin Announcement
-        </label>
-      </div>
+  <div class="pt-input-group">
+    <div class="pt-form-content">
+      <label class="pt-control pt-checkbox">
+        <%= checkbox f, :is_published %>
+        <span class="pt-control-indicator"></span>
+        Publish Announcement
+      </label>
     </div>
-
-    <div class="pt-input-group">
-      <div class="pt-form-content">
-        <label class="pt-control pt-checkbox">
-          <%= checkbox f, :is_published %>
-          <span class="pt-control-indicator"></span>
-          Publish Announcement
-        </label>
-      </div>
-    </div>
-    <hr />
-    <%= submit "Save", class: "pt-button pt-intent-primary" %>
-  <% end %>
-</div>
+  </div>
+  <hr />
+  <%= submit "Save", class: "pt-button pt-intent-primary" %>
+<% end %>

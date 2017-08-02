@@ -1,5 +1,9 @@
 <%= admin_header @conn, "Edit Profile" %>
 <div class="sa-admin-content">
-  <%= render "form.html", changeset: @changeset,
-                          action: user_path(@conn, :update, @user) %>
+  <div class="sa-panel">
+    <div class="body">
+      <%= render "form.html", changeset: @changeset,
+                              action: user_path(@conn, :update, @user) %>
+    </div>
+  </div>
 </div>
