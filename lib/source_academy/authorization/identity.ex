@@ -34,15 +34,20 @@ defmodule SourceAcademy.Authorization.Identity do
 
   def register(params) do
     Repo.transaction fn ->
-      with {:ok, user} <- %User{}
-        |> User.registration_changeset(params)
-        |> cast_assoc(:authorizations,
-             required: true,
-             with: &registration_changeset/2)
-        |> put_identity_data()
-        |> Repo.insert,
-        {:ok, _} <- Student.create(user, false),
-      do: user
+      result =
+        with {:ok, user} <- %User{}
+          |> User.registration_changeset(params)
+          |> cast_assoc(:authorizations,
+              required: true,
+              with: &registration_changeset/2)
+          |> put_identity_data()
+          |> Repo.insert,
+          {:ok, _} <- Student.create(user, false),
+        do: {:ok, user}
+      case result do
+        {:ok, user} -> {:ok, user}
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
     end
   end
 
