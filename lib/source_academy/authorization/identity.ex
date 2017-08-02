@@ -41,7 +41,7 @@ defmodule SourceAcademy.Authorization.Identity do
              with: &registration_changeset/2)
         |> put_identity_data()
         |> Repo.insert,
-        {:ok, _} <- Student.create(user, true),
+        {:ok, _} <- Student.create(user, false),
       do: user
     end
   end
