@@ -1,0 +1,28 @@
+<table style="width:100%" class="pt-table pt-bordered">
+  <thead>
+    <th style="width:400px;">Title</th>
+    <th style="width:100px;">Type</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+  <%= for question <- @questions do %>
+    <tr>
+      <td>
+        <%= question.title %>
+      </td>
+      <td>
+        <%= display_question_type(question) %>
+      </td>
+      <td>
+        <%= if question.programming_question != nil do %>
+          <%= link "Edit",
+              to: assessment_programming_question_path(@conn, :edit,
+                    @assessment.id, question.programming_question.id) %>
+        <% else %>
+
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

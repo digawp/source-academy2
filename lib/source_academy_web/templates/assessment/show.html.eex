@@ -1,30 +1,26 @@
 <%= admin_header @conn, "View " <> display_assessment_name(@assessment), fn -> %>
-  <%= link "Edit", to: assessment_path(@conn, :edit, @assessment.id),
+  <%= link "Edit Details", to: assessment_path(@conn, :edit, @assessment.id),
           class: "pt-button pt-intent-primary" %>
 <% end %>
 
 <div class="sa-admin-content">
-  <table class="pt-table pt-striped">
-    <tbody>
-      <tr>
-        <td>Title</td>
-        <td><%= @assessment.title %></td>
-      </tr>
-      <tr>
-        <td>Open At</td>
-        <td><%= display_datetime(@assessment.open_at) %></td>
-      </tr>
-      <tr>
-        <td>Close At</td>
-        <td><%= display_datetime(@assessment.close_at) %></td>
-      </tr>
-    </tbody>
-  </table>
-  <hr />
-  <h5>Questions</h5>
-  <%= render "question.form.html",
-        assessment: @assessment,
-        method: "post",
-        changeset: @question_changeset,
-        action: assessment_question_path(@conn, :create, @assessment.id) %>
+  <div class="pt-callout row">
+    <div class="col-xs-6"><%= @assessment.title %></div>
+    <div class="col-xs-3">Open <%= display_datetime(@assessment.open_at) %></div>
+    <div class="col-xs-3">Close <%= display_datetime(@assessment.close_at) %></div>
+  </div>
+  <br />
+  <div class="pt-callout">
+    <h5>Questions</h5>
+    <br />
+    <%= render "question.form.html",
+          assessment: @assessment,
+          method: "post",
+          changeset: @question_changeset,
+          action: assessment_question_path(@conn, :create, @assessment.id) %>
+    <%= render "question.list.html",
+          conn: @conn,
+          assessment: @assessment,
+          questions: @assessment.questions %>
+  </div>
 </div>

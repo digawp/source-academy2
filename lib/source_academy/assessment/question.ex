@@ -6,12 +6,14 @@ defmodule SourceAcademy.Assessment.Question do
 
   alias SourceAcademy.Repo
   alias SourceAcademy.Assessment
+  alias SourceAcademy.Assessment.ProgrammingQuestion
 
   schema "assessment_questions" do
     field :title, :string
     field :display_order, :integer
     field :weight, :integer
     belongs_to :assessment, Assessment
+    has_one :programming_question, ProgrammingQuestion
 
     timestamps()
   end

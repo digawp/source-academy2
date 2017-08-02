@@ -10,8 +10,9 @@ defmodule SourceAcademyWeb.AssessmentQuestionController do
       "assessment_id" => assessment_id,
       "question" => params
     }) do
+    question_type = Map.get(params, "question_type")
     assessment = Repo.get(Assessment, assessment_id)
-    case Assessment.create_question(assessment, params) do
+    case Assessment.create_question(assessment, question_type, params) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Question Added Successfully")

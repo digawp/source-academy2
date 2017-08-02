@@ -1,13 +1,24 @@
 defmodule SourceAcademyWeb.AssessmentController do
   use SourceAcademyWeb, :controller
+  import Ecto.Query
 
   alias SourceAcademy.Assessment
   alias SourceAcademy.Assessment.Question
   alias SourceAcademy.Repo
 
-  def index(conn, _params) do
-    assessments = Assessment.all()
-    render(conn, "index.html", assessments: assessments)
+  @tabs_map %{
+    "Missions" => :mission,
+    "Sidequests" => :sidequest,
+    "Paths" => :path,
+    "Contests" => :contest,
+  }
+
+  def index(conn, params) do
+    active_tab = Map.get(params, "tab", "Missions")
+    tabs = Enum.map(Map.to_list(@tabs_map), fn {key, _} -> key end)
+    assessments = Assessment.all(type: Map.get(@tabs_map, active_tab))
+    render(conn, "index.html", active_tab: active_tab,
+      tabs: tabs, assessments: assessments)
   end
 
   def new(conn, _params) do
@@ -16,7 +27,11 @@ defmodule SourceAcademyWeb.AssessmentController do
   end
 
   def show(conn, %{"id" => id}) do
-    assessment = Repo.get(Assessment, id)
+    assessment = Repo.one (from assessment in Assessment,
+      where: (assessment.id == ^id),
+      left_join: questions in assoc(assessment, :questions),
+      left_join: programming_question in assoc(questions, :programming_question),
+      preload: [questions: {questions, programming_question: programming_question}])
     question_changeset = Question.build(%{})
     render(conn, "show.html", assessment: assessment,
       question_changeset: question_changeset)

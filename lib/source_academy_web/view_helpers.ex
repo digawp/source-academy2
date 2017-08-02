@@ -46,4 +46,11 @@ defmodule SourceAcademyWeb.ViewHelpers do
       form: form, start_field: start_field, end_field: end_field,
       label: label
   end
+
+  def simple_tabs(active_tab, tabs, content) do
+    HelperView.render "simple_tabs.html",
+      active_tab: active_tab,
+      tabs: tabs,
+      content: content
+  end
 end

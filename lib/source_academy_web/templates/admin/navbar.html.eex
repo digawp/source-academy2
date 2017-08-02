@@ -11,7 +11,7 @@
     <div class="row">
       <div class="pt-button-group col-xs-12 pt-minimal">
         <%= link "Announcements", to: announcement_path(@conn, :index), class: "pt-button" %>
-        <%= link "Missions", to: assessment_path(@conn, :index), class: "pt-button" %>
+        <%= link "Assessments", to: assessment_path(@conn, :index), class: "pt-button" %>
         <%= link "Achievements", to: achievement_path(@conn, :index), class: "pt-button" %>
         <%= link "Materials", to: material_path(@conn, :index), class: "pt-button" %>
         <%= link "Discussion Groups", to: discussion_group_path(@conn, :index), class: "pt-button" %>

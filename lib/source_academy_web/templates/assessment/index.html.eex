@@ -1,7 +1,10 @@
-<%= admin_header @conn, "Missions, Sidequests and Contests", fn -> %>
+<%= admin_header @conn, "Assessments", fn -> %>
   <%= link "Create Assessment", to: assessment_path(@conn, :new), class: "pt-button pt-intent-success" %>
 <% end %>
 
 <div class="sa-admin-content">
-  <%= non_ideal_state "There are no assessments", Enum.empty?(@assessments) %>
+  <%= simple_tabs @active_tab, ["Missions", "Sidequests", "Paths"], fn -> %>
+    <%= non_ideal_state "There are no assessments", Enum.empty?(@assessments) %>
+    <%= render "list.html", conn: @conn, assessments: @assessments %>
+  <% end %>
 </div>

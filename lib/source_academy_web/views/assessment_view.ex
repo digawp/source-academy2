@@ -10,4 +10,12 @@ defmodule SourceAcademyWeb.AssessmentView do
     end
     prefix <> " " <> assessment.name
   end
+
+  def display_question_type(question) do
+    if question.programming_question != nil do
+      "programming"
+    else
+      "mcq"
+    end
+  end
 end

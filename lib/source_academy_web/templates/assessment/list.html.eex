@@ -1,0 +1,19 @@
+<%= for assessment <- Enum.sort_by(@assessments, &(&1.name)) do %>
+  <div class="row">
+    <div class="col-xs-3">
+      <b><%= display_assessment_name(assessment) %></b>
+      <br />
+      <%= assessment.title %>
+    </div>
+    <div class="col-xs-2">
+      Open <%= display_datetime(assessment.open_at) %>
+      <br />
+      Close <%= display_datetime(assessment.close_at) %>
+    </div>
+    <div class="col-xs">
+      <%= link "View", class: "pt-button", to: assessment_path(@conn, :show, assessment.id) %>
+      <%= link "Edit", class: "pt-button", to: assessment_path(@conn, :edit, assessment.id) %>
+      <%= link "Submissions", class: "pt-button", to: assessment_path(@conn, :edit, assessment.id) %>
+    </div>
+  </div>
+<% end %>

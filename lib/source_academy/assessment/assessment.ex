@@ -9,6 +9,7 @@ defmodule SourceAcademy.Assessment do
   alias SourceAcademy.Assessment.Attachment
   alias SourceAcademy.Assessment.TypeEnum
   alias SourceAcademy.Assessment.Question
+  alias SourceAcademy.Assessment.ProgrammingQuestion
   alias Timex.Timezone
 
   schema "assessments" do
@@ -55,7 +56,7 @@ defmodule SourceAcademy.Assessment do
     Repo.all(from s in __MODULE__, where: s.type == ^type)
   end
 
-  def create_question(assessment, params) do
+  def create_question(assessment, type, params) do
     changeset = Question.build(params)
       |> put_assoc(:assessment, assessment)
     Repo.transaction fn ->
@@ -67,10 +68,21 @@ defmodule SourceAcademy.Assessment do
         last_question.display_order + 1
       end
       changeset = change(changeset, %{display_order: display_order})
-      case Repo.insert(changeset) do
+      result =
+        with {:ok, question} <- Repo.insert(changeset),
+             {:ok, _} <- create_question_type(question, type),
+             do: {:ok, question}
+      case result do
         {:ok, question} -> question
         {:error, changeset} -> Repo.rollback(changeset)
       end
+    end
+  end
+
+  def create_question_type(question, type) do
+    case type do
+      "programming" -> create_blank_programming_question(question)
+      _ -> create_blank_programming_question(question)
     end
   end
 
@@ -83,6 +95,12 @@ defmodule SourceAcademy.Assessment do
     |> validate_required(@required_fields)
     |> validate_open_close_date
     |> cast_attachments(params, @optional_file_fields)
+  end
+
+  defp create_blank_programming_question(question) do
+    ProgrammingQuestion.build(%{})
+    |> put_assoc(:question, question)
+    |> Repo.insert
   end
 
   defp convert_date(params, field) do

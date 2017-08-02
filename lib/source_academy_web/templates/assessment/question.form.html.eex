@@ -6,7 +6,13 @@
     <div class="col-xs-2">
       <%= input_group f, "Weight", :weight %>
     </div>
+    <div class="col-xs-2">
+      <%= input_group f, "Type", :question_type,
+            type: :select,
+            options: ["programming", "mcq"] %>
+    </div>
     <div class="col-xs">
+      <br />
       <%= submit "Add Question", class: "pt-button pt-intent-success" %>
     </div>
   </div>
